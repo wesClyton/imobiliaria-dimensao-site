@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Gotham-Book';
+  src: url('./fonts/Gotham-Book.woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham-Bold';
+  src: url('./fonts/Gotham-Bold.woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  // colors
+  --primary-1: #11284A;
+  --primary-2: #173967;
+  --primary-3: #005990;
+  --primary-4: #5595BD;
+
+  --primary-rgb-1: 17, 40, 74;
+  --primary-rgb-2: 23, 57, 103;
+  --primary-rgb-3: 0, 89, 144;
+  --primary-rgb-4: 85, 149, 189;
+
+  --secondary-1: #CC9C55;
+  --secondary-2: #DFB269;
+  --secondary-3: #EECD8B;
+  --secondary-4: #F8E7BB;
+
+  --secondary-rgb-1: 204, 156, 85;
+  --secondary-rgb-2: 223, 178, 105;
+  --secondary-rgb-3: 238, 205, 139;
+  --secondary-rgb-4: 248, 231, 187;
+
+  --grey-1: #222222;
+  --grey-2: #666666;
+  --grey-3: #999999;
+  --grey-4: #CCCCCC;
+  --grey-5: #F0F0F0;
+
+  --grey-rgb-1: 34, 34, 34;
+  --grey-rgb-2: 102, 102, 102;
+  --grey-rgb-3: 153, 153, 153;
+  --grey-rgb-4: 204, 204, 204;
+  --grey-rgb-5: 240, 240, 240;
+
+  --black: #000000;
+  --white: #ffffff;
+
+  --black-rgb: 0, 0, 0;
+  --white-rgb: 255, 255, 255;
+
+  // fonts
+  --font-family: 'Gotham-Book', sans-serif;
+}

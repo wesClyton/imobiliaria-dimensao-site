@@ -1,0 +1,176 @@
+@import './break-points.scss';
+
+html {
+  overflow-x: hidden;
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  font-size: 20px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  background-color: var(--white);
+  color: var(--grey-3);
+  line-height: 1;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--primary-1);
+  color: var(--white);
+  text-shadow: none;
+}
+
+a {
+  color: var(--grey-3);
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    color: var(--primary-1);
+  }
+  &:visited {
+    color: inherit;
+    color: var(--grey-3);
+
+    &:hover {
+      color: var(--primary-1);
+    }
+  }
+}
+
+p {
+  padding-bottom: 1em;
+  line-height: 1.5em;
+}
+
+a,
+i,
+button,
+input,
+label,
+select,
+textarea,
+img {
+  transition: 0.25s all;
+}
+
+address {
+  font-style: normal;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0.15em 0 0.5em 0;
+  color: var(--primary-1);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 3em;
+}
+h2 {
+  font-size: 2.5em;
+}
+h3 {
+  font-size: 2em;
+}
+h4 {
+  font-size: 1.5em;
+}
+h5 {
+  font-size: 1.25em;
+}
+h6 {
+  font-size: 1em;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  border: none;
+  &:hover {
+    cursor: pointer;
+    outline: none;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+hr {
+  display: inline-block;
+  padding: 0;
+  margin: 2em 0;
+  height: 1px;
+  width: 100%;
+  background-color: var(--grey-3);
+  border: none;
+}
+
+input.input,
+textarea.textarea,
+select.select {
+  box-shadow: (0px 1px 3px rgba(0, 0, 0, 0.25));
+  border-radius: 3px;
+  border: none;
+  padding: 1em 0.5em;
+  font-family: var(--font-family);
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  margin-bottom: 2em;
+  color: var(--grey-1);
+  font-size: 0.83em;
+  &:focus {
+    outline: none;
+    box-shadow: (0px 3px 6px rgba(0, 0, 0, 0.25));
+  }
+}
+input.input[type='submit'] {
+  max-width: 200px;
+  min-width: 200px;
+  margin: 0 auto;
+  display: table;
+  &:hover {
+    cursor: pointer;
+  }
+}
+::placeholder {
+  color: var(--grey-2);
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.container.--fixed {
+  max-width: $xl;
+}
