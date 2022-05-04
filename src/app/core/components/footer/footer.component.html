@@ -1,26 +1,78 @@
 <footer>
   <div class="links">
+    <div class="container">
+      <nav class="nav">
+        <h6>Institucional</h6>
+        <ul>
+          <li><a href="#">Nossa História</a></li>
+          <li><a href="#">Corretotes</a></li>
+          <li><a href="#">Correa e Favarão</a></li>
+        </ul>
+      </nav>
 
+      <nav class="nav">
+        <h6>Imóveis</h6>
+        <ul>
+          <li *ngFor="let banner of banners;">
+            <a href="#">{{ banner.nome }}</a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav class="nav">
+        <h6>Contatos</h6>
+        <ul>
+          <li><a href="#">Fale Conosco</a></li>
+          <li><a href="#">Anuncie</a></li>
+          <li><a href="#">Descubra</a></li>
+        </ul>
+      </nav>
+
+      <div class="infos">
+        <ul>
+          <li>
+            <i class="icon-border address"></i>
+            Av. Brasil, 4337 - Zona I, Umuarama - PR
+          </li>
+          <li>
+            <i class="icon-border mail"></i>
+            <a href="mailto:contato@imobiliariadimensao.com.br">contato@imobiliariadimensao.com.br</a>
+          </li>
+          <li>
+            <i class="icon-border phone"></i>
+            +55 44 3622-5221
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <div class="container">
-    <div class="logos">
-      <a (click)="navigateHome()">
-        <img src="assets/logo-imobiliaria-dimensao.svg" alt="{{ APP_CONFIG.name }}">
-      </a>
+  <div class="container-bottom">
+    <div class="items-flex">
+      <div class="logos">
+        <a (click)="navigateHome()">
+          <img src="assets/logo-imobiliaria-dimensao.svg" alt="{{ APP_CONFIG.name }}">
+        </a>
 
-      <a (click)="navigateCorreaFavarao()">
-        <img src="assets/logo-correa-favarao.svg" alt="Correa & Favarão">
-      </a>
-    </div>
+        <a (click)="navigateCorreaFavarao()">
+          <img src="assets/logo-correa-favarao.svg" alt="Correa & Favarão">
+        </a>
+      </div>
 
+      <nav class="terms-policy">
+        <ul>
+          <li><a (click)="navigateTerms()">Termos de uso</a></li>
+          <li><a (click)="navigatePolicy()">Política de privacidade</a></li>
+        </ul>
+      </nav>
 
-    <nav class="terms-policy">
-      <ul>
-        <li><a (click)="navigateTerms()">Termos de uso</a></li>
-        <li><a (click)="navigatePolicy()">Política de privacidade</a></li>
+      <ul class="social">
+        <li><a class="icon-border linkedin" href="#" target="_blank"></a></li>
+        <li><a class="icon-border facebook" href="#" target="_blank"></a></li>
+        <li><a class="icon-border instagram" href="#" target="_blank"></a></li>
+        <li><a class="icon-border youtube" href="#" target="_blank"></a></li>
       </ul>
-    </nav>
+    </div>
 
     <p class="copy">
       ©{{ anoCorrente }} - Todos os direitos reservados {{ APP_CONFIG.name }}

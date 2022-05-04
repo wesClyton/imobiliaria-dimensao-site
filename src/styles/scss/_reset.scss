@@ -7,10 +7,10 @@ body {
   width: 100vw;
   height: 100vh;
   font-size: 20px;
-  font-family: var(--font-family);
+  font-family: var(--font-family-400);
   font-weight: 400;
   background-color: var(--white);
-  color: var(--grey-3);
+  color: var(--grey-1);
   line-height: 1;
 }
 
@@ -24,24 +24,24 @@ body {
 }
 
 ::selection {
-  background: var(--primary-1);
+  background: var(--primary-2);
   color: var(--white);
   text-shadow: none;
 }
 
 a {
-  color: var(--grey-3);
+  color: var(--grey-1);
   text-decoration: none;
   &:hover {
     cursor: pointer;
-    color: var(--primary-1);
+    color: var(--primary-2);
   }
   &:visited {
     color: inherit;
-    color: var(--grey-3);
+    color: var(--grey-1);
 
     &:hover {
-      color: var(--primary-1);
+      color: var(--primary-2);
     }
   }
 }
@@ -78,8 +78,8 @@ h4,
 h5,
 h6 {
   padding: 0.15em 0 0.5em 0;
-  color: var(--primary-1);
-  font-weight: 700;
+  color: var(--primary-2);
+  font-family: var(--font-family-700);
 }
 
 h1 {
@@ -140,7 +140,7 @@ select.select {
   border-radius: 3px;
   border: none;
   padding: 1em 0.5em;
-  font-family: var(--font-family);
+  font-family: var(--font-family-400);
   width: 100%;
   max-width: 100%;
   min-width: 100%;
