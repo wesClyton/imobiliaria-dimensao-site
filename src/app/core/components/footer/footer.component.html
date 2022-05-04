@@ -1,0 +1,29 @@
+<footer>
+  <div class="links">
+
+  </div>
+
+  <div class="container">
+    <div class="logos">
+      <a (click)="navigateHome()">
+        <img src="assets/logo-imobiliaria-dimensao.svg" alt="{{ APP_CONFIG.name }}">
+      </a>
+
+      <a (click)="navigateCorreaFavarao()">
+        <img src="assets/logo-correa-favarao.svg" alt="Correa & Favarão">
+      </a>
+    </div>
+
+
+    <nav class="terms-policy">
+      <ul>
+        <li><a (click)="navigateTerms()">Termos de uso</a></li>
+        <li><a (click)="navigatePolicy()">Política de privacidade</a></li>
+      </ul>
+    </nav>
+
+    <p class="copy">
+      ©{{ anoCorrente }} - Todos os direitos reservados {{ APP_CONFIG.name }}
+    </p>
+  </div>
+</footer>

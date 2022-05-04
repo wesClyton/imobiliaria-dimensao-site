@@ -1,5 +1,3 @@
-@import './break-points.scss';
-
 html {
   overflow-x: hidden;
 }
@@ -169,8 +167,4 @@ input.input[type='submit'] {
 
 .container {
   margin: 0 auto;
-}
-
-.container.--fixed {
-  max-width: $xl;
 }

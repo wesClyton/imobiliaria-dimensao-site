@@ -1,0 +1,48 @@
+<header [ngClass]="{
+  'menu-active' : menuActive,
+  'sub-menu-active': subMenuActive
+  }">
+  <nav class="nav">
+    <div class="logo">
+      <a href="/">
+        <img src="assets/logo-imobiliaria-dimensao.svg" alt="{{ APP_CONFIG.name }}">
+      </a>
+    </div>
+
+    <ul class="menu">
+      <div class="menu-main">
+        <ng-container *ngIf="isHome">
+          <li *ngFor="let banner of banners;">
+            <a href="#">{{ banner.nome }}</a>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="!isHome">
+          <li><a href="#">Início</a></li>
+          <li><a href="#">Quem somos</a></li>
+          <li><a href="#">Anúncios</a></li>
+          <li><a href="#">Anuncie</a></li>
+          <li><a href="#">Corretores</a></li>
+        </ng-container>
+      </div>
+
+      <div class="default-items">
+        <li class="item"><a href="#">Contato</a></li>
+        <li class="item"><a href="#">Descubra</a></li>
+
+        <li class="item item-menu">
+          <a href="#" (click)="showSubMenu()">Menu</a>
+          <ul class="sub-menu">
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Quem somos</a></li>
+            <li><a href="#">Anúncios</a></li>
+            <li><a href="#">Anuncie</a></li>
+            <li><a href="#">Corretores</a></li>
+          </ul>
+        </li>
+      </div>
+    </ul>
+  </nav>
+
+  <button type="button" class="btn-menu" (click)="showMenu()"></button>
+</header>

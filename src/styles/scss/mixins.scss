@@ -1,1 +1,30 @@
-@import './break-points.scss';
+$sm: 575.98px;
+$md: 767.98px;
+$lg: 991.98px;
+$xl: 1169.98px;
+
+@mixin mobile-first($brekpoint) {
+  @if($brekpoint == sm) {
+    @media screen and (min-width: $sm) {
+      @content
+    }
+  };
+
+  @if($brekpoint == md) {
+    @media screen and (min-width: $md) {
+      @content
+    }
+  };
+
+  @if($brekpoint == lg) {
+    @media screen and (min-width: $lg) {
+      @content
+    }
+  };
+
+  @if($brekpoint == xl) {
+    @media screen and (min-width: $xl) {
+      @content
+    }
+  };
+}
