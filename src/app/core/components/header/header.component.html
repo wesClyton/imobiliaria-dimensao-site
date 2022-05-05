@@ -13,16 +13,16 @@
       <div class="menu-main">
         <ng-container *ngIf="isHome">
           <li *ngFor="let banner of banners;">
-            <a href="#">{{ banner.nome }}</a>
+            <a #linkOnePage href="#banner-{{ banner.id }}">{{ banner.nome }}</a>
           </li>
         </ng-container>
 
         <ng-container *ngIf="!isHome">
-          <li><a href="#">Início</a></li>
-          <li><a href="#">Quem somos</a></li>
-          <li><a href="#">Anúncios</a></li>
-          <li><a href="#">Anuncie</a></li>
-          <li><a href="#">Corretores</a></li>
+          <li><a (click)="navigateHome()">Início</a></li>
+          <li><a (click)="navigateQuemSomos()">Quem somos</a></li>
+          <li><a (click)="navigateAnuncios()">Anúncios</a></li>
+          <li><a (click)="navigateAnuncie()">Anuncie</a></li>
+          <li><a (click)="navigateCorretores()">Corretores</a></li>
         </ng-container>
       </div>
 

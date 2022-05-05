@@ -8,11 +8,6 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(var(--white-rgb), 0.75);
-
-  @include mobile-first(lg) {
-    background-color: transparent;
-  }
 
   @include mobile-first(lg) {
     justify-content: space-between;

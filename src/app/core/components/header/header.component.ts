@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { APP_CONFIG } from '../../../app.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
+import { ScrollTopService } from '../../../shared/services/scroll-top/scroll-top.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements AfterViewInit {
 
   public menuActive = false;
 
@@ -61,9 +62,31 @@ export class HeaderComponent {
     }
   ];
 
+  @ViewChildren('linkOnePage')
+  public linksOnePage!: QueryList<ElementRef>;
+
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly scrollTopService: ScrollTopService
   ) { }
+
+  ngAfterViewInit(): void {
+    this.linksOnePage.forEach(link => link.nativeElement.addEventListener('click', this.onClickLink.bind(this)));
+  }
+
+  private onClickLink(event: PointerEvent): void {
+    event.preventDefault();
+    const element = event.target as HTMLAnchorElement;
+    const section = this.getSection(element);
+    if (section && section.id) {
+      this.scrollTopService.scrollTop(section);
+    }
+    this.showMenu();
+  }
+
+  private getSection(element: HTMLAnchorElement): HTMLElement {
+    return document.getElementById(element.hash.split('#')[1]) as HTMLElement;
+  }
 
   public showMenu(): void {
     this.menuActive = !this.menuActive;
@@ -78,6 +101,22 @@ export class HeaderComponent {
 
   public navigateHome(): void {
     this.router.navigateByUrl(APP_CONFIG.pathFront);
+  }
+
+  public navigateQuemSomos(): void {
+    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/quem-somos`);
+  }
+
+  public navigateAnuncios(): void {
+    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/anuncios`);
+  }
+
+  public navigateAnuncie(): void {
+    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/anuncie`);
+  }
+
+  public navigateCorretores(): void {
+    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/corretores`);
   }
 
 }
