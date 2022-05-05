@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ANNOUNCEMENT_CONFIG } from './modules/announcement/announcement.config';
 import { PAGES_CONFIG } from './pages/page.config';
 
 const routes: Routes = [
@@ -10,6 +11,10 @@ const routes: Routes = [
   {
     path: 'quem-somos',
     loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule)
+  },
+  {
+    path: ANNOUNCEMENT_CONFIG.path,
+    loadChildren: () => import('./modules/announcement/announcement.module').then(m => m.AnnouncementModule)
   },
   {
     path: '**',
