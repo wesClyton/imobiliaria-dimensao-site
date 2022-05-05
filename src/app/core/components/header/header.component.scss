@@ -5,6 +5,14 @@ header {
   padding: 1rem;
   width: 100%;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(var(--white-rgb), 0.75);
+
+  @include mobile-first(lg) {
+    background-color: transparent;
+  }
 
   @include mobile-first(lg) {
     justify-content: space-between;
@@ -99,7 +107,6 @@ header {
 
           a {
             font-size: 1.25rem;
-            color: var(--secondary-1) !important;
             padding: 0;
 
             &:hover {
@@ -148,9 +155,6 @@ header {
   }
 
   .sub-menu {
-    .btn-menu {
-      display: none;
-    }
     display: none;
     position: absolute;
     left: 0;
@@ -194,6 +198,14 @@ header {
   .sub-menu {
     display: block;
 
+    .btn-menu {
+      background-image: url(../../../../assets/icon-menu-active.svg);
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      width: 1rem;
+    }
+
     @include mobile-first(lg) {
       bottom: 0;
       top: 1.5rem;
@@ -201,16 +213,6 @@ header {
       display: inline-table;
       padding: 1rem;
       left: auto;
-
-      .btn-menu {
-        display: block;
-        position: absolute;
-        background-image: url(../../../../assets/icon-menu-active.svg);display: block;
-        position: absolute;
-        right: 0.25rem;
-        top: 0.25rem;
-        width: 1rem;
-      }
 
       li {
         padding: 0.5rem 0 !important;

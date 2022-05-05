@@ -1,0 +1,18 @@
+<div class="banners">
+  <section
+    *ngFor="let banner of banners;"
+    id="banner-{{ banner.id }}"
+    class="banner"
+    [ngStyle]="{'background-image': 'url(' + banner.foto + ')'}">
+
+    <div class="text">
+      <h1>{{ banner.nome }}</h1>
+      <p>Lorem Ipsum is simply dummy text of the printing</p>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-white" type="button">Ver destaques</button>
+      <button class="btn btn-primary" type="button">Encontre o seu</button>
+    </div>
+  </section>
+</div>

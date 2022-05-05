@@ -1,0 +1,55 @@
+@import 'mixins';
+
+.banners {
+  padding-top: 5rem;
+
+  @include mobile-first(lg) {
+    padding-top: 0;
+  }
+}
+
+.banner {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+  padding: 2rem 1rem 3rem 1rem;
+  width: 100vw;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mobile-first(lg) {
+    height: 100vh;
+  }
+
+  @include mobile-first(xl) {
+    padding-top: 7rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    color: var(--grey-1);
+
+    @include mobile-first(lg) {
+      font-size: 2.5rem;
+    }
+  }
+
+  p {
+    font-size: 0.65rem;
+
+    @include mobile-first(lg) {
+      font-size: 1rem;
+    }
+  }
+}
+
+.buttons {
+  .btn {
+    opacity: 0.85;
+    margin: 0.5rem;
+  }
+}

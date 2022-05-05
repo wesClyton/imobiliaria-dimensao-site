@@ -2,8 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../modules/auth/services/auth.service';
-import { HttpStatusCode } from '../../shared/enums/http-status-code.enum';
+import { HttpStatusCode } from '../../shared/interfaces/http-status-code.enum';
 
 @Component({
   selector: 'app-page-erro',
@@ -48,15 +47,14 @@ export class PageErroComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly location: Location,
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly authService: AuthService
+    private readonly activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.subscription.add(
       this.activatedRoute.queryParams.subscribe(params => {
-        if (params?.code) {
-          this.statusCode = parseInt(params.code, 10);
+        if (params['code']) {
+          this.statusCode = parseInt(params['code'], 10);
         }
       })
     );
@@ -71,7 +69,6 @@ export class PageErroComponent implements OnInit, OnDestroy {
       this.location.back();
       return;
     }
-    this.authService.logout();
   }
 
 }

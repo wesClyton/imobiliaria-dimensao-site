@@ -1,0 +1,132 @@
+.btn {
+  text-transform: uppercase;
+  background-color: var(--grey-1);
+  padding: 0.75em 1em;
+  color: var(--white);
+  border-radius: 25px;
+  display: inline-block;
+  text-align: center;
+  font-family: var(--font-family-400);
+  font-size: 0.65em;
+
+  &:hover {
+    background-color: var(--grey-2);
+  }
+
+  &:visited {
+    color: var(--white);
+  }
+
+  &:disabled {
+    background-color: var(--grey-4);
+  }
+}
+
+.btn-primary {
+  background-color: var(--primary-1);
+
+  &:hover {
+    background-color: var(--primary-2);
+  }
+}
+
+.btn-primary-3 {
+  background-color: var(--primary-3);
+
+  &:hover {
+    color: var(--white) !important;
+    background-color: var(--primary-2);
+  }
+}
+
+.btn-primary-4 {
+  background-color: var(--primary-4);
+
+  &:hover {
+    background-color: var(--primary-3);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--secondary-1);
+  color: var(--white) !important;
+
+  &:hover {
+    background-color: var(--secondary-2);
+  }
+}
+
+.btn-ternary {
+  background-color: var(--ternary-1);
+  color: var(--white) !important;
+
+  &:hover {
+    background-color: var(--ternary-2);
+  }
+}
+
+.btn-white {
+  background-color: var(--white);
+  color: var(--grey-1) !important;
+
+  &:hover {
+    background-color: var(--grey-5);
+  }
+}
+
+// outline
+.btn-outline {
+  background-color: transparent;
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: var(--grey-1);
+  color: var(--grey-1);
+
+  &:hover {
+    background-color: rgba(var(--black-rgb), 0.10);
+  }
+}
+
+.btn-outline.btn-primary {
+  border-color: var(--primary-1);
+  color: var(--primary-1) !important;
+}
+.btn-outline.btn-primary-3 {
+  border-color: var(--primary-3);
+  color: var(--primary-3) !important;
+}
+.btn-outline.btn-primary-4 {
+  border-color: var(--primary-4);
+  color: var(--primary-4) !important;
+}
+
+.btn-outline.btn-secondary {
+  border-color: var(--secondary-1);
+  color: var(--secondary-1) !important;
+}
+
+.btn-outline.btn-ternary {
+  border-color: var(--ternary-1);
+  color: var(--ternary-1) !important;
+}
+
+.btn-outline.btn-grey {
+  border-color: var(--grey-2);
+  color: var(--grey-2) !important;
+}
+
+// sizes
+.btn-sm {
+  font-size: 0.75em;
+}
+
+.btn-md {
+  font-size: 1em;
+  padding-top: 0.85em;
+  padding-bottom: 0.85em;
+}
+
+.btn-lg {
+  font-size: 1.25em;
+  padding: 1em 1.5em;
+}
