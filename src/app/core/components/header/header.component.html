@@ -1,6 +1,6 @@
 <header [ngClass]="{
-  'menu-active' : menuActive,
-  'sub-menu-active': subMenuActive
+    'menu-active' : menuActive,
+    'sub-menu-active': subMenuActive
   }">
   <nav class="nav">
     <div class="logo">
@@ -33,6 +33,7 @@
         <li class="item item-menu">
           <a href="#" (click)="showSubMenu()">Menu</a>
           <ul class="sub-menu">
+            <button type="button" class="btn-menu" (click)="showSubMenu()"></button>
             <li><a href="#">Início</a></li>
             <li><a href="#">Quem somos</a></li>
             <li><a href="#">Anúncios</a></li>
