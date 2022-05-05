@@ -27,18 +27,18 @@
       </div>
 
       <div class="default-items">
-        <li class="item"><a href="#">Contato</a></li>
-        <li class="item"><a href="#">Descubra</a></li>
+        <li class="item"><a (click)="navigateContato()">Contato</a></li>
+        <li class="item"><a (click)="navigateDescubra()">Descubra</a></li>
 
-        <li class="item item-menu">
-          <a href="#" (click)="showSubMenu()">Menu</a>
+        <li *ngIf="isHome" class="item item-menu">
+          <a (click)="showSubMenu($event)">Menu</a>
           <ul class="sub-menu">
-            <button type="button" class="btn-menu" (click)="showSubMenu()"></button>
-            <li><a href="#">Início</a></li>
-            <li><a href="#">Quem somos</a></li>
-            <li><a href="#">Anúncios</a></li>
-            <li><a href="#">Anuncie</a></li>
-            <li><a href="#">Corretores</a></li>
+            <button type="button" class="btn-menu" (click)="showSubMenu($event)"></button>
+            <li><a (click)="navigateHome()">Início</a></li>
+            <li><a (click)="navigateQuemSomos()">Quem somos</a></li>
+            <li><a (click)="navigateAnuncios()">Anúncios</a></li>
+            <li><a (click)="navigateAnuncie()">Anuncie</a></li>
+            <li><a (click)="navigateCorretores()">Corretores</a></li>
           </ul>
         </li>
       </div>

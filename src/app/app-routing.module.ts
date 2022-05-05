@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { APP_CONFIG } from './app.config';
 import { PAGES_CONFIG } from './pages/page.config';
 
 const routes: Routes = [
   {
-    path: APP_CONFIG.path,
+    path: '',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'quem-somos',
+    loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule)
   },
   {
     path: '**',

@@ -8,6 +8,12 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  background-color: rgba(var(--white-rgb), 0.75);
+  z-index: 50;
+
+  @include mobile-first(lg) {
+    background-color: transparent;
+  }
 
   @include mobile-first(lg) {
     justify-content: space-between;
@@ -139,6 +145,10 @@ header {
 .default-items {
   width: 100%;
 
+  @include mobile-first(lg) {
+    flex: 1;
+  }
+
   .item a {
     text-transform: uppercase;
     font-weight: 700;
@@ -194,6 +204,7 @@ header {
     display: block;
 
     .btn-menu {
+      display: block;
       background-image: url(../../../../assets/icon-menu-active.svg);
       position: absolute;
       right: 0.5rem;

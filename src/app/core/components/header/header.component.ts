@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 import { APP_CONFIG } from '../../../app.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
@@ -21,7 +22,7 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   public get isHome(): boolean {
-    return true;
+    return window.location.pathname === environment.baseUrl;
   }
 
   public banners: Array<Banner> = [
@@ -95,28 +96,49 @@ export class HeaderComponent implements AfterViewInit {
     }
   }
 
-  public showSubMenu(): void {
+  public showSubMenu(event: Event): void {
+    event.preventDefault();
     this.subMenuActive = !this.subMenuActive;
   }
 
+  private hideMenus(): void {
+    this.menuActive = false;
+    this.subMenuActive = false;
+  }
+
   public navigateHome(): void {
+    this.hideMenus();
     this.router.navigateByUrl(APP_CONFIG.pathFront);
   }
 
   public navigateQuemSomos(): void {
-    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/quem-somos`);
+    this.hideMenus();
+    this.router.navigateByUrl('quem-somos');
   }
 
   public navigateAnuncios(): void {
+    this.hideMenus();
     this.router.navigateByUrl(`${APP_CONFIG.pathFront}/anuncios`);
   }
 
   public navigateAnuncie(): void {
+    this.hideMenus();
     this.router.navigateByUrl(`${APP_CONFIG.pathFront}/anuncie`);
   }
 
   public navigateCorretores(): void {
+    this.hideMenus();
     this.router.navigateByUrl(`${APP_CONFIG.pathFront}/corretores`);
+  }
+
+  public navigateContato(): void {
+    this.hideMenus();
+    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/contato`);
+  }
+
+  public navigateDescubra(): void {
+    this.hideMenus();
+    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/descubra`);
   }
 
 }
