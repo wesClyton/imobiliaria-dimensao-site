@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Banner } from '../banner/interfaces/banner.interface';
 
 @Component({
@@ -47,5 +47,10 @@ export class HomeComponent {
   ];
 
   constructor() { }
+
+  @HostListener('window:scroll', ['$event'])
+  private onScroll(event: Event) {
+    console.log('onScroll', event);
+  }
 
 }

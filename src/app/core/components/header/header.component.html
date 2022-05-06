@@ -14,7 +14,7 @@
       <div class="menu-main">
         <ng-container *ngIf="isHome">
           <li *ngFor="let banner of banners;">
-            <a #linkOnePage href="#banner-{{ banner.id }}">{{ banner.nome }}</a>
+            <a #linkFilter (click)="navigateFilter(banner.nome)">{{ banner.nome }}</a>
           </li>
         </ng-container>
 
