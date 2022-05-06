@@ -12,18 +12,37 @@
   @include mobile-first(md) {
     width: 620px;
     max-height: 200px;
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: 200%;
+      background-color: var(--secondary-2);
+      position: absolute;
+      right: -70%;
+      top: -50%;
+      border-radius: 50%;
+      z-index: 1;
+    }
   }
 
   @include mobile-first(lg) {
     width: 875px;
     max-height: 235px;
+
+    &::after {
+      right: -55%;
+    }
   }
-  
+
   .content-text {
     color: var(--white);
     width: 100%;
     text-align: center;
     padding: 40px 25px;
+    z-index: 2;
 
     @include mobile-first(md) {
       width: 485px;
@@ -47,7 +66,7 @@
         font-size: 1.625rem;
       }
     }
-  
+
     p {
       font-size: 0.75rem;
       text-align: center;
@@ -84,30 +103,38 @@
     }
   }
 
-  .content-img {
+}
+
+.banner {
+  position: relative;
+  max-width: 620px;
+  margin: 9rem auto 0 auto;
+
+  @include mobile-first(lg) {
+    max-width: 875px;
+  }
+}
+
+.content-img {
+  position: relative;
+  display: none;
+
+  @include mobile-first(md) {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0.5rem;
+  }
+
+  img {
     position: relative;
-    display: none;
+    right: 0px;
+    width: 190px;
+    z-index: 10;
 
-    @include mobile-first(md) {
-      display: block;
-    }
-
-    img {
-      position: relative;
-      right: 0px;
-      width: auto;
-      z-index: 10;
-
-      @include mobile-first(md) {
-        top: -49px;
-        right: 20px;
-      }
-
-      @include mobile-first(lg) {
-        top: -69px;
-        right: 30px;
-      }
+    @include mobile-first(lg) {
+      width: 260px;
+      right: 40px;
     }
   }
- 
 }
