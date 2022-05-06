@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormService } from '../../shared/services/form/form.service';
 
 @Component({
   selector: 'app-contact',
@@ -15,7 +16,7 @@ export class ContactComponent implements OnInit {
   }
 
   public get controlNomeHasError(): boolean | undefined {
-    return this.controlNome?.dirty || this.controlNome?.hasError('required');
+    return this.controlNome?.dirty && this.controlNome?.hasError('required');
   }
 
   private get controlEmail(): AbstractControl | null {
@@ -23,7 +24,7 @@ export class ContactComponent implements OnInit {
   }
 
   public get controlEmailHasError(): boolean | undefined {
-    return this.controlEmail?.dirty || this.controlEmail?.hasError('required') || this.controlEmail?.hasError('email');
+    return this.controlEmail?.dirty && (this.controlEmail?.hasError('required') || this.controlEmail?.hasError('email'));
   }
 
   private get controlTelefone(): AbstractControl | null {
@@ -31,7 +32,7 @@ export class ContactComponent implements OnInit {
   }
 
   public get controlTelefoneHasError(): boolean | undefined {
-    return this.controlTelefone?.dirty || this.controlTelefone?.hasError('required');
+    return this.controlTelefone?.dirty && this.controlTelefone?.hasError('required');
   }
 
   private get controlMelhorHorario(): AbstractControl | null {
@@ -46,8 +47,13 @@ export class ContactComponent implements OnInit {
     return this.controlMensagem?.dirty || this.controlMensagem?.hasError('required');
   }
 
+  public get controlConcordo(): AbstractControl | null {
+    return this.form.get('concordo');
+  }
+
   constructor(
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly formService: FormService
   ) { }
 
   ngOnInit(): void {
@@ -60,8 +66,17 @@ export class ContactComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       telefone: [null, [Validators.required]],
       melhorHorario: [null],
-      mensagem: [null, [Validators.required]]
+      mensagem: [null, [Validators.required]],
+      concordo: [null],
     });
+  }
+
+  public submit(): void {
+    console.log('submit')
+    if (this.form.invalid) {
+      this.formService.validade(this.form);
+      return;
+    }
   }
 
 }
