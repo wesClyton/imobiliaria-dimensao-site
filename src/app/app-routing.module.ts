@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/announcement/announcement.module').then(m => m.AnnouncementModule)
   },
   {
+    path: 'contato',
+    loadChildren: () => import('./modules/contact/contact.module').then(m => m.ContactModule)
+  },
+  {
     path: '**',
     redirectTo: PAGES_CONFIG.path,
     pathMatch: 'full'
