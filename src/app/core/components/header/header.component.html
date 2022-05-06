@@ -33,7 +33,7 @@
         <li *ngIf="isHome" class="item item-menu">
           <a (click)="showSubMenu($event)">Menu</a>
           <ul class="sub-menu">
-            <button type="button" class="btn-menu" (click)="showSubMenu($event)"></button>
+            <button type="button" class="btn-menu icon-close" (click)="showSubMenu($event)"></button>
             <li><a (click)="navigateHome()">Início</a></li>
             <li><a (click)="navigateQuemSomos()">Quem somos</a></li>
             <li><a (click)="navigateAnuncios()">Anúncios</a></li>
@@ -45,5 +45,6 @@
     </ul>
   </nav>
 
-  <button type="button" class="btn-menu" (click)="showMenu()"></button>
+  <button type="button" class="btn-menu" (click)="showMenu()" [ngClass]="{ 'icon-menu' : !menuActive, 'icon-menu-active' : menuActive }">
+  </button>
 </header>

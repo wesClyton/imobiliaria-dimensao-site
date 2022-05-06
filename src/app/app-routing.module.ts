@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/contact/contact.module').then(m => m.ContactModule)
   },
   {
+    path: 'corretores',
+    loadChildren: () => import('./modules/broker/broker.module').then(m => m.BrokerModule)
+  },
+  {
     path: '**',
     redirectTo: PAGES_CONFIG.path,
     pathMatch: 'full'
