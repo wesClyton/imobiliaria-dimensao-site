@@ -1,7 +1,7 @@
 @import 'mixins';
 
 ::ng-deep {
-  body {
+  body, html {
     background-color: var(--grey-5);
   }
 }

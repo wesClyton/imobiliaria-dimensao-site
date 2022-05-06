@@ -9,7 +9,7 @@ import { NotificationModule } from './notification/notification.module';
   ],
   exports: [
     CoreComponentsModule,
-    NotificationModule
+    NotificationModule,
   ]
 })
 export class CoreModule { }
