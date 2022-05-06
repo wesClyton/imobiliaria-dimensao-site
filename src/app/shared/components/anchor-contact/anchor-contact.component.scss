@@ -96,9 +96,9 @@
       }
 
       @include mobile-first(lg) {
-        width: 210px;
-        font-size: 0.75rem;
-        height: 50px;
+        width: 190px;
+        font-size: 0.62rem;
+        height: 40px;
       }
     }
   }
@@ -108,9 +108,15 @@
 .banner {
   position: relative;
   max-width: 620px;
-  margin: 9rem auto 0 auto;
+  margin: 4rem auto 0 auto;
+
+  @include mobile-first(md) {
+    margin: 5rem auto 0 auto;
+    max-width: 750px;
+  }
 
   @include mobile-first(lg) {
+    margin: 9rem auto 0 auto;
     max-width: 875px;
   }
 }
@@ -123,6 +129,10 @@
     display: block;
     position: absolute;
     bottom: 0;
+    right: 4rem;
+  }
+
+  @include mobile-first(lg) {
     right: 0.5rem;
   }
 

@@ -8,7 +8,7 @@
 
 .box-1 {
   max-width: 660px;
-  margin: 0 auto 3rem;
+  margin: 0 auto;
   text-align: center;
   padding: 3rem 1rem;
 
@@ -31,16 +31,30 @@
   flex-direction: column;
   align-items: center;
 
-  @include mobile-first(lg) {
+  @include mobile-first(md) {
     flex-direction: row;
-    max-width: 875px;
+    max-width: 560px;
     margin: 0 auto;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
   }
 
+  @include mobile-first(lg) {
+    max-width: 875px;
+  }
+
   .broker {
+
+    &:hover {
+
+      cursor: pointer;
+
+      button {
+        background-color: var(--primary-3);
+        color: var(--white);
+      }
+    }
 
     @include mobile-first(lg) {
       width: 250px;
@@ -66,10 +80,7 @@
       z-index: 10;
     }
 
-    button:hover {
-      background-color: var(--primary-3);
-      color: var(--white);
-    }
+    
 
     div:last-child {
       text-align: center;
