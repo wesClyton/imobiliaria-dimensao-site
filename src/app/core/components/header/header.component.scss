@@ -32,10 +32,12 @@ header {
 
   .logo {
     @include mobile-first(lg) {
+      margin-right: 2rem;
       flex: 0;
     }
 
     @include mobile-first(xl) {
+      margin-right: 1rem;
       flex: 0.25;
     }
 

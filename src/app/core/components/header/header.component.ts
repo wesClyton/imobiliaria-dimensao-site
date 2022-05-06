@@ -81,7 +81,7 @@ export class HeaderComponent implements AfterViewInit {
   public navigateFilter(filter: string): void {
     this.router.navigate(
       [ANNOUNCEMENT_CONFIG.pathFront],
-      { queryParams: { filter }
+      { queryParams: { query: filter }
     });
     this.showMenu();
   }
