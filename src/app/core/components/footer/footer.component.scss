@@ -65,14 +65,9 @@ footer {
       }
     }
 
-    i.address {
-      background-image: url(../../../../assets/address.svg);
-    }
-    i.mail {
-      background-image: url(../../../../assets/mail.svg);
-    }
-    i.phone {
-      background-image: url(../../../../assets/phone.svg);
+    i {
+      font-size: 18px;
+      color: var(--primary-3);
     }
   }
 
@@ -124,21 +119,15 @@ footer {
       gap: 1rem;
       justify-content: center;
 
-      .linkedin {
-        background-image: url(../../../../assets/linkedin.svg);
-        background-size: 50%;
+      a {
+        font-size: 14px;
+        color: var(--primary-3);
       }
-      .facebook {
-        background-image: url(../../../../assets/facebook.svg);
-        background-size: 40%;
-      }
-      .instagram {
-        background-image: url(../../../../assets/instagram.svg);
-        background-size: 60%;
-      }
-      .youtube {
-        background-image: url(../../../../assets/youtube.svg);
-        background-size: 70%;
+
+      a:hover {
+        background-color: var(--primary-3);
+        color: #fff;
+        border-color: var(--primary-3);
       }
     }
 

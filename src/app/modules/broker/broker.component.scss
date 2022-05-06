@@ -1,0 +1,92 @@
+@import 'mixins';
+
+::ng-deep {
+  body {
+    background-color: var(--grey-5);
+  }
+}
+
+.box-1 {
+  max-width: 660px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  padding: 3rem 1rem;
+
+  h1 {
+    font-size: 1.5rem;
+  
+    @include mobile-first(lg) {
+      font-size: 2.5rem;
+    }
+  }
+
+  p {
+    text-align: center;
+  }
+}
+
+.box-2 {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+
+  @include mobile-first(lg) {
+    flex-direction: row;
+    max-width: 875px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .broker {
+
+    @include mobile-first(lg) {
+      width: 250px;
+    }
+
+    div:first-child{
+      position: relative;
+    } 
+
+    img {
+      border-radius: 50%;
+    }
+
+    button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: var(--white);
+      color: var(--primary-3);
+      z-index: 10;
+    }
+
+    button:hover {
+      background-color: var(--primary-3);
+      color: var(--white);
+    }
+
+    div:last-child {
+      text-align: center;
+
+      h2 {
+        font-size: 1rem;
+        color: var(--grey-1);
+        padding-top: 0.625rem;
+      }
+  
+      p {
+        display: inline-block;
+        font-size: 0.75rem;
+        color: var(--primary-3);
+      }
+    }
+  }
+
+}
+
