@@ -2,9 +2,9 @@ import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { APP_CONFIG } from '../../../app.config';
+import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
-import { ScrollTopService } from '../../../shared/services/scroll-top/scroll-top.service';
 
 @Component({
   selector: 'app-header',
@@ -63,30 +63,27 @@ export class HeaderComponent implements AfterViewInit {
     }
   ];
 
-  @ViewChildren('linkOnePage')
-  public linksOnePage!: QueryList<ElementRef>;
+  @ViewChildren('linkFilter')
+  public linksFilter!: QueryList<ElementRef>;
 
   constructor(
-    private readonly router: Router,
-    private readonly scrollTopService: ScrollTopService
+    private readonly router: Router
   ) { }
 
   ngAfterViewInit(): void {
-    this.linksOnePage.forEach(link => link.nativeElement.addEventListener('click', this.onClickLink.bind(this)));
+    this.linksFilter.forEach(link => link.nativeElement.addEventListener('click', this.onClickLink.bind(this)));
   }
 
   private onClickLink(event: PointerEvent): void {
     event.preventDefault();
-    const element = event.target as HTMLAnchorElement;
-    const section = this.getSection(element);
-    if (section && section.id) {
-      this.scrollTopService.scrollTop(section);
-    }
-    this.showMenu();
   }
 
-  private getSection(element: HTMLAnchorElement): HTMLElement {
-    return document.getElementById(element.hash.split('#')[1]) as HTMLElement;
+  public navigateFilter(filter: string): void {
+    this.router.navigate(
+      [ANNOUNCEMENT_CONFIG.pathFront],
+      { queryParams: { filter }
+    });
+    this.showMenu();
   }
 
   public showMenu(): void {
