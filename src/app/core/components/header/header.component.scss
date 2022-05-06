@@ -11,6 +11,12 @@ header {
   background-color: rgba(var(--white-rgb), 0.75);
   z-index: 50;
 
+  &.background-active {
+    background-color: var(--white);
+    box-shadow: 0 0px 5px rgba(var(--black-rgb), 0.25);
+    padding-bottom: 1rem;
+  }
+
   @include mobile-first(lg) {
     background-color: transparent;
   }

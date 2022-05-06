@@ -4,12 +4,86 @@
       <h1>Contato</h1>
 
       <div class="box-2">
-        <div class="form">
-          <form [formGroup]="form">
-            <input type="text" formControlName="nome">
+        <div class="box-form">
+          <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-field">
+              <label>Nome</label>
+              <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">
+              <span class="input-error" *ngIf="controlNomeHasError">Informe um Nome</span>
+            </div>
+
+            <div class="input-field">
+              <label>E-mail</label>
+              <input ngDefaultControl class="input" type="email" formControlName="email" placeholder="Informe seu E-mail">
+              <span class="input-error" *ngIf="controlEmailHasError">Informe um Email</span>
+            </div>
+
+            <div class="input-field">
+              <label>Telefone/Celular</label>
+              <input ngDefaultControl class="input" type="tel" formControlName="telefone" placeholder="Informe seu Telefone/Celular">
+              <span class="input-error" *ngIf="controlTelefoneHasError">Informe um Telefone/Celular</span>
+            </div>
+
+            <div class="input-field">
+              <label>Melhor horário para falar</label>
+              <select ngDefaultControl class="select" formControlName="melhorHorario">
+                <option>-</option>
+                <option value="MANHA">Manhã</option>
+                <option value="TARDE">Tarde</option>
+                <option value="NOITE">Noite</option>
+                <option value="TODOS">Todos</option>
+              </select>
+            </div>
+
+            <div class="input-field">
+              <label>Mensagem</label>
+              <textarea ngDefaultControl class="textarea" formControlName="mensagem" placeholder="Informe sua Mensagem"></textarea>
+              <span class="input-error" *ngIf="controlMensagemHasError">Informe uma Mensagem</span>
+            </div>
+
+            <div class="input-field-checkbox">
+              <input type="checkbox" formControlName="concordo">
+              <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
+            </div>
+
+            <button class="btn btn-sm btn-primary-3" type="submit">Enviar</button>
           </form>
         </div>
-        <div class="text"></div>
+
+        <div class="text">
+          <h5>A Imobiliária Dimensão</h5>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+
+          <div class="buttons">
+            <a class="btn btn-sm btn-outline btn-primary-3">Conheça nossa história</a>
+            <a class="btn btn-sm btn-outline btn-primary-3">Anunciar imóvel</a>
+          </div>
+
+          <ul class="list">
+            <li class="item">
+              <strong>Endereço</strong>
+              <p>Lorem Ipsum is simply, 000 - Umuarama-PR</p>
+              <a class="link-map" href="#">Ver no mapa</a>
+            </li>
+            <li class="item">
+              <strong>Telefones</strong>
+              <div class="phones">
+                <p>(44) 9 9999-9999</p>
+                <span>|</span>
+                <p>(44) 9 9999-9999</p>
+              </div>
+            </li>
+            <li class="item">
+              <strong>Acompanhe-nos</strong>
+              <ul class="social">
+                <li><a href="#" target="_blank"><span class="icon-facebook-rounded"></span></a></li>
+                <li><a href="#" target="_blank"><span class="icon-instagram-rounded"></span></a></li>
+                <li><a href="#" target="_blank"><span class="icon-linkedin-rounded"></span></a></li>
+                <li><a href="#" target="_blank"><span class="icon-whatsapp-rounded"></span></a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
