@@ -21,7 +21,7 @@ export class HomeComponent {
       foto: 'assets/api/casas.jpg',
       id: 'id-b',
       link: '#',
-      nome: 'Casas & Apartamentos'
+      nome: 'Casas & Sobrados'
     },
     {
       ativo: true,
@@ -46,11 +46,22 @@ export class HomeComponent {
     }
   ];
 
+  lastScrollTop = 0;
+
   constructor() { }
 
   @HostListener('window:scroll', ['$event'])
   private onScroll(event: Event) {
-    console.log('onScroll', event);
+
+    var st = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (st > this.lastScrollTop){
+       console.log('down');
+    } else {
+      console.log('up');
+    }
+    
+    this.lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
   }
 
 }

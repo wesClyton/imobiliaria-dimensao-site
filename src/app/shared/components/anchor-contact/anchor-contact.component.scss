@@ -140,7 +140,7 @@
     position: relative;
     right: 0px;
     width: 190px;
-    z-index: 10;
+    z-index: 9;
 
     @include mobile-first(lg) {
       width: 260px;

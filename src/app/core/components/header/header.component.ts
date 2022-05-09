@@ -38,7 +38,7 @@ export class HeaderComponent implements AfterViewInit {
       foto: '',
       id: 'id-b',
       link: '#',
-      nome: 'Casas & Apartamentos'
+      nome: 'Casas & Sobrados'
     },
     {
       ativo: true,
