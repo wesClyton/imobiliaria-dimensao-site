@@ -1,7 +1,7 @@
 <div class="banners">
   <section
+    #banner
     *ngFor="let banner of banners;"
-    id="banner-{{ banner.id }}"
     class="banner"
     [ngStyle]="{'background-image': 'url(' + banner.foto + ')'}">
 
