@@ -1,0 +1,225 @@
+@import 'mixins';
+
+::ng-deep {
+  body, html {
+    background-color: var(--grey-5);
+  }
+}
+
+.box {
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  
+  @include mobile-first(md) {
+    max-width: 640px;
+  }
+
+  @include mobile-first(lg) {
+    max-width: 980px;
+  }
+
+  @include mobile-first(xl) {
+    max-width: 1180px;
+  }
+
+  p {
+    @include mobile-first(lg) {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+}
+
+h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--primary-2);
+
+  @include mobile-first(lg) {
+    font-size: 2.5rem;
+  }
+}
+
+.box-2 {
+  display: flex;
+  max-width: 90%;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 30px auto 0;
+
+  @include mobile-first(lg) {
+    flex-direction: row;
+    max-width: 935px;
+  }
+
+  @include mobile-first(xl) {
+    flex-direction: row;
+    max-width: 1180px;
+    margin: 80px auto 0;
+    gap: 6rem;
+  }
+  
+}
+
+.box-form {
+  background-color: var(--white);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 3px 0 rgba(var(--black-rgb), 0.25);
+
+  @include mobile-first(lg) {
+    flex: 0.75;
+  }
+
+  @include mobile-first(xl) {
+    flex: 0.75;
+  }
+}
+
+.form {
+  .input-field {
+    margin-bottom: 1.5rem;
+  }
+
+  .input-field-checkbox {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+.text {
+
+  @include mobile-first(lg) {
+    flex: 1;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+
+    @include mobile-first(lg) {
+      font-size: 1.625rem;
+    }
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      display: flex;
+      margin-bottom: 40px;
+      align-items: center;
+      
+      span {
+        display: inline-block;
+        min-width: 40px;
+        min-height: 40px;
+        line-height: 40px;
+        background: #fff;
+        border: 1px solid var(--grey-4);
+        border-radius: 50%;
+        color: var(--primary-3);
+        text-align: center;
+        font-weight: bold;
+        margin-right: 10px;
+
+        @include mobile-first(lg) {
+          min-width: 80px;
+          min-height: 80px;
+          line-height: 80px;
+
+          font-size: 1.8rem;
+        }
+      }
+
+      p {
+        font-size: 0.75rem;
+        color: var(--grey-1);
+        padding: 0;
+
+        @include mobile-first(lg) {
+          font-size: 0.85rem;
+        }
+      }
+
+    }
+  }
+
+  app-button-whatsapp {
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+  }
+}
+
+.box-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 60px;
+
+  @include mobile-first(md) {
+    margin: 60px auto 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 540px;
+  }
+
+  @include mobile-first(lg) {
+    max-width: 935px;
+    margin-top: 80px;
+  }
+
+  @include mobile-first(xl) {
+    max-width: 1180px;
+    margin-top: 100px;
+  }
+
+  .item {
+    text-align: center;
+    margin-bottom: 20px;
+
+    @include mobile-first(md) {
+      width: 240px;
+    }
+
+    @include mobile-first(lg) {
+      width: 220px;
+      text-align: left;
+    }
+
+    @include mobile-first(xl) {
+      width: 240px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    i {
+      display: block;
+      font-size: 40px;
+      color: var(--primary-4);
+    }
+
+    span {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 10px 0;
+    }
+
+    p {
+      text-align: center;
+
+      @include mobile-first(lg) {
+        text-align: left;
+      }
+    }
+
+  }
+}

@@ -1,24 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AnchorContactModule } from 'src/app/shared/components/anchor-contact/anchor-contact.module';
 import { ButtonWhatsappModule } from 'src/app/shared/components/button-whatsapp/button-whatsapp.module';
-import { BrokerComponent } from './broker.component';
+import { AnnounceComponent } from './announce.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: BrokerComponent
+    component: AnnounceComponent
   }
 ];
 
 @NgModule({
-  declarations: [ BrokerComponent ],
+  declarations: [ AnnounceComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ReactiveFormsModule,
     AnchorContactModule,
     ButtonWhatsappModule
   ]
 })
-export class BrokerModule {}
+export class AnnounceModule {}

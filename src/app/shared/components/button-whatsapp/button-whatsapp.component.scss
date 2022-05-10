@@ -1,0 +1,26 @@
+button {
+  background-color: transparent;
+  border: 1px solid #00E676;
+  color: #00E676;
+  text-transform: uppercase;
+  text-align: center;
+  height: 26px;
+  line-height: 26px;
+  width: 200px;
+  border-radius: 25px;
+  font-size: 0.625rem;
+  font-weight: 600;
+
+  &:hover {
+    color: #fff;
+    background-color: #00E676;
+    border-color: #00E676;
+  }
+
+  span {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    vertical-align: text-top;
+  }
+}

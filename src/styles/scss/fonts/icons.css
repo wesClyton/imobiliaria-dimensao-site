@@ -84,6 +84,9 @@
 .icon-mail:before {
   content: "\e906";
 }
+.icon-mail-rounded:before {
+  content: "\e917";
+}
 .icon-phone:before {
   content: "\e907";
 }
