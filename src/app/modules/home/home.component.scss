@@ -10,7 +10,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center bottom;
-  padding: 2rem 1rem 3rem 1rem;
+  padding: 2rem 1rem 8rem 1rem;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -19,6 +19,14 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 7rem;
+
+  @include mobile-first(md) {
+    padding: 12rem 1rem 10rem 1rem;
+  }
+
+  @include mobile-first(lg) {
+    padding: 8rem 1rem 10rem 1rem;
+  }
 
   h1 {
     font-size: 1.5rem;
@@ -40,6 +48,13 @@
 
 .buttons {
   .btn {
+    width: 200px;
     margin: 0.5rem;
+    font-size: 0.75rem;
+
+    @include mobile-first(lg) {
+      width: 230px;
+      font-size: 0.82rem;
+    }
   }
 }
