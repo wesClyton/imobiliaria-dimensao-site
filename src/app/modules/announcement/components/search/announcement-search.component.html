@@ -1,0 +1,105 @@
+<form class="form" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="box-1">
+    <div class="input-field">
+      <label>Tipo</label>
+      <select ngDefaultControl class="select" formControlName="tipo">
+        <option value="null" selected>Selecione o Tipo</option>
+        <ng-container appAnnouncementTypeOptionSelect (dataFinded)="announcementTypes = $event">
+          <option *ngFor="let type of announcementTypes" [value]="type.value">
+            {{ type.name }}
+          </option>
+        </ng-container>
+      </select>
+    </div>
+
+    <div class="input-field">
+      <label>Cidade</label>
+      <select ngDefaultControl appCityOptionSelect class="select" formControlName="cidade">
+        <option value="null" selected>Selecione a Cidade</option>
+        <ng-container appCityOptionSelect (dataFinded)="cities = $event">
+          <option *ngFor="let city of cities?.data" [value]="city.id">
+            {{ city.nome }}
+          </option>
+        </ng-container>
+      </select>
+    </div>
+
+    <div class="input-field">
+      <div class="input-field">
+        <label>Bairro</label>
+        <input ngDefaultControl class="input" type="text" formControlName="bairro" placeholder="Informe o Bairro">
+      </div>
+    </div>
+  </div>
+
+  <div class="box-2" *ngIf="showFiltersAdvanced">
+    <div class="item">
+      <div class="input-field">
+        <label>Valor mínimo</label>
+        <input ngDefaultControl appCurrencyBr class="input" type="text" formControlName="valorMinimo" placeholder="Informe o Valor mínimo">
+      </div>
+      <div class="input-field">
+        <label>Valor máximo</label>
+        <input ngDefaultControl appCurrencyBr class="input" type="text" formControlName="valorMaximo" placeholder="Informe o Valor máximo">
+      </div>
+    </div>
+    <div class="item">
+      <div class="input-field">
+        <label>Área mínima (m²)</label>
+        <input ngDefaultControl appM2 class="input" type="text" formControlName="areaMinima" placeholder="Informe a Área mínima">
+      </div>
+      <div class="input-field">
+        <label>Área máxima (m²)</label>
+        <input ngDefaultControl appM2 class="input" type="text" formControlName="areaMaxima" placeholder="Informe a Área máxima">
+      </div>
+    </div>
+  </div>
+
+  <div class="box-3" *ngIf="showFiltersAdvanced">
+    <div class="input-field">
+      <label>Banheiros</label>
+      <div class="quantities-filter">
+        <div
+          class="item"
+          *ngFor="let quantitie of quantities"
+          [ngClass]="{ 'active' : controlBanheiros?.value === quantitie }">
+          <label for="banheiros-{{ quantitie }}">{{ quantitie }}</label>
+          <input type="radio" formControlName="banheiros" id="banheiros-{{ quantitie }}" [value]="quantitie">
+        </div>
+      </div>
+    </div>
+
+    <div class="input-field">
+      <label>Dormitórios</label>
+      <div class="quantities-filter">
+        <div
+          class="item"
+          *ngFor="let quantitie of quantities"
+          [ngClass]="{ 'active' : controlDormitorios?.value === quantitie }">
+          <label for="dormitorios-{{ quantitie }}">{{ quantitie }}</label>
+          <input type="radio" formControlName="dormitorios" id="dormitorios-{{ quantitie }}" [value]="quantitie">
+        </div>
+      </div>
+    </div>
+
+    <div class="input-field">
+      <label>Vagas</label>
+      <div class="quantities-filter">
+        <div
+          class="item"
+          *ngFor="let quantitie of quantities"
+          [ngClass]="{ 'active' : controlVagas?.value === quantitie }">
+          <label for="vagas-{{ quantitie }}">{{ quantitie }}</label>
+          <input type="radio" formControlName="vagas" id="vagas-{{ quantitie }}" [value]="quantitie">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button class="btn btn-sm btn-primary-4 btn-outline" type="button" (click)="toggleTypeFilter()">
+      {{ showFiltersAdvanced ? 'Filtros básicos' : 'Filtros avançados' }}
+    </button>
+    <button class="btn btn-sm btn-primary-3" type="submit">Buscar</button>
+  </div>
+</form>

@@ -1,0 +1,103 @@
+@import 'mixins';
+
+::ng-deep {
+  body, html {
+    background-color: var(--grey-5);
+  }
+}
+
+.box-1 {
+  width: 100%;
+  max-width: 870px;
+  margin: 0 auto;
+
+  @include mobile-first(md) {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+.box-2,
+.box-3 {
+  width: 100%;
+  max-width: 670px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.box-2 {
+  margin-bottom: 0.75rem;
+  @include mobile-first(md) {
+    .item {
+      display: flex;
+      gap: 2rem;
+    }
+  }
+}
+
+.box-3 {
+  @include mobile-first(md) {
+    flex-direction: row;
+    justify-content: space-between;
+    .input-field {
+      width: auto;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.buttons {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+
+  .btn {
+    width: auto;
+  }
+}
+
+.quantities-filter {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+
+  .item {
+    background-color: var(--white);
+    color: var(--primary-3);
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid var(--grey-4);
+    cursor: pointer;
+
+    label {
+      margin-bottom: 0;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+  }
+
+  .item.active {
+    background-color: var(--primary-3);
+    color: var(--white);
+    border-color: var(--white);
+  }
+}
