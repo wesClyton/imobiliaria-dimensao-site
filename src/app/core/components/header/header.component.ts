@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { APP_CONFIG } from '../../../app.config';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
+import { BannerGetAllService } from '../../../modules/banner/services/banner.service';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
 
 @Component({
@@ -11,7 +13,7 @@ import { ModuleConfig } from '../../../shared/interfaces/module-config.interface
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   public menuActive = false;
 
@@ -25,63 +27,39 @@ export class HeaderComponent implements AfterViewInit {
     return window.location.pathname === environment.baseUrl;
   }
 
-  public banners: Array<Banner> = [
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-a',
-      link: '#',
-      nome: 'Apartamentos'
-    },
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-b',
-      link: '#',
-      nome: 'Casas & Sobrados'
-    },
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-c',
-      link: '#',
-      nome: 'Comercial'
-    },
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-d',
-      link: '#',
-      nome: 'Loteamento'
-    },
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-e',
-      link: '#',
-      nome: 'Rural'
-    }
-  ];
+  public banners!: Array<Banner>;
 
   @ViewChildren('linkFilter')
   public linksFilter!: QueryList<ElementRef>;
 
+  private subscription = new Subscription();
+
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly bannerGetAllService: BannerGetAllService
   ) { }
 
   ngAfterViewInit(): void {
+    this.banners = this.bannerGetAllService.items;
+    if (!this.banners) {
+      this.subscription.add(this.bannerGetAllService.banners$.subscribe((banners) => this.banners = banners.data));
+    }
+
     this.linksFilter.forEach(link => link.nativeElement.addEventListener('click', this.onClickLink.bind(this)));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private onClickLink(event: PointerEvent): void {
     event.preventDefault();
   }
 
-  public navigateFilter(filter: string): void {
+  public navigateFilter(banner: Banner): void {
     this.router.navigate(
       [ANNOUNCEMENT_CONFIG.pathFront],
-      { queryParams: { query: filter }
+      { queryParams: { tipo: banner.nome }
     });
     this.showMenu();
   }

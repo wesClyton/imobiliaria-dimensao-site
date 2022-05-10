@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormService } from '../../shared/services/form/form.service';
+import { AnnouncementType } from '../announcement/interfaces/announcement-type.interface';
 
 @Component({
   selector: 'app-announce',
@@ -10,6 +11,8 @@ import { FormService } from '../../shared/services/form/form.service';
 export class AnnounceComponent implements OnInit {
 
   public form!: FormGroup;
+
+  public announcementTypes!: Array<AnnouncementType>;
 
   private get controlNome(): AbstractControl | null {
     return this.form.get('nome');

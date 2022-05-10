@@ -1,9 +1,9 @@
-<div class="banners" *ngIf="banners.length">
+<div class="banners" *ngIf="banners">
   <section
     #banner
     *ngFor="let banner of banners;"
     class="banner"
-    [ngStyle]="{'background-image': 'url(' + banner.foto + ')'}">
+    [ngStyle]="{'background-image': 'url(' + pathImageBanner(banner.foto) + ')'}">
 
     <div class="text">
       <h1>{{ banner.nome }}</h1>

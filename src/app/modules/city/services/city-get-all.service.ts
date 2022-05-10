@@ -8,7 +8,7 @@ import { CityGetAll } from '../interfaces/city-get-all.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class CityService extends HttpGetAllService<CityGetAll> {
+export class CityGetAllService extends HttpGetAllService<CityGetAll> {
 
   constructor(
     public override readonly httpClient: HttpClient,

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { DirectivesModule } from '../../shared/directives/directives.module';
 import { ContactComponent } from './contact.component';
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DirectivesModule
   ]
 })
 export class ContactModule {}

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LoadingService } from './core/loading/loading.service';
 import { ScrollTopService } from './shared/services/scroll-top/scroll-top.service';
 
 @Component({
@@ -10,15 +11,20 @@ import { ScrollTopService } from './shared/services/scroll-top/scroll-top.servic
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  private subs = new Subscription();
+  private subscription = new Subscription();
+
+  public showLoading!: boolean;
 
   constructor(
     private readonly router: Router,
-    private readonly scrollTopService: ScrollTopService
+    private readonly scrollTopService: ScrollTopService,
+    private readonly loadingService: LoadingService
   ) { }
 
   ngOnInit(): void {
-    this.subs.add(
+    this.subscription.add(this.loadingService.observer$.subscribe(value => this.showLoading = value));
+
+    this.subscription.add(
       this.router.events.subscribe((event: any) => {
         if (event instanceof NavigationStart) {
           setTimeout(() => this.scrollTopService.scrollTop(), 200);
@@ -28,7 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subs.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 

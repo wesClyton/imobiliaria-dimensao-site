@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { APP_CONFIG } from '../../../app.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
+import { BannerGetAllService } from '../../../modules/banner/services/banner.service';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
+import { LoadingService } from '../../loading/loading.service';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
 
   public get APP_CONFIG(): ModuleConfig {
     return APP_CONFIG;
@@ -19,47 +22,29 @@ export class FooterComponent {
     return new Date().getFullYear();
   }
 
-  public banners: Array<Banner> = [
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-a',
-      link: '#',
-      nome: 'Apartamentos'
-    },
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-b',
-      link: '#',
-      nome: 'Casas & Sobrados'
-    },
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-c',
-      link: '#',
-      nome: 'Comercial'
-    },
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-d',
-      link: '#',
-      nome: 'Loteamento'
-    },
-    {
-      ativo: true,
-      foto: '',
-      id: 'id-e',
-      link: '#',
-      nome: 'Rural'
-    }
-  ];
+  public banners!: Array<Banner>;
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly bannerGetAllService: BannerGetAllService,
+    private readonly loadingService: LoadingService
   ) { }
+
+  ngOnInit(): void {
+    this.getBanners();
+  }
+
+  private getBanners(): void {
+    this.bannerGetAllService
+      .getAll()
+      .pipe(
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(banners => {
+        this.bannerGetAllService.updateList(banners);
+        this.banners = banners.data;
+      });
+  }
 
   public navigateHome(): void {
     this.router.navigateByUrl(APP_CONFIG.pathFront);
