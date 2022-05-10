@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/contact/contact.module').then(m => m.ContactModule)
   },
   {
+    path: 'anuncie',
+    loadChildren: () => import('./modules/announce/announce.module').then(m => m.AnnounceModule)
+  },
+  {
     path: 'corretores',
     loadChildren: () => import('./modules/broker/broker.module').then(m => m.BrokerModule)
   },

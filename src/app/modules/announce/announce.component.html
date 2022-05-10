@@ -1,0 +1,112 @@
+<div class="inside-page">
+
+    <div class="box">
+      <h1>Por que anunciar conosco?</h1>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+      </p>
+
+      <div class="box-2">
+
+        <div class="text">
+          <h2>Como funciona</h2>
+          <ul>
+            <li>
+              <span>1</span>
+              <p>Preencha o formulário com seus dados e os dados do imóvel.</p>
+            </li>
+
+            <li>
+              <span>2</span>
+              <p>Nossos especialistas entrarão em contato em breve para mais informações e detalhes do imóvel.</p>
+            </li>
+
+            <li>
+              <span>3</span>
+              <p>Seu imóvel é incluído nos nossos sistemas e publicado no site da Anagê e nos principais portais imobiliários do país.</p>
+            </li>
+          </ul>
+
+          <app-button-whatsapp [numeroWhats]="44999999999" cl></app-button-whatsapp>
+        </div>
+
+        <div class="box-form">
+          <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-field">
+              <label>Nome</label>
+              <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">
+              <span class="input-error" *ngIf="controlNomeHasError">Informe um Nome</span>
+            </div>
+
+            <div class="input-field">
+              <label>E-mail</label>
+              <input ngDefaultControl class="input" type="email" formControlName="email" placeholder="Informe seu E-mail">
+              <span class="input-error" *ngIf="controlEmailHasError">Informe um E-mail</span>
+            </div>
+
+            <div class="input-field">
+              <label>Telefone/Celular</label>
+              <input ngDefaultControl class="input" type="tel" formControlName="telefone" placeholder="Informe seu Telefone/Celular">
+              <span class="input-error" *ngIf="controlTelefoneHasError">Informe um Telefone/Celular</span>
+            </div>
+
+            <div class="input-field">
+              <label>Tipo do Imóvel</label>
+              <select ngDefaultControl class="select" formControlName="tipoImovel">
+                <option>-</option>
+                <option value="CASA">Casa</option>
+                <option value="SOBRADO">Sobrado</option>
+                <option value="TERRENO_URBANO">Terreno Urbano</option>
+                <option value="APARTAMENTO">Apartamento</option>
+                <option value="TERRENO_RURAL">Terreno Rural</option>
+                <option value="COMERCIAL">Comercial</option>
+                <option value="LOTEAMENTO">Loteamento</option>
+              </select>
+              <span class="input-error" *ngIf="controlTipoImovelHasError">Informe um o tipo do seu imóvel</span>
+            </div>
+
+            <button class="btn btn-sm btn-primary-3" type="submit">Enviar</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="box-3">
+        <div class="item">
+          <i class="icon-qualidade"></i>
+          <span>Qualidade</span>
+          <p>
+            Você encontrará a rapidez, qualidade e apoio necessário para publicar seus anúncios.
+          </p>
+        </div>
+
+        <div class="item">
+          <i class="icon-comunicacao"></i>
+          <span>comunicacao</span>
+          <p>
+            Você pode ver as mensagens dos interessados no portal ou por e-mail.
+          </p>
+        </div>
+
+        <div class="item">
+          <i class="icon-qualidade"></i>
+          <span>Compromisso</span>
+          <p>
+            Te ajudamos a melhorar seu anúncio para que fique 100% completo.
+          </p>
+        </div>
+
+        <div class="item">
+          <i class="icon-qualidade"></i>
+          <span>Mais interessados</span>
+          <p>
+            Oferecemos um perfil de busca mais completo e específico dos seus interessados.
+          </p>
+        </div>
+
+      </div>
+
+      <app-anchor-contact></app-anchor-contact>
+
+    </div>
+
+</div>
