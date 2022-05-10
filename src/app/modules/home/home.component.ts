@@ -1,8 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
+import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
 import { PathImagePipe } from '../../shared/pipes/path-image/path-image.pipe';
 import { Banner } from '../banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../banner/services/banner.service';
+SwiperCore.use([Mousewheel, Pagination]);
 
 @Component({
   selector: 'app-home',
@@ -15,6 +17,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   public banners!: Array<Banner>;
 
   private subscription = new Subscription();
+
+  public swiperConfig: SwiperOptions = {
+    autoplay: false,
+    direction: 'vertical',
+    slidesPerView: 1,
+    mousewheel: true,
+    speed: 1500
+  };
 
   constructor(
     private readonly bannerGetAllService: BannerGetAllService,

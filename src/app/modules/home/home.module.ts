@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
+import { SwiperModule } from 'swiper/angular';
 
 const routes: Routes = [
   {
@@ -11,10 +12,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ HomeComponent ],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SwiperModule
   ]
 })
-export class HomeModule {}
+export class HomeModule { }

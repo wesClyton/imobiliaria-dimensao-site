@@ -1,18 +1,20 @@
 <div class="banners" *ngIf="banners">
-  <section
-    #banner
-    *ngFor="let banner of banners;"
-    class="banner"
-    [ngStyle]="{'background-image': 'url(' + pathImageBanner(banner.foto) + ')'}">
+  <swiper [config]="swiperConfig">
+    <ng-template swiperSlide *ngFor="let banner of banners;">
+      <section
+        class="banner"
+        [ngStyle]="{'background-image': 'url(' + pathImageBanner(banner.foto) + ')'}">
 
-    <div class="text">
-      <h1>{{ banner.nome }}</h1>
-      <p>Lorem Ipsum is simply dummy text of the printing</p>
-    </div>
+        <div class="text">
+          <h1>{{ banner.nome }}</h1>
+          <p>Lorem Ipsum is simply dummy text of the printing</p>
+        </div>
 
-    <div class="buttons">
-      <button class="btn btn-white" type="button">Ver destaques</button>
-      <button class="btn btn-primary" type="button">Encontre o seu</button>
-    </div>
-  </section>
+        <div class="buttons">
+          <button class="btn btn-white" type="button">Ver destaques</button>
+          <button class="btn btn-primary" type="button">Encontre o seu</button>
+        </div>
+      </section>
+    </ng-template>
+  </swiper>
 </div>
