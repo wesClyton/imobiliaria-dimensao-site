@@ -54,9 +54,19 @@
 }
 
 .buttons {
+  transition: 0.5s all;
+  opacity: 1;
+  display: flex;
+  gap: 1rem;
+  transform: translateY(0);
+
+  &.inactive {
+    opacity: 0;
+    transform: translateY(8rem);
+  }
+
   .btn {
     width: 200px;
-    margin: 0.5rem;
     font-size: 0.75rem;
 
     @include mobile-first(lg) {

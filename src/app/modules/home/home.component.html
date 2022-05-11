@@ -1,5 +1,7 @@
 <div class="banners" *ngIf="banners">
-  <swiper [config]="swiperConfig">
+  <swiper
+    [config]="swiperConfig"
+    (transitionStart)="buttonsAnimation()">
     <ng-template swiperSlide *ngFor="let banner of banners;">
       <section
         class="banner"
@@ -10,7 +12,7 @@
           <p>{{ banner.descricao }}</p>
         </div>
 
-        <div class="buttons">
+        <div #buttons class="buttons">
           <button class="btn btn-white" type="button">Ver destaques</button>
           <button class="btn btn-primary" type="button">Encontre o seu</button>
         </div>

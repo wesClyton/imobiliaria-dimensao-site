@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
 import { PathImagePipe } from '../../shared/pipes/path-image/path-image.pipe';
@@ -26,9 +26,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     speed: 1000
   };
 
+  @ViewChildren('buttons')
+  public buttonsDiv!: QueryList<ElementRef>;
+
   constructor(
     private readonly bannerGetAllService: BannerGetAllService,
-    private readonly pathImagePipe: PathImagePipe
+    private readonly pathImagePipe: PathImagePipe,
+    private readonly renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +48,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public pathImageBanner(foto: string): string {
     return this.pathImagePipe.transform(foto, 'banners');
+  }
+
+  public buttonsAnimation(): void {
+    this.buttonsDiv?.forEach(element => this.renderer.addClass(element.nativeElement, 'inactive'));
+    setTimeout(() => this.buttonsDiv?.forEach(element => this.renderer.removeClass(element.nativeElement, 'inactive')), 400);
   }
 
 }
