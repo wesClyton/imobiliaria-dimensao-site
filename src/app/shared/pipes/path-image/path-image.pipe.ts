@@ -18,7 +18,7 @@ export class PathImagePipe implements PipeTransform {
     return path === PathsImage[0];
   }
 
-  transform(image: string, path: PathImageType, galeriaId?: string): string {
+  transform(image: string | undefined, path: PathImageType, galeriaId?: string): string {
     if (!path && !galeriaId) {
       throw new Error(`PathImagePipe => Informe o "path" da imagem. Valores possíveis: ${this.valuesPossibiles}`);
     }

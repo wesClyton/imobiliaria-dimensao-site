@@ -7,15 +7,15 @@
   </section>
 
   <section class="box-2">
-    <div 
+    <div
       *ngFor="let broker of brokers;"
       (click)="openModal(broker)"
       class="broker">
       <div>
-        <img [src]="broker.foto" [alt]="broker.nome">
+        <img [src]="broker.foto | pathImage: 'corretores'" [alt]="broker.nome">
         <button class="icon-arrow-right"></button>
       </div>
-      
+
       <div>
         <h2>{{ broker.nome }}</h2>
         <p *ngIf="broker.creci">{{ broker.creci }}</p>
@@ -27,7 +27,9 @@
     <div class="overlay"></div>
     <div class="container">
       <div class="content">
-        <div class="content-img"><img [src]="broker?.foto" alt=""></div>
+        <div class="content-img">
+          <img [src]="broker?.foto | pathImage: 'corretores'" [alt]="broker?.nome">
+        </div>
         <div class="text">
           <button class="icon-close" (click)="closeModal()"></button>
           <h2>{{ broker?.nome }}</h2>

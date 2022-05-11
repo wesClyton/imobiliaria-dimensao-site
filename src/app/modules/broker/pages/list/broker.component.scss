@@ -14,7 +14,7 @@
 
   h1 {
     font-size: 1.5rem;
-  
+
     @include mobile-first(lg) {
       font-size: 2.5rem;
     }
@@ -62,10 +62,12 @@
 
     div:first-child{
       position: relative;
-    } 
+    }
 
     img {
       border-radius: 50%;
+      width: 100%;
+      max-width: 250px;
     }
 
     button {
@@ -80,7 +82,7 @@
       z-index: 10;
     }
 
-    
+
 
     div:last-child {
       text-align: center;
@@ -90,7 +92,7 @@
         color: var(--grey-1);
         padding-top: 0.625rem;
       }
-  
+
       p {
         display: inline-block;
         font-size: 0.75rem;
@@ -123,7 +125,7 @@
     width: 100%;
     height: 100%;
     top: 0;
-    background-color: rgba($color: #000000, $alpha: 0.5);
+    background-color: rgba(var(--black-rgb), 0.5);
     z-index: 99;
   }
 
@@ -133,7 +135,7 @@
     left: calc(50% - 300px / 2);
     max-width: 310px;
     width: 90%;
-    background: #fff;
+    background: var(--white);
     border-radius: 25px;
     opacity: 0;
     z-index: 100;
@@ -161,9 +163,9 @@
       @include mobile-first(md) {
         flex-direction: row;
       }
-      
+
       .content-img {
-        
+
         @include mobile-first(md) {
           width: 220px
         }
@@ -293,7 +295,7 @@
               margin-right: 10px;
               margin-bottom: 0;
             }
-            
+
           }
         }
       }

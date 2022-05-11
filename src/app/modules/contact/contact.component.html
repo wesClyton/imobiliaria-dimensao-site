@@ -46,7 +46,7 @@
               <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
             </div>
 
-            <button class="btn btn-sm btn-primary-3" type="submit">Enviar</button>
+            <button class="btn btn-sm btn-primary-3" type="submit" [disabled]="!controlConcordo?.value">Enviar</button>
           </form>
         </div>
 

@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { APP_CONFIG } from '../../../app.config';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
-import { BannerGetAllService } from '../../../modules/banner/services/banner.service';
+import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
 
 @Component({

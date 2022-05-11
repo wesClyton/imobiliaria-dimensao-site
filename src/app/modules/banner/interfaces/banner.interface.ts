@@ -3,5 +3,6 @@ export interface Banner {
   readonly nome: string;
   readonly foto: string;
   readonly link: string;
+  readonly descricao: string;
   readonly ativo: boolean;
 }

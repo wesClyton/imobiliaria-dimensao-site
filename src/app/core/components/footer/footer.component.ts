@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { APP_CONFIG } from '../../../app.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
-import { BannerGetAllService } from '../../../modules/banner/services/banner.service';
+import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
 import { LoadingService } from '../../loading/loading.service';
 
@@ -35,6 +35,10 @@ export class FooterComponent implements OnInit {
   }
 
   private getBanners(): void {
+    this.bannerGetAllService.queryFilterAdd({
+      field: 'ativo',
+      value: true
+    });
     this.bannerGetAllService
       .getAll()
       .pipe(

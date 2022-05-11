@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
 import { PathImagePipe } from '../../shared/pipes/path-image/path-image.pipe';
 import { Banner } from '../banner/interfaces/banner.interface';
-import { BannerGetAllService } from '../banner/services/banner.service';
+import { BannerGetAllService } from '../banner/services/banner-get-all.service';
 SwiperCore.use([Mousewheel, Pagination]);
 
 @Component({
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     direction: 'vertical',
     slidesPerView: 1,
     mousewheel: true,
-    speed: 1500
+    speed: 1000
   };
 
   constructor(
