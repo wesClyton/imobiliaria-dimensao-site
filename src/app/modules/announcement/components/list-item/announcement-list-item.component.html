@@ -1,0 +1,27 @@
+<div class="announcement" (click)="open()">
+  <img [src]="announcement.galeria.fotos[0]?.nome | pathImage : 'anuncios' : announcement?.galeria?.id" [alt]="announcement.titulo">
+  <div class="infos">
+    <div>
+      <small class="type">{{ announcement.tipo | announcementType }}</small>
+      <h2 class="title">{{ announcement.titulo }}</h2>
+      <p class="address">{{ announcement.endereco }} - {{ announcement.bairro }} - {{ announcement.cidade | cityState }}</p>
+
+      <div class="numbers">
+        <div *ngIf="announcement.areaTotal">
+          <i class="icon-metragem"></i> {{ announcement.areaTotal | m2: true }}
+        </div>
+        <div *ngIf="announcement.dormitorios">
+          <i class="icon-dormitorios"></i> {{ announcement.dormitorios }}
+        </div>
+        <div *ngIf="announcement.banheiros">
+          <i class="icon-banheiros"></i> {{ announcement.banheiros }}
+        </div>
+        <div *ngIf="announcement.vagasGaragem">
+          <i class="icon-garagem"></i> {{ announcement.vagasGaragem }}
+        </div>
+      </div>
+    </div>
+
+    <strong class="amount">{{ announcement.valor | currencyBr }}</strong>
+  </div>
+</div>

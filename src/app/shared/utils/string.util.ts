@@ -20,4 +20,8 @@ export class StringUtil {
     return value.replace('R$', '').trim();
   }
 
+  public static formatFriendlyUrl(value: string): string {
+    return 'formatar-url-amigavel';
+  }
+
 }

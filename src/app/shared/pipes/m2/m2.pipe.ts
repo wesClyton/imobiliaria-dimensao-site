@@ -10,10 +10,10 @@ export class M2Pipe implements PipeTransform {
     private readonly maskApplierService: MaskApplierService
   ) {}
 
-  transform(value: string): string {
+  transform(value: string | number, showSymbol = false): string {
     this.maskApplierService.thousandSeparator = '.';
-    const valueFormated = this.maskApplierService.applyMask(value, 'separator.2');
-    return valueFormated;
+    const valueFormated = this.maskApplierService.applyMask(value.toString(), 'separator.2');
+    return `${valueFormated}${showSymbol ? 'm²' : ''}`;
   }
 
 }

@@ -12,3 +12,38 @@ h1 {
     font-size: 2.5rem;
   }
 }
+
+.list {
+  margin-top: 2rem;
+
+  @include mobile-first(xl) {
+    padding: 1rem 1.5rem 0 1.5rem;
+  }
+}
+
+.announcements {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+
+  @include mobile-first(md) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .item {
+    width: 100%;
+    display: flex;
+
+    @include mobile-first(md) {
+      max-width: 290px;
+    }
+  }
+}
+
+app-announcement-list-item {
+  display: flex;
+}

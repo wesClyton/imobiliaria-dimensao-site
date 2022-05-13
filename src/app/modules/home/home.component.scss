@@ -59,10 +59,15 @@
   display: flex;
   gap: 1rem;
   transform: translateY(0);
+  flex-direction: column;
 
   &.inactive {
     opacity: 0;
     transform: translateY(8rem);
+  }
+
+  @include mobile-first(md) {
+    flex-direction: row;
   }
 
   .btn {
