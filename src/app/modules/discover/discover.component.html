@@ -1,0 +1,36 @@
+<div class="inside-page">
+
+  <div class="box">
+    <h1>Descubra</h1>
+
+    <div class="box-form">
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="input-field">
+          <label>Endereço</label>
+          <input ngDefaultControl class="input" type="text" formControlName="endereco" placeholder="Informe uma cidade, bairro ou rua..">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="box-2">
+
+
+      <google-map [options]="options" width="100%" *ngIf="options">
+        <map-marker
+          #markerElem
+          *ngFor="let spot of spots"
+          [position]="{ lat: spot.lat, lng: spot.lng }"
+          [options]="markerOptions"
+          [clickable]="true"
+          (mapClick)="selectMarker(markerElement, 'sassssddsd')"
+        >
+      
+        <map-info-window>{{ infoContent }}</map-info-window>
+      </map-marker>
+        
+    </google-map>
+    ,
+  </div>
+
+</div>

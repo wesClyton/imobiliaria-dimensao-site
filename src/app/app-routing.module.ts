@@ -29,6 +29,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/broker/broker.module').then(m => m.BrokerModule)
   },
   {
+    path: 'onde-encontrar',
+    loadChildren: () => import('./modules/discover/discover.module').then(m => m.DiscoverModule)
+  },
+  {
     path: '**',
     redirectTo: PAGES_CONFIG.path,
     pathMatch: 'full'

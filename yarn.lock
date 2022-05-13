@@ -214,6 +214,14 @@
   dependencies:
     "tslib" "^2.3.0"
 
+"@angular/google-maps@^13.3.7":
+  "integrity" "sha512-MwEopwy+jTKL4Ie1IXIDKjAV5RfmSynH9ay5PjHUjNRXPaWQ4K6BR77w7VCL7c2z5RowI52f9UMNIgsUkcRuLw=="
+  "resolved" "https://registry.npmjs.org/@angular/google-maps/-/google-maps-13.3.7.tgz"
+  "version" "13.3.7"
+  dependencies:
+    "@types/google.maps" "^3.45.6"
+    "tslib" "^2.3.0"
+
 "@angular/material@^13.2.0":
   "integrity" "sha512-VxseAkzEN2fakorQUa+r4enUhTAeY4gJ8NRbd0A7r0gKDLGcszJ1XYph4WiNs3bLkZUH1EirhOMAfpNOZ8SqFg=="
   "resolved" "https://registry.npmjs.org/@angular/material/-/material-13.2.0.tgz"
@@ -1500,6 +1508,11 @@
     "@types/express-serve-static-core" "^4.17.18"
     "@types/qs" "*"
     "@types/serve-static" "*"
+
+"@types/google.maps@^3.45.6":
+  "integrity" "sha512-//H3NjhH8GqWOdSecsodAc1FtcGWZKTi45q59Ym/sV0F8bituz4JcPicLRhSvdSLi9fjZKNUUdjXwgJeWv/M5w=="
+  "resolved" "https://registry.npmjs.org/@types/google.maps/-/google.maps-3.48.8.tgz"
+  "version" "3.48.8"
 
 "@types/http-proxy@^1.17.8":
   "integrity" "sha512-5kPLG5BKpWYkw/LVOGWpiq3nEVqxiN32rTgI53Sk12/xHFQ2rG3ehI9IO+O3W2QoKeyB92dJkoka8SUm6BX1pA=="
@@ -2904,11 +2917,6 @@
   "resolved" "https://registry.npmjs.org/es-module-lexer/-/es-module-lexer-0.9.3.tgz"
   "version" "0.9.3"
 
-"esbuild-darwin-64@0.14.22":
-  "integrity" "sha512-d8Ceuo6Vw6HM3fW218FB6jTY6O3r2WNcTAU0SGsBkXZ3k8SDoRLd3Nrc//EqzdgYnzDNMNtrWegK2Qsss4THhw=="
-  "resolved" "https://registry.npmjs.org/esbuild-darwin-64/-/esbuild-darwin-64-0.14.22.tgz"
-  "version" "0.14.22"
-
 "esbuild-wasm@0.14.22":
   "integrity" "sha512-FOSAM29GN1fWusw0oLMv6JYhoheDIh5+atC72TkJKfIUMID6yISlicoQSd9gsNSFsNBvABvtE2jR4JB1j4FkFw=="
   "resolved" "https://registry.npmjs.org/esbuild-wasm/-/esbuild-wasm-0.14.22.tgz"
@@ -3217,11 +3225,6 @@
   "integrity" "sha1-FQStJSMVjKpA20onh8sBQRmU6k8="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
-
-"fsevents@~2.3.2":
-  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
@@ -4486,28 +4489,10 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"nice-napi@^1.0.2":
-  "integrity" "sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA=="
-  "resolved" "https://registry.npmjs.org/nice-napi/-/nice-napi-1.0.2.tgz"
-  "version" "1.0.2"
-  dependencies:
-    "node-addon-api" "^3.0.0"
-    "node-gyp-build" "^4.2.2"
-
-"node-addon-api@^3.0.0":
-  "integrity" "sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A=="
-  "resolved" "https://registry.npmjs.org/node-addon-api/-/node-addon-api-3.2.1.tgz"
-  "version" "3.2.1"
-
 "node-forge@^1":
   "integrity" "sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA=="
   "resolved" "https://registry.npmjs.org/node-forge/-/node-forge-1.3.1.tgz"
   "version" "1.3.1"
-
-"node-gyp-build@^4.2.2":
-  "integrity" "sha512-amJnQCcgtRVw9SvoebO3BKGESClrfXGCUTX9hSn1OuGQTQBOZmVd0Z0OlecpuRksKvbsUqALE8jls/ErClAPuQ=="
-  "resolved" "https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.4.0.tgz"
-  "version" "4.4.0"
 
 "node-gyp@^8.2.0":
   "integrity" "sha512-olTJRgUtAb/hOXG0E93wZDs5YiJlgbXxTwQAFHyNlRsXQnYzUaF2aGgujZbw+hR8aF4ZG/rST57bWMWD16jr9w=="
