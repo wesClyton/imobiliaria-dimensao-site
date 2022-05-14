@@ -4,6 +4,16 @@
     <h1>Encontre seu imóvel</h1>
 
     <app-announcement-search></app-announcement-search>
+
+    <div class="list">
+      <h6 *ngIf="announcements">{{ announcements.length }} resultados encontrados</h6>
+
+      <ul class="announcements">
+        <li class="item" *ngFor="let announcement of announcements;">
+          <app-announcement-list-item [announcement]="announcement"></app-announcement-list-item>
+        </li>
+      </ul>
+    </div>
   </div>
 
 </div>

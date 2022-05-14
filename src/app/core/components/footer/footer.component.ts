@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { finalize } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import { APP_CONFIG } from '../../../app.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
@@ -42,6 +42,7 @@ export class FooterComponent implements OnInit {
     this.bannerGetAllService
       .getAll()
       .pipe(
+        take(1),
         finalize(() => this.loadingService.hide())
       )
       .subscribe(banners => {

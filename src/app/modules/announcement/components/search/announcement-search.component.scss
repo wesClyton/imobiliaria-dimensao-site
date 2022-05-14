@@ -108,3 +108,18 @@
     border-color: var(--white);
   }
 }
+
+.form-reset {
+  width: 100%;
+  text-align: center;
+
+  a {
+    font-size: 0.55rem;
+    color: var(--primary-3);
+    text-decoration: underline;
+    font-family: var(--font-family-700);
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+  }
+}

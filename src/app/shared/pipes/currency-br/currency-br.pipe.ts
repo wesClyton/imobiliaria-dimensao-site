@@ -10,9 +10,9 @@ export class CurrencyBrPipe implements PipeTransform {
     private readonly maskApplierService: MaskApplierService
   ) {}
 
-  transform(value: string): string {
+  transform(value: string | number): string {
     this.maskApplierService.thousandSeparator = '.';
-    const valueFormated = this.maskApplierService.applyMask(value, 'separator.2');
+    const valueFormated = this.maskApplierService.applyMask(value?.toString(), 'separator.2');
     return `R$ ${valueFormated}`;
   }
 

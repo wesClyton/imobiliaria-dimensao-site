@@ -26,7 +26,7 @@ export class HttpGetAllService<GetAll> implements HttpGetAll<GetAll> {
       .pipe(
         catchError((error) => {
           this.exceptionService.handleError(error);
-          return throwError(error);
+          return throwError(() => error);
         })
       );
   }
