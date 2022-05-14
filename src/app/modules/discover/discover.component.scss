@@ -28,6 +28,11 @@ h1 {
 
 .box-form {
   max-width: 90%;
+
+  @include mobile-first(md) {
+    width: 380px;
+  }
+
 }
 
 .box-2 {
@@ -36,37 +41,123 @@ h1 {
   margin-top: 4,75rem;
 }
 
-.numbers {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0.75rem 0 1.5rem;
-  flex-wrap: wrap;
-  color: var(--grey-2);
+map-info-window {
 
-  div {
-    width: 45%;
-    flex-basis: 45%;
-    font-size: 0.75rem;
+  .content {
+    width: 200px;
+    padding: 0;
+    margin: 0;
 
-    i {
-      color: var(--primary-3);
-      margin-right: 0.25rem;
+    img {
+      width: 100%;
+      height: auto;
+    }
 
-      &.icon-metragem {
-        font-size: 0.60rem;
+    .text {
+      padding: 0.2rem 0.6rem 0.6rem;
+
+      h2 {
+        font-size: 0.62rem;
+        padding: 0.25rem 0 0.25rem;
+        color: var(--primary-1);
+        text-align: center;
       }
-      &.icon-dormitorios {
-        font-size: 0.65rem;
+
+      .footer {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+          padding: 0;
+          font-size: 0.68rem;
+          font-weight: 600;
+          color: var(--grey-1);
+          text-align: center;
+        }
+
+        a {
+          display: block;
+          text-align: center;
+          font-size: 0.55rem;
+          color: var(--primary-3);
+          text-decoration: underline;
+          font-family: var(--font-family-700);
+        }
       }
-      &.icon-banheiros {
-        font-size: 1rem;
+
+      .numbers {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.35rem;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.25rem 0 0.45rem;
+        flex-wrap: wrap;
+        color: var(--grey-2);
+    
+        div {
+          
+          width: 30%;
+          flex-basis: 30%;
+
+          &:first-child {
+            width: 100%;
+            flex-basis: 100%;
+          }
+
+          font-size: 0.62rem;
+    
+          i {
+            color: var(--primary-3);
+            margin-right: 0.25rem;
+    
+            &.icon-metragem {
+              font-size: 0.425rem;
+            }
+            &.icon-dormitorios {
+              font-size: 0.525rem;
+            }
+            &.icon-banheiros {
+              font-size: 0.82rem;
+            }
+            &.icon-garagem {
+              font-size: 0.65rem;
+            }
+          }
+        }
       }
-      &.icon-garagem {
-        font-size: 0.75rem;
-      }
+    }
+   
+  }
+}
+
+::ng-deep.gm-style {
+  .gm-style-iw-c {
+    padding: 0!important;
+  }
+
+  .gm-style-iw-d {
+    overflow: auto!important;
+    max-height: 100%!important;
+  }
+
+  .gm-ui-hover-effect {
+    opacity: 1!important;
+    background-color: #fff!important;
+    top: 5px!important;
+    right: 5px!important;
+    width: 25px!important;
+    height: 25px!important;
+    border-radius: 50%;
+
+    span {
+      width: 14px!important;
+      height: 14px!important;
+      background-color: var(--primary-2)!important;
+      margin: 6px!important;
     }
   }
 }

@@ -4,19 +4,17 @@
     <h1>Descubra</h1>
 
     <div class="box-form">
-      <form class="form" [formGroup]="form" (ngSubmit)="submit()">
-        <div class="input-field">
-          <label>Endereço</label>
-          <input
-            type="text"
-            class="input"
-            (keydown.enter)="$event.preventDefault()"
-            placeholder="Informe uma cidade, bairro ou rua.."
-            type="text"
-            #search
-          />
-        </div>
-      </form>
+      <div class="input-field">
+        <label>Endereço</label>
+        <input
+          type="text"
+          class="input"
+          (keydown.enter)="$event.preventDefault()"
+          placeholder="Informe uma cidade, bairro ou rua.."
+          type="text"
+          #search
+        />
+      </div>
     </div>
   </div>
 
@@ -53,23 +51,28 @@
 
       <map-info-window>
         <div class="content">
-          <img [src]="infoMaker.image" alt="">
-          <h2>{{ infoMaker.tipo }}</h2>
-          <div class="numbers">
-            <div *ngIf="infoMaker.areaTotal">
-              <i class="icon-metragem"></i> {{ infoMaker.areaTotal | m2: true }}
+          <img [src]="infoMarker?.foto" alt="">
+          <div class="text">
+            <h2>{{ infoMarker?.tipo }}</h2>
+            <div class="numbers">
+              <div *ngIf="infoMarker?.areaTotal">
+                <i class="icon-metragem"></i> {{ infoMarker?.areaTotal | m2: true }}
+              </div>
+              <div *ngIf="infoMarker?.dormitorios">
+                <i class="icon-dormitorios"></i> {{ infoMarker?.dormitorios }}
+              </div>
+              <div *ngIf="infoMarker?.banheiros">
+                <i class="icon-banheiros"></i> {{ infoMarker?.banheiros }}
+              </div>
+              <div *ngIf="infoMarker?.vagasGaragem">
+                <i class="icon-garagem"></i> {{ infoMarker?.vagasGaragem }}
+              </div>
             </div>
-            <div *ngIf="infoMaker.dormitorios">
-              <i class="icon-dormitorios"></i> {{ infoMaker.dormitorios }}
-            </div>
-            <div *ngIf="infoMaker.banheiros">
-              <i class="icon-banheiros"></i> {{ infoMaker.banheiros }}
-            </div>
-            <div *ngIf="infoMaker.vagasGaragem">
-              <i class="icon-garagem"></i> {{ infoMaker.vagasGaragem }}
+            <div class="footer">
+              <p>R$ {{ infoMarker?.valor }} </p>
+              <a href="#">Ver imóvel</a>
             </div>
           </div>
-          <p>R$ {{ infoMaker.valor }} </p>
         </div>
       </map-info-window>
     </google-map>

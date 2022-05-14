@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 
 @Component({
@@ -23,13 +23,12 @@ export class DiscoverComponent implements OnInit {
 
   public form!: FormGroup;
 
-  private get controlEndereco(): AbstractControl | null {
-    return this.form.get('endereco');
-  }
-
-  zoom = 12;
+  zoom = 13;
   maxZoom = 20;
   minZoom = 1;
+  latitude!: any;
+  longitude!: any;
+  infoMarker!: any;
   center!: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
     zoomControl: true,
@@ -41,12 +40,11 @@ export class DiscoverComponent implements OnInit {
   };
   iconPin = {
     url: 'assets/pin.svg',
-    scaledSize: new google.maps.Size(40, 40), // scaled size
-    origin: new google.maps.Point(0, 0), // origin
-    anchor: new google.maps.Point(0, 0), // anchor
+    scaledSize: new google.maps.Size(40, 40),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(0, 0),
   };
-  latitude!: any;
-  longitude!: any;
+
   markers = [
     {
       position: {
@@ -54,16 +52,13 @@ export class DiscoverComponent implements OnInit {
         lng: -48.85230758990844,
       },
       description: {
-        foto: 'assets/foto-ap.jpg',
+        foto: 'https://imobiliaria-dimensao.s3.amazonaws.com/anuncios/c0cf7b91-3eb5-4faf-8df3-cb4f4cc3d912/87acf42768fe1b45424c-A702657ABD52AC7A4AC3AD287C6C4B09.jpg',
         tipo: 'Apartamento',
-        areaTotal: '80mts²',
+        areaTotal: '10080mts',
         dormitorios: '2',
         banheiros: '2',
         vagasGaragem: '1',
         valor: '3.300.00,00',
-      },
-      label: {
-        color: 'blue',
       },
     },
     {
@@ -72,16 +67,13 @@ export class DiscoverComponent implements OnInit {
         lng: -48.85093065252875,
       },
       description: {
-        foto: 'assets/foto-ap.jpg',
+        foto: 'https://imobiliaria-dimensao.s3.amazonaws.com/anuncios/c0cf7b91-3eb5-4faf-8df3-cb4f4cc3d912/87acf42768fe1b45424c-A702657ABD52AC7A4AC3AD287C6C4B09.jpg',
         tipo: 'Apartamento',
-        areaTotal: '80mts²',
+        areaTotal: '10010080mts',
         dormitorios: '2',
         banheiros: '2',
         vagasGaragem: '1',
         valor: '3.300.00,00',
-      },
-      label: {
-        color: 'blue',
       },
     },
     {
@@ -90,16 +82,13 @@ export class DiscoverComponent implements OnInit {
         lng: -48.85165515665002,
       },
       description: {
-        foto: 'assets/foto-ap.jpg',
+        foto: 'https://imobiliaria-dimensao.s3.amazonaws.com/anuncios/c0cf7b91-3eb5-4faf-8df3-cb4f4cc3d912/87acf42768fe1b45424c-A702657ABD52AC7A4AC3AD287C6C4B09.jpg',
         tipo: 'Apartamento',
-        areaTotal: '80mts²',
+        areaTotal: '10010080mts',
         dormitorios: '2',
         banheiros: '2',
         vagasGaragem: '1',
         valor: '3.300.00,00',
-      },
-      label: {
-        color: 'blue',
       },
     },
     {
@@ -108,16 +97,13 @@ export class DiscoverComponent implements OnInit {
         lng: -48.849401986329326,
       },
       description: {
-        foto: 'assets/foto-ap.jpg',
+        foto: 'https://imobiliaria-dimensao.s3.amazonaws.com/anuncios/c0cf7b91-3eb5-4faf-8df3-cb4f4cc3d912/87acf42768fe1b45424c-A702657ABD52AC7A4AC3AD287C6C4B09.jpg',
         tipo: 'Apartamento',
-        areaTotal: '80mts²',
+        areaTotal: '10010080mts',
         dormitorios: '2',
         banheiros: '2',
         vagasGaragem: '1',
         valor: '3.300.00,00',
-      },
-      label: {
-        color: 'blue',
       },
     },
     {
@@ -126,16 +112,13 @@ export class DiscoverComponent implements OnInit {
         lng: -48.84947026421592,
       },
       description: {
-        foto: 'assets/foto-ap.jpg',
+        foto: 'https://imobiliaria-dimensao.s3.amazonaws.com/anuncios/c0cf7b91-3eb5-4faf-8df3-cb4f4cc3d912/87acf42768fe1b45424c-A702657ABD52AC7A4AC3AD287C6C4B09.jpg',
         tipo: 'Apartamento',
-        areaTotal: '80mts²',
+        areaTotal: '10080mts',
         dormitorios: '2',
         banheiros: '2',
         vagasGaragem: '1',
         valor: '3.300.00,00',
-      },
-      label: {
-        color: 'blue',
       },
     },
     {
@@ -144,16 +127,13 @@ export class DiscoverComponent implements OnInit {
         lng: -48.8531772292115,
       },
       description: {
-        foto: 'assets/foto-ap.jpg',
+        foto: 'https://imobiliaria-dimensao.s3.amazonaws.com/anuncios/c0cf7b91-3eb5-4faf-8df3-cb4f4cc3d912/87acf42768fe1b45424c-A702657ABD52AC7A4AC3AD287C6C4B09.jpg',
         tipo: 'Apartamento',
-        areaTotal: '80mts²',
+        areaTotal: '10080mts',
         dormitorios: '2',
         banheiros: '2',
         vagasGaragem: '1',
         valor: '3.300.00,00',
-      },
-      label: {
-        color: 'blue',
       },
     },
     {
@@ -162,16 +142,13 @@ export class DiscoverComponent implements OnInit {
         lng: -48.8508315510223,
       },
       description: {
-        foto: 'assets/foto-ap.jpg',
+        foto: 'https://imobiliaria-dimensao.s3.amazonaws.com/anuncios/c0cf7b91-3eb5-4faf-8df3-cb4f4cc3d912/87acf42768fe1b45424c-A702657ABD52AC7A4AC3AD287C6C4B09.jpg',
         tipo: 'Apartamento',
-        areaTotal: '80mts²',
+        areaTotal: '10080mts',
         dormitorios: '2',
         banheiros: '2',
         vagasGaragem: '1',
         valor: '3.300.00,00',
-      },
-      label: {
-        color: 'blue',
       },
     },
     {
@@ -180,16 +157,13 @@ export class DiscoverComponent implements OnInit {
         lng: -48.84903620511575,
       },
       description: {
-        foto: 'assets/foto-ap.jpg',
+        foto: 'https://imobiliaria-dimensao.s3.amazonaws.com/anuncios/c0cf7b91-3eb5-4faf-8df3-cb4f4cc3d912/87acf42768fe1b45424c-A702657ABD52AC7A4AC3AD287C6C4B09.jpg',
         tipo: 'Apartamento',
-        areaTotal: '80mts²',
+        areaTotal: '10080mts',
         dormitorios: '2',
         banheiros: '2',
         vagasGaragem: '1',
         valor: '3.300.00,00',
-      },
-      label: {
-        color: 'blue',
       },
     },
     {
@@ -198,51 +172,43 @@ export class DiscoverComponent implements OnInit {
         lng: -48.85434104628686,
       },
       description: {
-        foto: 'assets/foto-ap.jpg',
+        foto: 'https://imobiliaria-dimensao.s3.amazonaws.com/anuncios/c0cf7b91-3eb5-4faf-8df3-cb4f4cc3d912/87acf42768fe1b45424c-A702657ABD52AC7A4AC3AD287C6C4B09.jpg',
         tipo: 'Apartamento',
-        areaTotal: '80mts²',
+        areaTotal: '10080mts',
         dormitorios: '2',
         banheiros: '2',
         vagasGaragem: '1',
         valor: '3.300.00,00',
       },
-      label: {
-        color: 'blue',
-      },
     },
   ] as any;
-  infoMaker!: any;
 
-  constructor(
-    private readonly formBuilder: FormBuilder,
-    private ngZone: NgZone
-  ) {}
+  constructor(private ngZone: NgZone) {}
 
   ngOnInit(): void {
-    this.createForm();
-
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.center = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-    });
-  }
-
-  private createForm(): void {
-    this.form = this.formBuilder.group({
-      endereco: [null],
-    });
-  }
-
-  public submit(): void {
-    console.log('submit');
+    navigator.permissions
+      .query({ name: 'geolocation' })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === 'granted') {
+          navigator.geolocation.getCurrentPosition((position) => {
+            this.center = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+          });
+        } else {
+          this.center = {
+            lat: -23.7625196,
+            lng: -53.300687,
+          };
+        }
+      });
   }
 
   eventHandler(event: any, name: string) {}
 
   openInfo(marker: MapMarker, content: string) {
-    this.infoMaker = content;
+    this.infoMarker = content;
     this.info.open(marker);
   }
 
@@ -261,8 +227,6 @@ export class DiscoverComponent implements OnInit {
         if (place.geometry === undefined || place.geometry === null) {
           return;
         }
-
-        console.log({ place }, place.geometry.location?.lat());
 
         //set latitude, longitude and zoom
         this.latitude = place.geometry.location?.lat();
