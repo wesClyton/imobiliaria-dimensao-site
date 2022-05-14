@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { StringUtil } from '../../../../shared/utils/string.util';
 import { CityGetAll } from '../../../city/interfaces/city-get-all.interface';
-import { AnnouncementSearchQuantitiesTypeEnum } from '../../enums/announcement-search-quantities-type.enum';
+import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
 import { AnnouncementType } from '../../interfaces/announcement-type.interface';
 
 @Component({
@@ -33,7 +35,7 @@ export class AnnouncementSearchComponent implements OnInit {
     return this.form.get('bairro');
   }
 
-  private get controlMinimo(): AbstractControl | null {
+  private get controlValorMinimo(): AbstractControl | null {
     return this.form.get('valorMinimo');
   }
 
@@ -57,12 +59,13 @@ export class AnnouncementSearchComponent implements OnInit {
     return this.form.get('dormitorios');
   }
 
-  public get controlVagas(): AbstractControl | null {
-    return this.form.get('vagas');
+  public get controlVagasGaragem(): AbstractControl | null {
+    return this.form.get('vagasGaragem');
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -80,25 +83,34 @@ export class AnnouncementSearchComponent implements OnInit {
       areaMaxima: [null],
       banheiros: [null],
       dormitorios: [null],
-      vagas: [null]
+      vagasGaragem: [null]
     });
   }
 
   public toggleTypeFilter(): void {
     this.showFiltersAdvanced = !this.showFiltersAdvanced;
-    this.resetAdvancedFilter();
   }
 
-  private resetAdvancedFilter(): void {
-    this.controlBanheiros?.reset();
-    this.controlDormitorios?.reset();
-    this.controlVagas?.reset();
+  public resetAdvancedFilter(): void {
+    this.form.reset();
   }
 
   public submit(): void {
-    console.log(this.form.value)
-  }
+    let queryParams = {};
 
-  public quantitiesSelect(type: AnnouncementSearchQuantitiesTypeEnum, quantity: string): void {}
+    const fieldsRemoveR$ = ['valorMinimo', 'valorMaximo'];
+
+    Object.keys(this.form.controls).forEach(field => {
+      let value = this.form.get(field)?.value;
+      if (fieldsRemoveR$.includes(field)) {
+        value = StringUtil.removeSymbolCurrencyBr(value);
+      }
+      if (value && value !== 'null' && value !== null) {
+        queryParams = { ...queryParams, [field]: value }
+      }
+    });
+
+    this.router.navigate([ANNOUNCEMENT_CONFIG.pathFront], { queryParams  });
+  }
 
 }

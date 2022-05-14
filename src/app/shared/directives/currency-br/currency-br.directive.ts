@@ -29,7 +29,7 @@ export class CurrencyBrDirective implements OnInit, OnDestroy {
 
   private setMask(value: string): void {
     this.ngControl.control?.setValue(
-      this.currencyBrPipe.transform(StringUtil.removeSymbolCurrencyBr(value).toString()),
+      this.currencyBrPipe.transform(StringUtil.removeSymbolCurrencyBr(value)?.toString()),
       { emitEvent: false }
     );
   }

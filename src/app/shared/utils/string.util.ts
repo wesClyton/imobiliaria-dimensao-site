@@ -17,11 +17,16 @@ export class StringUtil {
   }
 
   public static removeSymbolCurrencyBr(value: string): string {
-    return value.replace('R$', '').trim();
+    return value?.replace('R$', '').trim();
   }
 
   public static formatFriendlyUrl(value: string): string {
     return 'formatar-url-amigavel';
+  }
+
+  public static transformCurrencyEUA(value: string): number {
+    value = this.removeSymbolCurrencyBr(value);
+    return parseFloat(value.replace(/\./g, '').replace(',', '.').trim());
   }
 
 }

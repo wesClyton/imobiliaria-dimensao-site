@@ -113,7 +113,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   public navigateDescubra(): void {
     this.hideMenus();
-    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/descubra`);
+    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/onde-encontrar`);
   }
 
 }
