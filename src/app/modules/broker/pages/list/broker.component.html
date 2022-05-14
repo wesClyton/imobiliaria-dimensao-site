@@ -38,10 +38,10 @@
           <p *ngIf="broker?.biografia">{{ broker?.biografia }}</p>
           <div class="sociais">
             <div>
-              <a target="_blank" [href]="broker?.facebook" *ngIf="broker?.facebook"><i class="icon-facebook-rounded"></i></a>
-              <a target="_blank" [href]="broker?.instagram" *ngIf="broker?.instagram"><i class="icon-instagram-rounded"></i></a>
-              <a target="_blank" [href]="broker?.linkedin" *ngIf="broker?.linkedin"><i class="icon-linkedin-rounded"></i></a>
-              <a target="_blank" [href]="broker?.email" *ngIf="broker?.email"><i class="icon-mail-rounded"></i></a>
+              <a *ngIf="broker?.facebook" target="_blank" [href]="broker?.facebook"><i class="icon-facebook-rounded"></i></a>
+              <a *ngIf="broker?.instagram" target="_blank" [href]="broker?.instagram"><i class="icon-instagram-rounded"></i></a>
+              <a *ngIf="broker?.linkedin" target="_blank" [href]="broker?.linkedin"><i class="icon-linkedin-rounded"></i></a>
+              <a *ngIf="broker?.email" target="_blank" [href]="broker?.email"><i class="icon-mail-rounded"></i></a>
             </div>
 
             <app-button-whatsapp [numeroWhats]="broker?.whatsapp"></app-button-whatsapp>

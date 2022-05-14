@@ -19,6 +19,10 @@ export class PathImagePipe implements PipeTransform {
   }
 
   transform(image: string | undefined, path: PathImageType, galeriaId?: string): string {
+    if (!image) {
+      return 'assets/no-image.jpg';
+    }
+
     if (!path && !galeriaId) {
       throw new Error(`PathImagePipe => Informe o "path" da imagem. Valores possíveis: ${this.valuesPossibiles}`);
     }

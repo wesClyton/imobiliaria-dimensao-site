@@ -35,19 +35,19 @@
             <div class="input-field">
               <label>Nome</label>
               <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">
-              <span class="input-error" *ngIf="controlNomeHasError">Informe um Nome</span>
+              <span *ngIf="controlNomeHasError" class="input-error">Informe um Nome</span>
             </div>
 
             <div class="input-field">
               <label>E-mail</label>
               <input ngDefaultControl class="input" type="email" formControlName="email" placeholder="Informe seu E-mail">
-              <span class="input-error" *ngIf="controlEmailHasError">Informe um E-mail</span>
+              <span *ngIf="controlEmailHasError" class="input-error">Informe um E-mail válido</span>
             </div>
 
             <div class="input-field">
               <label>Telefone/Celular</label>
               <input ngDefaultControl appPhone class="input" type="tel" formControlName="telefone" placeholder="Informe seu Telefone/Celular">
-              <span class="input-error" *ngIf="controlTelefoneHasError">Informe um Telefone/Celular</span>
+              <span *ngIf="controlTelefoneHasError" class="input-error">Informe um Telefone/Celular</span>
             </div>
 
             <div class="input-field">
@@ -60,7 +60,7 @@
                   </option>
                 </ng-container>
               </select>
-              <span class="input-error" *ngIf="controlTipoImovelHasError">Informe um o tipo do seu imóvel</span>
+              <span *ngIf="controlTipoImovelHasError" class="input-error">Informe um o tipo do seu imóvel</span>
             </div>
 
             <button class="btn btn-sm btn-primary-3" type="submit">Enviar</button>

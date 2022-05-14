@@ -14,7 +14,7 @@
 
     <div class="input-field">
       <label>Cidade</label>
-      <select ngDefaultControl appCityOptionSelect class="select" formControlName="cidade">
+      <select ngDefaultControl appCityOptionSelect class="select" formControlName="cidadeId">
         <option value="null" selected>Selecione a Cidade</option>
         <ng-container appCityOptionSelect (dataFinded)="cities = $event">
           <option *ngFor="let city of cities?.data" [value]="city.id">
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="box-2" *ngIf="showFiltersAdvanced">
+  <div *ngIf="showFiltersAdvanced" class="box-2">
     <div class="item">
       <div class="input-field">
         <label>Valor mínimo</label>
@@ -55,7 +55,7 @@
     </div>
   </div>
 
-  <div class="box-3" *ngIf="showFiltersAdvanced">
+  <div *ngIf="showFiltersAdvanced" class="box-3">
     <div class="input-field">
       <label>Banheiros</label>
       <div class="quantities-filter">

@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .announcement {
   border-radius: 8px;
   overflow: hidden;
@@ -10,6 +12,17 @@
 
   &:hover {
     box-shadow: 0 3px 0 rgba(var(--primary-rgb-3), 0.5);
+  }
+
+  img {
+    width: 100%;
+    max-height: 217px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--grey-5);
+
+    @include mobile-first(md) {
+      max-height: 160px;
+    }
   }
 }
 
@@ -73,7 +86,6 @@
 }
 
 .amount {
-  font-family: var(--font-family-700);
   color: var(--grey-2);
   display: block;
   text-align: center;

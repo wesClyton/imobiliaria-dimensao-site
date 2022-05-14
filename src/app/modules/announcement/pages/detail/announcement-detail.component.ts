@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, take } from 'rxjs';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../../../core/loading/loading.service';
+import { FormService } from '../../../../shared/services/form/form.service';
+import { CharacteristicType } from '../../../characteristic/enums/characteristic-type.enum';
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
 import { Announcement } from '../../interfaces/announcement.interface';
 import { AnnouncementGetAllService } from '../../services/announcement-get-all.service';
@@ -13,7 +15,7 @@ import { AnnouncementGetByIdService } from '../../services/announcement-get-by-i
   templateUrl: 'announcement-detail.component.html',
   styleUrls: ['announcement-detail.component.scss']
 })
-export class AnnouncementDetailComponent implements OnInit {
+export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
   public announcement!: Announcement;
 
@@ -51,33 +53,58 @@ export class AnnouncementDetailComponent implements OnInit {
     return this.controlTelefone?.dirty && this.controlTelefone?.hasError('required');
   }
 
+  private subscription = new Subscription();
+
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private readonly announcementGetByIdService: AnnouncementGetByIdService,
     private readonly announcementGetAllService: AnnouncementGetAllService,
     private readonly loadingService: LoadingService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly formService: FormService
   ) {
-    const state: { [k: string]: Announcement } | undefined = this.router.getCurrentNavigation()?.extras?.state;
-    if (state && state['announcement']) {
-      this.announcement = state['announcement'];
-    }
-    if (!this.announcement) {
-      this.loadingService.show();
-    }
+    this.setAnnouncement();
   }
 
   ngOnInit(): void {
     this.createForm();
 
+    this.subscription.add(
+      this.router.events.subscribe((event: any) => {
+        if (event instanceof NavigationStart) {
+          this.setAnnouncement();
+        }
+      })
+    );
+
+    this.init();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private init(): void {
     if (this.announcement) {
+      this.getAnnouncements();
+      this.filterCharacteristics();
       return;
     }
 
     this.announcementId = this.activatedRoute.snapshot.params['id'];
     this.getAnnouncement();
-    this.getAnnouncements();
+  }
+
+  private setAnnouncement(): void {
+    const state: { [k: string]: Announcement } | undefined = this.router.getCurrentNavigation()?.extras?.state;
+    if (state && state['announcement']) {
+      this.announcement = state['announcement'];
+      this.init();
+    }
+    if (!this.announcement) {
+      this.loadingService.show();
+    }
   }
 
   private createForm(): void {
@@ -95,16 +122,46 @@ export class AnnouncementDetailComponent implements OnInit {
         take(1),
         finalize(() => this.loadingService.hide())
       )
-      .subscribe(announcement => this.announcement = announcement);
+      .subscribe(announcement => {
+        this.announcement = announcement;
+        this.filterCharacteristics();
+        this.getAnnouncements();
+      });
   }
 
   private getAnnouncements(): void {
+    this.announcementGetAllService.queryFilterRemove();
+
+    this.announcementGetAllService.queryFilterAdd({
+      field: 'tipo',
+      value: this.announcement.tipo
+    });
+
     this.announcementGetAllService
       .getAll()
       .pipe(take(1))
-      .subscribe(announcements => this.announcements = announcements.data.filter((announcement, index) => index < 3));
+      .subscribe(announcements => {
+        this.announcements = announcements.data.filter((announcement, index) => {
+          if (announcement.id === this.announcement.id) {
+            return false;
+          }
+          return true;
+        });
+        // to-do
+        // deixar no array apenas os 3 primeiros anúncios
+      });
   }
 
-  public submit(): void {}
+  private filterCharacteristics(): void {
+    this.characteristicsImovel = this.announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.Imovel);
+    this.characteristicsInstalacoes = this.announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.InstalacoesCondominio);
+  }
+
+  public submit(): void {
+    if (this.form.invalid) {
+      this.formService.validate(this.form);
+      return;
+    }
+  }
 
 }

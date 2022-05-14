@@ -11,7 +11,7 @@ export class FormService {
     private readonly notificationService: NotificationService
   ) { }
 
-  public validade(form: FormGroup, messageWarning: string = 'Verifique o formulário!'): void {
+  public validate(form: FormGroup, messageWarning: string = 'Verifique o formulário!'): void {
     this.notificationService.warning(messageWarning);
 
     Object.keys(form.controls).forEach(field => {
@@ -20,7 +20,7 @@ export class FormService {
         control.markAsDirty();
         control.markAsTouched();
       } else if (control instanceof FormGroup) {
-        this.validade(control);
+        this.validate(control);
       }
     });
   }

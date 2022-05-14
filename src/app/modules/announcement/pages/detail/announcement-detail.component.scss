@@ -1,3 +1,16 @@
+@import 'mixins';
+
+::ng-deep {
+  body, html {
+    background-color: var(--grey-5);
+  }
+}
+
+.heading {
+  font-size: 1.25rem;
+  color: var(--grey-2);
+}
+
 .galery {
   padding: 5rem;
   background-color: red;
@@ -9,10 +22,20 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @include mobile-first(xl) {
+    flex-direction: row;
+    max-width: 1390px;
+    margin: 0 auto;
+  }
 }
 
 .box-1 {
   flex: 1;
+
+  @include mobile-first(lg) {
+    flex: 2;
+  }
 }
 
 .box-2 {
@@ -21,10 +44,6 @@
 
 .announcement {
   color: var(--grey-2);
-
-  .title {
-    font-size: 1rem;
-  }
   .type {
     font-size: 0.65rem;
     color: var(--primary-3);
@@ -34,8 +53,129 @@
   .address {
     font-size: 0.75rem;
   }
-  .value {
-    font-family: var(--font-family-700);
+  .amount {
+    font-size: 0.75rem;
+  }
+}
+
+.numbers {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 1.75rem 0;
+  flex-wrap: wrap;
+  color: var(--grey-2);
+
+  div {
+    width: fit-content;
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid var(--grey-4);
+    border-radius: 8px;
+    background-color: var(--white);
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+
+    i {
+      color: var(--white);
+      background-color: var(--primary-4);
+      padding: 0.35rem;
+      min-height: 38px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.icon-metragem {
+        font-size: 0.60rem;
+      }
+      &.icon-dormitorios {
+        font-size: 0.65rem;
+      }
+      &.icon-banheiros {
+        font-size: 1rem;
+      }
+      &.icon-garagem {
+        font-size: 0.75rem;
+      }
+    }
+
+    strong {
+      font-size: 0.75rem;
+    }
+
+    p {
+      padding-bottom: 0;
+      transform: translateY(2px);
+    }
+  }
+}
+
+.about {
+  p {
+    padding-bottom: 0;
+  }
+}
+
+.characteristics {
+
+  .heading {
+    padding-top: 1.75rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem;
+
+    .tag {
+      background-color: var(--white);
+      padding: 0.5rem;
+      border: 1px dashed var(--grey-4);
+      text-align: center;
+      font-size: 0.75rem;
+      border-radius: 8px;
+    }
+  }
+}
+
+.more {
+  padding-top: 1.75rem;
+}
+
+app-announcement-list-item {
+  display: flex;
+}
+
+.announcements {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  justify-content: flex-start;
+
+  @include mobile-first(md) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .item {
+    width: 100%;
+    display: flex;
+
+    @include mobile-first(md) {
+      max-width: 215px;
+    }
+
+    @include mobile-first(xl) {
+      max-width: 264px;
+    }
   }
 }
 
@@ -44,4 +184,15 @@
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0 3px 0 rgba(var(--black-rgb), 0.25);
+}
+
+.form {
+  .input-field {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    margin: 0 auto;
+    display: block;
+  }
 }

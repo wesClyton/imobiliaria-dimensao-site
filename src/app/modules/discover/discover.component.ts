@@ -133,7 +133,6 @@ export class DiscoverComponent implements OnInit {
       )
       .subscribe(announcements => {
         announcements.data.forEach(announcement => {
-          console.log(announcement)
           this.markers.push({
             announcement,
             position: {
@@ -142,8 +141,6 @@ export class DiscoverComponent implements OnInit {
             }
           });
         });
-
-        console.log('markers', this.markers);
       });
   }
 

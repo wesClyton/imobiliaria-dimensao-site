@@ -35,10 +35,9 @@
       </map-marker>
 
       <map-info-window>
-        <div class="content" *ngIf="announcement">
+        <div *ngIf="announcement" class="content">
           <img
-            *ngIf="announcement.galeria.fotos[0]"
-            [src]="announcement.galeria.fotos[0].nome| pathImage: 'anuncios': announcement.galeria.fotos[0].galeriaId"
+            [src]="announcement.galeria.fotos[0]?.nome | pathImage: 'anuncios': announcement.galeria.fotos[0]?.galeriaId"
             [alt]="announcement.titulo">
           <div class="text">
             <h2>{{ announcement.tipo }}</h2>

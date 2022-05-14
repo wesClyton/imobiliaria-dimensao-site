@@ -75,7 +75,7 @@ export class AnnouncementSearchComponent implements OnInit {
   private createForm(): void {
     this.form = this.formBuilder.group({
       tipo: [null],
-      cidade: [null],
+      cidadeId: [null],
       bairro: [null],
       valorMinimo: [null],
       valorMaximo: [null],

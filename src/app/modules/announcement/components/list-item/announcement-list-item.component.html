@@ -1,5 +1,7 @@
 <a class="announcement" [routerLink]="[link]" [state]="{ announcement: announcement }" [title]="announcement.titulo">
-  <img [src]="announcement.galeria.fotos[0]?.nome | pathImage : 'anuncios' : announcement?.galeria?.id" [alt]="announcement.titulo">
+  <img
+    [src]="announcement.galeria.fotos[0]?.nome | pathImage : 'anuncios' : announcement?.galeria?.id"
+    [alt]="announcement.titulo">
   <div class="infos">
     <div>
       <small class="type">{{ announcement.tipo | announcementType }}</small>

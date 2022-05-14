@@ -18,6 +18,7 @@ import { NotificationType } from './notification-type.enum';
     .content {
       display: flex;
       align-items: center;
+      font-size: initial;
     }
   `]
 })

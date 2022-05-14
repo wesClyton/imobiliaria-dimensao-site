@@ -9,19 +9,19 @@
             <div class="input-field">
               <label>Nome</label>
               <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">
-              <span class="input-error" *ngIf="controlNomeHasError">Informe um Nome</span>
+              <span *ngIf="controlNomeHasError" class="input-error">Informe um Nome</span>
             </div>
 
             <div class="input-field">
               <label>E-mail</label>
               <input ngDefaultControl class="input" type="email" formControlName="email" placeholder="Informe seu E-mail">
-              <span class="input-error" *ngIf="controlEmailHasError">Informe um E-mail</span>
+              <span *ngIf="controlEmailHasError" class="input-error">Informe um E-mail válido</span>
             </div>
 
             <div class="input-field">
               <label>Telefone/Celular</label>
               <input ngDefaultControl appPhone class="input" type="tel" formControlName="telefone" placeholder="Informe seu Telefone/Celular">
-              <span class="input-error" *ngIf="controlTelefoneHasError">Informe um Telefone/Celular</span>
+              <span *ngIf="controlTelefoneHasError" class="input-error">Informe um Telefone/Celular</span>
             </div>
 
             <div class="input-field">
@@ -38,7 +38,7 @@
             <div class="input-field">
               <label>Mensagem</label>
               <textarea ngDefaultControl class="textarea" formControlName="mensagem" placeholder="Informe sua Mensagem"></textarea>
-              <span class="input-error" *ngIf="controlMensagemHasError">Informe uma Mensagem</span>
+              <span *ngIf="controlMensagemHasError" class="input-error">Informe uma Mensagem</span>
             </div>
 
             <div class="input-field-checkbox">

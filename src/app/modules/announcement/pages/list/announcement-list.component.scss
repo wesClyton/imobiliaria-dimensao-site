@@ -15,9 +15,16 @@ h1 {
 
 .list {
   margin-top: 2rem;
+  margin: 0 auto;
+  max-width: 620px;
+
+  @include mobile-first(lg) {
+    max-width: 950px;
+  }
 
   @include mobile-first(xl) {
     padding: 1rem 1.5rem 0 1.5rem;
+    max-width: 1340px;
   }
 }
 
@@ -27,11 +34,11 @@ h1 {
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  justify-content: flex-start;
 
   @include mobile-first(md) {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
   }
 
   .item {
