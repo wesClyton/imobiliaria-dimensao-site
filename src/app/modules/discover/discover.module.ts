@@ -4,21 +4,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { DiscoverComponent } from './discover.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: DiscoverComponent
-  }
+    component: DiscoverComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [ DiscoverComponent ],
+  declarations: [DiscoverComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    GoogleMapsModule
-  ]
+    GoogleMapsModule,
+    PipesModule,
+  ],
 })
 export class DiscoverModule {}

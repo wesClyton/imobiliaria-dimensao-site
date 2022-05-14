@@ -35,3 +35,38 @@ h1 {
   height: 50vh;
   margin-top: 4,75rem;
 }
+
+.numbers {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.75rem 0 1.5rem;
+  flex-wrap: wrap;
+  color: var(--grey-2);
+
+  div {
+    width: 45%;
+    flex-basis: 45%;
+    font-size: 0.75rem;
+
+    i {
+      color: var(--primary-3);
+      margin-right: 0.25rem;
+
+      &.icon-metragem {
+        font-size: 0.60rem;
+      }
+      &.icon-dormitorios {
+        font-size: 0.65rem;
+      }
+      &.icon-banheiros {
+        font-size: 1rem;
+      }
+      &.icon-garagem {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
