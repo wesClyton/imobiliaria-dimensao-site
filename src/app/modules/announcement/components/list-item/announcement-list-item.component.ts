@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { StringUtil } from '../../../../shared/utils/string.util';
-import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
 import { Announcement } from '../../interfaces/announcement.interface';
+import { AnnouncementLinkUtil } from '../../utils/announcement-link.util';
 
 @Component({
   selector: 'app-announcement-list-item',
@@ -14,7 +13,7 @@ export class AnnouncementListItemComponent {
   public announcement!: Announcement;
 
   public get link(): string {
-    return `${ANNOUNCEMENT_CONFIG.pathFront}/${StringUtil.formatFriendlyUrl(this.announcement.titulo)}/${this.announcement.id}`;
+    return AnnouncementLinkUtil.create(this.announcement);
   }
 
   constructor() { }

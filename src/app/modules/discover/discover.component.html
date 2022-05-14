@@ -7,77 +7,63 @@
       <div class="input-field">
         <label>Endereço</label>
         <input
+          #search
           type="text"
           class="input"
-          (keydown.enter)="$event.preventDefault()"
-          placeholder="Informe uma cidade, bairro ou rua.."
-          type="text"
-          #search
-        />
+          placeholder="Informe uma cidade, bairro ou rua"
+          (keydown.enter)="$event.preventDefault()" />
       </div>
     </div>
   </div>
 
   <div class="box-2">
-
     <google-map
-  
       #myGoogleMap
-
-      height="500px"
       width="100%"
+      height="100%"
       [zoom]="zoom"
       [center]="center"
-      [options]="options"
-      (mapClick)="eventHandler($event,'mapClick')"
-      (mapDblclick)="eventHandler($event,'mapDblclick')"
-      (mapDrag)="eventHandler($event,'mapDrag')"
-      (mapDragend)="eventHandler($event,'mapDragend')"
-      (mapRightclick)="eventHandler($event,'mapRightclick')"
-      (positionChanged)="eventHandler($event,'marker_positionChanged')"
-      (zoomChanged)="eventHandler($event,'zoomChanged')"
-    >
+      [options]="options">
+
       <map-marker
         #markerElem="mapMarker"
         *ngFor="let marker of markers"
-        [position]="marker.position"
-        [label]="marker.label"
-        [title]="marker.title"
-        [options]="marker.options"
         [icon]="iconPin"
-        (mapClick)="openInfo(markerElem, marker.description)"
-      >
+        [position]="marker.position"
+        [title]="marker.announcement.titulo"
+        (mapClick)="openInfo(markerElem, marker.announcement)">
       </map-marker>
 
       <map-info-window>
-        <div class="content">
-          <img [src]="infoMarker?.foto" alt="">
+        <div class="content" *ngIf="announcement">
+          <img
+            *ngIf="announcement.galeria.fotos[0]"
+            [src]="announcement.galeria.fotos[0].nome| pathImage: 'anuncios': announcement.galeria.fotos[0].galeriaId"
+            [alt]="announcement.titulo">
           <div class="text">
-            <h2>{{ infoMarker?.tipo }}</h2>
+            <h2>{{ announcement.tipo }}</h2>
             <div class="numbers">
-              <div *ngIf="infoMarker?.areaTotal">
-                <i class="icon-metragem"></i> {{ infoMarker?.areaTotal | m2: true }}
+              <div *ngIf="announcement.areaTotal">
+                <i class="icon-metragem"></i> {{ announcement.areaTotal | m2: true }}
               </div>
-              <div *ngIf="infoMarker?.dormitorios">
-                <i class="icon-dormitorios"></i> {{ infoMarker?.dormitorios }}
+              <div *ngIf="announcement.dormitorios">
+                <i class="icon-dormitorios"></i> {{ announcement.dormitorios }}
               </div>
-              <div *ngIf="infoMarker?.banheiros">
-                <i class="icon-banheiros"></i> {{ infoMarker?.banheiros }}
+              <div *ngIf="announcement.banheiros">
+                <i class="icon-banheiros"></i> {{ announcement.banheiros }}
               </div>
-              <div *ngIf="infoMarker?.vagasGaragem">
-                <i class="icon-garagem"></i> {{ infoMarker?.vagasGaragem }}
+              <div *ngIf="announcement.vagasGaragem">
+                <i class="icon-garagem"></i> {{ announcement.vagasGaragem }}
               </div>
             </div>
             <div class="footer">
-              <p>R$ {{ infoMarker?.valor }} </p>
-              <a href="#">Ver imóvel</a>
+              <p>{{ announcement.valor | currencyBr }} </p>
+              <a class="announcement" target="_blank" [href]="link" [title]="announcement.titulo">Ver imóvel</a>
             </div>
           </div>
         </div>
       </map-info-window>
     </google-map>
-      
-    
   </div>
 
 </div>

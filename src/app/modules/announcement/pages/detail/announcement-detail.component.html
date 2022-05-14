@@ -5,9 +5,42 @@
   <div class="grid-1">
     <div class="box-1">
       <div class="announcement">
-        <h1>{{ announcement.titulo }}</h1>
+        <h1 class="title">{{ announcement.titulo }}</h1>
         <small class="type">{{ announcement.tipo | announcementType }}</small>
         <p class="address">{{ announcement.endereco }} - {{ announcement.bairro }} - {{ announcement.cidade | cityState }}</p>
+        <strong class="value">{{ announcement.valor | currencyBr }}</strong>
+
+        <div class="numbers">
+          <div *ngIf="announcement.areaTotal">
+            <i class="icon-metragem"></i> {{ announcement.areaTotal | m2: true }}
+          </div>
+          <div *ngIf="announcement.dormitorios">
+            <i class="icon-dormitorios"></i> {{ announcement.dormitorios }}
+          </div>
+          <div *ngIf="announcement.banheiros">
+            <i class="icon-banheiros"></i> {{ announcement.banheiros }}
+          </div>
+          <div *ngIf="announcement.vagasGaragem">
+            <i class="icon-garagem"></i> {{ announcement.vagasGaragem }}
+          </div>
+        </div>
+
+        <div class="about">
+          <h2>Sobre o imóvel</h2>
+          <p>{{ announcement.sobre }}</p>
+        </div>
+
+        <div class="characteristics">
+          <div class="imovel">
+            <h2>Características do imóvel</h2>
+            <div class="tags" *ngFor="let characteristic of characteristicsImovel"></div>
+          </div>
+
+          <div class="condominio">
+            <h2>Instalações do condomínio</h2>
+            <div class="tags" *ngFor="let characteristic of characteristicsInstalacoes"></div>
+          </div>
+        </div>
       </div>
 
       <div class="more">
@@ -20,7 +53,31 @@
       </div>
     </div>
 
-    <div class="box-2"></div>
+    <div class="box-2">
+      <div class="box-form">
+        <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+          <div class="input-field">
+            <label>Nome</label>
+            <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">
+            <span class="input-error" *ngIf="controlNomeHasError">Informe um Nome</span>
+          </div>
+
+          <div class="input-field">
+            <label>E-mail</label>
+            <input ngDefaultControl class="input" type="email" formControlName="email" placeholder="Informe seu E-mail">
+            <span class="input-error" *ngIf="controlEmailHasError">Informe um E-mail</span>
+          </div>
+
+          <div class="input-field">
+            <label>Telefone/Celular</label>
+            <input ngDefaultControl appPhone class="input" type="tel" formControlName="telefone" placeholder="Informe seu Telefone/Celular">
+            <span class="input-error" *ngIf="controlTelefoneHasError">Informe um Telefone/Celular</span>
+          </div>
+
+          <button class="btn btn-sm btn-primary-3" type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
   </div>
 
 </div>

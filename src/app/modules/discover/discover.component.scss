@@ -50,7 +50,8 @@ map-info-window {
 
     img {
       width: 100%;
-      height: auto;
+      height: 110px;
+      object-fit: cover;
     }
 
     .text {
@@ -97,9 +98,9 @@ map-info-window {
         margin: 0.25rem 0 0.45rem;
         flex-wrap: wrap;
         color: var(--grey-2);
-    
+
         div {
-          
+
           width: 30%;
           flex-basis: 30%;
 
@@ -109,11 +110,11 @@ map-info-window {
           }
 
           font-size: 0.62rem;
-    
+
           i {
             color: var(--primary-3);
             margin-right: 0.25rem;
-    
+
             &.icon-metragem {
               font-size: 0.425rem;
             }
@@ -130,34 +131,34 @@ map-info-window {
         }
       }
     }
-   
+
   }
 }
 
-::ng-deep.gm-style {
+::ng-deep .gm-style {
   .gm-style-iw-c {
-    padding: 0!important;
+    padding: 0 !important;
   }
 
   .gm-style-iw-d {
-    overflow: auto!important;
-    max-height: 100%!important;
+    overflow: auto !important;
+    max-height: 100% !important;
   }
 
   .gm-ui-hover-effect {
-    opacity: 1!important;
-    background-color: #fff!important;
-    top: 5px!important;
-    right: 5px!important;
-    width: 25px!important;
-    height: 25px!important;
+    opacity: 1 !important;
+    background-color: var(--white) !important;
+    top: 5px !important;
+    right: 5px !important;
+    width: 25px !important;
+    height: 25px !important;
     border-radius: 50%;
 
     span {
-      width: 14px!important;
-      height: 14px!important;
-      background-color: var(--primary-2)!important;
-      margin: 6px!important;
+      width: 14px !important;
+      height: 14px !important;
+      background-color: var(--primary-2) !important;
+      margin: 6px !important;
     }
   }
 }

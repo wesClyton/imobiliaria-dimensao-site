@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { AnnouncementComponentModule } from '../components/announcement-components.module';
 import { AnnouncementPipesModule } from '../pipes/announcement-pipes.module';
@@ -15,6 +16,7 @@ import { AnnouncementListComponent } from './list/announcement-list.component';
     CommonModule,
     AnnouncementComponentModule,
     AnnouncementPipesModule,
+    ReactiveFormsModule,
     PipesModule
   ],
   exports: [
