@@ -1,3 +1,26 @@
-<div class="inside-page">
-  <h1>Detalhes Anúncio</h1>
+<div class="inside-page" *ngIf="announcement">
+
+  <div class="galery"></div>
+
+  <div class="grid-1">
+    <div class="box-1">
+      <div class="announcement">
+        <h1>{{ announcement.titulo }}</h1>
+        <small class="type">{{ announcement.tipo | announcementType }}</small>
+        <p class="address">{{ announcement.endereco }} - {{ announcement.bairro }} - {{ announcement.cidade | cityState }}</p>
+      </div>
+
+      <div class="more">
+        <h2>Você também pode se interessar</h2>
+        <ul class="announcements">
+          <li class="item" *ngFor="let announcement of announcements;">
+            <app-announcement-list-item [announcement]="announcement"></app-announcement-list-item>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box-2"></div>
+  </div>
+
 </div>

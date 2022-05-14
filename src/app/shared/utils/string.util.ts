@@ -21,7 +21,17 @@ export class StringUtil {
   }
 
   public static formatFriendlyUrl(value: string): string {
-    return 'formatar-url-amigavel';
+    value = value.replace(/[á|ã|â|à]/gi, 'a');
+    value = value.replace(/[é|ê|è]/gi, 'e');
+    value = value.replace(/[í|ì|î]/gi, 'i');
+    value = value.replace(/[õ|ò|ó|ô]/gi, 'o');
+    value = value.replace(/[ú|ù|û]/gi, 'u');
+    value = value.replace(/[ç]/gi, 'c');
+    value = value.replace(/[ñ]/gi, 'n');
+    value = value.replace(/[á|ã|â]/gi, 'a');
+    value = value.replace(/\W/gi, '-');
+    value = value.replace(/(\-)\1+/gi, '-');
+    return value.trim().toLowerCase();
   }
 
   public static transformCurrencyEUA(value: string): number {

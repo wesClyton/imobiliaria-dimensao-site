@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { DirectivesModule } from '../../../shared/directives/directives.module';
 import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { CityDirectivesModule } from '../../city/directives/city-directives.module';
@@ -16,6 +17,7 @@ import { AnnouncementSearchComponent } from './search/announcement-search.compon
   ],
   imports: [
     CommonModule,
+    RouterModule,
     ReactiveFormsModule,
     DirectivesModule,
     AnnouncementDirectivesModule,

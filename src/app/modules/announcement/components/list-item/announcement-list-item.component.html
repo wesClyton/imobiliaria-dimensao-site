@@ -1,4 +1,4 @@
-<div class="announcement" (click)="open()">
+<a class="announcement" [routerLink]="[link]" [state]="{ announcement: announcement }" [title]="announcement.titulo">
   <img [src]="announcement.galeria.fotos[0]?.nome | pathImage : 'anuncios' : announcement?.galeria?.id" [alt]="announcement.titulo">
   <div class="infos">
     <div>
@@ -24,4 +24,4 @@
 
     <strong class="amount">{{ announcement.valor | currencyBr }}</strong>
   </div>
-</div>
+</a>

@@ -23,7 +23,7 @@ export class HttpGetByIdService<GetById> implements HttpGetById<GetById> {
       .pipe(
         catchError((error) => {
           this.exceptionService.handleError(error);
-          return throwError(error);
+          return throwError(() => error);
         })
       );
   }
