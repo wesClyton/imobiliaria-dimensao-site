@@ -34,7 +34,7 @@
   flex: 1;
 
   @include mobile-first(lg) {
-    flex: 2;
+    flex: 1.75;
   }
 }
 
@@ -156,7 +156,7 @@ app-announcement-list-item {
 .announcements {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   width: 100%;
   justify-content: flex-start;
 

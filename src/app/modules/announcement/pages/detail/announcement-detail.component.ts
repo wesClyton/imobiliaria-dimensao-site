@@ -74,6 +74,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
       this.router.events.subscribe((event: any) => {
         if (event instanceof NavigationStart) {
           this.setAnnouncement();
+          this.getAnnouncements();
         }
       })
     );
@@ -100,7 +101,6 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     const state: { [k: string]: Announcement } | undefined = this.router.getCurrentNavigation()?.extras?.state;
     if (state && state['announcement']) {
       this.announcement = state['announcement'];
-      this.init();
     }
     if (!this.announcement) {
       this.loadingService.show();
@@ -130,6 +130,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
   }
 
   private getAnnouncements(): void {
+    this.announcements = new Array<Announcement>();
     this.announcementGetAllService.queryFilterRemove();
 
     this.announcementGetAllService.queryFilterAdd({
@@ -141,14 +142,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
       .getAll()
       .pipe(take(1))
       .subscribe(announcements => {
-        this.announcements = announcements.data.filter((announcement, index) => {
-          if (announcement.id === this.announcement.id) {
-            return false;
-          }
-          return true;
-        });
-        // to-do
-        // deixar no array apenas os 3 primeiros anúncios
+        this.announcements = announcements.data.filter(announcement => announcement.id === this.announcement.id ? false : true).filter((announcement, index) => index < 3);
       });
   }
 

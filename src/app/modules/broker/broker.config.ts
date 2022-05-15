@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 
-const PATH: string = 'brokers';
+const PATH: string = 'corretores';
 
 export const BROKER_CONFIG: ModuleConfig = {
   name: 'Corretor',

@@ -64,7 +64,7 @@
         </div>
       </div>
 
-      <div class="more">
+      <div *ngIf="announcements?.length" class="more">
         <h2 class="heading">Você também pode se interessar</h2>
         <ul class="announcements">
           <li class="item" *ngFor="let announcement of announcements;">

@@ -4,9 +4,9 @@
       <nav class="nav">
         <h6>Institucional</h6>
         <ul>
-          <li><a href="#">Nossa História</a></li>
-          <li><a href="#">Corretotes</a></li>
-          <li><a href="#">Correa e Favarão</a></li>
+          <li><a routerLink="/quem-somos" href="#">Nossa História</a></li>
+          <li><a [routerLink]="BROKER_CONFIG.pathFront" href="#">Corretotes</a></li>
+          <li><a routerLink="/correa-favarao" href="#">Correa e Favarão</a></li>
         </ul>
       </nav>
 
@@ -22,9 +22,9 @@
       <nav class="nav">
         <h6>Contatos</h6>
         <ul>
-          <li><a href="#">Fale Conosco</a></li>
-          <li><a href="#">Anuncie</a></li>
-          <li><a href="#">Descubra</a></li>
+          <li><a routerLink="/contato">Fale Conosco</a></li>
+          <li><a routerLink="/anuncie">Anuncie</a></li>
+          <li><a routerLink="/onde-encontrar">Descubra</a></li>
         </ul>
       </nav>
 
@@ -50,19 +50,19 @@
   <div class="container-bottom">
     <div class="items-flex">
       <div class="logos">
-        <a (click)="navigateHome()">
+        <a routerLink="/">
           <img src="assets/logo-imobiliaria-dimensao.svg" alt="{{ APP_CONFIG.name }}">
         </a>
 
-        <a (click)="navigateCorreaFavarao()">
+        <a routerLink="/correa-favarao">
           <img src="assets/logo-correa-favarao.svg" alt="Correa & Favarão">
         </a>
       </div>
 
       <nav class="terms-policy">
         <ul>
-          <li><a (click)="navigateTerms()">Termos de uso</a></li>
-          <li><a (click)="navigatePolicy()">Política de privacidade</a></li>
+          <li><a routerLink="/termos-de-uso">Termos de uso</a></li>
+          <li><a routerLink="/politica-de-privacidade">Política de privacidade</a></li>
         </ul>
       </nav>
 
