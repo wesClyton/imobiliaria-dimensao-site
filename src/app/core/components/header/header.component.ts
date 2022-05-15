@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { APP_CONFIG } from '../../../app.config';
-import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
@@ -44,23 +43,14 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
     if (!this.banners) {
       this.subscription.add(this.bannerGetAllService.banners$.subscribe((banners) => this.banners = banners.data));
     }
-
-    this.linksFilter.forEach(link => link.nativeElement.addEventListener('click', this.onClickLink.bind(this)));
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  private onClickLink(event: PointerEvent): void {
-    event.preventDefault();
-  }
-
   public navigateFilter(banner: Banner): void {
-    this.router.navigate(
-      [ANNOUNCEMENT_CONFIG.pathFront],
-      { queryParams: { tipo: banner.nome }
-    });
+    window.open(banner.link, '_blank');
     this.showMenu();
   }
 

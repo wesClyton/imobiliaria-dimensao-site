@@ -93,6 +93,10 @@
     width: 200px;
     font-size: 0.75rem;
 
+    &:visited {
+      color: var(--white);
+    }
+
     @include mobile-first(lg) {
       width: 230px;
       font-size: 0.82rem;

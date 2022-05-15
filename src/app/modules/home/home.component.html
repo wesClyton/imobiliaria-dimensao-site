@@ -15,8 +15,8 @@
         </div>
 
         <div #buttons class="buttons">
-          <button class="btn btn-white" type="button">Ver destaques</button>
-          <button class="btn btn-primary" type="button">Encontre o seu</button>
+          <a class="btn btn-white" target="_blank" href="{{ banner.link }}&destaque=true">Ver destaques</a>
+          <a class="btn btn-primary" target="_blank" [href]="banner.link">Encontre o seu</a>
         </div>
       </section>
     </ng-template>
