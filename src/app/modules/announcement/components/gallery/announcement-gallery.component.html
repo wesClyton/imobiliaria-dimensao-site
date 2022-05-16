@@ -1,0 +1,80 @@
+<ng-container *ngIf="announcement">
+  <section class="announcement-gallery">
+
+    <div class="box-content">
+      <swiper *ngIf="showPhotos" [config]="swiperConfig">
+        <ng-template swiperSlide *ngFor="let photo of announcement.galeria?.fotos;">
+          <div class="photo">
+            <img [src]="photo.nome | pathImage: 'anuncios': photo.galeriaId" [alt]="photo.nome">
+          </div>
+        </ng-template>
+      </swiper>
+
+      <div *ngIf="showVideo" class="box-video">
+        <app-youtube-iframe [videoId]="announcement.urlVideo"></app-youtube-iframe>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="buttons">
+        <button
+          class="btn"
+          type="button"
+          [ngClass]="{
+            'btn-outline' : !showPhotos,
+            'btn-primary-4' : !showPhotos,
+            'btn-primary-3' : showPhotos
+          }"
+          (click)="photosClick()">
+          Fotos
+        </button>
+        <button
+          class="btn"
+          type="button"
+          [ngClass]="{
+            'btn-outline' : !showVideo,
+            'btn-primary-4' : !showVideo,
+            'btn-primary-3' : showVideo
+          }"
+          (click)="videosClick()">
+          Vídeo
+        </button>
+        <button
+          class="btn"
+          type="button"
+          [ngClass]="{
+            'btn-outline' : !showTour360,
+            'btn-primary-4' : !showTour360,
+            'btn-primary-3' : showTour360
+          }"
+          (click)="tour360Click()">
+          Tour 360°
+        </button>
+        <button
+          class="btn"
+          type="button"
+          [ngClass]="{
+            'btn-outline' : !showMap,
+            'btn-primary-4' : !showMap,
+            'btn-primary-3' : showMap
+          }"
+          (click)="mapClick()">
+          Mapa
+        </button>
+      </div>
+      <div class="copy-link">
+        <mat-icon (click)="copyLink()">share</mat-icon>
+      </div>
+    </div>
+
+    <!-- <div class="buttons">
+      <button *ngIf="announcement.galeria.fotos[0]" class="btn btn-sm" type="button">Fotos</button>
+      <button *ngIf="announcement.urlVideo" class="btn btn-sm" type="button">Vídeos</button>
+      <button *ngIf="announcement.url360" class="btn btn-sm" type="button">Tour 360°</button>
+      <button *ngIf="announcement.urlMapa" class="btn btn-sm" type="button">Mapa</button>
+    </div> -->
+
+  </section>
+
+  <section *ngIf="isOpened" class="announcement-modal"></section>
+</ng-container>

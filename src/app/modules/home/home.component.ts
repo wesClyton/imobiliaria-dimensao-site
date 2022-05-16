@@ -10,7 +10,8 @@ SwiperCore.use([Mousewheel, Pagination]);
   selector: 'app-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.scss'],
-  providers: [PathImagePipe]
+  providers: [PathImagePipe],
+  encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit, OnDestroy {
 

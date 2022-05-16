@@ -11,17 +11,15 @@
   color: var(--grey-2);
 }
 
-.galery {
-  padding: 5rem;
-  background-color: red;
-  width: 100%;
-}
-
 .grid-1 {
-  padding: 3.75rem 1rem;
+  padding: 2rem 1rem 3.75rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @include mobile-first(md) {
+    padding: 3.75rem 1rem;
+  }
 
   @include mobile-first(xl) {
     flex-direction: row;
