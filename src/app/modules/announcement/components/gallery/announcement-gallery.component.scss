@@ -1,8 +1,32 @@
+@import 'mixins';
 @import '~swiper/css';
 @import '~swiper/css/navigation';
+
+@mixin maxHeightGallery() {
+  max-height: 240px;
+
+  @include mobile-first(lg) {
+    max-height: 320px;
+  }
+}
+
 .swiper {
   width: 100%;
-  max-height: 100%;
+  @include maxHeightGallery();
+}
+.swiper-slide {
+  width: auto;
+  @include maxHeightGallery();
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    @include maxHeightGallery();
+  }
 }
 .swiper-button-next:after,
 .swiper-button-prev:after {
@@ -21,7 +45,7 @@
 .box-content {
   position: relative;
   height: auto;
-  max-height: 240px;
+  @include maxHeightGallery();
 }
 
 .box-video {
@@ -30,7 +54,7 @@
   padding-bottom: 56.25%;
   padding-top: 30px;
   height: 0;
-  max-height: 240px;
+  @include maxHeightGallery();
   overflow: hidden;
 
   iframe,
@@ -41,7 +65,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    max-height: 240px;
+    @include maxHeightGallery();
   }
 }
 
@@ -51,6 +75,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1390px;
+    margin: 0 auto;
   }
   .buttons {
     display: flex;
@@ -67,6 +93,16 @@
     align-items: center;
     height: 30px;
     color: var(--primary-3);
+    transition: 0.5s all;
+
+    &:hover {
+      color: var(--primary-4);
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      cursor: pointer;
+    }
   }
 }
 

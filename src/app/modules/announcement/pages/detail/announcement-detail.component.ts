@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
@@ -6,7 +6,6 @@ import { LoadingService } from '../../../../core/loading/loading.service';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { CharacteristicType } from '../../../characteristic/enums/characteristic-type.enum';
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
-import { AnnouncementGalleryComponent } from '../../components/gallery/announcement-gallery.component';
 import { Announcement } from '../../interfaces/announcement.interface';
 import { AnnouncementGetAllService } from '../../services/announcement-get-all.service';
 import { AnnouncementGetByIdService } from '../../services/announcement-get-by-id.service';

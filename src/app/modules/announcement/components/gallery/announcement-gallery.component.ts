@@ -21,6 +21,8 @@ export class AnnouncementGalleryComponent {
     autoplay: false,
     direction: 'horizontal',
     slidesPerView: 'auto',
+    centeredSlides: true,
+    spaceBetween: 2,
     mousewheel: true,
     speed: 500,
     navigation: true,
