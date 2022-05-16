@@ -14,7 +14,7 @@
         <h6>Imóveis</h6>
         <ul>
           <li *ngFor="let banner of banners;">
-            <a href="#">{{ banner.nome }}</a>
+            <a target="_blank" [href]="banner.link">{{ banner.nome }}</a>
           </li>
         </ul>
       </nav>

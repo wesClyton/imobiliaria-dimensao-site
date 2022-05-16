@@ -23,6 +23,7 @@ export class AnnouncementGalleryComponent {
     slidesPerView: 'auto',
     centeredSlides: true,
     spaceBetween: 2,
+    initialSlide: 0,
     mousewheel: true,
     speed: 500,
     navigation: true,

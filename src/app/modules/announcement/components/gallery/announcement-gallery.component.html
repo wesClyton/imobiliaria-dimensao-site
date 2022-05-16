@@ -2,7 +2,7 @@
   <section class="announcement-gallery">
 
     <div class="box-content">
-      <swiper *ngIf="showPhotos" [config]="swiperConfig">
+      <swiper *ngIf="showPhotos && swiperConfig" [config]="swiperConfig">
         <ng-template swiperSlide *ngFor="let photo of announcement.galeria?.fotos;">
           <div class="photo">
             <img [src]="photo.nome | pathImage: 'anuncios': photo.galeriaId" [alt]="photo.nome">

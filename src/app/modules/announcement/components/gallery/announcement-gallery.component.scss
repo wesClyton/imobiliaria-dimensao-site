@@ -2,21 +2,23 @@
 @import '~swiper/css';
 @import '~swiper/css/navigation';
 
-@mixin maxHeightGallery() {
+@mixin heightGallery() {
+  min-height: 240px;
   max-height: 240px;
 
   @include mobile-first(lg) {
+    min-height: 320px;
     max-height: 320px;
   }
 }
 
 .swiper {
   width: 100%;
-  @include maxHeightGallery();
+  @include heightGallery();
 }
 .swiper-slide {
   width: auto;
-  @include maxHeightGallery();
+  @include heightGallery();
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +27,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    @include maxHeightGallery();
+    @include heightGallery();
   }
 }
 .swiper-button-next:after,
@@ -45,31 +47,35 @@
 .box-content {
   position: relative;
   height: auto;
-  @include maxHeightGallery();
+  @include heightGallery();
 }
 
 .box-video {
-  background-color: var(--grey-1);
+  background-color: var(--black);
   position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
-  height: 0;
-  @include maxHeightGallery();
-  overflow: hidden;
+  height: 100%;
+  @include heightGallery();
 
   iframe,
   object,
   embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    @include maxHeightGallery();
+    width: auto;
+    height: auto;
+    @include heightGallery();
+
+    @include mobile-first(md) {
+      width: 425px;
+    }
+
+    @include mobile-first(lg) {
+      width: 565px;
+    }
   }
 }
 
 .announcement-gallery {
+  overflow-x: hidden;
+
   .actions {
     padding: 0.5rem 1rem;
     display: flex;
