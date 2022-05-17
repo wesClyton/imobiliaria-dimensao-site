@@ -21,6 +21,10 @@
     padding: 3.75rem 1rem;
   }
 
+  @include mobile-first(lg) {
+    gap: 6rem;
+  }
+
   @include mobile-first(xl) {
     flex-direction: row;
     max-width: 1390px;
@@ -32,7 +36,7 @@
   flex: 1;
 
   @include mobile-first(lg) {
-    flex: 1.75;
+    flex: 2.1;
   }
 }
 

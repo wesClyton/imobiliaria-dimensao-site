@@ -40,7 +40,7 @@
             [src]="announcement.galeria.fotos[0]?.nome | pathImage: 'anuncios': announcement.galeria.fotos[0]?.galeriaId"
             [alt]="announcement.titulo">
           <div class="text">
-            <h2>{{ announcement.tipo }}</h2>
+            <h2>{{ announcement.tipo | announcementType }}</h2>
             <div class="numbers">
               <div *ngIf="announcement.areaTotal">
                 <i class="icon-metragem"></i> {{ announcement.areaTotal | m2: true }}

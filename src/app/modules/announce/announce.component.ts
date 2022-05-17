@@ -65,7 +65,6 @@ export class AnnounceComponent implements OnInit {
   }
 
   public submit(): void {
-    console.log('submit')
     if (this.form.invalid) {
       this.formService.validate(this.form);
       return;

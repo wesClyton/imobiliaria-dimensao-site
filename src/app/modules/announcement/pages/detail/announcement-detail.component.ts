@@ -86,17 +86,6 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private init(): void {
-    if (this.announcement) {
-      this.getAnnouncements();
-      this.filterCharacteristics();
-      return;
-    }
-
-    this.announcementId = this.activatedRoute.snapshot.params['id'];
-    this.getAnnouncement();
-  }
-
   private setAnnouncement(): void {
     const state: { [k: string]: Announcement } | undefined = this.router.getCurrentNavigation()?.extras?.state;
     if (state && state['announcement']) {
@@ -113,6 +102,17 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
       email: [null, [Validators.required, Validators.email]],
       telefone: [null, [Validators.required]]
     });
+  }
+
+  private init(): void {
+    if (this.announcement) {
+      this.getAnnouncements();
+      this.filterCharacteristics();
+      return;
+    }
+
+    this.announcementId = this.activatedRoute.snapshot.params['id'];
+    this.getAnnouncement();
   }
 
   private getAnnouncement(): void {

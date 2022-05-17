@@ -12,39 +12,39 @@
   }
 }
 
-.swiper {
-  width: 100%;
-  @include heightGallery();
-}
-.swiper-slide {
-  width: auto;
-  @include heightGallery();
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    display: block;
+.box-content {
+  .swiper {
     width: 100%;
-    height: 100%;
     @include heightGallery();
   }
-}
-.swiper-button-next:after,
-.swiper-button-prev:after {
-  color: var(--white);
-  background-color: rgba(var(--primary-rgb-2), 0.75);
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-}
-.swiper-button-prev:after {
-  border-radius: 0 8px 8px 0;
-}
-.swiper-button-next:after {
-  border-radius: 8px 0 0 8px;
-}
+  .swiper-slide {
+    width: auto;
+    @include heightGallery();
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.box-content {
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      @include heightGallery();
+    }
+  }
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    color: var(--white);
+    background-color: rgba(var(--primary-rgb-2), 0.75);
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+  .swiper-button-prev:after {
+    border-radius: 0 8px 8px 0;
+  }
+  .swiper-button-next:after {
+    border-radius: 8px 0 0 8px;
+  }
+
   position: relative;
   height: auto;
   @include heightGallery();
@@ -84,7 +84,7 @@
     max-width: 1390px;
     margin: 0 auto;
   }
-  .buttons {
+  .announcement-buttons {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
@@ -100,14 +100,21 @@
     height: 30px;
     color: var(--primary-3);
     transition: 0.5s all;
+    gap: 0.25rem;
+    cursor: pointer;
 
     &:hover {
       color: var(--primary-4);
-      transform: scale(1.1);
     }
 
-    mat-icon {
-      cursor: pointer;
+    span {
+      display: none;
+      font-size: 0.75rem;
+      color: var(--grey-3);
+
+      @include mobile-first(md) {
+        display: inline-block;
+      }
     }
   }
 }

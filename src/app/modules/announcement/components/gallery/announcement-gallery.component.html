@@ -6,6 +6,11 @@
         <ng-template swiperSlide *ngFor="let photo of announcement.galeria?.fotos;">
           <div class="photo">
             <img [src]="photo.nome | pathImage: 'anuncios': photo.galeriaId" [alt]="photo.nome">
+            <!-- <ng-container *ngIf="announcement.galeria.fotos.length < 3">
+              <div class="photo">
+                <img [src]="'' | pathImage: 'anuncios': photo.galeriaId" alt="No photo">
+              </div>
+            </ng-container> -->
           </div>
         </ng-template>
       </swiper>
@@ -16,7 +21,7 @@
     </div>
 
     <div class="actions">
-      <div class="buttons">
+      <div class="announcement-buttons">
         <button
           *ngIf="announcement.galeria.fotos[0]"
           class="btn"
@@ -66,17 +71,11 @@
           Mapa
         </button>
       </div>
-      <div class="copy-link">
-        <mat-icon (click)="copyLink()">share</mat-icon>
+      <div class="copy-link" (click)="copyLink()">
+        <mat-icon>share</mat-icon>
+        <span>compartilhar</span>
       </div>
     </div>
-
-    <!-- <div class="buttons">
-      <button  class="btn btn-sm" type="button">Fotos</button>
-      <button *ngIf="announcement.urlVideo" class="btn btn-sm" type="button">Vídeos</button>
-      <button *ngIf="announcement.url360" class="btn btn-sm" type="button">Tour 360°</button>
-      <button *ngIf="announcement.urlMapa" class="btn btn-sm" type="button">Mapa</button>
-    </div> -->
 
   </section>
 
