@@ -3,10 +3,12 @@
 @import '~swiper/css/navigation';
 
 @mixin heightGallery() {
+  height: 240px;
   min-height: 240px;
   max-height: 240px;
 
   @include mobile-first(lg) {
+    height: 320px;
     min-height: 320px;
     max-height: 320px;
   }
@@ -73,8 +75,24 @@
   }
 }
 
+.box-map {
+  position: relative;
+  background-color: var(--grey-3);
+  width: 100%;
+  height: 100%;
+  @include heightGallery();
+
+  google-map {
+    @include heightGallery();
+  }
+}
+
 .announcement-gallery {
   overflow-x: hidden;
+
+  .photo {
+    cursor: pointer;
+  }
 
   .actions {
     padding: 0.5rem 1rem;

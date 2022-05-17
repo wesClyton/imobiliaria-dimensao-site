@@ -4,19 +4,32 @@
     <div class="box-content">
       <swiper *ngIf="showPhotos && swiperConfig" [config]="swiperConfig">
         <ng-template swiperSlide *ngFor="let photo of announcement.galeria?.fotos;">
-          <div class="photo">
+          <div class="photo" (click)="openModal()">
             <img [src]="photo.nome | pathImage: 'anuncios': photo.galeriaId" [alt]="photo.nome">
-            <!-- <ng-container *ngIf="announcement.galeria.fotos.length < 3">
-              <div class="photo">
-                <img [src]="'' | pathImage: 'anuncios': photo.galeriaId" alt="No photo">
-              </div>
-            </ng-container> -->
           </div>
         </ng-template>
       </swiper>
 
       <div *ngIf="showVideo" class="box-video">
         <app-youtube-iframe [videoId]="announcement.urlVideo"></app-youtube-iframe>
+      </div>
+
+      <div *ngIf="showMap" class="box-map">
+        <google-map
+          #myGoogleMap
+          width="100%"
+          height="100%"
+          [center]="center"
+          [options]="options">
+
+          <map-marker
+            *ngIf="marker"
+            #markerElem="mapMarker"
+            [icon]="iconPin"
+            [position]="marker.position"
+            [title]="marker.announcement.titulo">
+          </map-marker>
+        </google-map>
       </div>
     </div>
 

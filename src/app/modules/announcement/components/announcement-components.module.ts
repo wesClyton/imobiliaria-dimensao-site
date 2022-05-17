@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { SwiperModule } from 'swiper/angular';
@@ -31,7 +32,8 @@ import { AnnouncementSearchComponent } from './search/announcement-search.compon
     PipesModule,
     SwiperModule,
     MatIconModule,
-    YoutubeIframeModule
+    YoutubeIframeModule,
+    GoogleMapsModule
   ],
   exports: [
     AnnouncementSearchComponent,

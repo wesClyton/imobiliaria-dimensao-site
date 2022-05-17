@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { AnchorContactComponent } from './anchor-contact.component';
 
 @NgModule({
-  declarations: [ 
-    AnchorContactComponent 
+  declarations: [
+    AnchorContactComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     AnchorContactComponent

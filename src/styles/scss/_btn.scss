@@ -43,6 +43,7 @@
   background-color: var(--primary-4);
 
   &:hover {
+    color: var(--white) !important;
     background-color: var(--primary-3);
   }
 }

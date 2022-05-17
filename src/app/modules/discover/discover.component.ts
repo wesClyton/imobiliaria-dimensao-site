@@ -14,22 +14,14 @@ import { Marker } from './marker.interface';
   styleUrls: ['discover.component.scss'],
 })
 export class DiscoverComponent implements OnInit {
-  @ViewChild('myGoogleMap', { static: false })
-  map!: GoogleMap;
 
   @ViewChild(MapInfoWindow, { static: false })
-  info!: MapInfoWindow;
+  public info!: MapInfoWindow;
 
   @ViewChild('search', { static: false })
   public searchElementRef!: ElementRef;
 
   public form!: FormGroup;
-
-  public zoom = 13;
-
-  public maxZoom = 20;
-
-  public minZoom = 1;
 
   public latitude!: number;
 
@@ -44,8 +36,9 @@ export class DiscoverComponent implements OnInit {
     scrollwheel: false,
     disableDoubleClickZoom: true,
     mapTypeId: 'roadmap',
-    maxZoom: this.maxZoom,
-    minZoom: this.minZoom
+    maxZoom: 20,
+    minZoom: 1,
+    zoom: 13
   };
 
   public iconPin = {
@@ -72,7 +65,7 @@ export class DiscoverComponent implements OnInit {
   ngOnInit(): void {
     navigator.permissions
       .query({ name: 'geolocation' })
-      .then((permissionStatus) => {
+      .then(permissionStatus => {
         if (permissionStatus.state === 'granted') {
           navigator.geolocation.getCurrentPosition((position) => {
             this.center = {
