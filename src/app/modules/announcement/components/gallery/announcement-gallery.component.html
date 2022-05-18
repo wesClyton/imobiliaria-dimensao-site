@@ -1,38 +1,5 @@
-<ng-container *ngIf="announcement">
-  <section class="announcement-gallery">
-
-    <div class="box-content">
-      <swiper *ngIf="showPhotos && swiperConfig" [config]="swiperConfig">
-        <ng-template swiperSlide *ngFor="let photo of announcement.galeria?.fotos;">
-          <div class="photo" (click)="openModal()">
-            <img [src]="photo.nome | pathImage: 'anuncios': photo.galeriaId" [alt]="photo.nome">
-          </div>
-        </ng-template>
-      </swiper>
-
-      <div *ngIf="showVideo" class="box-video">
-        <app-youtube-iframe [videoId]="announcement.urlVideo"></app-youtube-iframe>
-      </div>
-
-      <div *ngIf="showMap" class="box-map">
-        <google-map
-          #myGoogleMap
-          width="100%"
-          height="100%"
-          [center]="center"
-          [options]="options">
-
-          <map-marker
-            *ngIf="marker"
-            #markerElem="mapMarker"
-            [icon]="iconPin"
-            [position]="marker.position"
-            [title]="marker.announcement.titulo">
-          </map-marker>
-        </google-map>
-      </div>
-    </div>
-
+<div class="announcement-box-gallery">
+  <ng-template #announcementButtons>
     <div class="actions">
       <div class="announcement-buttons">
         <button
@@ -84,13 +51,79 @@
           Mapa
         </button>
       </div>
+
       <div class="copy-link" (click)="copyLink()">
         <mat-icon>share</mat-icon>
         <span>compartilhar</span>
       </div>
     </div>
+  </ng-template>
 
-  </section>
+  <ng-template #youtubeVideo>
+    <app-youtube-iframe [videoId]="announcement.urlVideo"></app-youtube-iframe>
+  </ng-template>
 
-  <section *ngIf="isOpened" class="announcement-modal"></section>
-</ng-container>
+  <ng-template #googleMap>
+    <google-map
+      #myGoogleMap
+      width="100%"
+      height="100%"
+      [center]="center"
+      [options]="options">
+
+      <map-marker
+        *ngIf="marker"
+        #markerElem="mapMarker"
+        [icon]="iconPin"
+        [position]="marker.position"
+        [title]="marker.announcement.titulo">
+      </map-marker>
+    </google-map>
+  </ng-template>
+
+  <ng-template #swiper>
+    <swiper *ngIf="showPhotos" [config]="swiperConfig">
+      <ng-template swiperSlide *ngFor="let photo of announcement.galeria?.fotos;">
+        <div class="photo" (click)="openModal()">
+          <img [src]="photo.nome | pathImage: 'anuncios': photo.galeriaId" [alt]="photo.nome">
+        </div>
+      </ng-template>
+    </swiper>
+  </ng-template>
+
+  <ng-container *ngIf="announcement">
+    <section class="announcement-gallery">
+      <div class="box-content">
+        <ng-container [ngTemplateOutlet]="swiper"></ng-container>
+
+        <div *ngIf="showVideo" class="box-video">
+          <ng-container [ngTemplateOutlet]="youtubeVideo"></ng-container>
+        </div>
+
+        <div *ngIf="showMap" class="box-map">
+          <ng-container [ngTemplateOutlet]="googleMap"></ng-container>
+        </div>
+      </div>
+
+      <ng-container [ngTemplateOutlet]="announcementButtons"></ng-container>
+    </section>
+
+    <section *ngIf="isModalOpened" class="announcement-modal">
+      <button type="button" class="btn-menu icon-close" (click)="modalHide()"></button>
+
+      <ng-container [ngTemplateOutlet]="announcementButtons"></ng-container>
+
+      <div class="box-content">
+        <ng-container [ngTemplateOutlet]="swiper"></ng-container>
+
+        <div *ngIf="showVideo" class="box-video">
+          <ng-container [ngTemplateOutlet]="youtubeVideo"></ng-container>
+        </div>
+
+        <div *ngIf="showMap" class="box-map">
+          <ng-container [ngTemplateOutlet]="googleMap"></ng-container>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</div>

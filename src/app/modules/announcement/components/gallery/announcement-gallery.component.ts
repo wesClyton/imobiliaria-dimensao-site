@@ -23,7 +23,7 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
   @ViewChild(MapInfoWindow, { static: false })
   public info!: MapInfoWindow;
 
-  public isOpened = false;
+  public isModalOpened = false;
 
   public swiperConfig: SwiperOptions = {
     autoplay: false,
@@ -120,12 +120,18 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
     }
   }
 
-  public show(): void {
-    this.isOpened = true;
+  public modalShow(): void {
+    this.isModalOpened = true;
   }
 
-  public hide(): void {
-    this.isOpened = false;
+  public modalHide(): void {
+    this.isModalOpened = false;
+  }
+
+  public openModal(): void {
+    if (!this.isModalOpened) {
+      this.modalShow();
+    }
   }
 
   private resetButtons(): void {
@@ -160,9 +166,4 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
     CopyClipboard.copy(window.location.href);
     this.notificationService.success('Link copiado para área de transferência');
   }
-
-  public openModal(): void {
-    alert('Abrir modal');
-  }
-
 }
