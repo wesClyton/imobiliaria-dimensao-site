@@ -1,5 +1,5 @@
 import { Characteristic } from '../../characteristic/interfaces/characteristic.interface';
-import { City } from '../../city/interfaces/city.interface';
+import { District } from '../../district/interfaces/district.interface';
 import { AnnouncementStateProperty } from '../enums/announcement-state-property.enum';
 import { AnnouncementType } from '../enums/announcement-type.enum';
 import { AnnouncementGallery } from './announcement-gallery.interface';
@@ -9,11 +9,10 @@ export interface Announcement {
   readonly areaConstruida: number;
   readonly areaTotal: number;
   readonly ativo: boolean;
-  readonly bairro: string;
+  readonly bairro: District;
   readonly banheiros: number;
   readonly caracteristicas: Array<Characteristic>;
   readonly cep: string;
-  readonly cidade: City;
   readonly codigoAnuncio: string;
   readonly dataConclusao: Date;
   readonly destaque: boolean;

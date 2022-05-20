@@ -6,6 +6,7 @@ import { DiscoverComponent } from './discover.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { AnnouncementPipesModule } from '../announcement/pipes/announcement-pipes.module';
+import { AnnouncementDirectivesModule } from '../announcement/directives/announcement-directives.module';
 
 const routes: Routes = [
   {
@@ -22,7 +23,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     GoogleMapsModule,
     PipesModule,
-    AnnouncementPipesModule
+    AnnouncementPipesModule,
+    AnnouncementDirectivesModule,
+    ReactiveFormsModule
   ],
 })
 export class DiscoverModule {}

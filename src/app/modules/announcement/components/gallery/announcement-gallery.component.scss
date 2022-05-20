@@ -20,9 +20,9 @@
   max-height: 240px;
 
   @include mobile-first(md) {
-    height: 500px;
-    min-height: 500px;
-    max-height: 500px;
+    height: 75vh;
+    min-height: 75vh;
+    max-height: 75vh;
   }
 }
 

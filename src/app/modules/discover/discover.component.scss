@@ -29,8 +29,29 @@ h1 {
 .box-form {
   max-width: 90%;
 
+  .input-field:first-child {
+    margin-bottom: 1.5rem;
+
+    @include mobile-first(lg) {
+      margin-bottom: 0;
+    }
+  }
+
   @include mobile-first(md) {
     width: 380px;
+  }
+
+  @include mobile-first(lg) {
+    width: 100%;
+  }
+
+  form {
+    @include mobile-first(lg) {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      justify-content: center;
+    }
   }
 
 }

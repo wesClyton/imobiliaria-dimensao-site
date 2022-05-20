@@ -40,6 +40,7 @@ export class FooterComponent implements OnInit {
   }
 
   private getBanners(): void {
+    this.bannerGetAllService.queryFilterRemove();
     this.bannerGetAllService.queryFilterAdd({
       field: 'ativo',
       value: true

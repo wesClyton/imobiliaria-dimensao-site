@@ -4,15 +4,29 @@
     <h1>Descubra</h1>
 
     <div class="box-form">
-      <div class="input-field">
-        <label>Endereço</label>
-        <input
-          #search
-          type="text"
-          class="input"
-          placeholder="Informe uma cidade, bairro ou rua"
-          (keydown.enter)="$event.preventDefault()" />
-      </div>
+      <form [formGroup]="form">
+        <div class="input-field">
+          <label>Endereço</label>
+          <input
+            #search
+            type="text"
+            class="input"
+            placeholder="Informe uma cidade, bairro ou rua"
+            (keydown.enter)="$event.preventDefault()" />
+        </div>
+
+        <div class="input-field">
+          <label>Tipo do Imóvel</label>
+          <select ngDefaultControl class="select" formControlName="tipoImovel">
+            <option value="null" selected>Selecione o Tipo</option>
+            <ng-container appAnnouncementTypeOptionSelect (dataFinded)="announcementTypes = $event">
+              <option *ngFor="let type of announcementTypes" [value]="type.value">
+                {{ type.name }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </form>
     </div>
   </div>
 

@@ -14,11 +14,11 @@
 
     <div class="input-field">
       <label>Cidade</label>
-      <select ngDefaultControl appCityOptionSelect class="select" formControlName="cidadeId">
+      <select ngDefaultControl class="select" formControlName="cidadeId">
         <option value="null" selected>Selecione a Cidade</option>
         <ng-container appCityOptionSelect (dataFinded)="cities = $event">
           <option *ngFor="let city of cities?.data" [value]="city.id">
-            {{ city.nome }}
+            {{ city | cityState }}
           </option>
         </ng-container>
       </select>
@@ -27,12 +27,17 @@
     <div class="input-field">
       <div class="input-field">
         <label>Bairro</label>
-        <input ngDefaultControl class="input" type="text" formControlName="bairro" placeholder="Informe o Bairro">
+        <select ngDefaultControl class="select" formControlName="bairroId">
+          <option value="null" selected>Selecione o Bairro</option>
+          <option *ngFor="let district of districts?.data" [value]="district.id">
+            {{ district.nome }}
+          </option>
+        </select>
       </div>
     </div>
   </div>
 
-  <div *ngIf="showFiltersAdvanced" class="box-2">
+  <div *ngIf="showFiltersAdvanced && !typeIsLoteamento" class="box-2">
     <div class="item">
       <div class="input-field">
         <label>Valor mínimo</label>
@@ -55,8 +60,8 @@
     </div>
   </div>
 
-  <div *ngIf="showFiltersAdvanced" class="box-3">
-    <div class="input-field">
+  <div *ngIf="showFiltersAdvanced && !typeIsTerrenoUrbano && !typeIsTerronoRural && !typeIsLoteamento" class="box-3">
+    <div *ngIf="!typeIsComercial" class="input-field">
       <label>Banheiros</label>
       <div class="quantities-filter">
         <div
@@ -69,7 +74,7 @@
       </div>
     </div>
 
-    <div class="input-field">
+    <div *ngIf="!typeIsComercial" class="input-field">
       <label>Dormitórios</label>
       <div class="quantities-filter">
         <div
@@ -83,7 +88,7 @@
     </div>
 
     <div class="input-field">
-      <label>Vagas</label>
+      <label>Vagas de garagem</label>
       <div class="quantities-filter">
         <div
           class="item"
@@ -97,7 +102,7 @@
   </div>
 
   <div class="buttons">
-    <button class="btn btn-sm btn-primary-4 btn-outline" type="button" (click)="toggleTypeFilter()">
+    <button *ngIf="!typeIsLoteamento" class="btn btn-sm btn-primary-4 btn-outline" type="button" (click)="toggleTypeFilter()">
       {{ showFiltersAdvanced ? 'Filtros básicos' : 'Filtros avançados' }}
     </button>
     <button class="btn btn-sm btn-primary-3" type="submit">Buscar</button>

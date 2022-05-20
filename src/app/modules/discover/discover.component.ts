@@ -1,8 +1,10 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { finalize, take } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../core/loading/loading.service';
+import { AnnouncementType as AnnouncementTypeEnum } from '../announcement/enums/announcement-type.enum';
+import { AnnouncementType } from '../announcement/interfaces/announcement-type.interface';
 import { Announcement } from '../announcement/interfaces/announcement.interface';
 import { AnnouncementGetAllService } from '../announcement/services/announcement-get-all.service';
 import { AnnouncementLinkUtil } from '../announcement/utils/announcement-link.util';
@@ -13,7 +15,7 @@ import { Marker } from './marker.interface';
   templateUrl: 'discover.component.html',
   styleUrls: ['discover.component.scss'],
 })
-export class DiscoverComponent implements OnInit {
+export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(MapInfoWindow, { static: false })
   public info!: MapInfoWindow;
@@ -22,6 +24,8 @@ export class DiscoverComponent implements OnInit {
   public searchElementRef!: ElementRef;
 
   public form!: FormGroup;
+
+  public announcementTypes!: Array<AnnouncementType>;
 
   public latitude!: number;
 
@@ -54,15 +58,29 @@ export class DiscoverComponent implements OnInit {
     return AnnouncementLinkUtil.create(this.announcement);
   }
 
+  private subscription = new Subscription();
+
   constructor(
     private readonly ngZone: NgZone,
     private readonly announcementGetAllService: AnnouncementGetAllService,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    private readonly formBuilder: FormBuilder
   ) {
     this.loadingService.show();
   }
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      tipoImovel: [null]
+    });
+
+    this.subscription.add(
+      this.form.get('tipoImovel')?.valueChanges.subscribe(value => {
+        this.loadingService.show();
+        this.getAnnouncements(value);
+      })
+    );
+
     navigator.permissions
       .query({ name: 'geolocation' })
       .then(permissionStatus => {
@@ -105,10 +123,20 @@ export class DiscoverComponent implements OnInit {
     });
   }
 
-  private getAnnouncements(): void {
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private getAnnouncements(announcementType?: AnnouncementTypeEnum): void {
     this.markers = new Array<Marker>();
     this.announcementGetAllService.queryFilterRemove();
 
+    if (announcementType && (announcementType as string) !== 'null') {
+      this.announcementGetAllService.queryFilterAdd({
+        field: 'tipo',
+        value: announcementType
+      });
+    }
     this.announcementGetAllService.queryFilterAdd({
       field: 'ativo',
       value: true

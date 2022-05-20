@@ -14,7 +14,7 @@
         <h6>Imóveis</h6>
         <ul>
           <li *ngFor="let banner of banners;">
-            <a target="_blank" [href]="banner.link">{{ banner.nome }}</a>
+            <a [routerLink]="banner.link">{{ banner.nome }}</a>
           </li>
         </ul>
       </nav>
@@ -51,11 +51,11 @@
     <div class="items-flex">
       <div class="logos">
         <a routerLink="/">
-          <img src="assets/logo-imobiliaria-dimensao.svg" alt="{{ APP_CONFIG.name }}">
+          <img src="assets/logo-imobiliaria-dimensao.png" alt="{{ APP_CONFIG.name }}">
         </a>
 
         <a routerLink="/correa-favarao">
-          <img src="assets/logo-correa-favarao.svg" alt="Correa & Favarão">
+          <img src="assets/logo-correa-favarao.png" alt="Correa & Favarão">
         </a>
       </div>
 

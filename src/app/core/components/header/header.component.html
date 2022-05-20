@@ -6,7 +6,7 @@
   <nav class="nav">
     <div class="logo">
       <a href="/">
-        <img src="assets/logo-imobiliaria-dimensao.svg" alt="{{ APP_CONFIG.name }}">
+        <img src="assets/logo-imobiliaria-dimensao.png" alt="{{ APP_CONFIG.name }}">
       </a>
     </div>
 
@@ -14,7 +14,7 @@
       <div class="menu-main">
         <ng-container *ngIf="isHome">
           <li *ngFor="let banner of banners;">
-            <a target="_blank" [href]="banner.link" (click)="showMenu()">{{ banner.nome }}</a>
+            <a [routerLink]="banner.link" (click)="showMenu()">{{ banner.nome }}</a>
           </li>
         </ng-container>
 
@@ -28,8 +28,8 @@
       </div>
 
       <div class="default-items">
-        <li class="item"><a (click)="navigateContato()">Contato</a></li>
         <li class="item"><a (click)="navigateDescubra()">Descubra</a></li>
+        <li class="item"><a (click)="navigateContato()">Contato</a></li>
 
         <li *ngIf="isHome" class="item item-menu">
           <a (click)="showSubMenu($event)">Menu</a>

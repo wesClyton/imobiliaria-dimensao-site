@@ -40,7 +40,8 @@
 .box-3 {
   @include mobile-first(md) {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 2rem;
     .input-field {
       width: auto;
     }

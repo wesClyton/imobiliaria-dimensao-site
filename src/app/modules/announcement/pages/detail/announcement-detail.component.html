@@ -2,12 +2,12 @@
 
   <app-announcement-gallery [announcement]="announcement"></app-announcement-gallery>
 
-  <div class="grid-1">
+  <div #grid1 class="grid-1">
     <div class="box-1">
       <div class="announcement">
         <h1 class="heading">{{ announcement.titulo }}</h1>
         <small class="type">{{ announcement.tipo | announcementType }}</small>
-        <p class="address">{{ announcement.endereco }} - {{ announcement.bairro }} - {{ announcement.cidade | cityState }}</p>
+        <p class="address">{{ announcement.endereco }} - {{ announcement.bairro.nome }} - {{ announcement.bairro.cidade | cityState }}</p>
         <strong class="amount">{{ announcement.valor | currencyBr }}</strong>
 
         <div class="numbers">
@@ -75,7 +75,7 @@
     </div>
 
     <div class="box-2">
-      <div class="box-form">
+      <div #boxForm class="box-form">
         <p>Para saber mais sobre esse imóvel entre agora em contato atravé do formulário abaixo.</p>
         <form class="form" [formGroup]="form" (ngSubmit)="submit()">
           <div class="input-field">
@@ -98,6 +98,8 @@
 
           <button class="btn btn-sm btn-primary-3" type="submit">Enviar</button>
         </form>
+
+        <p class="announcement-code">Código do imóvel: <strong>{{ announcement.codigoAnuncio | uppercase }}</strong></p>
       </div>
     </div>
   </div>

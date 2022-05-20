@@ -6,7 +6,7 @@
     <div>
       <small class="type">{{ announcement.tipo | announcementType }}</small>
       <h2 class="title">{{ announcement.titulo }}</h2>
-      <p class="address">{{ announcement.endereco }} - {{ announcement.bairro }} - {{ announcement.cidade | cityState }}</p>
+      <p class="address">{{ announcement.endereco }} - {{ announcement.bairro.nome }} - {{ announcement.bairro.cidade | cityState }}</p>
 
       <div class="numbers">
         <div *ngIf="announcement.areaTotal">

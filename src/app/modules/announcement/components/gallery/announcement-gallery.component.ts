@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MapInfoWindow } from '@angular/google-maps';
 import { take } from 'rxjs';
 import SwiperCore, { Mousewheel, Navigation, SwiperOptions } from 'swiper';
@@ -6,7 +6,6 @@ import { SwiperComponent } from 'swiper/angular';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { CopyClipboard } from '../../../../shared/utils/copy-clipboard';
 import { Marker } from '../../../discover/marker.interface';
-import { AnnouncementPhoto } from '../../interfaces/announcement-photo.interface';
 import { Announcement } from '../../interfaces/announcement.interface';
 import { AnnouncementLinkUtil } from '../../utils/announcement-link.util';
 SwiperCore.use([Mousewheel, Navigation]);
@@ -17,7 +16,7 @@ SwiperCore.use([Mousewheel, Navigation]);
   styleUrls: ['announcement-gallery.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AnnouncementGalleryComponent implements OnInit, OnChanges {
+export class AnnouncementGalleryComponent implements OnChanges {
 
   @Input()
   public announcement!: Announcement;
@@ -82,13 +81,8 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
     private readonly notificationService: NotificationService
   ) { }
 
-  ngOnInit(): void {
-    this.setPhotos();
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['announcement'] && !changes['announcement'].firstChange) {
-      this.setPhotos();
       this.resetButtons();
       this.showPhotos = true;
     }
@@ -108,23 +102,6 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
           lng: parseFloat(this.announcement.longitude)
         }
       }
-    }
-  }
-
-  private setPhotos(): void {
-    if (this.announcement && this.announcement.galeria.fotos.length < 3) {
-      const photo: AnnouncementPhoto = {
-        id: '',
-        galeriaId: this.announcement.galeria.id,
-        nome: '',
-        ordem: null
-      };
-
-      if (this.announcement.galeria.fotos.length === 1) {
-        this.announcement.galeria.fotos.push(photo, photo);
-        return;
-      }
-      this.announcement.galeria.fotos.push(photo);
     }
   }
 

@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription, take } from 'rxjs';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { CityGetAll } from '../../../city/interfaces/city-get-all.interface';
+import { DistrictGetAll } from '../../../district/interfaces/district-get-all.interface';
+import { DistrictGetAllService } from '../../../district/services/district-get-all.service';
 import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
+import { AnnouncementType as AnnouncementTypeEnum } from '../../enums/announcement-type.enum';
 import { AnnouncementType } from '../../interfaces/announcement-type.interface';
 
 @Component({
@@ -11,7 +15,7 @@ import { AnnouncementType } from '../../interfaces/announcement-type.interface';
   templateUrl: 'announcement-search.component.html',
   styleUrls: ['announcement-search.component.scss']
 })
-export class AnnouncementSearchComponent implements OnInit {
+export class AnnouncementSearchComponent implements OnInit, OnDestroy {
 
   public form!: FormGroup;
 
@@ -21,18 +25,20 @@ export class AnnouncementSearchComponent implements OnInit {
 
   public announcementTypes!: Array<AnnouncementType>;
 
+  public districts!: DistrictGetAll | null;
+
   public cities!: CityGetAll;
 
   private get controlTipo(): AbstractControl | null {
     return this.form.get('tipo');
   }
 
-  private get controlCidade(): AbstractControl | null {
-    return this.form.get('cidade');
+  public get controlCidade(): AbstractControl | null {
+    return this.form.get('cidadeId');
   }
 
   private get controlBairro(): AbstractControl | null {
-    return this.form.get('bairro');
+    return this.form.get('bairroId');
   }
 
   private get controlValorMinimo(): AbstractControl | null {
@@ -63,20 +69,59 @@ export class AnnouncementSearchComponent implements OnInit {
     return this.form.get('vagasGaragem');
   }
 
+  private subscription = new Subscription();
+
+  private possibleQueries!: {
+    tipo: string;
+    cidadeId: string;
+    bairroId: string;
+    valorMinimo: string;
+    valorMaximo: string;
+    areaMinima: string;
+    areaMaxima: string;
+    banheiros: string;
+    dormitorios: string;
+    vagasGaragem: string;
+  }
+
+  public get typeIsComercial(): boolean {
+    return this.controlTipo?.value === AnnouncementTypeEnum.Comercial;
+  }
+
+  public get typeIsTerrenoUrbano(): boolean {
+    return this.controlTipo?.value === AnnouncementTypeEnum.TerrenoUrbano;
+  }
+
+  public get typeIsTerronoRural(): boolean {
+    return this.controlTipo?.value === AnnouncementTypeEnum.TerronoRural;
+  }
+
+  public get typeIsLoteamento(): boolean {
+    return this.controlTipo?.value === AnnouncementTypeEnum.Loteamento;
+  }
+
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly router: Router
-  ) {}
+    private readonly router: Router,
+    private readonly districtGetAllService: DistrictGetAllService,
+    private readonly activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
+
+    this.subscription.add(this.activatedRoute.queryParams.subscribe(queries => this.setValueForm(queries)));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private createForm(): void {
     this.form = this.formBuilder.group({
       tipo: [null],
       cidadeId: [null],
-      bairro: [null],
+      bairroId: [null],
       valorMinimo: [null],
       valorMaximo: [null],
       areaMinima: [null],
@@ -85,6 +130,92 @@ export class AnnouncementSearchComponent implements OnInit {
       dormitorios: [null],
       vagasGaragem: [null]
     });
+
+    this.subscription.add(this.form.get('cidadeId')?.valueChanges.subscribe(value => this.getDistricts(value)));
+  }
+
+  private setValueForm(queries: { [key: string]: string }) {
+    this.possibleQueries = {
+      tipo: queries['tipo'],
+      cidadeId: queries['cidadeId'],
+      bairroId: queries['bairroId'],
+      valorMinimo: queries['valorMinimo'],
+      valorMaximo: queries['valorMaximo'],
+      areaMinima: queries['areaMinima'],
+      areaMaxima: queries['areaMaxima'],
+      banheiros: queries['banheiros'],
+      dormitorios: queries['dormitorios'],
+      vagasGaragem: queries['vagasGaragem']
+    }
+
+    if (this.valueExist(this.possibleQueries.tipo)) {
+      this.controlTipo?.setValue(this.possibleQueries.tipo);
+    }
+    if (this.valueExist(this.possibleQueries.cidadeId)) {
+      this.controlCidade?.setValue(this.possibleQueries.cidadeId);
+    }
+    if (this.valueExist(this.possibleQueries.bairroId)) {
+      this.controlBairro?.setValue(this.possibleQueries.bairroId);
+    }
+    if (this.valueExist(this.possibleQueries.bairroId)) {
+      this.controlBairro?.setValue(this.possibleQueries.bairroId);
+    }
+    if (this.valueExist(this.possibleQueries.valorMinimo)) {
+      this.controlValorMinimo?.setValue(this.possibleQueries.valorMinimo);
+      this.toggleTypeFilter();
+    }
+    if (this.valueExist(this.possibleQueries.valorMaximo)) {
+      this.controlValorMaximo?.setValue(this.possibleQueries.valorMaximo);
+      this.toggleTypeFilter();
+    }
+    if (this.valueExist(this.possibleQueries.areaMinima)) {
+      this.controlAreaMinima?.setValue(this.possibleQueries.areaMinima);
+      this.toggleTypeFilter();
+    }
+    if (this.valueExist(this.possibleQueries.areaMaxima)) {
+      this.controlAreaMaxima?.setValue(this.possibleQueries.areaMaxima);
+      this.toggleTypeFilter();
+    }
+    if (this.valueExist(this.possibleQueries.banheiros)) {
+      this.controlBanheiros?.setValue(this.possibleQueries.banheiros);
+      this.toggleTypeFilter();
+    }
+    if (this.valueExist(this.possibleQueries.dormitorios)) {
+      this.controlDormitorios?.setValue(this.possibleQueries.dormitorios);
+      this.toggleTypeFilter();
+    }
+    if (this.valueExist(this.possibleQueries.vagasGaragem)) {
+      this.controlVagasGaragem?.setValue(this.possibleQueries.vagasGaragem);
+      this.toggleTypeFilter();
+    }
+  }
+
+  private valueExist(value: string): boolean {
+    return value && value !== 'null' ? true : false;
+  }
+
+  private getDistricts(cityId: string): void {
+    this.districtGetAllService.queryFilterRemove();
+    this.districts = null;
+
+    if (!this.valueExist(cityId)) {
+      return;
+    }
+
+    this.districtGetAllService.queryFilterAdd({
+      field: 'cidadeId',
+      value: cityId
+    });
+
+    this.districtGetAllService
+      .getAll()
+      .pipe(take(1))
+      .subscribe((districts) => {
+        this.districts = districts;
+        if (this.possibleQueries.bairroId) {
+          setTimeout(() => this.controlBairro?.setValue(this.possibleQueries.bairroId), 0);
+        }
+      });
   }
 
   public toggleTypeFilter(): void {

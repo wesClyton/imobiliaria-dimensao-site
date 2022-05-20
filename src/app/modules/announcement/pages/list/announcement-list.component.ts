@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../../../core/loading/loading.service';
@@ -11,7 +11,7 @@ import { AnnouncementGetAllService } from '../../services/announcement-get-all.s
   templateUrl: 'announcement-list.component.html',
   styleUrls: ['announcement-list.component.scss']
 })
-export class AnnouncementListComponent implements OnInit {
+export class AnnouncementListComponent implements OnInit, OnDestroy {
 
   public announcements!: Array<Announcement>;
 
@@ -26,8 +26,6 @@ export class AnnouncementListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAnnouncements();
-
     this.subscription.add(
       this.activatedRoute.queryParams.subscribe(filter => {
         if (filter) {
@@ -48,6 +46,10 @@ export class AnnouncementListComponent implements OnInit {
         }
       })
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private getAnnouncements(queryFilter?: Array<QueryFilterParam>): void {
