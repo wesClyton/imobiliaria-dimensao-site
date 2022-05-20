@@ -1,100 +1,100 @@
-<div class="announcement-box-gallery">
-  <ng-template #announcementButtons>
-    <div class="actions">
-      <div class="announcement-buttons">
-        <button
-          *ngIf="announcement.galeria.fotos[0]"
-          class="btn"
-          type="button"
-          [ngClass]="{
-            'btn-outline' : !showPhotos,
-            'btn-primary-4' : !showPhotos,
-            'btn-primary-3' : showPhotos
-          }"
-          (click)="photosClick()">
-          Fotos
-        </button>
-        <button
-          *ngIf="announcement.urlVideo"
-          class="btn"
-          type="button"
-          [ngClass]="{
-            'btn-outline' : !showVideo,
-            'btn-primary-4' : !showVideo,
-            'btn-primary-3' : showVideo
-          }"
-          (click)="videosClick()">
-          Vídeo
-        </button>
-        <button
-          *ngIf="announcement.url360"
-          class="btn"
-          type="button"
-          [ngClass]="{
-            'btn-outline' : !showTour360,
-            'btn-primary-4' : !showTour360,
-            'btn-primary-3' : showTour360
-          }"
-          (click)="tour360Click()">
-          Tour 360°
-        </button>
-        <button
-          *ngIf="announcement.urlMapa"
-          class="btn"
-          type="button"
-          [ngClass]="{
-            'btn-outline' : !showMap,
-            'btn-primary-4' : !showMap,
-            'btn-primary-3' : showMap
-          }"
-          (click)="mapClick()">
-          Mapa
-        </button>
-      </div>
-
-      <div class="copy-link" (click)="copyLink()">
-        <mat-icon>share</mat-icon>
-        <span>compartilhar</span>
-      </div>
+<ng-template #announcementButtons>
+  <div class="actions">
+    <div class="announcement-buttons">
+      <button
+        *ngIf="announcement.galeria.fotos[0]"
+        class="btn"
+        type="button"
+        [ngClass]="{
+          'btn-outline' : !showPhotos,
+          'btn-primary-4' : !showPhotos,
+          'btn-primary-3' : showPhotos
+        }"
+        (click)="photosClick()">
+        Fotos
+      </button>
+      <button
+        *ngIf="announcement.urlVideo"
+        class="btn"
+        type="button"
+        [ngClass]="{
+          'btn-outline' : !showVideo,
+          'btn-primary-4' : !showVideo,
+          'btn-primary-3' : showVideo
+        }"
+        (click)="videosClick()">
+        Vídeo
+      </button>
+      <button
+        *ngIf="announcement.url360"
+        class="btn"
+        type="button"
+        [ngClass]="{
+          'btn-outline' : !showTour360,
+          'btn-primary-4' : !showTour360,
+          'btn-primary-3' : showTour360
+        }"
+        (click)="tour360Click()">
+        Tour 360°
+      </button>
+      <button
+        *ngIf="announcement.urlMapa"
+        class="btn"
+        type="button"
+        [ngClass]="{
+          'btn-outline' : !showMap,
+          'btn-primary-4' : !showMap,
+          'btn-primary-3' : showMap
+        }"
+        (click)="mapClick()">
+        Mapa
+      </button>
     </div>
-  </ng-template>
 
-  <ng-template #youtubeVideo>
-    <app-youtube-iframe [videoId]="announcement.urlVideo"></app-youtube-iframe>
-  </ng-template>
+    <div class="copy-link" (click)="copyLink()">
+      <mat-icon>share</mat-icon>
+      <span>compartilhar</span>
+    </div>
+  </div>
+</ng-template>
 
-  <ng-template #googleMap>
-    <google-map
-      #myGoogleMap
-      width="100%"
-      height="100%"
-      [center]="center"
-      [options]="options">
+<ng-template #youtubeVideo>
+  <app-youtube-iframe [videoId]="announcement.urlVideo"></app-youtube-iframe>
+</ng-template>
 
-      <map-marker
-        *ngIf="marker"
-        #markerElem="mapMarker"
-        [icon]="iconPin"
-        [position]="marker.position"
-        [title]="marker.announcement.titulo">
-      </map-marker>
-    </google-map>
-  </ng-template>
+<ng-template #googleMap>
+  <google-map
+    #myGoogleMap
+    width="100%"
+    height="100%"
+    [center]="center"
+    [options]="options">
 
-  <ng-template #swiper>
-    <swiper *ngIf="showPhotos" [config]="swiperConfig">
-      <ng-template swiperSlide *ngFor="let photo of announcement.galeria?.fotos;">
-        <div class="photo" (click)="openModal()">
-          <img [src]="photo.nome | pathImage: 'anuncios': photo.galeriaId" [alt]="photo.nome">
-        </div>
-      </ng-template>
-    </swiper>
-  </ng-template>
+    <map-marker
+      *ngIf="marker"
+      #markerElem="mapMarker"
+      [icon]="iconPin"
+      [position]="marker.position"
+      [title]="marker.announcement.titulo">
+    </map-marker>
+  </google-map>
+</ng-template>
 
+<ng-template #swiperTemplate>
+  <swiper #swiper *ngIf="showPhotos" [config]="swiperConfig">
+    <ng-template swiperSlide *ngFor="let photo of announcement.galeria?.fotos;">
+      <div class="photo" (click)="openModal()">
+        <img [src]="photo.nome | pathImage: 'anuncios': photo.galeriaId" [alt]="photo.nome">
+      </div>
+    </ng-template>
+  </swiper>
+</ng-template>
+
+<div class="announcement-box-gallery">
   <ng-container *ngIf="announcement">
     <section class="announcement-gallery">
       <div class="box-content">
-        <ng-container [ngTemplateOutlet]="swiper"></ng-container>
+        <ng-container [ngTemplateOutlet]="swiperTemplate"></ng-container>
 
         <div *ngIf="showVideo" class="box-video">
           <ng-container [ngTemplateOutlet]="youtubeVideo"></ng-container>
@@ -114,7 +114,7 @@
       <ng-container [ngTemplateOutlet]="announcementButtons"></ng-container>
 
       <div class="box-content">
-        <ng-container [ngTemplateOutlet]="swiper"></ng-container>
+        <ng-container [ngTemplateOutlet]="swiperTemplate"></ng-container>
 
         <div *ngIf="showVideo" class="box-video">
           <ng-container [ngTemplateOutlet]="youtubeVideo"></ng-container>

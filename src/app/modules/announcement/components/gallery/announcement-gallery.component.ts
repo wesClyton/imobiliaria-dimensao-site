@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MapInfoWindow } from '@angular/google-maps';
+import { take } from 'rxjs';
 import SwiperCore, { Mousewheel, Navigation, SwiperOptions } from 'swiper';
+import { SwiperComponent } from 'swiper/angular';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { CopyClipboard } from '../../../../shared/utils/copy-clipboard';
 import { Marker } from '../../../discover/marker.interface';
@@ -34,7 +36,10 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
     mousewheel: true,
     speed: 500,
     navigation: true,
-    loop: false
+    loop: true,
+    lazy: {
+      loadPrevNext: true
+    }
   };
 
   public showPhotos = true;
@@ -69,6 +74,9 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
   public get link(): string {
     return AnnouncementLinkUtil.create(this.announcement);
   }
+
+  @ViewChild('swiper', { static: false })
+  public swiper!: SwiperComponent;
 
   constructor(
     private readonly notificationService: NotificationService
@@ -122,10 +130,24 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
 
   public modalShow(): void {
     this.isModalOpened = true;
+
+    this.swiperConfig.slidesPerView = 1;
+    let initialSlide = 0;
+    this.swiper.activeSlides.pipe(take(1)).subscribe(slides => {
+      slides.forEach(slide => {
+        if (slide.slideData.isActive) {
+          initialSlide = slide.slideIndex;
+          this.swiperConfig.initialSlide = initialSlide + 1;
+          this.swiper.updateInitSwiper(this.swiperConfig);
+        }
+      });
+    });
   }
 
   public modalHide(): void {
     this.isModalOpened = false;
+    this.swiperConfig.slidesPerView = 'auto';
+    this.swiper.updateInitSwiper(this.swiperConfig);
   }
 
   public openModal(): void {
