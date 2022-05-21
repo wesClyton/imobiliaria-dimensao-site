@@ -1,11 +1,5 @@
 @import 'mixins';
 
-::ng-deep {
-  body, html {
-    background-color: var(--grey-5);
-  }
-}
-
 .heading {
   font-size: 1.25rem;
   color: var(--grey-2);

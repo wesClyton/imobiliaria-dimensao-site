@@ -1,11 +1,5 @@
 @import 'mixins';
 
-::ng-deep {
-  body, html {
-    background-color: var(--grey-5);
-  }
-}
-
 .box {
   display: flex;
   flex-direction: column;

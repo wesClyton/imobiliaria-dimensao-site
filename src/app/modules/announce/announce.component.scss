@@ -1,15 +1,9 @@
 @import 'mixins';
 
-::ng-deep {
-  body, html {
-    background-color: var(--grey-5);
-  }
-}
-
 .box {
   margin: 0 auto;
   padding: 3rem 1rem;
-  
+
   @include mobile-first(md) {
     max-width: 640px;
   }
@@ -58,7 +52,7 @@ h1 {
     margin: 80px auto 0;
     gap: 6rem;
   }
-  
+
 }
 
 .box-form {
@@ -113,7 +107,7 @@ h1 {
       display: flex;
       margin-bottom: 40px;
       align-items: center;
-      
+
       span {
         display: inline-block;
         min-width: 40px;
