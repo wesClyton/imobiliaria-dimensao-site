@@ -8,12 +8,13 @@ import { Component, Input } from '@angular/core';
 export class ButtonWhatsappComponent {
 
   @Input() numeroWhats: any;
+  @Input() messageWhats: any;
 
   constructor() { }
 
   openWhatsapp() {
     this.numeroWhats = this.numeroWhats.replace(/\D/g, '');
-    window.open(`https://api.whatsapp.com/send?phone=+55${this.numeroWhats}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=${this.numeroWhats}&text=${this.messageWhats}`, '_blank')
   }
 
 }
