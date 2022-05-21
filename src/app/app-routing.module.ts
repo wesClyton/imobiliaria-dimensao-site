@@ -33,6 +33,18 @@ const routes: Routes = [
     loadChildren: () => import('./modules/discover/discover.module').then(m => m.DiscoverModule)
   },
   {
+    path: 'termos-de-uso',
+    loadChildren: () => import('./modules/terms-of-use/terms-of-use.module').then(m => m.TermsOfUseModule)
+  },
+  {
+    path: 'politica-de-privacidade',
+    loadChildren: () => import('./modules/privacy-policy/privacy-policy.module').then(m => m.PrivacyPolicyModule)
+  },
+  {
+    path: PAGES_CONFIG.path,
+    loadChildren: () => import('./pages/page.module').then(m => m.PageModule)
+  },
+  {
     path: '**',
     redirectTo: PAGES_CONFIG.path,
     pathMatch: 'full'
