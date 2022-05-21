@@ -38,7 +38,7 @@
         Tour 360°
       </button>
       <button
-        *ngIf="announcement.urlMapa"
+        *ngIf="announcement.latitude && announcement.longitude"
         class="btn"
         type="button"
         [ngClass]="{
@@ -90,8 +90,8 @@
   </swiper>
 </ng-template>
 
-<div class="announcement-box-gallery">
-  <ng-container *ngIf="announcement">
+<div *ngIf="announcement" class="announcement-box-gallery">
+  <ng-container>
     <section class="announcement-gallery">
       <div class="box-content">
         <ng-container [ngTemplateOutlet]="swiperTemplate"></ng-container>

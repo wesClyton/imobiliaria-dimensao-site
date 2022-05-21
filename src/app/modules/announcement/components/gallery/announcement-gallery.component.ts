@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MapInfoWindow } from '@angular/google-maps';
 import { take } from 'rxjs';
 import SwiperCore, { Mousewheel, Navigation, SwiperOptions } from 'swiper';
@@ -16,7 +16,7 @@ SwiperCore.use([Mousewheel, Navigation]);
   styleUrls: ['announcement-gallery.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AnnouncementGalleryComponent implements OnChanges {
+export class AnnouncementGalleryComponent implements OnInit, OnChanges {
 
   @Input()
   public announcement!: Announcement;
@@ -41,7 +41,7 @@ export class AnnouncementGalleryComponent implements OnChanges {
     }
   };
 
-  public showPhotos = true;
+  public showPhotos = false;
 
   public showVideo = false;
 
@@ -77,15 +77,49 @@ export class AnnouncementGalleryComponent implements OnChanges {
   @ViewChild('swiper', { static: false })
   public swiper!: SwiperComponent;
 
+  private get hasPhotos(): boolean {
+    return this.announcement?.galeria?.fotos?.length > 0;
+  }
+
+  private get hasVideo(): boolean {
+    return this.announcement.urlVideo ? true : false;
+  }
+
+  private get hasTour360(): boolean {
+    return this.announcement.url360 ? true : false;
+  }
+
   constructor(
     private readonly notificationService: NotificationService
   ) { }
+
+  ngOnInit(): void {
+    this.setContentGalery();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['announcement'] && !changes['announcement'].firstChange) {
       this.resetButtons();
       this.showPhotos = true;
     }
+  }
+
+  private setContentGalery(): void {
+    this.resetButtons();
+
+    if (this.hasPhotos) {
+      this.showPhotos = true;
+      return;
+    }
+    if (this.hasVideo) {
+      this.showVideo = true;
+      return;
+    }
+    if (this.hasTour360) {
+      this.showTour360 = true;
+      return;
+    }
+    this.showMap = true;
   }
 
   private initMap(): void {

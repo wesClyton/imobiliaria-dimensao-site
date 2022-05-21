@@ -38,7 +38,7 @@
           </div>
         </div>
 
-        <div class="about">
+        <div *ngIf="announcement.sobre" class="about">
           <h2 class="heading">Sobre o imóvel</h2>
           <p>{{ announcement.sobre }}</p>
         </div>
