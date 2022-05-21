@@ -1,4 +1,6 @@
-<header [ngClass]="{
+<header
+  id="main-header"
+  [ngClass]="{
     'menu-active' : menuActive,
     'sub-menu-active': subMenuActive,
     'background-active': !isHome
@@ -14,7 +16,8 @@
       <div class="menu-main">
         <ng-container *ngIf="isHome">
           <li *ngFor="let banner of banners;">
-            <a [routerLink]="banner.link" (click)="showMenu()">{{ banner.nome }}</a>
+            <a *ngIf="!StringUtil.isUrl(banner.link)" [routerLink]="banner.link" (click)="showMenu()">{{ banner.nome }}</a>
+            <a *ngIf="StringUtil.isUrl(banner.link)" target="_blank" [href]="banner.link" (click)="showMenu()">{{ banner.nome }}</a>
           </li>
         </ng-container>
 

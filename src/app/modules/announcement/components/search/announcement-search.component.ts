@@ -135,58 +135,78 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
   }
 
   private setValueForm(queries: { [key: string]: string }) {
-    this.possibleQueries = {
-      tipo: queries['tipo'],
-      cidadeId: queries['cidadeId'],
-      bairroId: queries['bairroId'],
-      valorMinimo: queries['valorMinimo'],
-      valorMaximo: queries['valorMaximo'],
-      areaMinima: queries['areaMinima'],
-      areaMaxima: queries['areaMaxima'],
-      banheiros: queries['banheiros'],
-      dormitorios: queries['dormitorios'],
-      vagasGaragem: queries['vagasGaragem']
+    if (Object.keys(queries).length) {
+      this.possibleQueries = {
+        tipo: queries['tipo'],
+        cidadeId: queries['cidadeId'],
+        bairroId: queries['bairroId'],
+        valorMinimo: queries['valorMinimo'],
+        valorMaximo: queries['valorMaximo'],
+        areaMinima: queries['areaMinima'],
+        areaMaxima: queries['areaMaxima'],
+        banheiros: queries['banheiros'],
+        dormitorios: queries['dormitorios'],
+        vagasGaragem: queries['vagasGaragem']
+      }
     }
 
-    if (this.valueExist(this.possibleQueries.tipo)) {
-      this.controlTipo?.setValue(this.possibleQueries.tipo);
+    const type: AnnouncementTypeEnum = this.activatedRoute.snapshot.params['type'];
+    if (type) {
+      this.possibleQueries = {
+        tipo: type,
+        cidadeId: queries['cidadeId'],
+        bairroId: queries['bairroId'],
+        valorMinimo: queries['valorMinimo'],
+        valorMaximo: queries['valorMaximo'],
+        areaMinima: queries['areaMinima'],
+        areaMaxima: queries['areaMaxima'],
+        banheiros: queries['banheiros'],
+        dormitorios: queries['dormitorios'],
+        vagasGaragem: queries['vagasGaragem']
+      }
     }
-    if (this.valueExist(this.possibleQueries.cidadeId)) {
-      this.controlCidade?.setValue(this.possibleQueries.cidadeId);
-    }
-    if (this.valueExist(this.possibleQueries.bairroId)) {
-      this.controlBairro?.setValue(this.possibleQueries.bairroId);
-    }
-    if (this.valueExist(this.possibleQueries.bairroId)) {
-      this.controlBairro?.setValue(this.possibleQueries.bairroId);
-    }
-    if (this.valueExist(this.possibleQueries.valorMinimo)) {
-      this.controlValorMinimo?.setValue(this.possibleQueries.valorMinimo);
-      this.toggleTypeFilter();
-    }
-    if (this.valueExist(this.possibleQueries.valorMaximo)) {
-      this.controlValorMaximo?.setValue(this.possibleQueries.valorMaximo);
-      this.toggleTypeFilter();
-    }
-    if (this.valueExist(this.possibleQueries.areaMinima)) {
-      this.controlAreaMinima?.setValue(this.possibleQueries.areaMinima);
-      this.toggleTypeFilter();
-    }
-    if (this.valueExist(this.possibleQueries.areaMaxima)) {
-      this.controlAreaMaxima?.setValue(this.possibleQueries.areaMaxima);
-      this.toggleTypeFilter();
-    }
-    if (this.valueExist(this.possibleQueries.banheiros)) {
-      this.controlBanheiros?.setValue(this.possibleQueries.banheiros);
-      this.toggleTypeFilter();
-    }
-    if (this.valueExist(this.possibleQueries.dormitorios)) {
-      this.controlDormitorios?.setValue(this.possibleQueries.dormitorios);
-      this.toggleTypeFilter();
-    }
-    if (this.valueExist(this.possibleQueries.vagasGaragem)) {
-      this.controlVagasGaragem?.setValue(this.possibleQueries.vagasGaragem);
-      this.toggleTypeFilter();
+
+    if (this.possibleQueries) {
+      if (this.valueExist(this.possibleQueries.tipo)) {
+        this.controlTipo?.setValue(this.possibleQueries.tipo);
+      }
+      if (this.valueExist(this.possibleQueries.cidadeId)) {
+        this.controlCidade?.setValue(this.possibleQueries.cidadeId);
+      }
+      if (this.valueExist(this.possibleQueries.bairroId)) {
+        this.controlBairro?.setValue(this.possibleQueries.bairroId);
+      }
+      if (this.valueExist(this.possibleQueries.bairroId)) {
+        this.controlBairro?.setValue(this.possibleQueries.bairroId);
+      }
+      if (this.valueExist(this.possibleQueries.valorMinimo)) {
+        this.controlValorMinimo?.setValue(this.possibleQueries.valorMinimo);
+        this.toggleTypeFilter();
+      }
+      if (this.valueExist(this.possibleQueries.valorMaximo)) {
+        this.controlValorMaximo?.setValue(this.possibleQueries.valorMaximo);
+        this.toggleTypeFilter();
+      }
+      if (this.valueExist(this.possibleQueries.areaMinima)) {
+        this.controlAreaMinima?.setValue(this.possibleQueries.areaMinima);
+        this.toggleTypeFilter();
+      }
+      if (this.valueExist(this.possibleQueries.areaMaxima)) {
+        this.controlAreaMaxima?.setValue(this.possibleQueries.areaMaxima);
+        this.toggleTypeFilter();
+      }
+      if (this.valueExist(this.possibleQueries.banheiros)) {
+        this.controlBanheiros?.setValue(this.possibleQueries.banheiros);
+        this.toggleTypeFilter();
+      }
+      if (this.valueExist(this.possibleQueries.dormitorios)) {
+        this.controlDormitorios?.setValue(this.possibleQueries.dormitorios);
+        this.toggleTypeFilter();
+      }
+      if (this.valueExist(this.possibleQueries.vagasGaragem)) {
+        this.controlVagasGaragem?.setValue(this.possibleQueries.vagasGaragem);
+        this.toggleTypeFilter();
+      }
     }
   }
 

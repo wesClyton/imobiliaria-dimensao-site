@@ -39,4 +39,8 @@ export class StringUtil {
     return parseFloat(value.replace(/\./g, '').replace(',', '.').trim());
   }
 
+  public static isUrl(value: string): boolean {
+    return value.startsWith('http') || value.startsWith('www');
+  }
+
 }

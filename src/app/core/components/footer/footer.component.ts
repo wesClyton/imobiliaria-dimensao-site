@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
 import { APP_CONFIG } from '../../../app.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
 import { BROKER_CONFIG } from '../../../modules/broker/broker.config';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
+import { StringUtil } from '../../../shared/utils/string.util';
 import { LoadingService } from '../../loading/loading.service';
 
 @Component({
@@ -29,8 +29,11 @@ export class FooterComponent implements OnInit {
     return BROKER_CONFIG;
   }
 
+  public get StringUtil(): typeof StringUtil {
+    return StringUtil;
+  }
+
   constructor(
-    private readonly router: Router,
     private readonly bannerGetAllService: BannerGetAllService,
     private readonly loadingService: LoadingService
   ) { }

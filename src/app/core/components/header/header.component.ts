@@ -6,6 +6,7 @@ import { APP_CONFIG } from '../../../app.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
+import { StringUtil } from '../../../shared/utils/string.util';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +33,10 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
   public linksFilter!: QueryList<ElementRef>;
 
   private subscription = new Subscription();
+
+  public get StringUtil(): typeof StringUtil {
+    return StringUtil;
+  }
 
   constructor(
     private readonly router: Router,

@@ -1,4 +1,4 @@
-<footer>
+<footer id="main-footer">
   <div class="links">
     <div class="container">
       <nav class="nav">
@@ -14,7 +14,8 @@
         <h6>Imóveis</h6>
         <ul>
           <li *ngFor="let banner of banners;">
-            <a [routerLink]="banner.link">{{ banner.nome }}</a>
+            <a *ngIf="!StringUtil.isUrl(banner.link)" [routerLink]="banner.link">{{ banner.nome }}</a>
+            <a *ngIf="StringUtil.isUrl(banner.link)" target="_blank" [href]="banner.link">{{ banner.nome }}</a>
           </li>
         </ul>
       </nav>

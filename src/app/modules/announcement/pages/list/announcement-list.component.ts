@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { QueryFilterParam } from '../../../../shared/http/query-filter/query-filter.interface';
+import { AnnouncementType } from '../../enums/announcement-type.enum';
 import { Announcement } from '../../interfaces/announcement.interface';
 import { AnnouncementGetAllService } from '../../services/announcement-get-all.service';
 
@@ -28,22 +29,7 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.activatedRoute.queryParams.subscribe(filter => {
-        if (filter) {
-          this.loadingService.show();
-          let queryFilter = new Array<QueryFilterParam>();
-
-          const fieldsParseNumber = ['valorMinimo', 'valorMaximo', 'areaMinima', 'areaMaxima', 'banheiros', 'dormitorios', 'vagasGaragem'];
-
-          Object.keys(filter).forEach(field => {
-            let value = filter[field];
-            if (fieldsParseNumber.includes(field)) {
-              value = parseFloat(value)
-            }
-            queryFilter.push({ field, value });
-          });
-
-          this.getAnnouncements(queryFilter);
-        }
+        Object.keys(filter).length ? this.getAnouncementsByFilter(filter) : this.getAnnouncementByRouteType();
       })
     );
   }
@@ -52,7 +38,29 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private getAnnouncements(queryFilter?: Array<QueryFilterParam>): void {
+  private getAnouncementsByFilter(filter: any): void {
+    this.loadingService.show();
+    let queryFilter = new Array<QueryFilterParam>();
+
+    const fieldsParseNumber = ['valorMinimo', 'valorMaximo', 'areaMinima', 'areaMaxima', 'banheiros', 'dormitorios', 'vagasGaragem'];
+
+    Object.keys(filter).forEach(field => {
+      let value = filter[field];
+      if (fieldsParseNumber.includes(field)) {
+        value = parseFloat(value)
+      }
+      queryFilter.push({ field, value });
+    });
+
+    this.getAnnouncements(queryFilter);
+  }
+
+  private getAnnouncementByRouteType(): void {
+    const type: AnnouncementType = this.activatedRoute.snapshot.params['type'];
+    this.getAnnouncements(null, type);
+  }
+
+  private getAnnouncements(queryFilter?: Array<QueryFilterParam> | null, type?: AnnouncementType): void {
     this.announcementGetAllService.queryFilterRemove();
 
     this.announcementGetAllService.queryFilterAdd({
@@ -63,6 +71,14 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
     if (queryFilter) {
       this.announcementGetAllService.queryFilterAdd(queryFilter);
     }
+
+    if (type) {
+      this.announcementGetAllService.queryFilterAdd({
+        field: 'tipo',
+        value: type
+      });
+    }
+
     this.announcementGetAllService
       .getAll()
       .pipe(

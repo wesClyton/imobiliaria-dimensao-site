@@ -97,11 +97,14 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
   @HostListener('window:scroll', ['$event'])
   private onScroll(event: any): void {
+    this.renderer.removeStyle(this.boxForm.nativeElement, 'transform');
     if (window.screen.availWidth >= 991.98) {
-      const scrollTop = event.srcElement.scrollingElement.scrollTop + 100;
-      this.renderer.removeStyle(this.boxForm.nativeElement, 'transform');
-      if (this.grid1TopInitial && scrollTop >= this.grid1TopInitial) {
-        this.renderer.setStyle(this.boxForm.nativeElement, 'transform', `translateY(${scrollTop - this.grid1TopInitial}px)`);
+      const heightHeader = (document.getElementById('main-header') as HTMLElement).clientHeight;
+      const scrollTop = event.srcElement.scrollingElement.scrollTop;
+      const scrollTopWithHeightHeader = scrollTop + heightHeader;
+
+      if (this.grid1TopInitial && (scrollTopWithHeightHeader >= this.grid1TopInitial)) {
+        this.renderer.setStyle(this.boxForm.nativeElement, 'transform', `translateY(${scrollTopWithHeightHeader - this.grid1TopInitial}px)`);
       }
     }
   }
