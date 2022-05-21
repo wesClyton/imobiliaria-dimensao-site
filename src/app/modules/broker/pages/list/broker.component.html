@@ -41,7 +41,7 @@
               <a *ngIf="broker?.facebook" target="_blank" [href]="broker?.facebook"><i class="icon-facebook-rounded"></i></a>
               <a *ngIf="broker?.instagram" target="_blank" [href]="broker?.instagram"><i class="icon-instagram-rounded"></i></a>
               <a *ngIf="broker?.linkedin" target="_blank" [href]="broker?.linkedin"><i class="icon-linkedin-rounded"></i></a>
-              <a *ngIf="broker?.email" target="_blank" [href]="broker?.email"><i class="icon-mail-rounded"></i></a>
+              <a *ngIf="broker?.email" target="_blank" href="mailto:{{broker?.email}}"><i class="icon-mail-rounded"></i></a>
             </div>
 
             <app-button-whatsapp [numeroWhats]="broker?.whatsapp" messageWhats="Olá, estou entrando em contato através do site."></app-button-whatsapp>

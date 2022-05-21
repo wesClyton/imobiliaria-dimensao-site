@@ -13,7 +13,7 @@ export class ButtonWhatsappComponent {
   constructor() { }
 
   openWhatsapp() {
-    this.numeroWhats = this.numeroWhats.replace(/\D/g, '');
+    this.numeroWhats = '55' + this.numeroWhats.replace(/\D/g, '');
     window.open(`https://api.whatsapp.com/send?phone=${this.numeroWhats}&text=${this.messageWhats}`, '_blank')
   }
 
