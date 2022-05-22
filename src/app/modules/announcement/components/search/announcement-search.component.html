@@ -37,69 +37,71 @@
     </div>
   </div>
 
-  <div *ngIf="showFiltersAdvanced && !typeIsLoteamento" class="box-2">
-    <div class="item">
-      <div class="input-field">
-        <label>Valor mínimo</label>
-        <input ngDefaultControl appCurrencyBr class="input" type="text" formControlName="valorMinimo" placeholder="Informe o Valor mínimo">
+  <ng-container *ngIf="showFiltersAdvanced">
+    <div *ngIf="!typeIsLoteamento" class="box-2">
+      <div class="item">
+        <div class="input-field">
+          <label>Valor mínimo</label>
+          <input ngDefaultControl appCurrencyBr class="input" type="text" formControlName="valorMinimo" placeholder="Informe o Valor mínimo">
+        </div>
+        <div class="input-field">
+          <label>Valor máximo</label>
+          <input ngDefaultControl appCurrencyBr class="input" type="text" formControlName="valorMaximo" placeholder="Informe o Valor máximo">
+        </div>
       </div>
-      <div class="input-field">
-        <label>Valor máximo</label>
-        <input ngDefaultControl appCurrencyBr class="input" type="text" formControlName="valorMaximo" placeholder="Informe o Valor máximo">
-      </div>
-    </div>
-    <div class="item">
-      <div class="input-field">
-        <label>Área mínima (m²)</label>
-        <input ngDefaultControl appM2 class="input" type="text" formControlName="areaMinima" placeholder="Informe a Área mínima">
-      </div>
-      <div class="input-field">
-        <label>Área máxima (m²)</label>
-        <input ngDefaultControl appM2 class="input" type="text" formControlName="areaMaxima" placeholder="Informe a Área máxima">
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="showFiltersAdvanced && !typeIsTerrenoUrbano && !typeIsTerronoRural && !typeIsLoteamento" class="box-3">
-    <div *ngIf="!typeIsComercial" class="input-field">
-      <label>Banheiros</label>
-      <div class="quantities-filter">
-        <div
-          class="item"
-          *ngFor="let quantitie of quantities"
-          [ngClass]="{ 'active' : controlBanheiros?.value === quantitie }">
-          <label for="banheiros-{{ quantitie }}">{{ quantitie }}</label>
-          <input type="radio" formControlName="banheiros" id="banheiros-{{ quantitie }}" [value]="quantitie">
+      <div class="item">
+        <div class="input-field">
+          <label>Área mínima (m²)</label>
+          <input ngDefaultControl appM2 class="input" type="text" formControlName="areaMinima" placeholder="Informe a Área mínima">
+        </div>
+        <div class="input-field">
+          <label>Área máxima (m²)</label>
+          <input ngDefaultControl appM2 class="input" type="text" formControlName="areaMaxima" placeholder="Informe a Área máxima">
         </div>
       </div>
     </div>
 
-    <div *ngIf="!typeIsComercial" class="input-field">
-      <label>Dormitórios</label>
-      <div class="quantities-filter">
-        <div
-          class="item"
-          *ngFor="let quantitie of quantities"
-          [ngClass]="{ 'active' : controlDormitorios?.value === quantitie }">
-          <label for="dormitorios-{{ quantitie }}">{{ quantitie }}</label>
-          <input type="radio" formControlName="dormitorios" id="dormitorios-{{ quantitie }}" [value]="quantitie">
+    <div *ngIf="!typeIsTerrenoUrbano && !typeIsTerronoRural && !typeIsLoteamento" class="box-3">
+      <div *ngIf="!typeIsComercial" class="input-field">
+        <label>Banheiros</label>
+        <div class="quantities-filter">
+          <div
+            class="item"
+            *ngFor="let quantitie of quantities"
+            [ngClass]="{ 'active' : controlBanheiros?.value === quantitie }">
+            <label for="banheiros-{{ quantitie }}">{{ quantitie }}</label>
+            <input type="radio" formControlName="banheiros" id="banheiros-{{ quantitie }}" [value]="quantitie">
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="input-field">
-      <label>Vagas de garagem</label>
-      <div class="quantities-filter">
-        <div
-          class="item"
-          *ngFor="let quantitie of quantities"
-          [ngClass]="{ 'active' : controlVagasGaragem?.value === quantitie }">
-          <label for="vagas-{{ quantitie }}">{{ quantitie }}</label>
-          <input type="radio" formControlName="vagasGaragem" id="vagas-{{ quantitie }}" [value]="quantitie">
+      <div *ngIf="!typeIsComercial" class="input-field">
+        <label>Dormitórios</label>
+        <div class="quantities-filter">
+          <div
+            class="item"
+            *ngFor="let quantitie of quantities"
+            [ngClass]="{ 'active' : controlDormitorios?.value === quantitie }">
+            <label for="dormitorios-{{ quantitie }}">{{ quantitie }}</label>
+            <input type="radio" formControlName="dormitorios" id="dormitorios-{{ quantitie }}" [value]="quantitie">
+          </div>
+        </div>
+      </div>
+
+      <div class="input-field">
+        <label>Vagas de garagem</label>
+        <div class="quantities-filter">
+          <div
+            class="item"
+            *ngFor="let quantitie of quantities"
+            [ngClass]="{ 'active' : controlVagasGaragem?.value === quantitie }">
+            <label for="vagas-{{ quantitie }}">{{ quantitie }}</label>
+            <input type="radio" formControlName="vagasGaragem" id="vagas-{{ quantitie }}" [value]="quantitie">
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
   <div class="buttons">
     <button *ngIf="!typeIsLoteamento" class="btn btn-sm btn-primary-4 btn-outline" type="button" (click)="toggleTypeFilter()">

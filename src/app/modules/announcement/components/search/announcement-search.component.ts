@@ -181,31 +181,31 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       }
       if (this.valueExist(this.possibleQueries.valorMinimo)) {
         this.controlValorMinimo?.setValue(this.possibleQueries.valorMinimo);
-        this.toggleTypeFilter();
+        this.showFiltersAdvanced = true;
       }
       if (this.valueExist(this.possibleQueries.valorMaximo)) {
         this.controlValorMaximo?.setValue(this.possibleQueries.valorMaximo);
-        this.toggleTypeFilter();
+        this.showFiltersAdvanced = true;
       }
       if (this.valueExist(this.possibleQueries.areaMinima)) {
         this.controlAreaMinima?.setValue(this.possibleQueries.areaMinima);
-        this.toggleTypeFilter();
+        this.showFiltersAdvanced = true;
       }
       if (this.valueExist(this.possibleQueries.areaMaxima)) {
         this.controlAreaMaxima?.setValue(this.possibleQueries.areaMaxima);
-        this.toggleTypeFilter();
+        this.showFiltersAdvanced = true;
       }
       if (this.valueExist(this.possibleQueries.banheiros)) {
         this.controlBanheiros?.setValue(this.possibleQueries.banheiros);
-        this.toggleTypeFilter();
+        this.showFiltersAdvanced = true;
       }
       if (this.valueExist(this.possibleQueries.dormitorios)) {
         this.controlDormitorios?.setValue(this.possibleQueries.dormitorios);
-        this.toggleTypeFilter();
+        this.showFiltersAdvanced = true;
       }
       if (this.valueExist(this.possibleQueries.vagasGaragem)) {
         this.controlVagasGaragem?.setValue(this.possibleQueries.vagasGaragem);
-        this.toggleTypeFilter();
+        this.showFiltersAdvanced = true;
       }
     }
   }

@@ -149,7 +149,7 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
         if (slide.slideData.isActive) {
           initialSlide = slide.slideIndex;
           this.swiperConfig.initialSlide = initialSlide + 1;
-          this.swiper.updateInitSwiper(this.swiperConfig);
+          this.swiper?.updateInitSwiper(this.swiperConfig);
         }
       });
     });
@@ -158,7 +158,7 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
   public modalHide(): void {
     this.isModalOpened = false;
     this.swiperConfig.slidesPerView = 'auto';
-    this.swiper.updateInitSwiper(this.swiperConfig);
+    this.swiper?.updateInitSwiper(this.swiperConfig);
   }
 
   public openModal(): void {
