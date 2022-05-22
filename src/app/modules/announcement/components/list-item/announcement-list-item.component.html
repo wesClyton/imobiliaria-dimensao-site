@@ -5,25 +5,29 @@
   <div class="infos">
     <div>
       <small class="type">{{ announcement.tipo | announcementType }}</small>
-      <h2 class="title">{{ announcement.titulo }}</h2>
+      <!-- <h2 class="title">{{ announcement.titulo }}</h2> -->
+      <strong class="amount">{{ announcement.valor | currencyBr }}</strong>
       <p class="address">{{ announcement.endereco }} - {{ announcement.bairro.nome }} - {{ announcement.bairro.cidade | cityState }}</p>
+      <p *ngIf="announcement.sobre" class="sobre">{{ announcement.sobre | resumeText : 100 }}</p>
 
       <div class="numbers">
         <div *ngIf="announcement.areaTotal">
-          <i class="icon-metragem"></i> {{ announcement.areaTotal | m2: true }}
+          <i class="icon-metragem"></i> 
+          <span>{{ announcement.areaTotal | m2: true }}</span>
         </div>
         <div *ngIf="announcement.dormitorios">
-          <i class="icon-dormitorios"></i> {{ announcement.dormitorios }}
+          <i class="icon-dormitorios"></i>
+          <span>{{ announcement.dormitorios }}</span>
         </div>
         <div *ngIf="announcement.banheiros">
-          <i class="icon-banheiros"></i> {{ announcement.banheiros }}
+          <i class="icon-banheiros"></i>
+          <span>{{ announcement.banheiros }}</span>
         </div>
         <div *ngIf="announcement.vagasGaragem">
-          <i class="icon-garagem"></i> {{ announcement.vagasGaragem }}
+          <i class="icon-garagem"></i>
+          <span>{{ announcement.vagasGaragem }}</span>
         </div>
       </div>
     </div>
-
-    <strong class="amount">{{ announcement.valor | currencyBr }}</strong>
   </div>
 </a>

@@ -41,4 +41,4 @@ import { AnnouncementSearchComponent } from './search/announcement-search.compon
     AnnouncementGalleryComponent
   ]
 })
-export class AnnouncementComponentModule {}
+export class AnnouncementComponentModule { }

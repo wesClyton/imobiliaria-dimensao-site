@@ -5,6 +5,7 @@ import { CurrencyBrPipe } from './currency-br/currency-br.pipe';
 import { M2Pipe } from './m2/m2.pipe';
 import { PathImagePipe } from './path-image/path-image.pipe';
 import { PhonePipe } from './phone/phone.pipe';
+import { ResumeTextPipe } from './resume-text/resume-text.pipe';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { PhonePipe } from './phone/phone.pipe';
     M2Pipe,
     CurrencyBrPipe,
     PathImagePipe,
-    CityStatePipe
+    CityStatePipe,
+    ResumeTextPipe
   ],
   imports: [NgxMaskModule.forRoot()],
   exports: [
@@ -20,7 +22,8 @@ import { PhonePipe } from './phone/phone.pipe';
     M2Pipe,
     CurrencyBrPipe,
     PathImagePipe,
-    CityStatePipe
+    CityStatePipe,
+    ResumeTextPipe
   ]
 })
-export class PipesModule {}
+export class PipesModule { }

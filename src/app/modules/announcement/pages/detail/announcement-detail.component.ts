@@ -17,6 +17,8 @@ import { AnnouncementGetByIdService } from '../../services/announcement-get-by-i
 })
 export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
+  public showModal = false;
+
   public announcement!: Announcement;
 
   private announcementId!: string;
@@ -189,6 +191,14 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
   private setInitialGrid1Top(): void {
     setTimeout(() => this.grid1TopInitial = this.grid1.nativeElement.offsetTop, 500);
+  }
+
+  public openModal(): void {
+    this.showModal = true;
+  }
+
+  public closeModal(): void {
+    this.showModal = false;
   }
 
 }

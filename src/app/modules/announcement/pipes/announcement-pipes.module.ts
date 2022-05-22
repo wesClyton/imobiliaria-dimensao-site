@@ -3,10 +3,10 @@ import { AnnouncementTypePipe } from './announcement-type/announcement-type.pipe
 
 @NgModule({
   declarations: [
-    AnnouncementTypePipe
+    AnnouncementTypePipe,
   ],
   exports: [
     AnnouncementTypePipe
   ]
 })
-export class AnnouncementPipesModule {}
+export class AnnouncementPipesModule { }

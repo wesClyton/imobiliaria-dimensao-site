@@ -34,13 +34,84 @@
   }
 }
 
+.display-modal {
+  display: block!important;
+}
+
 .box-2 {
-  flex: 1;
-  position: relative;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 90;
+
+  @include mobile-first(md) {
+    display: block;
+    flex: 1;
+    position: relative;
+    top: auto;
+    left: auto;
+    height: inherit;
+    width: inherit;
+    background: none;
+    z-index: 1;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 98;
+
+    @include mobile-first(md) {
+      display: none;
+    }
+  }
 
   .box-form {
-    position: relative;
-    transition: 0.25s all;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 360px;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+    z-index: 99;
+
+    @include mobile-first(md) {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      width: auto;
+      max-width: none;
+      transition: 0.25s all;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: 0.25s all;
+
+      @include mobile-first(md) {
+        display: none;
+      }
+    }
 
     .announcement-code {
       text-align: center;
@@ -65,6 +136,15 @@
   }
   .amount {
     font-size: 0.75rem;
+  }
+}
+
+.interesse {
+  text-align: center;
+  margin: 1rem 0;
+
+  @include mobile-first(md) {
+    display: none;
   }
 }
 
@@ -116,12 +196,23 @@
     }
 
     strong {
-      font-size: 0.75rem;
+      font-size: 0.625rem;
+
+      @include mobile-first(md) {
+        font-size: 0.75rem;
+      }
     }
 
     p {
+      font-size: 0.625rem;
+      line-height: 0.625rem;
       padding-bottom: 0;
       transform: translateY(2px);
+
+      @include mobile-first(md) {
+        font-size: 0.75rem;
+        line-height: 0.75rem;
+      }
     }
   }
 }

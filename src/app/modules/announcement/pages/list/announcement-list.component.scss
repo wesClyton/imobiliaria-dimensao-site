@@ -2,6 +2,24 @@
 
 .page {
   padding: 2rem 1rem;
+  margin: 0 auto;
+  max-width: 360px;
+
+  @include mobile-first(md) {
+    max-width: 760px;
+  }
+
+  @include mobile-first(lg) {
+    max-width: 992px;
+  }
+
+  @include mobile-first(xl) {
+    max-width: 1170px;
+  }
+
+  @include mobile-first(xxl) {
+    max-width: 1440px;
+  }
 }
 
 h1 {
@@ -16,7 +34,11 @@ h1 {
 .list {
   margin-top: 2rem;
   margin: 0 auto;
-  max-width: 620px;
+  max-width: 360px;
+
+  @include mobile-first(md) {
+    max-width: 720px;
+  }
 
   @include mobile-first(lg) {
     max-width: 950px;
@@ -46,8 +68,21 @@ h1 {
     display: flex;
 
     @include mobile-first(md) {
+      max-width: 340px;
+    }
+
+    @include mobile-first(lg) {
       max-width: 290px;
     }
+
+    @include mobile-first(xl) {
+      max-width: 330px;
+    }
+
+    @include mobile-first(xxl) {
+      max-width: 290px;
+    }
+
   }
 }
 

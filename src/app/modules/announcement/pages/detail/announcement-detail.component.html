@@ -63,6 +63,10 @@
           </div>
         </div>
       </div>
+      
+      <div class="interesse">
+        <button class="btn btn-sm btn-primary-3" (click)="openModal()">Tenho Interesse</button>
+      </div>
 
       <div *ngIf="announcements?.length" class="more">
         <h2 class="heading">Você também pode se interessar</h2>
@@ -74,8 +78,10 @@
       </div>
     </div>
 
-    <div class="box-2">
+    <div class="box-2" [ngClass]="{'display-modal': showModal }">
+      <div class="overlay" (click)="closeModal()"></div>
       <div #boxForm class="box-form">
+        <button class="close-button icon-close" (click)="closeModal()"></button>
         <p>Para saber mais sobre esse imóvel entre agora em contato atravé do formulário abaixo.</p>
         <form class="form" [formGroup]="form" (ngSubmit)="submit()">
           <div class="input-field">

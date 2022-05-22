@@ -2,6 +2,7 @@ $sm: 575.98px;
 $md: 767.98px;
 $lg: 991.98px;
 $xl: 1169.98px;
+$xxl: 1439.98px;
 
 @mixin mobile-first($brekpoint) {
   @if($brekpoint == sm) {
@@ -24,6 +25,12 @@ $xl: 1169.98px;
 
   @if($brekpoint == xl) {
     @media screen and (min-width: $xl) {
+      @content
+    }
+  };
+
+  @if($brekpoint == xxl) {
+    @media screen and (min-width: $xxl) {
       @content
     }
   };
