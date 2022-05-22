@@ -19,7 +19,7 @@ export class FooterComponent implements OnInit {
     return APP_CONFIG;
   }
 
-  public get anoCorrente(): number {
+  public get currentYear(): number {
     return new Date().getFullYear();
   }
 

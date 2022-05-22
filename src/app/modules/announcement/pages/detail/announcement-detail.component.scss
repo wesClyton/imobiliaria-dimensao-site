@@ -35,7 +35,7 @@
 }
 
 .display-modal {
-  display: block!important;
+  display: block !important;
 }
 
 .box-2 {
@@ -45,7 +45,7 @@
   left: 0;
   height: 100vh;
   width: 100%;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(var(--black-rgb), 0.25);
   z-index: 90;
 
   @include mobile-first(md) {
@@ -81,9 +81,9 @@
     width: 90%;
     max-width: 360px;
     padding: 2rem;
-    background: #fff;
+    background: var(--white);
     border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.5rem 1rem rgba(var(--black-rgb), 0.25);
     z-index: 99;
 
     @include mobile-first(md) {

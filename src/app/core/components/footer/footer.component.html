@@ -4,9 +4,9 @@
       <nav class="nav">
         <h6>Institucional</h6>
         <ul>
-          <li><a routerLink="/quem-somos" href="#">Nossa História</a></li>
-          <li><a [routerLink]="BROKER_CONFIG.pathFront" href="#">Corretotes</a></li>
-          <li><a routerLink="/correa-favarao" href="#">Correa e Favarão</a></li>
+          <li><a routerLink="/quem-somos">Nossa História</a></li>
+          <li><a [routerLink]="BROKER_CONFIG.pathFront">Corretotes</a></li>
+          <li><a routerLink="/correa-favarao">Correa e Favarão</a></li>
         </ul>
       </nav>
 
@@ -68,7 +68,7 @@
       </nav>
 
       <ul class="social">
-        <li><a class="icon-border" target="_blank" href=""><span class="icon-linkedin"></span></a></li>
+        <li><a class="icon-border" target="_blank" href="#"><span class="icon-linkedin"></span></a></li>
         <li><a class="icon-border" target="_blank" href="https://www.facebook.com/ImobiliariaDimensao/"><span class="icon-facebook"></span></a></li>
         <li><a class="icon-border" target="_blank" href="https://www.instagram.com/dimensaoimobiliaria/?hl=pt"><span class="icon-instagram"></span></a></li>
         <li><a class="icon-border" target="_blank" href="#"><span class="icon-youtube"></span></a></li>
@@ -76,7 +76,7 @@
     </div>
 
     <p class="copy">
-      ©{{ anoCorrente }} - Todos os direitos reservados {{ APP_CONFIG.name }}
+      ©{{ currentYear }} - Todos os direitos reservados {{ APP_CONFIG.name }}
     </p>
   </div>
 </footer>

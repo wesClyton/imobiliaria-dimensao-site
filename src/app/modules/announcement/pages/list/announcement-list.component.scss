@@ -89,3 +89,21 @@ h1 {
 app-announcement-list-item {
   display: flex;
 }
+
+.paginator {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+
+  .btn {
+    font-size: 0.5rem;
+  }
+
+  .btn-cursor-disabled {
+    &:disabled {
+      background-color: var(--primary-3) !important;
+    }
+  }
+}

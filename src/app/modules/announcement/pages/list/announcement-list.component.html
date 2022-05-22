@@ -1,19 +1,53 @@
 <div class="inside-page">
 
-  <div class="page">
+  <div *ngIf="announcementGetAll?.data" class="page">
     <h1>Encontre seu imóvel</h1>
 
     <app-announcement-search></app-announcement-search>
 
     <div class="list">
-      <h6 *ngIf="announcements">{{ announcements.length }} resultados encontrados</h6>
+      <h6>{{ announcementGetAll.data.length }} resultados encontrados</h6>
 
       <ul class="announcements">
-        <li class="item" *ngFor="let announcement of announcements;">
+        <li class="item" *ngFor="let announcement of announcementGetAll.data;">
           <app-announcement-list-item [announcement]="announcement"></app-announcement-list-item>
         </li>
       </ul>
     </div>
+
+    <ul class="paginator">
+      <li>
+        <button
+          class="btn btn-primary-4"
+          type="button"
+          [disabled]="!announcementGetAll.prevPage"
+          (click)="clickPrevious(announcementGetAll.currentPage)">
+          Anterior
+        </button>
+      </li>
+      <li *ngFor="let page of pages">
+        <button
+          class="btn btn-cursor-disabled"
+          type="button"
+          [disabled]="announcementGetAll.currentPage === page + 1"
+          [ngClass]="{
+            'btn-primary-3' : announcementGetAll.currentPage === page + 1,
+            'btn-primary-4' : announcementGetAll.currentPage !== page + 1
+          }"
+          (click)="goPage(page + 1)">
+          {{ page + 1 }}
+        </button>
+      </li>
+      <li>
+        <button
+          class="btn btn-primary-4"
+          type="button"
+          [disabled]="!announcementGetAll.nextPage"
+          (click)="clickNext(announcementGetAll.currentPage)">
+          Próxima
+        </button>
+      </li>
+    </ul>
   </div>
 
 </div>

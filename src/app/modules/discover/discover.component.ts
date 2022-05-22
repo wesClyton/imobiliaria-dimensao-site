@@ -131,20 +131,23 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
     this.markers = new Array<Marker>();
     this.announcementGetAllService.queryFilterRemove();
 
+    this.announcementGetAllService.queryFilterAdd([
+      {
+        field: 'ativo',
+        value: true
+      },
+      {
+        field: 'take',
+        value: 999
+      }
+    ]);
+
     if (announcementType && (announcementType as string) !== 'null') {
       this.announcementGetAllService.queryFilterAdd({
         field: 'tipo',
         value: announcementType
       });
     }
-    this.announcementGetAllService.queryFilterAdd({
-      field: 'ativo',
-      value: true
-    });
-    this.announcementGetAllService.queryFilterAdd({
-      field: 'take',
-      value: 999
-    });
 
     this.announcementGetAllService
       .getAll()

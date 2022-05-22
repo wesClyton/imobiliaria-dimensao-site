@@ -4,7 +4,7 @@ import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { QueryFilterParam } from '../../../../shared/http/query-filter/query-filter.interface';
 import { AnnouncementType } from '../../enums/announcement-type.enum';
-import { Announcement } from '../../interfaces/announcement.interface';
+import { AnnouncementGetAll } from '../../interfaces/announcement-get-all.interface';
 import { AnnouncementGetAllService } from '../../services/announcement-get-all.service';
 
 @Component({
@@ -14,9 +14,13 @@ import { AnnouncementGetAllService } from '../../services/announcement-get-all.s
 })
 export class AnnouncementListComponent implements OnInit, OnDestroy {
 
-  public announcements!: Array<Announcement>;
+  public announcementGetAll!: AnnouncementGetAll;
 
   private subscription = new Subscription();
+
+  public quantityItemsPerPage = 12;
+
+  public pages = new Array<number>();
 
   constructor(
     private readonly announcementGetAllService: AnnouncementGetAllService,
@@ -51,7 +55,6 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
       }
       queryFilter.push({ field, value });
     });
-
     this.getAnnouncements(queryFilter);
   }
 
@@ -60,13 +63,20 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
     this.getAnnouncements(null, type);
   }
 
-  private getAnnouncements(queryFilter?: Array<QueryFilterParam> | null, type?: AnnouncementType): void {
+  private getAnnouncements(queryFilter?: Array<QueryFilterParam> | QueryFilterParam | null, type?: AnnouncementType): void {
+    this.pages = new Array<number>();
     this.announcementGetAllService.queryFilterRemove();
 
-    this.announcementGetAllService.queryFilterAdd({
-      field: 'ativo',
-      value: true
-    });
+    this.announcementGetAllService.queryFilterAdd([
+      {
+        field: 'ativo',
+        value: true
+      },
+      {
+        field: 'take',
+        value: this.quantityItemsPerPage
+      }
+    ]);
 
     if (queryFilter) {
       this.announcementGetAllService.queryFilterAdd(queryFilter);
@@ -85,7 +95,33 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
         take(1),
         finalize(() => this.loadingService.hide())
       )
-      .subscribe(announcements => this.announcements = announcements.data)
+      .subscribe(announcements => {
+        this.announcementGetAll = announcements;
+        const numberOfPagesToCreate = (Math.ceil(this.announcementGetAll.data.length / this.quantityItemsPerPage));
+        for(let i = 0; i <= (numberOfPagesToCreate - 1); i++) {
+          this.pages.push(i);
+        }
+      })
   }
+
+  public goPage(page: number): void {
+    let queryFilter: QueryFilterParam;
+
+    queryFilter = {
+      field: 'page',
+      value: page
+    }
+
+    this.getAnnouncements(queryFilter);
+  }
+
+  public clickPrevious(currentPage: number): void {
+    this.goPage(currentPage - 1);
+  }
+
+  public clickNext(currentPage: number): void {
+    this.goPage(currentPage + 1);
+  }
+
 
 }

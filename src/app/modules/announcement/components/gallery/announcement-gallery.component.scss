@@ -213,12 +213,19 @@
       .swiper {
         width: 100%;
         @include heightGalleryModal();
+        @include mobile-first(lg) {
+          max-width: 75vw;
+          padding: 0 1rem;
+          background-color: var(--black);
+          border-radius: 1rem;
+        }
       }
       .swiper-slide {
         @include heightGalleryModal();
 
         img {
           @include heightGalleryModal();
+          padding: 1rem;
         }
       }
     }

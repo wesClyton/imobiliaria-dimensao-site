@@ -164,16 +164,15 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     this.announcements = new Array<Announcement>();
     this.announcementGetAllService.queryFilterRemove();
 
-    this.announcementGetAllService.queryFilterAdd({
-      field: 'tipo',
-      value: this.announcement.tipo
-    });
-
     this.announcementGetAllService
       .getAll()
       .pipe(take(1))
       .subscribe(announcements => {
-        this.announcements = announcements.data.filter(announcement => announcement.id === this.announcement.id ? false : true).filter((announcement, index) => index < 3);
+        this.announcements = announcements.data.filter(
+          announcement => announcement.id === this.announcement.id ? false : true
+        )
+        .filter(announcement => announcement.tipo === this.announcement.tipo)
+        .filter((announcement, index) => index < 3)
       });
   }
 

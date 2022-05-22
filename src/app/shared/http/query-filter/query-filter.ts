@@ -1,6 +1,9 @@
+import { StringUtil } from '../../utils/string.util';
 import { QueryFilterParam } from './query-filter.interface';
 
 export class QueryFilter {
+
+  private static queryFilter = '';
 
   public static create(queryFilter: QueryFilterParam): QueryFilterParam {
     return {
@@ -13,10 +16,16 @@ export class QueryFilter {
     const queryFilters = new Array<QueryFilterParam>();
 
     Object.keys(object).forEach(key => {
-      if (object[key] || object[key] === false) {
+      let value = object[key];
+      if (value && value?.startsWith('R$')) {
+        value = StringUtil.removeSymbolCurrencyBr(value);
+        value = StringUtil.transformCurrencyEUA(value);
+      }
+
+      if (value !== NaN && (value || value === false)) {
         queryFilters.push(this.create({
           field: key,
-          value: object[key]
+          value
         }));
       }
     });
@@ -25,23 +34,27 @@ export class QueryFilter {
   }
 
   public static concat(queryFilter: QueryFilterParam | Array<QueryFilterParam>, currentQuery: string): string {
-    let newQuery = '';
-
-    if (Array.isArray(queryFilter)) {
-      queryFilter.forEach(queryFilterItem => newQuery = this.mountQuery(queryFilterItem, currentQuery));
-    } else {
-      newQuery = this.mountQuery(queryFilter, currentQuery);
+    if (currentQuery) {
+      this.queryFilter = currentQuery;
     }
 
-    return newQuery;
+    if (Array.isArray(queryFilter)) {
+      queryFilter.forEach(queryFilterItem => this.queryFilter = this.mountQuery(queryFilterItem, this.queryFilter));
+    } else {
+      this.queryFilter = this.mountQuery(queryFilter, this.queryFilter);
+    }
+
+    return this.queryFilter;
   }
 
-  private static mountQuery(queryFilter: QueryFilterParam, query: string): string {
-    return query && !this.paramExist(query, queryFilter.field) ? `${query}&${queryFilter.field}=${queryFilter.value}` : `/${queryFilter.field}=${queryFilter.value}`;
+  private static mountQuery(queryFilter: QueryFilterParam, currentQuery: string): string {
+    return currentQuery && !this.paramExist(currentQuery, queryFilter.field) ?
+      `${currentQuery}&${queryFilter.field}=${queryFilter.value}` :
+      `/${queryFilter.field}=${queryFilter.value}`;
   }
 
-  private static paramExist(query: string, field: string): boolean {
-    return query.includes(`${field}=`);
+  private static paramExist(currentQuery: string, field: string): boolean {
+    return currentQuery.includes(`${field}=`);
   }
 
 }
