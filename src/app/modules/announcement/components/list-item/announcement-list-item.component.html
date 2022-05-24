@@ -5,15 +5,14 @@
   <div class="infos">
     <div>
       <small class="type">{{ announcement.tipo | announcementType }}</small>
-      <!-- <h2 class="title">{{ announcement.titulo }}</h2> -->
       <strong class="amount">{{ announcement.valor | currencyBr }}</strong>
       <p class="address">{{ announcement.endereco }} - {{ announcement.bairro.nome }} - {{ announcement.bairro.cidade | cityState }}</p>
       <p *ngIf="announcement.sobre" class="sobre">{{ announcement.sobre | resumeText : 100 }}</p>
 
       <div class="numbers">
         <div *ngIf="announcement.areaTotal">
-          <i class="icon-metragem"></i> 
-          <span>{{ announcement.areaTotal | m2: true }}</span>
+          <i class="icon-metragem"></i>
+          <span>{{ announcement.areaTotal | m2 }}</span>
         </div>
         <div *ngIf="announcement.dormitorios">
           <i class="icon-dormitorios"></i>
