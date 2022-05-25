@@ -24,7 +24,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-banheiros:before {
+.icon-shower:before {
+  content: "\e919";
+}
+.icon-youtube-rounded:before {
+  content: "\e918";
+}
+.icon-mail-rounded:before {
+  content: "\e917";
+}
+.icon-suite:before {
   content: "\e90a";
 }
 .icon-close:before {
@@ -69,10 +78,10 @@
 .icon-facebook:before {
   content: "\e901";
 }
-.icon-menu:before {
+.icon-icon-menu:before {
   content: "\e902";
 }
-.icon-menu-active:before {
+.icon-icon-menu-active:before {
   content: "\e903";
 }
 .icon-instagram:before {
@@ -83,9 +92,6 @@
 }
 .icon-mail:before {
   content: "\e906";
-}
-.icon-mail-rounded:before {
-  content: "\e917";
 }
 .icon-phone:before {
   content: "\e907";

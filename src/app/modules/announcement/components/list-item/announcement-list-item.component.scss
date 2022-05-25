@@ -60,11 +60,12 @@
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: baseline;
   margin: 0.75rem 0 0.5rem;
   flex-wrap: nowrap;
   color: var(--grey-2);
+
 
   div {
 
@@ -72,25 +73,32 @@
       display: inline-block;
       font-size: 0.6875rem;
       line-height: 0.6275rem;
-      vertical-align: bottom;
+      padding-right: 0.4rem;
     }
 
     i {
       color: var(--primary-3);
       margin-right: 0.25rem;
-      vertical-align: bottom;
+
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      // background: var(--primary-3);
+      border-radius: 5px;
 
       &.icon-metragem {
-        font-size: 0.60rem;
+        font-size: 0.42rem;
       }
       &.icon-dormitorios {
-        font-size: 0.65rem;
+        font-size: 0.55rem;
       }
-      &.icon-banheiros {
-        font-size: 1rem;
+      &.icon-shower {
+        font-size: 0.625rem;
       }
       &.icon-garagem {
-        font-size: 0.75rem;
+        font-size: 0.625rem;
       }
     }
   }
