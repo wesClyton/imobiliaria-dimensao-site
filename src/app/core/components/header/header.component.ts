@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { APP_CONFIG } from '../../../app.config';
+import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
@@ -36,6 +37,10 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   public get StringUtil(): typeof StringUtil {
     return StringUtil;
+  }
+
+  public get ANNOUNCEMENT_CONFIG(): ModuleConfig {
+    return ANNOUNCEMENT_CONFIG;
   }
 
   constructor(

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize, take } from 'rxjs';
 import { APP_CONFIG } from '../../../app.config';
+import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
 import { BROKER_CONFIG } from '../../../modules/broker/broker.config';
@@ -31,6 +32,10 @@ export class FooterComponent implements OnInit {
 
   public get StringUtil(): typeof StringUtil {
     return StringUtil;
+  }
+
+  public get ANNOUNCEMENT_CONFIG(): ModuleConfig {
+    return ANNOUNCEMENT_CONFIG;
   }
 
   constructor(
