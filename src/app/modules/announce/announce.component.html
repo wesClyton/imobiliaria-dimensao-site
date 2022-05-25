@@ -1,110 +1,106 @@
-<div class="inside-page">
+<div class="box">
+  <h1>Por que anunciar conosco?</h1>
+  <p>
+    Com mais de 35 anos de experiência, somos referência no ramo imobiliário, possuindo grande conhecimento de mercado, proporcionando anuncios de qualidade, ampla divulgação e um atendimento personalizado.
+  </p>
 
-    <div class="box">
-      <h1>Por que anunciar conosco?</h1>
-      <p>
-        Com mais de 35 anos de experiência, somos referência no ramo imobiliário, possuindo grande conhecimento de mercado, proporcionando anuncios de qualidade, ampla divulgação e um atendimento personalizado.
-      </p>
+  <div class="box-2">
 
-      <div class="box-2">
+    <div class="text">
+      <h2>Como funciona</h2>
+      <ul>
+        <li>
+          <span>1</span>
+          <p>Preencha o formulário ao lado com seus dados e do imóvel.</p>
+        </li>
 
-        <div class="text">
-          <h2>Como funciona</h2>
-          <ul>
-            <li>
-              <span>1</span>
-              <p>Preencha o formulário ao lado com seus dados e do imóvel.</p>
-            </li>
+        <li>
+          <span>2</span>
+          <p>Nossos especialistas entrarão em contato para mais informações.</p>
+        </li>
 
-            <li>
-              <span>2</span>
-              <p>Nossos especialistas entrarão em contato para mais informações.</p>
-            </li>
+        <li>
+          <span>3</span>
+          <p>Em seguida, cuidaremos do restante para você.</p>
+        </li>
+      </ul>
 
-            <li>
-              <span>3</span>
-              <p>Em seguida, cuidaremos do restante para você.</p>
-            </li>
-          </ul>
-
-          <app-button-whatsapp [numeroWhats]="44991591664" messageWhats="Olá, vim através do site."></app-button-whatsapp>
-        </div>
-
-        <div class="box-form">
-          <form class="form" [formGroup]="form" (ngSubmit)="submit()">
-            <div class="input-field">
-              <label>Nome</label>
-              <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">
-              <span *ngIf="controlNomeHasError" class="input-error">Informe um Nome</span>
-            </div>
-
-            <div class="input-field">
-              <label>E-mail</label>
-              <input ngDefaultControl class="input" type="email" formControlName="email" placeholder="Informe seu E-mail">
-              <span *ngIf="controlEmailHasError" class="input-error">Informe um E-mail válido</span>
-            </div>
-
-            <div class="input-field">
-              <label>Telefone/Celular</label>
-              <input ngDefaultControl appPhone class="input" type="tel" formControlName="telefone" placeholder="(00) 0 0000-0000">
-              <span *ngIf="controlTelefoneHasError" class="input-error">Informe um Telefone/Celular</span>
-            </div>
-
-            <div class="input-field">
-              <label>Tipo do Imóvel</label>
-              <select ngDefaultControl class="select" formControlName="tipoImovel">
-                <option value="null" selected>Selecione o Tipo</option>
-                <ng-container appAnnouncementTypeOptionSelect (dataFinded)="announcementTypes = $event">
-                  <option *ngFor="let type of announcementTypes" [value]="type.value">
-                    {{ type.name }}
-                  </option>
-                </ng-container>
-              </select>
-              <span *ngIf="controlTipoImovelHasError" class="input-error">Informe um o tipo do seu imóvel</span>
-            </div>
-
-            <button class="btn btn-sm btn-primary-3" type="submit">Enviar</button>
-          </form>
-        </div>
-      </div>
-
-      <div class="box-3">
-        <div class="item">
-          <i class="icon-qualidade"></i>
-          <span>Qualidade</span>
-          <p>
-            Você encontrará a rapidez, qualidade e apoio necessário para publicar seus anúncios.
-          </p>
-        </div>
-
-        <div class="item">
-          <i class="icon-comunicacao"></i>
-          <span>Divulgação</span>
-          <p>
-            Agilidade e apoio necessário para anunciar o seu imóvel em vários meios de comunicação.
-          </p>
-        </div>
-
-        <div class="item">
-          <i class="icon-compromisso"></i>
-          <span>Compromisso</span>
-          <p>
-            Te ajudamos a melhorar seu anúncio para que fique 100% completo.
-          </p>
-        </div>
-
-        <div class="item">
-          <i class="icon-interessados"></i>
-          <span>Material</span>
-          <p>
-            Produzimos todo o material necessário para a divulgação do seu imóvel.
-          </p>
-        </div>
-
-      </div>
-
-      <app-anchor-contact></app-anchor-contact>
-
+      <app-button-whatsapp [numeroWhats]="44991591664" messageWhats="Olá, vim através do site."></app-button-whatsapp>
     </div>
+
+    <div class="box-form">
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="input-field">
+          <label>Nome</label>
+          <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">
+          <span *ngIf="controlNomeHasError" class="input-error">Informe um Nome</span>
+        </div>
+
+        <div class="input-field">
+          <label>E-mail</label>
+          <input ngDefaultControl class="input" type="email" formControlName="email" placeholder="Informe seu E-mail">
+          <span *ngIf="controlEmailHasError" class="input-error">Informe um E-mail válido</span>
+        </div>
+
+        <div class="input-field">
+          <label>Telefone/Celular</label>
+          <input ngDefaultControl appPhone class="input" type="tel" formControlName="telefone" placeholder="(00) 0 0000-0000">
+          <span *ngIf="controlTelefoneHasError" class="input-error">Informe um Telefone/Celular</span>
+        </div>
+
+        <div class="input-field">
+          <label>Tipo do Imóvel</label>
+          <select ngDefaultControl class="select" formControlName="tipoImovel">
+            <option value="null" selected>Selecione o Tipo</option>
+            <ng-container appAnnouncementTypeOptionSelect (dataFinded)="announcementTypes = $event">
+              <option *ngFor="let type of announcementTypes" [value]="type.value">
+                {{ type.name }}
+              </option>
+            </ng-container>
+          </select>
+          <span *ngIf="controlTipoImovelHasError" class="input-error">Informe um o tipo do seu imóvel</span>
+        </div>
+
+        <button class="btn btn-sm btn-primary-3" type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="box-3">
+    <div class="item">
+      <i class="icon-qualidade"></i>
+      <span>Qualidade</span>
+      <p>
+        Você encontrará a rapidez, qualidade e apoio necessário para publicar seus anúncios.
+      </p>
+    </div>
+
+    <div class="item">
+      <i class="icon-comunicacao"></i>
+      <span>Divulgação</span>
+      <p>
+        Agilidade e apoio necessário para anunciar o seu imóvel em vários meios de comunicação.
+      </p>
+    </div>
+
+    <div class="item">
+      <i class="icon-compromisso"></i>
+      <span>Compromisso</span>
+      <p>
+        Te ajudamos a melhorar seu anúncio para que fique 100% completo.
+      </p>
+    </div>
+
+    <div class="item">
+      <i class="icon-interessados"></i>
+      <span>Material</span>
+      <p>
+        Produzimos todo o material necessário para a divulgação do seu imóvel.
+      </p>
+    </div>
+
+  </div>
+
+  <app-anchor-contact></app-anchor-contact>
 
 </div>

@@ -1,89 +1,85 @@
-<div class="inside-page">
+<div class="box">
+  <h1>Contato</h1>
+  <p>Fale diretamente conosco preenchendo o formulário abaixo! Temos uma equipe capacitada, pronta para te ajudar.</p>
 
-    <div class="box">
-      <h1>Contato</h1>
-      <p>Fale diretamente conosco preenchendo o formulário abaixo! Temos uma equipe capacitada, pronta para te ajudar.</p>
-
-      <div class="box-2">
-        <div class="box-form">
-          <form class="form" [formGroup]="form" (ngSubmit)="submit()">
-            <div class="input-field">
-              <label>Nome</label>
-              <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">
-              <span *ngIf="controlNomeHasError" class="input-error">Informe um Nome</span>
-            </div>
-
-            <div class="input-field">
-              <label>E-mail</label>
-              <input ngDefaultControl class="input" type="email" formControlName="email" placeholder="Informe seu E-mail">
-              <span *ngIf="controlEmailHasError" class="input-error">Informe um E-mail válido</span>
-            </div>
-
-            <div class="input-field">
-              <label>Telefone/Celular</label>
-              <input ngDefaultControl appPhone class="input" type="tel" formControlName="telefone" placeholder="(00) 0 0000-0000">
-              <span *ngIf="controlTelefoneHasError" class="input-error">Informe um Telefone/Celular</span>
-            </div>
-
-            <div class="input-field">
-              <label>Melhor horário para contato</label>
-              <select ngDefaultControl class="select" formControlName="melhorHorario">
-                <option value="null" selected>Selecione</option>
-                <option value="MANHA">Manhã</option>
-                <option value="TARDE">Tarde</option>
-                <option value="NOITE">Noite</option>
-                <option value="TODOS">Todos</option>
-              </select>
-            </div>
-
-            <div class="input-field">
-              <label>Mensagem</label>
-              <textarea ngDefaultControl class="textarea" formControlName="mensagem" placeholder="Informe sua Mensagem"></textarea>
-              <span *ngIf="controlMensagemHasError" class="input-error">Informe uma Mensagem</span>
-            </div>
-
-            <div class="input-field-checkbox">
-              <input type="checkbox" formControlName="concordo">
-              <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
-            </div>
-
-            <button class="btn btn-sm btn-primary-3" type="submit" [disabled]="!controlConcordo?.value">Enviar</button>
-          </form>
+  <div class="box-2">
+    <div class="box-form">
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="input-field">
+          <label>Nome</label>
+          <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">
+          <span *ngIf="controlNomeHasError" class="input-error">Informe um Nome</span>
         </div>
 
-        <div class="text">
-
-          <div class="buttons">
-            <a routerLink="/quem-somos" class="btn btn-sm btn-outline btn-primary-3">Conheça nossa história</a>
-            <a routerLink="/anuncie" class="btn btn-sm btn-outline btn-primary-3">Anunciar imóvel</a>
-          </div>
-
-          <ul class="list">
-            <li class="item">
-              <strong>Endereço</strong>
-              <p>Av. Brasil, 4337 - Zona I, Umuarama - PR</p>
-              <a class="link-map" href="https://g.page/imobiliariadimensao?share" target="_blank">Ver no mapa</a>
-            </li>
-            <li class="item">
-              <strong>Telefones</strong>
-              <div class="phones">
-                <p>(44) 3622-5221</p>
-                <span>|</span>
-                <p>(44) 9 9159-1664</p>
-              </div>
-            </li>
-            <li class="item">
-              <strong>Acompanhe-nos</strong>
-              <ul class="social">
-                <li><a target="_blank" href="https://www.facebook.com/ImobiliariaDimensao/"><span class="icon-facebook-rounded"></span></a></li>
-                <li><a target="_blank" href="https://www.instagram.com/dimensaoimobiliaria/"><span class="icon-instagram-rounded"></span></a></li>
-                <li><a target="_blank" href="https://www.youtube.com/channel/UCjxX6SqyxYL0onrYgG9ocRQ"><span class="icon-youtube-rounded"></span></a></li>
-                <li><a target="_blank" href="https://wa.me/5544991591664?text=Ol%C3%A1%2C+vim+atrav%C3%A9s+do+site."><span class="icon-whatsapp-rounded"></span></a></li>
-              </ul>
-            </li>
-          </ul>
+        <div class="input-field">
+          <label>E-mail</label>
+          <input ngDefaultControl class="input" type="email" formControlName="email" placeholder="Informe seu E-mail">
+          <span *ngIf="controlEmailHasError" class="input-error">Informe um E-mail válido</span>
         </div>
-      </div>
+
+        <div class="input-field">
+          <label>Telefone/Celular</label>
+          <input ngDefaultControl appPhone class="input" type="tel" formControlName="telefone" placeholder="(00) 0 0000-0000">
+          <span *ngIf="controlTelefoneHasError" class="input-error">Informe um Telefone/Celular</span>
+        </div>
+
+        <div class="input-field">
+          <label>Melhor horário para contato</label>
+          <select ngDefaultControl class="select" formControlName="melhorHorario">
+            <option value="null" selected>Selecione</option>
+            <option value="MANHA">Manhã</option>
+            <option value="TARDE">Tarde</option>
+            <option value="NOITE">Noite</option>
+            <option value="TODOS">Todos</option>
+          </select>
+        </div>
+
+        <div class="input-field">
+          <label>Mensagem</label>
+          <textarea ngDefaultControl class="textarea" formControlName="mensagem" placeholder="Informe sua Mensagem"></textarea>
+          <span *ngIf="controlMensagemHasError" class="input-error">Informe uma Mensagem</span>
+        </div>
+
+        <div class="input-field-checkbox">
+          <input type="checkbox" formControlName="concordo">
+          <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
+        </div>
+
+        <button class="btn btn-sm btn-primary-3" type="submit" [disabled]="!controlConcordo?.value">Enviar</button>
+      </form>
     </div>
 
+    <div class="text">
+
+      <div class="buttons">
+        <a routerLink="/quem-somos" class="btn btn-sm btn-outline btn-primary-3">Conheça nossa história</a>
+        <a routerLink="/anuncie" class="btn btn-sm btn-outline btn-primary-3">Anunciar imóvel</a>
+      </div>
+
+      <ul class="list">
+        <li class="item">
+          <strong>Endereço</strong>
+          <p>Av. Brasil, 4337 - Zona I, Umuarama - PR</p>
+          <a class="link-map" href="https://g.page/imobiliariadimensao?share" target="_blank">Ver no mapa</a>
+        </li>
+        <li class="item">
+          <strong>Telefones</strong>
+          <div class="phones">
+            <p>(44) 3622-5221</p>
+            <span>|</span>
+            <p>(44) 9 9159-1664</p>
+          </div>
+        </li>
+        <li class="item">
+          <strong>Acompanhe-nos</strong>
+          <ul class="social">
+            <li><a target="_blank" href="https://www.facebook.com/ImobiliariaDimensao/"><span class="icon-facebook-rounded"></span></a></li>
+            <li><a target="_blank" href="https://www.instagram.com/dimensaoimobiliaria/"><span class="icon-instagram-rounded"></span></a></li>
+            <li><a target="_blank" href="https://www.youtube.com/channel/UCjxX6SqyxYL0onrYgG9ocRQ"><span class="icon-youtube-rounded"></span></a></li>
+            <li><a target="_blank" href="https://wa.me/5544991591664?text=Ol%C3%A1%2C+vim+atrav%C3%A9s+do+site."><span class="icon-whatsapp-rounded"></span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

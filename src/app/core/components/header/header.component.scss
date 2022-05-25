@@ -17,6 +17,10 @@ header {
     padding-bottom: 1rem;
   }
 
+  &.no-fixed {
+    position: relative;
+  }
+
   @include mobile-first(lg) {
     background-color: transparent;
   }

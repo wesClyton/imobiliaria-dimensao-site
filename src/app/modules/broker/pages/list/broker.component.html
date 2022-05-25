@@ -1,56 +1,53 @@
-<div class="inside-page">
-  <section class="box-1">
-    <h1>Conheça nossa equipe</h1>
-    <p>
-      Sempre atualizados com as mudanças do mercado imobiliário, cultivando relacionamentos de respeito e transparência, os corretores da Dimensão buscam a melhor opção para você.
-    </p>
-  </section>
+<section class="box-1">
+  <h1>Conheça nossa equipe</h1>
+  <p>
+    Sempre atualizados com as mudanças do mercado imobiliário, cultivando relacionamentos de respeito e transparência, os corretores da Dimensão buscam a melhor opção para você.
+  </p>
+</section>
 
-  <section class="box-2">
-    <div
-      *ngFor="let broker of brokers;"
-      (click)="openModal(broker)"
-      class="broker">
-      <div>
-        <img [src]="broker.foto | pathImage: 'corretores'" [alt]="broker.nome">
-        <button class="icon-arrow-right"></button>
-      </div>
-
-      <div>
-        <h2>{{ broker.nome }}</h2>
-        <p *ngIf="broker.creci">{{ broker.creci }}</p>
-      </div>
+<section class="box-2">
+  <div
+    *ngFor="let broker of brokers;"
+    (click)="openModal(broker)"
+    class="broker">
+    <div>
+      <img [src]="broker.foto | pathImage: 'corretores'" [alt]="broker.nome">
+      <button class="icon-arrow-right"></button>
     </div>
-  </section>
 
-  <div class="modal" [ngClass]="{ 'modal-active' : broker }">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="content">
-        <div class="content-img">
-          <img [src]="broker?.foto | pathImage: 'corretores'" [alt]="broker?.nome">
-        </div>
-        <div class="text">
-          <button class="icon-close" (click)="closeModal()"></button>
-          <h2>{{ broker?.nome }}</h2>
-          <span>{{ broker?.funcao }}</span>
-          <span>{{ broker?.creci }}</span>
-          <p *ngIf="broker?.biografia">{{ broker?.biografia }}</p>
-          <div class="sociais">
-            <div>
-              <a *ngIf="broker?.facebook" target="_blank" [href]="broker?.facebook"><i class="icon-facebook-rounded"></i></a>
-              <a *ngIf="broker?.instagram" target="_blank" [href]="broker?.instagram"><i class="icon-instagram-rounded"></i></a>
-              <a *ngIf="broker?.linkedin" target="_blank" [href]="broker?.linkedin"><i class="icon-linkedin-rounded"></i></a>
-              <a *ngIf="broker?.email" target="_blank" href="mailto:{{broker?.email}}"><i class="icon-mail-rounded"></i></a>
-            </div>
+    <div>
+      <h2>{{ broker.nome }}</h2>
+      <p *ngIf="broker.creci">{{ broker.creci }}</p>
+    </div>
+  </div>
+</section>
 
-            <app-button-whatsapp [numeroWhats]="broker?.whatsapp" messageWhats="Olá, vim através do site."></app-button-whatsapp>
+<div class="modal" [ngClass]="{ 'modal-active' : broker }">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="content">
+      <div class="content-img">
+        <img [src]="broker?.foto | pathImage: 'corretores'" [alt]="broker?.nome">
+      </div>
+      <div class="text">
+        <button class="icon-close" (click)="closeModal()"></button>
+        <h2>{{ broker?.nome }}</h2>
+        <span>{{ broker?.funcao }}</span>
+        <span>{{ broker?.creci }}</span>
+        <p *ngIf="broker?.biografia">{{ broker?.biografia }}</p>
+        <div class="sociais">
+          <div>
+            <a *ngIf="broker?.facebook" target="_blank" [href]="broker?.facebook"><i class="icon-facebook-rounded"></i></a>
+            <a *ngIf="broker?.instagram" target="_blank" [href]="broker?.instagram"><i class="icon-instagram-rounded"></i></a>
+            <a *ngIf="broker?.linkedin" target="_blank" [href]="broker?.linkedin"><i class="icon-linkedin-rounded"></i></a>
+            <a *ngIf="broker?.email" target="_blank" href="mailto:{{broker?.email}}"><i class="icon-mail-rounded"></i></a>
           </div>
+
+          <app-button-whatsapp [numeroWhats]="broker?.whatsapp" messageWhats="Olá, vim através do site."></app-button-whatsapp>
         </div>
       </div>
     </div>
   </div>
-
-  <app-anchor-contact></app-anchor-contact>
-
 </div>
+
+<app-anchor-contact></app-anchor-contact>

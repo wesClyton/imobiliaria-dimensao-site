@@ -1,81 +1,77 @@
-<div class="inside-page">
+<div class="box">
+  <h1>Descubra</h1>
 
-  <div class="box">
-    <h1>Descubra</h1>
+  <div class="box-form">
+    <form [formGroup]="form">
+      <div class="input-field">
+        <label>Endereço</label>
+        <input
+          #search
+          type="text"
+          class="input"
+          placeholder="Informe uma cidade, bairro ou rua"
+          (keydown.enter)="$event.preventDefault()" />
+      </div>
 
-    <div class="box-form">
-      <form [formGroup]="form">
-        <div class="input-field">
-          <label>Endereço</label>
-          <input
-            #search
-            type="text"
-            class="input"
-            placeholder="Informe uma cidade, bairro ou rua"
-            (keydown.enter)="$event.preventDefault()" />
-        </div>
-
-        <div class="input-field">
-          <label>Tipo do Imóvel</label>
-          <select ngDefaultControl class="select" formControlName="tipoImovel">
-            <option value="null" selected>Selecione o Tipo</option>
-            <ng-container appAnnouncementTypeOptionSelect (dataFinded)="announcementTypes = $event">
-              <option *ngFor="let type of announcementTypes" [value]="type.value">
-                {{ type.name }}
-              </option>
-            </ng-container>
-          </select>
-        </div>
-      </form>
-    </div>
+      <div class="input-field">
+        <label>Tipo do Imóvel</label>
+        <select ngDefaultControl class="select" formControlName="tipoImovel">
+          <option value="null" selected>Selecione o Tipo</option>
+          <ng-container appAnnouncementTypeOptionSelect (dataFinded)="announcementTypes = $event">
+            <option *ngFor="let type of announcementTypes" [value]="type.value">
+              {{ type.name }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+    </form>
   </div>
+</div>
 
-  <div class="box-2">
-    <google-map
-      #myGoogleMap
-      width="100%"
-      height="100%"
-      [center]="center"
-      [options]="options">
+<div class="box-2">
+  <google-map
+    #myGoogleMap
+    width="100%"
+    height="100%"
+    [center]="center"
+    [options]="options">
 
-      <map-marker
-        #markerElem="mapMarker"
-        *ngFor="let marker of markers"
-        [icon]="iconPin"
-        [position]="marker.position"
-        [title]="marker.announcement.titulo"
-        (mapClick)="openInfo(markerElem, marker.announcement)">
-      </map-marker>
+    <map-marker
+      #markerElem="mapMarker"
+      *ngFor="let marker of markers"
+      [icon]="iconPin"
+      [position]="marker.position"
+      [title]="marker.announcement.titulo"
+      (mapClick)="openInfo(markerElem, marker.announcement)">
+    </map-marker>
 
-      <map-info-window>
-        <div *ngIf="announcement" class="content">
-          <img
-            [src]="announcement.galeria.fotos[0]?.nome | pathImage: 'anuncios': announcement.galeria.fotos[0]?.galeriaId"
-            [alt]="announcement.titulo">
-          <div class="text">
-            <h2>{{ announcement.tipo | announcementType }}</h2>
-            <div class="numbers">
-              <div *ngIf="announcement.areaTotal">
-                <i class="icon-metragem"></i> {{ announcement.areaTotal | m2 }}
-              </div>
-              <div *ngIf="announcement.dormitorios">
-                <i class="icon-dormitorios"></i> {{ announcement.dormitorios }}
-              </div>
-              <div *ngIf="announcement.banheiros">
-                <i class="icon-banheiros"></i> {{ announcement.banheiros }}
-              </div>
-              <div *ngIf="announcement.vagasGaragem">
-                <i class="icon-garagem"></i> {{ announcement.vagasGaragem }}
-              </div>
+    <map-info-window>
+      <div *ngIf="announcement" class="content">
+        <img
+          [src]="announcement.galeria.fotos[0]?.nome | pathImage: 'anuncios': announcement.galeria.fotos[0]?.galeriaId"
+          [alt]="announcement.titulo">
+        <div class="text">
+          <h2>{{ announcement.tipo | announcementType }}</h2>
+          <div class="numbers">
+            <div *ngIf="announcement.areaTotal">
+              <i class="icon-metragem"></i> {{ announcement.areaTotal | m2 }}
             </div>
-            <div class="footer">
-              <p>{{ announcement.valor | currencyBr }} </p>
-              <a class="announcement" target="_blank" [href]="link" [title]="announcement.titulo">Ver imóvel</a>
+            <div *ngIf="announcement.dormitorios">
+              <i class="icon-dormitorios"></i> {{ announcement.dormitorios }}
+            </div>
+            <div *ngIf="announcement.banheiros">
+              <i class="icon-banheiros"></i> {{ announcement.banheiros }}
+            </div>
+            <div *ngIf="announcement.vagasGaragem">
+              <i class="icon-garagem"></i> {{ announcement.vagasGaragem }}
             </div>
           </div>
+          <div class="footer">
+            <p>{{ announcement.valor | currencyBr }} </p>
+            <a class="announcement" target="_blank" [href]="link" [title]="announcement.titulo">Ver imóvel</a>
+          </div>
         </div>
-      </map-info-window>
-    </google-map>
-  </div>
-
+      </div>
+    </map-info-window>
+  </google-map>
 </div>

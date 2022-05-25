@@ -81,7 +81,7 @@
 
     @include mobile-first(md) {
       position: sticky;
-      top: 120px;
+      top: 2rem;
       width: 100%;
       max-width: 100%;
     }
