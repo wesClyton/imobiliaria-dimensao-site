@@ -150,7 +150,10 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       }
     }
 
-    const type: AnnouncementTypeEnum = this.activatedRoute.snapshot.params['type'];
+    let type: AnnouncementTypeEnum = this.activatedRoute.snapshot.params['type'];
+    if (type?.includes('&')) {
+      type = type.split('&')[0] as AnnouncementTypeEnum;
+    }
     if (type) {
       this.possibleQueries = {
         tipo: type,
