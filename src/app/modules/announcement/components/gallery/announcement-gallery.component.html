@@ -26,18 +26,6 @@
         Vídeo
       </button>
       <button
-        *ngIf="announcement.url360"
-        class="btn"
-        type="button"
-        [ngClass]="{
-          'btn-outline' : !showTour360,
-          'btn-primary-4' : !showTour360,
-          'btn-primary-3' : showTour360
-        }"
-        (click)="tour360Click()">
-        Tour 360°
-      </button>
-      <button
         *ngIf="announcement.latitude && announcement.longitude"
         class="btn"
         type="button"
@@ -49,6 +37,13 @@
         (click)="mapClick()">
         Mapa
       </button>
+      <a
+        *ngIf="announcement.url360"
+        class="btn btn-primary-4 btn-outline"
+        target="_blank"
+        [href]="announcement.url360">
+        Tour 360°
+      </a>
     </div>
 
     <div class="copy-link" (click)="copyLink()">

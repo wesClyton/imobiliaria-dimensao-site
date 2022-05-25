@@ -115,10 +115,6 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
       this.showVideo = true;
       return;
     }
-    if (this.hasTour360) {
-      this.showTour360 = true;
-      return;
-    }
     this.showMap = true;
   }
 
@@ -182,11 +178,6 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
   public videosClick(): void {
     this.resetButtons();
     this.showVideo = true;
-  }
-
-  public tour360Click(): void {
-    this.resetButtons();
-    this.showTour360 = true;
   }
 
   public mapClick(): void {
