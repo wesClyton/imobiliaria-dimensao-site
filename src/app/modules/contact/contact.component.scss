@@ -4,6 +4,13 @@
   margin: 0 auto;
   max-width: 980px;
   padding: 3rem 1rem;
+
+  > p {
+    display: block;
+    margin: 0 auto 30px;
+    max-width: 450px;
+    text-align: center;
+  }
 }
 
 h1 {
@@ -20,9 +27,16 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  max-width: 90%;
+  margin: 0 auto;
+
+  @include mobile-first(md) {
+    max-width: 500px;
+  }
 
   @include mobile-first(lg) {
     flex-direction: row;
+    max-width: fit-content;
   }
 }
 
@@ -53,8 +67,9 @@ h1 {
 }
 
 .text {
+
   @include mobile-first(lg) {
-    flex: 0.75;
+    flex: 0.84;
   }
 
   .buttons {

@@ -63,6 +63,14 @@ h1 {
     flex-wrap: wrap;
   }
 
+  @include mobile-first(lg) {
+    gap: 1rem;
+  }
+
+  @include mobile-first(xl) {
+    gap: 2rem;
+  }
+
   .item {
     width: 100%;
     display: flex;

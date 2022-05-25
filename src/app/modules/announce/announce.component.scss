@@ -20,6 +20,7 @@
     @include mobile-first(lg) {
       max-width: 600px;
       margin: 0 auto;
+      text-align: center;
     }
   }
 }
@@ -51,6 +52,11 @@ h1 {
     max-width: 1180px;
     margin: 80px auto 0;
     gap: 6rem;
+  }
+
+  p {
+    text-align: left;
+    margin: 0;
   }
 
 }
