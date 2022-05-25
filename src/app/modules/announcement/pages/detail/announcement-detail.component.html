@@ -2,7 +2,7 @@
 
   <app-announcement-gallery [announcement]="announcement"></app-announcement-gallery>
 
-  <div #grid1 class="grid-1">
+  <div class="grid-1">
     <div class="box-1">
       <div class="announcement">
         <h1 class="heading">{{ announcement.titulo }}</h1>
@@ -65,7 +65,7 @@
       </div>
 
       <div class="interesse">
-        <button class="btn btn-sm btn-primary-3" (click)="openModal()">Tenho Interesse</button>
+        <button class="btn btn-sm btn-primary-3" (click)="toggleModal()">Tenho Interesse</button>
       </div>
 
       <div *ngIf="announcements?.length" class="more">
@@ -79,9 +79,8 @@
     </div>
 
     <div class="box-2" [ngClass]="{'display-modal': showModal }">
-      <div class="overlay" (click)="closeModal()"></div>
-      <div #boxForm class="box-form">
-        <button class="close-button icon-close" (click)="closeModal()"></button>
+      <div class="box-form">
+        <button class="close-button icon-close" (click)="toggleModal()"></button>
         <p>Para saber mais sobre esse imóvel entre agora em contato atravé do formulário abaixo.</p>
         <form class="form" [formGroup]="form" (ngSubmit)="submit()">
           <div class="input-field">

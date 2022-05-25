@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
@@ -57,14 +57,6 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
 
-  @ViewChild('grid1', { static: false })
-  private grid1!: ElementRef<HTMLDivElement>;
-
-  @ViewChild('boxForm', { static: false })
-  private boxForm!: ElementRef<HTMLDivElement>;
-
-  private grid1TopInitial!: number;
-
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
@@ -72,8 +64,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     private readonly announcementGetAllService: AnnouncementGetAllService,
     private readonly loadingService: LoadingService,
     private readonly formBuilder: FormBuilder,
-    private readonly formService: FormService,
-    private readonly renderer: Renderer2
+    private readonly formService: FormService
   ) {
     this.setAnnouncement();
   }
@@ -97,34 +88,10 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  @HostListener('window:scroll', ['$event'])
-  private onScroll(event: any): void {
-    if (window.screen.availWidth >= 991.98) {
-      const heightHeader = (document.getElementById('main-header') as HTMLElement).clientHeight;
-      const scrollTop = event.srcElement.scrollingElement.scrollTop;
-      const scrollTopWithHeightHeader = scrollTop + heightHeader;
-      const footerElement = (document.getElementById('main-footer') as HTMLElement);
-
-      if (
-          this.grid1TopInitial &&
-          (
-            scrollTopWithHeightHeader >= this.grid1TopInitial &&
-            ((scrollTopWithHeightHeader + window.screen.availHeight - 180) <= footerElement.offsetTop)
-          )
-      ) {
-        this.renderer.removeStyle(this.boxForm.nativeElement, 'transform');
-        this.renderer.setStyle(this.boxForm.nativeElement, 'transform', `translateY(${scrollTopWithHeightHeader - this.grid1TopInitial}px)`);
-      }
-    }
-  }
-
   private setAnnouncement(): void {
     const state: { [k: string]: Announcement } | undefined = this.router.getCurrentNavigation()?.extras?.state;
     if (state && state['announcement']) {
       this.announcement = state['announcement'];
-      if (!this.grid1TopInitial) {
-        this.setInitialGrid1Top();
-      }
     }
     if (!this.announcement) {
       this.loadingService.show();
@@ -161,9 +128,6 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
         this.announcement = announcement;
         this.filterCharacteristics();
         this.getAnnouncements();
-        if (!this.grid1TopInitial) {
-          this.setInitialGrid1Top();
-        }
       });
   }
 
@@ -195,16 +159,8 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  private setInitialGrid1Top(): void {
-    setTimeout(() => this.grid1TopInitial = this.grid1.nativeElement.offsetTop, 500);
-  }
-
-  public openModal(): void {
-    this.showModal = true;
-  }
-
-  public closeModal(): void {
-    this.showModal = false;
+  public toggleModal(): void {
+    this.showModal = !this.showModal;
   }
 
 }

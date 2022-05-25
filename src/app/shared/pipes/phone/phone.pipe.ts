@@ -12,6 +12,8 @@ export class PhonePipe implements PipeTransform {
 
   transform(value: string): string {
     const mask = this.hasNinthDigit(value) ? '(00) 0 0000-0000' : '(00) 0000-0000';
+    this.maskApplierService.prefix = '';
+    this.maskApplierService.suffix = '';
     return this.maskApplierService.applyMask(value, mask);
   }
 
