@@ -20,6 +20,62 @@ h1 {
   }
 }
 
+.legend-pins {
+  ul {
+    padding: 1rem;
+    font-size: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    transform: translate(0, 2px);
+
+    &::after {
+      content: '\2022';
+      font-size: 2rem;
+      max-height: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(2px);
+    }
+
+    &.color- {
+      &CASA {
+        &::after { color: #005990 }
+      }
+      &SOBRADO {
+        &::after { color: #CD4F4F }
+      }
+      &TERRENO_URBANO {
+        &::after { color: #D9BA17 }
+      }
+      &APARTAMENTO {
+        &::after { color: #5EBB32 }
+      }
+      &TERRENO_RURAL {
+        &::after { color: #21B6E5 }
+      }
+      &COMERCIAL {
+        &::after { color: #AC62D9 }
+      }
+      &LOTEAMENTO {
+        &::after { color: #EF75DB }
+      }
+    }
+  }
+}
+
 .box-form {
   max-width: 90%;
 

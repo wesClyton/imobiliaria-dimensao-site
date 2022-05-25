@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../core/loading/loading.service';
+import { IconPinImage } from './icon-pin-image.enum';
 import { AnnouncementType as AnnouncementTypeEnum } from '../announcement/enums/announcement-type.enum';
 import { AnnouncementType } from '../announcement/interfaces/announcement-type.interface';
 import { Announcement } from '../announcement/interfaces/announcement.interface';
 import { AnnouncementGetAllService } from '../announcement/services/announcement-get-all.service';
 import { AnnouncementLinkUtil } from '../announcement/utils/announcement-link.util';
+import { IconPin } from './icon-pin.interface';
 import { Marker } from './marker.interface';
 
 @Component({
@@ -43,13 +45,6 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
     maxZoom: 20,
     minZoom: 1,
     zoom: 13
-  };
-
-  public iconPin = {
-    url: 'assets/pin.svg',
-    scaledSize: new google.maps.Size(40, 40),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 0),
   };
 
   public markers = Array<Marker>();
@@ -172,5 +167,14 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
     this.announcement = announcement;
     this.info.open(marker);
   }
+
+  public iconPin(announcement: Announcement): IconPin {
+    return {
+      url: `assets/${IconPinImage[announcement.tipo]}`,
+      scaledSize: new google.maps.Size(40, 40),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 0),
+    }
+  };
 
 }

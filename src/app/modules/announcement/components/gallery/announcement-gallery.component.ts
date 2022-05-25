@@ -5,7 +5,9 @@ import SwiperCore, { Mousewheel, Navigation, SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { CopyClipboard } from '../../../../shared/utils/copy-clipboard';
+import { IconPin } from '../../../discover/icon-pin.interface';
 import { Marker } from '../../../discover/marker.interface';
+import { IconPinImage } from '../../../discover/icon-pin-image.enum';
 import { Announcement } from '../../interfaces/announcement.interface';
 import { AnnouncementLinkUtil } from '../../utils/announcement-link.util';
 SwiperCore.use([Mousewheel, Navigation]);
@@ -63,11 +65,13 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
     zoom: 13
   };
 
-  public iconPin = {
-    url: 'assets/pin.svg',
-    scaledSize: new google.maps.Size(40, 40),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 0),
+  public get iconPin(): IconPin {
+    return {
+      url: `assets/${IconPinImage[this.announcement?.tipo]}`,
+      scaledSize: new google.maps.Size(40, 40),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 0)
+    }
   };
 
   public get link(): string {

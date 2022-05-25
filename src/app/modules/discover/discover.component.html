@@ -28,6 +28,14 @@
   </div>
 </div>
 
+<div class="legend-pins">
+  <ul>
+    <li *ngFor="let type of announcementTypes" class="color-{{ type.value }}" [value]="type.value">
+      {{ type.name }}
+    </li>
+  </ul>
+</div>
+
 <div class="box-2">
   <google-map
     #myGoogleMap
@@ -39,7 +47,7 @@
     <map-marker
       #markerElem="mapMarker"
       *ngFor="let marker of markers"
-      [icon]="iconPin"
+      [icon]="iconPin(marker.announcement)"
       [position]="marker.position"
       [title]="marker.announcement.titulo"
       (mapClick)="openInfo(markerElem, marker.announcement)">
