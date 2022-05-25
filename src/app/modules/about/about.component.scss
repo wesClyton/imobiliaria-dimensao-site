@@ -5,8 +5,10 @@ img.about-banner {
 }
 
 .container {
-  max-width: 1024px;
+  display: block;
+  max-width: 90%;
   padding: 0 1rem;
+  margin: 0 auto;
 }
 
 .box-1 {
@@ -43,28 +45,59 @@ h1 {
   gap: 2rem;
   flex-direction: column;
   padding: 1.5rem 0;
+  max-width: 600px;
+  margin: 0 auto;
 
   @include mobile-first(lg) {
     display: flex;
     flex-direction: row;
     gap: 3rem;
     padding: 4rem 0;
+    max-width: fit-content;
   }
 
   i {
     background-color: var(--primary-4);
     width: 45px;
+    min-width: 45px;
     height: 45px;
     border-radius: 100%;
     display: inline-block;
-    margin-bottom: 1rem;
+    margin: 0 0.625rem 1rem 0;
+
+    @include mobile-first(lg) {
+      margin-right: 0;
+    }
   }
 
-  div {
+  .item {
+    display: inline-block;
+    width: 100%;
     text-align: center;
+
+    @include mobile-first(sm) {
+      display: flex;
+      text-align: left;
+    }
+
+    @include mobile-first(lg) {
+      display: inline-block;
+      width: 33%;
+      text-align: center;
+
+      &:last-child {
+        width: 34%;
+      }
+    }
 
     p {
       text-align: center;
+
+      @include mobile-first(sm) {
+        text-align: justify;
+        text-align-last: left;
+      }
+
     }
   }
 }

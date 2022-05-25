@@ -2,6 +2,7 @@
 
     <div class="box">
       <h1>Contato</h1>
+      <p>Fale diretamente conosco preenchendo o formulário abaixo! Temos uma equipe capacitada, pronta para te ajudar.</p>
 
       <div class="box-2">
         <div class="box-form">
@@ -20,12 +21,12 @@
 
             <div class="input-field">
               <label>Telefone/Celular</label>
-              <input ngDefaultControl appPhone class="input" type="tel" formControlName="telefone" placeholder="Informe seu Telefone/Celular">
+              <input ngDefaultControl appPhone class="input" type="tel" formControlName="telefone" placeholder="(00) 0 0000-0000">
               <span *ngIf="controlTelefoneHasError" class="input-error">Informe um Telefone/Celular</span>
             </div>
 
             <div class="input-field">
-              <label>Melhor horário para falar</label>
+              <label>Melhor horário para contato</label>
               <select ngDefaultControl class="select" formControlName="melhorHorario">
                 <option value="null" selected>Selecione</option>
                 <option value="MANHA">Manhã</option>
@@ -51,8 +52,6 @@
         </div>
 
         <div class="text">
-          <h5>A Imobiliária Dimensão</h5>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
 
           <div class="buttons">
             <a routerLink="/quem-somos" class="btn btn-sm btn-outline btn-primary-3">Conheça nossa história</a>
@@ -78,7 +77,8 @@
               <ul class="social">
                 <li><a target="_blank" href="https://www.facebook.com/ImobiliariaDimensao/"><span class="icon-facebook-rounded"></span></a></li>
                 <li><a target="_blank" href="https://www.instagram.com/dimensaoimobiliaria/"><span class="icon-instagram-rounded"></span></a></li>
-                <li><a target="_blank" href="https://wa.me/5544991591664?text=Ol%C3%A1%2C+estou+entrando+em+contato+atrav%C3%A9s+do+site."><span class="icon-whatsapp-rounded"></span></a></li>
+                <li><a target="_blank" href="https://www.youtube.com/channel/UCjxX6SqyxYL0onrYgG9ocRQ"><span class="icon-youtube-rounded"></span></a></li>
+                <li><a target="_blank" href="https://wa.me/5544991591664?text=Ol%C3%A1%2C+vim+atrav%C3%A9s+do+site."><span class="icon-whatsapp-rounded"></span></a></li>
               </ul>
             </li>
           </ul>
