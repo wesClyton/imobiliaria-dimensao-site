@@ -8,12 +8,33 @@ export class CurrencyBrPipe implements PipeTransform {
 
   constructor(
     private readonly maskApplierService: MaskApplierService
-  ) {}
+  ) { }
 
-  transform(value: string | number): string {
+  transform(value: string | number, inDirective: boolean = false): string {
+    value = typeof value === 'number' ? value.toString() : value;
+
+    let thousand!: string;
+    let decimal!: string;
+    let formated!: string;
+    if (!inDirective) {
+      if (!value.includes('.')) {
+        value = `${value}.00`;
+      }
+      if (value.includes('.')) {
+        decimal = value.substring(value.length - 2, value.length);
+        if (decimal.includes('.')) {
+          value = `${value}0`;
+        }
+      }
+      thousand = value.substring(0, value.length - 2);
+      decimal = value.substring(value.length - 2, value.length);
+      formated = thousand ? `${thousand},${decimal}` : '0';
+    }
+
     this.maskApplierService.thousandSeparator = '.';
-    const valueFormated = this.maskApplierService.applyMask(value?.toString(), 'separator.2');
-    return `R$ ${valueFormated}`;
+    this.maskApplierService.prefix = 'R$ ';
+    this.maskApplierService.suffix = '';
+    return this.maskApplierService.applyMask(formated ? formated : value, 'separator.2');
   }
 
 }

@@ -13,7 +13,7 @@ const routes: Routes = [
     component: AnnouncementListComponent
   },
   {
-    path: ':title/:id',
+    path: ':title/:code',
     component: AnnouncementDetailComponent
   }
 ];

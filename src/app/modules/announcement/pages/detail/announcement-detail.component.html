@@ -14,7 +14,7 @@
           <div *ngIf="announcement.areaTotal">
             <i class="icon-metragem"></i>
             <strong>Área</strong>
-            <p>{{ announcement.areaTotal | m2: true }}</p>
+            <p>{{ announcement.areaTotal | m2 }}</p>
           </div>
           <div *ngIf="announcement.suites">
             <i class="icon-dormitorios"></i>
@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="interesse">
         <button class="btn btn-sm btn-primary-3" (click)="openModal()">Tenho Interesse</button>
       </div>

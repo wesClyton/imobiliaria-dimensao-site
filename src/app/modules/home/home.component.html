@@ -15,8 +15,8 @@
         </div>
 
         <div #buttons class="buttons">
-          <a routerLink="{{ banner.link }}&destaque=true" class="btn btn-white">Ver destaques</a>
-          <a [routerLink]="banner.link" class="btn btn-primary">Encontre o seu</a>
+          <a routerLink="{{ ANNOUNCEMENT_CONFIG.pathFront }}/{{ banner.link }}&destaque=true" class="btn btn-white">Ver destaques</a>
+          <a routerLink="{{ ANNOUNCEMENT_CONFIG.pathFront }}/{{ banner.link }}" class="btn btn-primary">Encontre o seu</a>
         </div>
       </section>
     </ng-template>

@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
+import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 import { PathImagePipe } from '../../shared/pipes/path-image/path-image.pipe';
+import { ANNOUNCEMENT_CONFIG } from '../announcement/announcement.config';
 import { Banner } from '../banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../banner/services/banner-get-all.service';
 SwiperCore.use([Mousewheel, Pagination]);
@@ -29,6 +31,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   @ViewChildren('buttons')
   public buttonsDiv!: QueryList<ElementRef>;
+
+  public get ANNOUNCEMENT_CONFIG(): ModuleConfig {
+    return ANNOUNCEMENT_CONFIG;
+  }
 
   constructor(
     private readonly bannerGetAllService: BannerGetAllService,
