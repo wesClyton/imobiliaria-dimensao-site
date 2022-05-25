@@ -16,7 +16,7 @@ export class CurrencyBrPipe implements PipeTransform {
     let thousand!: string;
     let decimal!: string;
     let formated!: string;
-    if (!inDirective) {
+    if (value && !inDirective) {
       if (!value.includes('.')) {
         value = `${value}.00`;
       }

@@ -37,7 +37,7 @@ export class CurrencyBrDirective implements OnInit, OnDestroy {
     let decimal!: string;
     let formated!: string;
 
-    if (loadedValue) {
+    if (value && loadedValue) {
       if (!value.includes('.')) {
         value = `${value}.00`;
       }
@@ -60,6 +60,10 @@ export class CurrencyBrDirective implements OnInit, OnDestroy {
   }
 
   private formatDigits(value: string): string {
+    if (value === 'R$ ') {
+      return value;
+    }
+
     const thousand = value.split(',')[0];
     let digits = value.split(',')[1];
 
