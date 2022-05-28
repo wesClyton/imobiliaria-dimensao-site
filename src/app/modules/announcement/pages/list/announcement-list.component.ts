@@ -64,7 +64,6 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
   }
 
   private getAnnouncements(queryFilter?: Array<QueryFilterParam> | QueryFilterParam | null, type?: AnnouncementType): void {
-    this.pages = new Array<number>();
     this.announcementGetAllService.queryFilterRemove();
 
     this.announcementGetAllService.queryFilterAdd([
@@ -97,11 +96,16 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
       )
       .subscribe(announcements => {
         this.announcementGetAll = announcements;
-        const numberOfPagesToCreate = (Math.ceil(this.announcementGetAll.data.length / this.quantityItemsPerPage));
-        for(let i = 0; i <= (numberOfPagesToCreate - 1); i++) {
-          this.pages.push(i);
-        }
-      })
+        this.createPaginator();
+      });
+  }
+
+  private createPaginator(): void {
+    this.pages = new Array<number>();
+    const numberOfPages = (Math.ceil(this.announcementGetAll.count / this.quantityItemsPerPage));
+    for (let i = 0; i <= (numberOfPages - 1); i++) {
+      this.pages.push(i);
+    }
   }
 
   public goPage(page: number): void {

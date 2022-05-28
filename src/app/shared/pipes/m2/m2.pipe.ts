@@ -33,7 +33,7 @@ export class M2Pipe implements PipeTransform {
 
     this.maskApplierService.thousandSeparator = '.';
     this.maskApplierService.prefix = '';
-    this.maskApplierService.suffix = '';
+    this.maskApplierService.suffix = !inDirective ? 'm²' : '';
     return this.maskApplierService.applyMask(formated ? formated : value, 'separator.2');
   }
 

@@ -107,9 +107,20 @@ app-announcement-list-item {
 
   .btn {
     font-size: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include mobile-first(md) {
+      font-size: 0.65rem;
+    }
   }
 
   .btn-cursor-disabled {
+    width: 1.75rem;
+    height: 1.75rem;
+    min-width: 1.75rem;
+    min-height: 1.75rem;
+
     &:disabled {
       background-color: var(--primary-3) !important;
     }
