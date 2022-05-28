@@ -16,11 +16,13 @@
 
   img {
     width: 100%;
+    min-height: 217px;
     max-height: 217px;
     object-fit: cover;
     border-bottom: 1px solid var(--grey-5);
 
     @include mobile-first(md) {
+      min-height: 160px;
       max-height: 160px;
     }
   }

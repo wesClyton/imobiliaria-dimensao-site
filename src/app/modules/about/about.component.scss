@@ -12,7 +12,8 @@ img.about-banner {
 }
 
 .box-1 {
-  margin-top: 2rem;
+  margin: 2rem auto;
+  max-width: 1315px;
 
   @include mobile-first(lg) {
     display: flex;
@@ -53,7 +54,7 @@ h1 {
     flex-direction: row;
     gap: 3rem;
     padding: 4rem 0;
-    max-width: fit-content;
+    max-width: 1315px;
   }
 
   i {

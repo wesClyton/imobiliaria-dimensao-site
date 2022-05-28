@@ -9,7 +9,7 @@ export class ScrollTopService {
 
   scrollTop(element?: HTMLElement | undefined): void {
     if (!element) {
-      element = document.getElementsByTagName('main')[0] || undefined;
+      element = document.getElementById('main-header') || undefined;
     }
     if (element) {
       // setTimeout por causa do Firefox
