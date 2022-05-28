@@ -27,10 +27,10 @@
           <label>Melhor horário para contato</label>
           <select ngDefaultControl class="select" formControlName="melhorHorario">
             <option value="null" selected>Selecione</option>
-            <option value="MANHA">Manhã</option>
-            <option value="TARDE">Tarde</option>
-            <option value="NOITE">Noite</option>
-            <option value="TODOS">Todos</option>
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+            <option value="Todos">Todos</option>
           </select>
         </div>
 
@@ -41,8 +41,8 @@
         </div>
 
         <div class="input-field-checkbox">
-          <input type="checkbox" formControlName="concordo">
-          <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</span>
+          <input id="concordo" type="checkbox" formControlName="concordo">
+          <label for="concordo">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</label>
         </div>
 
         <button class="btn btn-sm btn-primary-3" type="submit" [disabled]="!controlConcordo?.value">Enviar</button>

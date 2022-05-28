@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize, take } from 'rxjs';
+import { LoadingService } from '../../core/loading/loading.service';
+import { NotificationService } from '../../core/notification/notification.service';
 import { FormService } from '../../shared/services/form/form.service';
+import { LeadType } from '../lead/enums/lead-type.enum';
+import { ContactFormService } from './contact-form.service';
+import { ContactLead } from './contact-lead.interface';
 
 @Component({
   selector: 'app-contact',
@@ -40,11 +46,11 @@ export class ContactComponent implements OnInit {
   }
 
   private get controlMensagem(): AbstractControl | null {
-    return this.form.get('melhorHorario');
+    return this.form.get('mensagem');
   }
 
   public get controlMensagemHasError(): boolean | undefined {
-    return this.controlMensagem?.dirty || this.controlMensagem?.hasError('required');
+    return this.controlMensagem?.dirty && this.controlMensagem?.hasError('required');
   }
 
   public get controlConcordo(): AbstractControl | null {
@@ -53,7 +59,10 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly formService: FormService
+    private readonly formService: FormService,
+    private readonly loadingService: LoadingService,
+    private readonly contactFormService: ContactFormService,
+    private readonly notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -76,6 +85,28 @@ export class ContactComponent implements OnInit {
       this.formService.validate(this.form);
       return;
     }
+
+    this.loadingService.show();
+
+    const lead: ContactLead = {
+      email: this.controlEmail?.value,
+      nome: this.controlNome?.value,
+      melhorHorario: this.controlMelhorHorario?.value,
+      mensagem: this.controlMensagem?.value,
+      telefone: this.controlTelefone?.value,
+      tipoForm: LeadType.Contato
+    }
+
+    this.contactFormService
+      .post(lead)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success('Formulário enviado com sucesso!');
+        this.form.reset();
+      });
   }
 
 }

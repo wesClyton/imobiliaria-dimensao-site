@@ -3,10 +3,14 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../../../core/loading/loading.service';
+import { NotificationService } from '../../../../core/notification/notification.service';
 import { FormService } from '../../../../shared/services/form/form.service';
 import { CharacteristicType } from '../../../characteristic/enums/characteristic-type.enum';
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
+import { LeadType } from '../../../lead/enums/lead-type.enum';
+import { AnnouncementLead } from '../../interfaces/announcement-lead.interface';
 import { Announcement } from '../../interfaces/announcement.interface';
+import { AnnouncementFormService } from '../../services/announcement-form.service';
 import { AnnouncementGetAllService } from '../../services/announcement-get-all.service';
 import { AnnouncementGetByIdService } from '../../services/announcement-get-by-id.service';
 
@@ -64,7 +68,9 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     private readonly announcementGetAllService: AnnouncementGetAllService,
     private readonly loadingService: LoadingService,
     private readonly formBuilder: FormBuilder,
-    private readonly formService: FormService
+    private readonly formService: FormService,
+    private readonly announcementFormService: AnnouncementFormService,
+    private readonly notificationService: NotificationService
   ) {
     this.setAnnouncement();
   }
@@ -157,6 +163,27 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
       this.formService.validate(this.form);
       return;
     }
+
+    this.loadingService.show();
+
+    const lead: AnnouncementLead = {
+      email: this.controlEmail?.value,
+      nome: this.controlNome?.value,
+      telefone: this.controlTelefone?.value,
+      tipoForm: LeadType.Anuncio,
+      codigoimovel: this.announcement.codigoAnuncio
+    }
+
+    this.announcementFormService
+      .post(lead)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success('Formulário enviado com sucesso!');
+        this.form.reset();
+      });
   }
 
   public toggleModal(): void {

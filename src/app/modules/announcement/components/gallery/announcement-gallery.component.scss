@@ -226,6 +226,8 @@
         img {
           @include heightGalleryModal();
           padding: 1rem;
+          height: auto !important;
+          min-height: auto !important;
         }
       }
     }

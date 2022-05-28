@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize, take } from 'rxjs';
+import { LoadingService } from '../../core/loading/loading.service';
+import { NotificationService } from '../../core/notification/notification.service';
 import { FormService } from '../../shared/services/form/form.service';
 import { AnnouncementType } from '../announcement/interfaces/announcement-type.interface';
+import { LeadType } from '../lead/enums/lead-type.enum';
+import { AnnounceLead } from './announce-lead.interface';
+import { AnnounceFormService } from './announce-form.service';
 
 @Component({
   selector: 'app-announce',
@@ -48,7 +54,10 @@ export class AnnounceComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly formService: FormService
+    private readonly formService: FormService,
+    private readonly announceFormService: AnnounceFormService,
+    private readonly loadingService: LoadingService,
+    private readonly notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -69,6 +78,27 @@ export class AnnounceComponent implements OnInit {
       this.formService.validate(this.form);
       return;
     }
+
+    this.loadingService.show();
+
+    const lead: AnnounceLead = {
+      email: this.controlEmail?.value,
+      nome: this.controlNome?.value,
+      telefone: this.controlTelefone?.value,
+      tipoForm: LeadType.Anuncie,
+      tipoImovel: this.controlTipoImovel?.value
+    }
+
+    this.announceFormService
+      .post(lead)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(() => {
+        this.notificationService.success('Formulário enviado com sucesso!');
+        this.form.reset();
+      });
   }
 
 }

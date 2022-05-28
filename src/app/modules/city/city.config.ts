@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 
-const PATH: string = 'cities';
+const PATH: string = 'cidades';
 
 export const CITY_CONFIG: ModuleConfig = {
   name: 'Cidade',

@@ -18,7 +18,7 @@ export class PhonePipe implements PipeTransform {
   }
 
   private hasNinthDigit(value: string): boolean {
-    return value.length > 10;
+    return value?.length > 10;
   }
 
 }
