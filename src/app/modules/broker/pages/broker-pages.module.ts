@@ -4,12 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AnchorContactModule } from '../../../shared/components/anchor-contact/anchor-contact.module';
 import { ButtonWhatsappModule } from '../../../shared/components/button-whatsapp/button-whatsapp.module';
 import { PipesModule } from '../../../shared/pipes/pipes.module';
+import { BrokerGetAllResolver } from '../resolvers/broker-get-all.resolver';
 import { BrokerComponent } from './list/broker.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: BrokerComponent
+    component: BrokerComponent,
+    resolve: {
+      brokerGetAll: BrokerGetAllResolver
+    }
   }
 ];
 
