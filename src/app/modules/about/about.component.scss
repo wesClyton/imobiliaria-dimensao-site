@@ -92,11 +92,10 @@ h1 {
     }
 
     p {
-      text-align: center;
 
-      @include mobile-first(sm) {
-        text-align: justify;
-        text-align-last: left;
+      @include mobile-first(lg) {
+        text-align:  center;
+        text-align-last: center;
       }
 
     }
