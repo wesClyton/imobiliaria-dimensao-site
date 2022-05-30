@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('icons/icomoon.eot?a2ahj9');
-  src:  url('icons/icomoon.eot?a2ahj9#iefix') format('embedded-opentype'),
+  src: url('icons/icomoon.eot?a2ahj9');
+  src: url('icons/icomoon.eot?a2ahj9#iefix') format('embedded-opentype'),
     url('icons/icomoon.ttf?a2ahj9') format('truetype'),
     url('icons/icomoon.woff?a2ahj9') format('woff'),
     url('icons/icomoon.svg?a2ahj9#icomoon') format('svg');
@@ -10,7 +10,8 @@
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   font-style: normal;
@@ -27,78 +28,103 @@
 .icon-shower:before {
   content: "\e919";
 }
+
 .icon-youtube-rounded:before {
   content: "\e918";
 }
+
 .icon-mail-rounded:before {
   content: "\e917";
 }
+
 .icon-suite:before {
   content: "\e90a";
 }
+
 .icon-close:before {
   content: "\e90b";
 }
+
 .icon-compromisso:before {
   content: "\e90c";
 }
+
 .icon-comunicacao:before {
   content: "\e90d";
 }
+
 .icon-dormitorios:before {
   content: "\e90e";
 }
+
 .icon-facebook-rounded:before {
   content: "\e90f";
 }
+
 .icon-garagem:before {
   content: "\e910";
 }
+
 .icon-instagram-rounded:before {
   content: "\e911";
 }
+
 .icon-interessados:before {
   content: "\e912";
 }
+
 .icon-linkedin-rounded:before {
   content: "\e913";
 }
+
 .icon-metragem:before {
   content: "\e914";
 }
+
 .icon-qualidade:before {
   content: "\e915";
 }
+
 .icon-whatsapp-rounded:before {
   content: "\e916";
 }
+
 .icon-arrow-right:before {
   content: "\e900";
 }
+
 .icon-facebook:before {
   content: "\e901";
 }
-.icon-icon-menu:before {
+
+.icon-menu:before {
   content: "\e902";
 }
-.icon-icon-menu-active:before {
+
+.icon-menu-active:before {
   content: "\e903";
 }
+
 .icon-instagram:before {
   content: "\e904";
 }
+
 .icon-linkedin:before {
   content: "\e905";
 }
+
 .icon-mail:before {
   content: "\e906";
 }
+
 .icon-phone:before {
   content: "\e907";
 }
+
 .icon-youtube:before {
   content: "\e908";
 }
+
 .icon-address:before {
   content: "\e909";
 }

@@ -22,28 +22,13 @@ header {
   }
 
   @include mobile-first(lg) {
+    display: initial;
     background-color: transparent;
   }
 
-  @include mobile-first(lg) {
-    justify-content: space-between;
-    flex-direction: column;
-  }
-
-  @include mobile-first(xl) {
-    padding: 1rem 2.5rem 0 2.5rem;
-  }
-
   .logo {
-    @include mobile-first(lg) {
-      margin-right: 2rem;
-      flex: 0;
-    }
 
-    @include mobile-first(xl) {
-      margin-right: 1rem;
-      flex: 0.25;
-    }
+    display: inline-block;
 
     a {
       padding: 0;
@@ -75,10 +60,7 @@ header {
 
 .nav {
 
-  @include mobile-first(lg) {
-    display: flex;
-    align-items: center;
-  }
+  position: relative;
 
   .menu {
     width: 100%;
@@ -98,36 +80,16 @@ header {
     transform: translateX(-100vw);
 
     @include mobile-first(lg) {
-      opacity: 1;
+      display: initial;
+      position: absolute;
       transform: translateX(0);
-      position: relative;
-      height: auto;
-      background-color: transparent;
-      display: flex;
-      flex-direction: row;
-      flex: 1;
+      opacity: 1;
+      background: transparent;
+    }
 
-      ul {
-        width: 100%;
-        text-align: right;
-
-        li {
-          display: inline-block;
-          padding: 1rem 2rem;
-
-          &:last-child {
-            padding-right: 0;
-          }
-
-          a {
-            font-size: 1.25rem;
-            padding: 0;
-
-            &:hover {
-              color: var(--primary-1) !important;
-            }
-          }
-        }
+    li {
+      @include mobile-first(lg) {
+        display: inline-block;
       }
     }
   }
@@ -138,6 +100,21 @@ header {
     color: var(--grey-1) !important;
     font-size: 1rem;
     text-align: center;
+
+    @include mobile-first(lg) {
+      padding: 0.3rem;
+      font-size: 0.62rem;
+    }
+
+    @include mobile-first(xl) {
+      padding: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    @include mobile-first(xxl) {
+      padding: 0.5rem;
+      font-size: 0.875rem;
+    }
   }
 }
 
@@ -155,13 +132,38 @@ header {
   width: 100%;
 
   @include mobile-first(lg) {
-    flex: 1;
+    position: absolute;
+    width: 135px;
+    top: 20px;
+    right: 0;
   }
+
+  @include mobile-first(xl) {
+    width: 180px;
+  }
+
+  @include mobile-first(xxl) {
+    width: 220px;
+    top: 10px;
+  }
+  
 
   .item a {
     text-transform: uppercase;
     font-weight: 700;
     font-size: 0.85rem;
+
+    @include mobile-first(lg) {
+      font-size: 0.62rem;
+    }
+
+    @include mobile-first(xl) {
+      font-size: 0.75rem;
+    }
+
+    @include mobile-first(xxl) {
+      font-size: 0.875rem;
+    }
   }
 
   .item-menu {
@@ -178,31 +180,9 @@ header {
     padding: 1rem 0;
     box-shadow: 0 0px 10px rgba(var(--black-rgb), 0.25);
 
-    @include mobile-first(lg) {
-      border-radius: 0.5rem;
-    }
-
     a {
       text-transform: capitalize;
       font-weight: 400;
-    }
-  }
-
-  @include mobile-first(lg) {
-    display: flex;
-    justify-content: flex-end;
-
-    .item a {
-      font-size: 0.5rem;
-      padding: 0.5rem;
-    }
-  }
-
-  @include mobile-first(xl) {
-    flex: 1;
-
-    .item a {
-      font-size: 0.75rem;
     }
   }
 
@@ -242,14 +222,6 @@ header {
       }
     }
   }
-
-  .menu-main {
-    opacity: 0.25;
-
-    @include mobile-first(lg) {
-      opacity: 1;
-    }
-  }
 }
 
 
@@ -257,26 +229,22 @@ header {
   margin-bottom: 2rem;
 
   @include mobile-first(lg) {
-    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 53%;
+    width: 585px;
+    transform: translateX(-50%);
     margin-bottom: 0;
-    align-items: center;
-
-    li {
-      margin: 0 0.25rem;
-    }
-
-    a {
-      font-size: 0.75rem;
-      padding: 0.5rem;
-    }
   }
 
   @include mobile-first(xl) {
-    flex: 2;
-    justify-content: center;
-
-    a {
-      font-size: 0.85rem;
-    }
+    left: 50%;
+    width: 741px;
   }
+
+  @include mobile-first(xxl) {
+    width: 947px;
+    top: 10px;
+  }
+  
 }
