@@ -19,6 +19,51 @@ header {
 
   &.no-fixed {
     position: relative;
+    display: inline-block;
+
+    .menu-main {
+      margin-bottom: 2rem;
+    
+      @include mobile-first(lg) {
+        width: 485px;
+
+        a {
+          font-size: 0.75rem;
+        }
+      }
+    
+      @include mobile-first(xl) {
+        width: 530px;
+      }
+    
+      @include mobile-first(xxl) {
+        width: 595px;
+      }
+    }
+  }
+
+  .menu-main {
+    margin-bottom: 2rem;
+  
+    @include mobile-first(lg) {
+      position: absolute;
+      top: 20px;
+      left: 53%;
+      width: 585px;
+      transform: translateX(-50%);
+      margin-bottom: 0;
+    }
+  
+    @include mobile-first(xl) {
+      left: 50%;
+      width: 741px;
+    }
+  
+    @include mobile-first(xxl) {
+      width: 947px;
+      top: 10px;
+    }
+    
   }
 
   @include mobile-first(lg) {
@@ -133,21 +178,15 @@ header {
 
   @include mobile-first(lg) {
     position: absolute;
-    width: 135px;
+    width: auto;
     top: 20px;
     right: 0;
   }
 
-  @include mobile-first(xl) {
-    width: 180px;
-  }
-
   @include mobile-first(xxl) {
-    width: 220px;
     top: 10px;
   }
   
-
   .item a {
     text-transform: uppercase;
     font-weight: 700;
@@ -222,29 +261,4 @@ header {
       }
     }
   }
-}
-
-
-.menu-main {
-  margin-bottom: 2rem;
-
-  @include mobile-first(lg) {
-    position: absolute;
-    top: 20px;
-    left: 53%;
-    width: 585px;
-    transform: translateX(-50%);
-    margin-bottom: 0;
-  }
-
-  @include mobile-first(xl) {
-    left: 50%;
-    width: 741px;
-  }
-
-  @include mobile-first(xxl) {
-    width: 947px;
-    top: 10px;
-  }
-  
 }
