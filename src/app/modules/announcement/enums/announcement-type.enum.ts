@@ -4,6 +4,5 @@ export enum AnnouncementType {
   TerrenoUrbano = 'TERRENO_URBANO',
   Apartamento = 'APARTAMENTO',
   TerronoRural = 'TERRENO_RURAL',
-  Comercial = 'COMERCIAL',
-  Loteamento = 'LOTEAMENTO'
+  Comercial = 'COMERCIAL'
 }

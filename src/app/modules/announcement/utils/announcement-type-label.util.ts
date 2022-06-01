@@ -7,7 +7,6 @@ export class AnnouncementTypeLabel {
       APARTAMENTO: 'Apartamento',
       CASA: 'Casa',
       COMERCIAL: 'Comercial',
-      LOTEAMENTO: 'Loteamento',
       SOBRADO: 'Sobrado',
       TERRENO_RURAL: 'Terreno Rural',
       TERRENO_URBANO: 'Terreno Urbano'
