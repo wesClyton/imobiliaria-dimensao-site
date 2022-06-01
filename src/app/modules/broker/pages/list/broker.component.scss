@@ -128,7 +128,7 @@
     top: 40%;
     left: calc(50% - 300px / 2);
     max-width: 310px;
-    width: 90%;
+    max-width: 100%;
     background: var(--white);
     border-radius: 25px;
     opacity: 0;
