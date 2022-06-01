@@ -96,10 +96,6 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
     return this.controlTipo?.value === AnnouncementTypeEnum.TerronoRural;
   }
 
-  public get typeIsLoteamento(): boolean {
-    return this.controlTipo?.value === AnnouncementTypeEnum.Loteamento;
-  }
-
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,

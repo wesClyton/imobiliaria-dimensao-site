@@ -38,7 +38,7 @@
   </div>
 
   <ng-container *ngIf="showFiltersAdvanced">
-    <div *ngIf="!typeIsLoteamento" class="box-2">
+    <div class="box-2">
       <div class="item">
         <div class="input-field">
           <label>Valor mínimo</label>
@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div *ngIf="!typeIsTerrenoUrbano && !typeIsTerronoRural && !typeIsLoteamento" class="box-3">
+    <div *ngIf="!typeIsTerrenoUrbano && !typeIsTerronoRural" class="box-3">
       <div *ngIf="!typeIsComercial" class="input-field">
         <label>Banheiros</label>
         <div class="quantities-filter">
@@ -104,7 +104,7 @@
   </ng-container>
 
   <div class="buttons">
-    <button *ngIf="!typeIsLoteamento" class="btn btn-sm btn-primary-4 btn-outline" type="button" (click)="toggleTypeFilter()">
+    <button class="btn btn-sm btn-primary-4 btn-outline" type="button" (click)="toggleTypeFilter()">
       {{ showFiltersAdvanced ? 'Filtros básicos' : 'Filtros avançados' }}
     </button>
     <button class="btn btn-sm btn-primary-3" type="submit">Buscar</button>
