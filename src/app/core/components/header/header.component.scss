@@ -23,7 +23,7 @@ header {
 
     .menu-main {
       margin-bottom: 2rem;
-    
+
       @include mobile-first(lg) {
         width: 485px;
 
@@ -31,11 +31,11 @@ header {
         font-size: 0.75rem;
       }
       }
-    
+
       @include mobile-first(xl) {
         width: 530px;
       }
-    
+
       @include mobile-first(xxl) {
         width: 595px;
       }
@@ -44,7 +44,7 @@ header {
 
   .menu-main {
     margin-bottom: 2rem;
-  
+
     @include mobile-first(lg) {
       position: absolute;
       top: 20px;
@@ -53,17 +53,17 @@ header {
       transform: translateX(-50%);
       margin-bottom: 0;
     }
-  
+
     @include mobile-first(xl) {
       left: 50%;
       width: 741px;
     }
-  
+
     @include mobile-first(xxl) {
       width: 947px;
       top: 15px;
     }
-    
+
   }
 
   @include mobile-first(lg) {
@@ -72,8 +72,12 @@ header {
   }
 
   .logo {
-
     display: inline-block;
+    position: relative;
+
+    @include mobile-first(md) {
+      z-index: 10;
+    }
 
     a {
       padding: 0;
@@ -128,6 +132,7 @@ header {
     flex-direction: column;
     opacity: 0;
     transform: translateX(-100vw);
+    z-index: 5;
 
     @include mobile-first(lg) {
       display: initial;
@@ -191,7 +196,7 @@ header {
   @include mobile-first(xxl) {
     top: 10px;
   }
-  
+
   .item a {
     text-transform: uppercase;
     font-weight: 700;
