@@ -34,6 +34,8 @@ export class QueryFilter {
   }
 
   public static concat(queryFilter: QueryFilterParam | Array<QueryFilterParam>, currentQuery: string): string {
+    this.queryFilter = '';
+
     if (currentQuery) {
       this.queryFilter = currentQuery;
     }
