@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ExceptionService } from '../../exception/exception.service';
+import { StringUtil } from '../../utils/string.util';
 import { QueryFilter } from '../query-filter/query-filter';
 import { QueryFilterParam } from '../query-filter/query-filter.interface';
 import { HttpGetAll } from './http-get-all.interface';
@@ -32,7 +33,15 @@ export class HttpGetAllService<GetAll> implements HttpGetAll<GetAll> {
   }
 
   public queryFilterAdd(query: QueryFilterParam | Array<QueryFilterParam>): void {
-    this.queryFilter = QueryFilter.concat(query, this.queryFilter);
+    if (StringUtil.isArray(query)) {
+      if ((query as Array<QueryFilterParam>).length) {
+        this.queryFilter = QueryFilter.concat(query, this.queryFilter);
+      }
+      return;
+    }
+    if (query) {
+      this.queryFilter = QueryFilter.concat(query, this.queryFilter);
+    }
   }
 
   public queryFilterRemove(): void {

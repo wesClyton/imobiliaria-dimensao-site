@@ -43,4 +43,12 @@ export class StringUtil {
     return value.startsWith('http') || value.startsWith('www');
   }
 
+  public static isBoolean(value: any): boolean {
+    return typeof value === 'boolean'
+  }
+
+  public static isArray(value: any): boolean {
+    return Array.isArray(value);
+  }
+
 }
