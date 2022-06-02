@@ -171,9 +171,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
   public iconPin(announcement: Announcement): IconPin {
     return {
       url: `assets/${IconPinImage[announcement.tipo]}`,
-      scaledSize: new google.maps.Size(40, 40),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(0, 0),
+      scaledSize: new google.maps.Size(40, 40)
     }
   };
 
