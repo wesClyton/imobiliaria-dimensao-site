@@ -14,12 +14,12 @@
 }
 
 h1 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   text-align: center;
   color: var(--primary-2);
 
   @include mobile-first(lg) {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
   }
 }
 
@@ -61,7 +61,7 @@ h1 {
 
     label {
       cursor: pointer;
-      font-size: 0.5rem;
+      font-size: 0.75rem;
       font-family: var(--font-family-700);
     }
   }
@@ -103,13 +103,13 @@ h1 {
       border-top: 1px solid var(--grey-4);
 
       strong {
-        font-size: 0.75rem;
+        font-size: 1rem;
         margin-bottom: 0.5rem;
         display: block;
       }
 
       .link-map {
-        font-size: 0.55rem;
+        font-size: 0.75rem;
         color: var(--primary-3);
         text-decoration: underline;
         font-family: var(--font-family-700);

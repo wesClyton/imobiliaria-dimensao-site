@@ -55,35 +55,35 @@
     }
 
     h2 {
-      font-size: 1.15rem;
+      font-size: 1.35rem;
       color: var(--white);
 
       @include mobile-first(md) {
-        font-size: 1.225rem;
+        font-size: 1.425rem;
       }
 
       @include mobile-first(lg) {
-        font-size: 1.625rem;
+        font-size: 1.825rem;
       }
     }
 
     p {
-      font-size: 0.75rem;
+      font-size: 1rem;
       text-align: center;
 
       @include mobile-first(md) {
-        font-size: 0.75rem;
+        font-size: 1rem;
         text-align: left;
       }
 
       @include mobile-first(lg) {
-        font-size: 0.875rem;
+        font-size: 1.2rem;
       }
     }
 
     a {
       width: 160px;
-      font-size: 0.62rem;
+      font-size: 0.82rem;
       border: 1px solid var(--primary-4);
 
       @include mobile-first(md) {
@@ -93,7 +93,7 @@
 
       @include mobile-first(lg) {
         width: 190px;
-        font-size: 0.62rem;
+        font-size: 0.82rem;
       }
     }
   }

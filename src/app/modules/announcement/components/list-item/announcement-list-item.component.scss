@@ -38,22 +38,22 @@
   .type {
     color: var(--primary-3);
     display: block;
-    font-size: 0.65rem;
+    font-size: 0.85rem;
   }
 
   .title {
-    font-size: 1rem;
+    font-size: 1.25rem;
     color: var(--grey-2);
   }
 
   .address {
-    font-size: 0.75rem;
+    font-size: 1rem;
     color: var(--grey-2);
     text-align: left;
   }
 
   .sobre {
-    font-size: 0.625rem;
+    font-size: 0.825rem;
     color: var(--grey-2);
   }
 }
@@ -75,8 +75,8 @@
 
     span {
       display: inline-block;
-      font-size: 0.6875rem;
-      line-height: 0.6275rem;
+      font-size: 0.8875rem;
+      line-height: 0.8275rem;
     }
 
     i {
@@ -91,16 +91,16 @@
       border-radius: 5px;
 
       &.icon-metragem {
-        font-size: 0.42rem;
+        font-size: 0.62rem;
       }
       &.icon-dormitorios {
-        font-size: 0.55rem;
+        font-size: 0.75rem;
       }
       &.icon-shower {
-        font-size: 0.625rem;
+        font-size: 0.825rem;
       }
       &.icon-garagem {
-        font-size: 0.625rem;
+        font-size: 0.825rem;
       }
     }
   }

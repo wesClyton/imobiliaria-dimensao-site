@@ -11,7 +11,7 @@
 
 h1 {
   padding-bottom: 1.875rem;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   text-align: center;
   color: var(--primary-2);
 
@@ -23,7 +23,7 @@ h1 {
 .legend-pins {
   ul {
     padding: 1rem;
-    font-size: 0.5rem;
+    font-size: 0.75rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -42,7 +42,7 @@ h1 {
 
     &::after {
       content: '\2022';
-      font-size: 2rem;
+      font-size: 2.2rem;
       max-height: 12px;
       display: flex;
       justify-content: center;
@@ -127,7 +127,7 @@ map-info-window {
       padding: 0.2rem 0.6rem 0.6rem;
 
       h2 {
-        font-size: 0.62rem;
+        font-size: 0.82rem;
         padding: 0.25rem 0 0.25rem;
         color: var(--primary-1);
         text-align: center;
@@ -141,7 +141,7 @@ map-info-window {
 
         p {
           padding: 0;
-          font-size: 0.68rem;
+          font-size: 0.88rem;
           font-weight: 600;
           color: var(--grey-1);
           text-align: center;
@@ -150,7 +150,7 @@ map-info-window {
         a {
           display: block;
           text-align: center;
-          font-size: 0.55rem;
+          font-size: 0.75rem;
           color: var(--primary-3);
           text-decoration: underline;
           font-family: var(--font-family-700);
@@ -178,23 +178,23 @@ map-info-window {
             flex-basis: 100%;
           }
 
-          font-size: 0.62rem;
+          font-size: 0.82rem;
 
           i {
             color: var(--primary-3);
             margin-right: 0.25rem;
 
             &.icon-metragem {
-              font-size: 0.425rem;
+              font-size: 0.625rem;
             }
             &.icon-dormitorios {
-              font-size: 0.525rem;
+              font-size: 0.725rem;
             }
             &.icon-banheiros {
-              font-size: 0.82rem;
+              font-size: 1rem;
             }
             &.icon-garagem {
-              font-size: 0.65rem;
+              font-size: 0.85rem;
             }
           }
         }

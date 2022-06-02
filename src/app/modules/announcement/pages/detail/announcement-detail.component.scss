@@ -1,7 +1,7 @@
 @import 'mixins';
 
 .heading {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: var(--grey-2);
 }
 
@@ -87,7 +87,7 @@
     }
 
     h5 {
-      font-size: 1.15rem;
+      font-size: 1.35rem;
     }
 
     .close-button {
@@ -112,7 +112,7 @@
       text-align: center;
       padding: 0;
       margin-top: 1.5rem;
-      font-size: 0.75rem;
+      font-size: 1rem;
     }
 
   }
@@ -121,16 +121,16 @@
 .announcement {
   color: var(--grey-2);
   .type {
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     color: var(--primary-3);
     display: block;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
   .address {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
   .amount {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 }
 
@@ -155,7 +155,7 @@
 
   div {
     width: fit-content;
-    font-size: 0.75rem;
+    font-size: 1rem;
     display: flex;
     flex-direction: row;
     border: 1px solid var(--grey-4);
@@ -177,39 +177,39 @@
       align-items: center;
 
       &.icon-metragem {
-        font-size: 0.60rem;
+        font-size: 0.80rem;
       }
       &.icon-suite {
-        font-size: 1rem;
+        font-size: 1.2rem;
       }
       &.icon-dormitorios {
-        font-size: 0.65rem;
+        font-size: 0.85rem;
       }
       &.icon-shower {
-        font-size: 0.8rem;
+        font-size: 1rem;
       }
       &.icon-garagem {
-        font-size: 0.75rem;
+        font-size: 0.95rem;
       }
     }
 
     strong {
-      font-size: 0.625rem;
+      font-size: 0.825rem;
 
       @include mobile-first(md) {
-        font-size: 0.75rem;
+        font-size: 0.95rem;
       }
     }
 
     p {
-      font-size: 0.625rem;
-      line-height: 0.625rem;
+      font-size: 0.825rem;
+      line-height: 0.825rem;
       padding-bottom: 0;
       transform: translateY(2px);
 
       @include mobile-first(md) {
-        font-size: 0.75rem;
-        line-height: 0.75rem;
+        font-size: 0.95rem;
+        line-height: 0.95rem;
       }
     }
   }
@@ -238,7 +238,7 @@
       padding: 0.5rem;
       border: 1px dashed var(--grey-4);
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.95rem;
       border-radius: 8px;
     }
   }
