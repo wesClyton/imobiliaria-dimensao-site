@@ -72,6 +72,10 @@ h1 {
   }
 }
 
+.textarea {
+  resize: vertical;
+}
+
 .text {
 
   @include mobile-first(lg) {
