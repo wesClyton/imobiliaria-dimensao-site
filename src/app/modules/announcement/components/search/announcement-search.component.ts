@@ -150,6 +150,11 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
     if (type?.includes('&')) {
       type = type.split('&')[0] as AnnouncementTypeEnum;
     }
+
+    if (type?.includes(',')) {
+      type = type.split(',')[0] as AnnouncementTypeEnum;
+    }
+
     if (type) {
       this.possibleQueries = {
         tipo: type,
@@ -221,17 +226,23 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.districtGetAllService.queryFilterAdd({
-      field: 'cidadeId',
-      value: cityId
-    });
+    this.districtGetAllService.queryFilterAdd([
+      {
+        field: 'cidadeId',
+        value: cityId
+      },
+      {
+        field: 'take',
+        value: 999
+      }
+    ]);
 
     this.districtGetAllService
       .getAll()
       .pipe(take(1))
       .subscribe((districts) => {
         this.districts = districts;
-        if (this.possibleQueries.bairroId) {
+        if (this.possibleQueries?.bairroId) {
           setTimeout(() => this.controlBairro?.setValue(this.possibleQueries.bairroId), 0);
         }
       });
@@ -260,7 +271,7 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.router.navigate([ANNOUNCEMENT_CONFIG.pathFront], { queryParams  });
+    this.router.navigate([ANNOUNCEMENT_CONFIG.pathFront], { queryParams });
   }
 
 }

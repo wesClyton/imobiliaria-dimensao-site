@@ -25,7 +25,8 @@ header {
       margin-bottom: 2rem;
 
       @include mobile-first(lg) {
-        width: 485px;
+        width: 647px;
+        left: 55%;
 
         a {
           font-size: 1rem;
@@ -33,11 +34,12 @@ header {
       }
 
       @include mobile-first(xl) {
-        width: 530px;
+        width: 750px;
+        left: 53%;
       }
 
       @include mobile-first(xxl) {
-        width: 595px;
+        width: 748px;
       }
     }
   }
@@ -56,11 +58,11 @@ header {
 
     @include mobile-first(xl) {
       left: 50%;
-      width: 741px;
+      width: 773px;
     }
 
     @include mobile-first(xxl) {
-      width: 947px;
+      width: 806px;
       top: 15px;
     }
 

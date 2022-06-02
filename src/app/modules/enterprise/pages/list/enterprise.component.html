@@ -1,0 +1,26 @@
+<section class="box-1">
+  <h1>Conheça nossos Empreendimentos</h1>
+  <p>
+    Sempre atualizados com as mudanças do mercado imobiliário, cultivando relacionamentos de respeito e transparência, os corretores da Dimensão buscam a melhor opção para você.
+  </p>
+</section>
+
+<section class="box-2">
+  <div
+    *ngFor="let enterprise of enterprises;"
+    (click)="openLink(enterprise)"
+    class="enterprise">
+    <div>
+      <img [src]="enterprise.foto | pathImage: 'empreendimentos'" [alt]="enterprise.nome">
+      <button class="icon-arrow-right"></button>
+    </div>
+
+    <div>
+      <h2>{{ enterprise.nome }}</h2>
+      <h5>{{ enterprise.cidade | cityState }}</h5>
+      <p *ngIf="enterprise.descricao">{{ enterprise.descricao | resumeText : 120 }}</p>
+    </div>
+  </div>
+</section>
+
+<app-anchor-contact></app-anchor-contact>

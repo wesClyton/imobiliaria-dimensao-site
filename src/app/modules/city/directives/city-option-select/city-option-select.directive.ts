@@ -16,6 +16,10 @@ export class CityOptionSelectDirective implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.cityService.queryFilterAdd({
+      field: 'take',
+      value: 999
+    })
     this.cityService.getAll().pipe(take(1)).subscribe(cities => this.dataFinded.next(cities));
   }
 
