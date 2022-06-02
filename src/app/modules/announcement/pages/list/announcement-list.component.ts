@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
+import { ScrollTopService } from 'src/app/shared/services/scroll-top/scroll-top.service';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { QueryFilterParam } from '../../../../shared/http/query-filter/query-filter.interface';
 import { AnnouncementType } from '../../enums/announcement-type.enum';
@@ -25,7 +26,8 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
   constructor(
     private readonly announcementGetAllService: AnnouncementGetAllService,
     private readonly loadingService: LoadingService,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly scrollTopService: ScrollTopService,
   ) {
     this.loadingService.show();
   }
@@ -117,6 +119,7 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
     }
 
     this.getAnnouncements(queryFilter);
+    this.scrollTopService.scrollTop(document.getElementsByTagName('h6')[0]);
   }
 
   public clickPrevious(currentPage: number): void {

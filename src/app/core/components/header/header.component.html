@@ -17,7 +17,8 @@
       <div class="menu-main">
         <ng-container *ngIf="isHome">
           <li *ngFor="let banner of banners;">
-            <a *ngIf="!StringUtil.isUrl(banner.link)" routerLink="{{ ANNOUNCEMENT_CONFIG.pathFront }}/{{ banner.link }}" (click)="showMenu()">{{ banner.nome }}</a>
+            <a *ngIf="StringUtil.isUrlAnnouncementType(banner.link)" routerLink="{{ ANNOUNCEMENT_CONFIG.pathFront }}/{{ banner.link }}" (click)="showMenu()">{{ banner.nome }}</a>
+            <a *ngIf="StringUtil.isUrlInternal(banner.link)" routerLink="{{ banner.link }}" (click)="showMenu()">{{ banner.nome }}</a>
             <a *ngIf="StringUtil.isUrl(banner.link)" target="_blank" [href]="banner.link" (click)="showMenu()">{{ banner.nome }}</a>
           </li>
         </ng-container>
@@ -26,6 +27,7 @@
           <li><a (click)="navigateHome()">Início</a></li>
           <li><a (click)="navigateQuemSomos()">Quem somos</a></li>
           <li><a (click)="navigateAnuncios()">Anúncios</a></li>
+          <li><a (click)="navigateEmpreendimentos()">Empreendimentos</a></li>
           <li><a (click)="navigateAnuncie()">Anuncie</a></li>
           <li><a (click)="navigateCorretores()">Corretores</a></li>
           <li><a (click)="navigateContato()">Contato</a></li>
@@ -41,6 +43,7 @@
             <li><a (click)="navigateHome()">Início</a></li>
             <li><a (click)="navigateQuemSomos()">Quem somos</a></li>
             <li><a (click)="navigateAnuncios()">Anúncios</a></li>
+            <li><a (click)="navigateEmpreendimentos()">Empreendimentos</a></li>
             <li><a (click)="navigateAnuncie()">Anuncie</a></li>
             <li><a (click)="navigateCorretores()">Corretores</a></li>
             <li class="item"><a (click)="navigateContato()">Contato</a></li>

@@ -1,7 +1,7 @@
 <form class="form" [formGroup]="form" (ngSubmit)="submit()">
   <div class="box-1">
     <div class="input-field">
-      <label>Tipo</label>
+      <label>Tipo do Imóvel</label>
       <select ngDefaultControl class="select" formControlName="tipo">
         <option value="null" selected>Selecione o Tipo</option>
         <ng-container appAnnouncementTypeOptionSelect (dataFinded)="announcementTypes = $event">

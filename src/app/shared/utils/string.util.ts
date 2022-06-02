@@ -1,3 +1,5 @@
+import { AnnouncementType } from "src/app/modules/announcement/enums/announcement-type.enum";
+
 export class StringUtil {
 
   public static removeSpecialCharacteres(value: string): string {
@@ -41,6 +43,16 @@ export class StringUtil {
 
   public static isUrl(value: string): boolean {
     return value.startsWith('http') || value.startsWith('www');
+  }
+
+  public static isUrlAnnouncementType(value: string): boolean {
+
+    const valueEnum = Object.values(AnnouncementType).filter(valueEnum => value.includes(valueEnum));
+    return valueEnum.length ? true : false;
+  }
+
+  public static isUrlInternal(value: string): boolean {
+    return value.startsWith('/');
   }
 
   public static isBoolean(value: any): boolean {

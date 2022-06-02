@@ -14,7 +14,8 @@
         <h6>Imóveis</h6>
         <ul>
           <li *ngFor="let banner of banners;">
-            <a *ngIf="!StringUtil.isUrl(banner.link)" routerLink="{{ ANNOUNCEMENT_CONFIG.pathFront }}/{{ banner.link }}">{{ banner.nome }}</a>
+            <a *ngIf="StringUtil.isUrlAnnouncementType(banner.link)" routerLink="{{ ANNOUNCEMENT_CONFIG.pathFront }}/{{ banner.link }}">{{ banner.nome }}</a>
+            <a *ngIf="StringUtil.isUrlInternal(banner.link)" routerLink="{{ banner.link }}">{{ banner.nome }}</a>
             <a *ngIf="StringUtil.isUrl(banner.link)" target="_blank" [href]="banner.link">{{ banner.nome }}</a>
           </li>
         </ul>
@@ -68,6 +69,7 @@
       </nav>
 
       <ul class="social">
+        <li><a class="icon-border" target="_blank" href="https://wa.me/5544991591664?text=Ol%C3%A1%2C+vim+atrav%C3%A9s+do+site."><span class="icon-whatsapp-rounded"></span></a></li>
         <li><a class="icon-border" target="_blank" href="https://www.facebook.com/ImobiliariaDimensao/"><span class="icon-facebook"></span></a></li>
         <li><a class="icon-border" target="_blank" href="https://www.instagram.com/dimensaoimobiliaria/?hl=pt"><span class="icon-instagram"></span></a></li>
         <li><a class="icon-border" target="_blank" href="https://www.youtube.com/channel/UCjxX6SqyxYL0onrYgG9ocRQ"><span class="icon-youtube"></span></a></li>

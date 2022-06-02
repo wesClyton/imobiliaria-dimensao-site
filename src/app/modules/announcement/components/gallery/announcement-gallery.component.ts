@@ -68,9 +68,7 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
   public get iconPin(): IconPin {
     return {
       url: `assets/${IconPinImage[this.announcement?.tipo]}`,
-      scaledSize: new google.maps.Size(40, 40),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(0, 0)
+      scaledSize: new google.maps.Size(40, 40)
     }
   };
 

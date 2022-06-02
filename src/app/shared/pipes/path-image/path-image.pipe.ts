@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 
-const PathsImage = ['anuncios', 'banners', 'corretores'] as const;
+const PathsImage = ['anuncios', 'banners', 'corretores', 'empreendimentos'] as const;
 
 type PathImageType = typeof PathsImage[number];
 

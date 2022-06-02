@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { StringUtil } from 'src/app/shared/utils/string.util';
 import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
 import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 import { PathImagePipe } from '../../shared/pipes/path-image/path-image.pipe';
@@ -60,6 +61,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   public buttonsAnimation(): void {
     this.buttonsDiv?.forEach(element => this.renderer.addClass(element.nativeElement, 'inactive'));
     setTimeout(() => this.buttonsDiv?.forEach(element => this.renderer.removeClass(element.nativeElement, 'inactive')), 400);
+  }
+
+  public get StringUtil(): typeof StringUtil {
+    return StringUtil;
   }
 
 }
