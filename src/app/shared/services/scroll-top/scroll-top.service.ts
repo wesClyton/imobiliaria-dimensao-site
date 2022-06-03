@@ -8,9 +8,6 @@ export class ScrollTopService {
   constructor() { }
 
   scrollTop(element?: HTMLElement | undefined): void {
-
-    console.log(element);
-
     if (!element) {
       element = document.getElementById('main-header') || undefined;
     }

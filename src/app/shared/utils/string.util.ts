@@ -88,7 +88,6 @@ export class StringUtil {
       return this.transformNumber(value);
     }
 
-    console.log('value', value);
     return value;
   }
 
