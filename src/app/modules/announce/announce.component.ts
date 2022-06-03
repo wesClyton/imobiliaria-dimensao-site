@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { finalize, take } from 'rxjs';
 import { LoadingService } from '../../core/loading/loading.service';
 import { NotificationService } from '../../core/notification/notification.service';
@@ -16,7 +16,7 @@ import { AnnounceFormService } from './announce-form.service';
 })
 export class AnnounceComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   public announcementTypes!: Array<AnnouncementType>;
 
@@ -53,7 +53,7 @@ export class AnnounceComponent implements OnInit {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly formService: FormService,
     private readonly announceFormService: AnnounceFormService,
     private readonly loadingService: LoadingService,

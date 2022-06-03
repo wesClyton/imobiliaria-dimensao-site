@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../core/loading/loading.service';
@@ -25,7 +25,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('search', { static: false })
   public searchElementRef!: ElementRef;
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   public announcementTypes!: Array<AnnouncementType>;
 
@@ -59,7 +59,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly ngZone: NgZone,
     private readonly announcementGetAllService: AnnouncementGetAllService,
     private readonly loadingService: LoadingService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: UntypedFormBuilder
   ) {
     this.loadingService.show();
   }

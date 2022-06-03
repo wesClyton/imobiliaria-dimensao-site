@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { NotificationService } from '../../../core/notification/notification.service';
 
 @Injectable({
@@ -11,15 +11,15 @@ export class FormService {
     private readonly notificationService: NotificationService
   ) { }
 
-  public validate(form: FormGroup, messageWarning: string = 'Verifique o formulário!'): void {
+  public validate(form: UntypedFormGroup, messageWarning: string = 'Verifique o formulário!'): void {
     this.notificationService.warning(messageWarning);
 
     Object.keys(form.controls).forEach(field => {
       const control = form.get(field);
-      if (control instanceof FormControl) {
+      if (control instanceof UntypedFormControl) {
         control.markAsDirty();
         control.markAsTouched();
-      } else if (control instanceof FormGroup) {
+      } else if (control instanceof UntypedFormGroup) {
         this.validate(control);
       }
     });

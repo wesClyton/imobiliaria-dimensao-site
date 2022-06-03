@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { StringUtil } from '../../../../shared/utils/string.util';
@@ -17,7 +17,7 @@ import { AnnouncementType } from '../../interfaces/announcement-type.interface';
 })
 export class AnnouncementSearchComponent implements OnInit, OnDestroy {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   public quantities = new Array<string>('1', '2', '3', '4+');
 
@@ -97,7 +97,7 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly router: Router,
     private readonly districtGetAllService: DistrictGetAllService,
     private readonly activatedRoute: ActivatedRoute

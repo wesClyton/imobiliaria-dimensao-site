@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../../../core/loading/loading.service';
@@ -33,7 +33,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
   public characteristicsInstalacoes!: Array<Characteristic>;
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   private get controlNome(): AbstractControl | null {
     return this.form.get('nome');
@@ -67,7 +67,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     private readonly announcementGetByIdService: AnnouncementGetByIdService,
     private readonly announcementGetAllService: AnnouncementGetAllService,
     private readonly loadingService: LoadingService,
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly formService: FormService,
     private readonly announcementFormService: AnnouncementFormService,
     private readonly notificationService: NotificationService

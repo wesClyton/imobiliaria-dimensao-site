@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { finalize, take } from 'rxjs';
 import { LoadingService } from '../../core/loading/loading.service';
 import { NotificationService } from '../../core/notification/notification.service';
@@ -15,7 +15,7 @@ import { ContactLead } from './contact-lead.interface';
 })
 export class ContactComponent implements OnInit {
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
 
   private get controlNome(): AbstractControl | null {
     return this.form.get('nome');
@@ -58,7 +58,7 @@ export class ContactComponent implements OnInit {
   }
 
   constructor(
-    private readonly formBuilder: FormBuilder,
+    private readonly formBuilder: UntypedFormBuilder,
     private readonly formService: FormService,
     private readonly loadingService: LoadingService,
     private readonly contactFormService: ContactFormService,
