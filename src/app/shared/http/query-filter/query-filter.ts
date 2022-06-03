@@ -16,16 +16,7 @@ export class QueryFilter {
     const queryFilters = new Array<QueryFilterParam>();
 
     Object.keys(object).forEach(key => {
-      let value = object[key];
-
-      if (value instanceof Date) {
-        value = (value as Date).toString();
-      }
-
-      if (value && !StringUtil.isBoolean(value) && value?.startsWith('R$')) {
-        value = StringUtil.removeSymbolCurrencyBr(value);
-        value = StringUtil.transformCurrencyEUA(value);
-      }
+      let value = StringUtil.prepareSearchValue(object, key);
 
       if (value !== NaN && (value || value === false)) {
         queryFilters.push(this.create({

@@ -19,7 +19,7 @@ export class StringUtil {
   }
 
   public static removeSymbolCurrencyBr(value: string): string {
-    return value?.replace('R$', '').trim();
+    return value?.toString().replace('R$', '').trim();
   }
 
   public static formatFriendlyUrl(value: string): string {
@@ -41,12 +41,16 @@ export class StringUtil {
     return parseFloat(value.replace(/\./g, '').replace(',', '.').trim());
   }
 
+  public static transformNumber(value: string): number {
+    value = this.removeSymbolCurrencyBr(value);
+    return parseFloat(value?.replace(/\./g, '')?.replace(',', '.').trim());
+  }
+
   public static isUrl(value: string): boolean {
     return value.startsWith('http') || value.startsWith('www');
   }
 
   public static isUrlAnnouncementType(value: string): boolean {
-
     const valueEnum = Object.values(AnnouncementType).filter(valueEnum => value.includes(valueEnum));
     return valueEnum.length ? true : false;
   }
@@ -61,6 +65,31 @@ export class StringUtil {
 
   public static isArray(value: any): boolean {
     return Array.isArray(value);
+  }
+
+  public static isNumber(value: any): boolean {
+    return typeof value === 'number';
+  }
+
+  public static prepareSearchValue(object: any, key: string): any {
+    let value = object[key];
+
+    const keysTranformNumber = ['areaMinima', 'areaMaxima', 'banheiros', 'dormitorios', 'vagasGaragem'];
+    if (keysTranformNumber.some(item => item === key)) {
+      return this.transformNumber(value);
+    }
+
+    if (value instanceof Date) {
+      return (value as Date).toString();
+    }
+
+    if (value && !this.isBoolean(value) && !this.isNumber(value) && value?.startsWith('R$')) {
+      value = this.removeSymbolCurrencyBr(value);
+      return this.transformNumber(value);
+    }
+
+    console.log('value', value);
+    return value;
   }
 
 }
