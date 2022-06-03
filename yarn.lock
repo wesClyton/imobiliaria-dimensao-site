@@ -160,7 +160,7 @@
     "uuid" "8.3.2"
     "yargs" "17.4.1"
 
-"@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@^14.0.0", "@angular/common@>=10.0.0", "@angular/common@14.0.0":
+"@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@^14.0.0", "@angular/common@^14.0.0 || ^15.0.0", "@angular/common@>=10.0.0", "@angular/common@14.0.0":
   "integrity" "sha512-VYydSXelPlcAnWZs6SKkOxV+rNe8zOtHKLf9jBTYT5nP5P66+va4zITo1C9bs5tbK+mRssayf615+SIGEXyJFg=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-14.0.0.tgz"
   "version" "14.0.0"
@@ -190,7 +190,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@^14.0.0", "@angular/core@>=10.0.0", "@angular/core@14.0.0":
+"@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@^14.0.0", "@angular/core@^14.0.0 || ^15.0.0", "@angular/core@>=10.0.0", "@angular/core@14.0.0":
   "integrity" "sha512-Mj3r8iMlWfMbY+9DRUFZx1gKnA27Jwx3ff/VXeXBgfxaEKDYmlZSnliZSV6ssiHSUwn/U6yxDXFgcZL090zNBQ=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-14.0.0.tgz"
   "version" "14.0.0"
@@ -204,10 +204,10 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/google-maps@^13.3.7":
-  "integrity" "sha512-MwEopwy+jTKL4Ie1IXIDKjAV5RfmSynH9ay5PjHUjNRXPaWQ4K6BR77w7VCL7c2z5RowI52f9UMNIgsUkcRuLw=="
-  "resolved" "https://registry.npmjs.org/@angular/google-maps/-/google-maps-13.3.7.tgz"
-  "version" "13.3.7"
+"@angular/google-maps@^14.0.0":
+  "integrity" "sha512-oJu3cUoHKRkduwZh0X5l6Dw9f6OAyGZSRlvAyGBoB8gi1pxEBn5zmDMDGa9eqpsp+6HpbI11gXI12o2PYAIIOw=="
+  "resolved" "https://registry.npmjs.org/@angular/google-maps/-/google-maps-14.0.0.tgz"
+  "version" "14.0.0"
   dependencies:
     "@types/google.maps" "^3.45.6"
     "tslib" "^2.3.0"
