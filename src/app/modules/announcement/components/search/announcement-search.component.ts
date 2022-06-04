@@ -19,7 +19,7 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
 
   public form!: UntypedFormGroup;
 
-  public quantities = new Array<string>('1', '2', '3', '4+');
+  public quantities = new Array<string>('1', '2', '3', '4');
 
   public showFiltersAdvanced = false;
 
