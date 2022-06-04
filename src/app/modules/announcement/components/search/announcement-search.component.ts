@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { CityGetAll } from '../../../city/interfaces/city-get-all.interface';
 import { DistrictGetAll } from '../../../district/interfaces/district-get-all.interface';
 import { DistrictGetAllService } from '../../../district/services/district-get-all.service';
 import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
+import { AnnouncementAreaType } from '../../enums/announcement-area-type.enum';
 import { AnnouncementType as AnnouncementTypeEnum } from '../../enums/announcement-type.enum';
 import { AnnouncementType } from '../../interfaces/announcement-type.interface';
 
@@ -49,12 +50,20 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
     return this.form.get('valorMaximo');
   }
 
-  private get controlAreaMinima(): AbstractControl | null {
-    return this.form.get('areaMinima');
+  private get controlAreaTotalMinima(): AbstractControl | null {
+    return this.form.get('areaTotalMinima');
   }
 
-  private get controlAreaMaxima(): AbstractControl | null {
-    return this.form.get('areaMaxima');
+  private get controlAreaTotalMaxima(): AbstractControl | null {
+    return this.form.get('areaTotalMaxima');
+  }
+
+  private get controlAreaConstruidaMinima(): AbstractControl | null {
+    return this.form.get('areaConstruidaMinima');
+  }
+
+  private get controlAreaConstruidaMaxima(): AbstractControl | null {
+    return this.form.get('areaConstruidaMaxima');
   }
 
   public get controlBanheiros(): AbstractControl | null {
@@ -69,6 +78,21 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
     return this.form.get('vagasGaragem');
   }
 
+  private get controlTipoArea(): AbstractControl | null {
+    return this.form.get('tipoArea');
+  }
+
+  public get isArea(): { [key in AnnouncementAreaType]: boolean } {
+    return {
+      CONSTRUIDA: this.controlTipoArea?.value === AnnouncementAreaType.Construida,
+      TOTAL: this.controlTipoArea?.value === AnnouncementAreaType.Total
+    }
+  }
+
+  public get AnnouncementAreaType(): typeof AnnouncementAreaType {
+    return AnnouncementAreaType;
+  }
+
   private subscription = new Subscription();
 
   private possibleQueries!: {
@@ -77,8 +101,11 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
     bairroId: string;
     valorMinimo: string;
     valorMaximo: string;
-    areaMinima: string;
-    areaMaxima: string;
+    tipoArea: string;
+    areaTotalMinima: string;
+    areaTotalMaxima: string;
+    areaConstruidaMinima: string;
+    areaConstruidaMaxima: string;
     banheiros: string;
     dormitorios: string;
     vagasGaragem: string;
@@ -120,14 +147,23 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       bairroId: [null],
       valorMinimo: [null],
       valorMaximo: [null],
-      areaMinima: [null],
-      areaMaxima: [null],
+      tipoArea: [AnnouncementAreaType.Construida],
+      areaTotalMinima: [null],
+      areaTotalMaxima: [null],
+      areaConstruidaMinima: [null],
+      areaConstruidaMaxima: [null],
       banheiros: [null],
       dormitorios: [null],
       vagasGaragem: [null]
     });
 
     this.subscription.add(this.form.get('cidadeId')?.valueChanges.subscribe(value => this.getDistricts(value)));
+    this.subscription.add(this.form.get('tipoArea')?.valueChanges.subscribe(() => {
+      this.controlAreaConstruidaMinima?.reset();
+      this.controlAreaConstruidaMaxima?.reset();
+      this.controlAreaTotalMinima?.reset();
+      this.controlAreaTotalMaxima?.reset();
+    }));
   }
 
   private setValueForm(queries: { [key: string]: string }) {
@@ -138,8 +174,11 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
         bairroId: queries['bairroId'],
         valorMinimo: queries['valorMinimo'],
         valorMaximo: queries['valorMaximo'],
-        areaMinima: queries['areaMinima'],
-        areaMaxima: queries['areaMaxima'],
+        tipoArea: queries['tipoArea'],
+        areaTotalMinima: queries['areaTotalMinima'],
+        areaTotalMaxima: queries['areaTotalMaxima'],
+        areaConstruidaMinima: queries['areaConstruidaMinima'],
+        areaConstruidaMaxima: queries['areaConstruidaMaxima'],
         banheiros: queries['banheiros'],
         dormitorios: queries['dormitorios'],
         vagasGaragem: queries['vagasGaragem']
@@ -162,8 +201,11 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
         bairroId: queries['bairroId'],
         valorMinimo: queries['valorMinimo'],
         valorMaximo: queries['valorMaximo'],
-        areaMinima: queries['areaMinima'],
-        areaMaxima: queries['areaMaxima'],
+        tipoArea: queries['tipoArea'],
+        areaTotalMinima: queries['areaTotalMinima'],
+        areaTotalMaxima: queries['areaTotalMaxima'],
+        areaConstruidaMaxima: queries['areaConstruidaMaxima'],
+        areaConstruidaMinima: queries['areaConstruidaMinima'],
         banheiros: queries['banheiros'],
         dormitorios: queries['dormitorios'],
         vagasGaragem: queries['vagasGaragem']
@@ -184,20 +226,36 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
         this.controlBairro?.setValue(this.possibleQueries.bairroId);
       }
       if (this.valueExist(this.possibleQueries.valorMinimo)) {
-        this.controlValorMinimo?.setValue(this.possibleQueries.valorMinimo);
+        this.controlValorMinimo?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.valorMinimo));
         this.showFiltersAdvanced = true;
       }
       if (this.valueExist(this.possibleQueries.valorMaximo)) {
-        this.controlValorMaximo?.setValue(this.possibleQueries.valorMaximo);
+        this.controlValorMaximo?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.valorMaximo));
         this.showFiltersAdvanced = true;
       }
-      if (this.valueExist(this.possibleQueries.areaMinima)) {
-        this.controlAreaMinima?.setValue(this.possibleQueries.areaMinima);
+      if (this.valueExist(this.possibleQueries.tipoArea)) {
+        this.controlTipoArea?.setValue(this.possibleQueries.tipoArea);
         this.showFiltersAdvanced = true;
       }
-      if (this.valueExist(this.possibleQueries.areaMaxima)) {
-        this.controlAreaMaxima?.setValue(this.possibleQueries.areaMaxima);
-        this.showFiltersAdvanced = true;
+      if (this.isArea.CONSTRUIDA) {
+        if (this.valueExist(this.possibleQueries.areaConstruidaMinima)) {
+          this.controlAreaConstruidaMinima?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.areaConstruidaMinima));
+          this.showFiltersAdvanced = true;
+        }
+        if (this.valueExist(this.possibleQueries.areaConstruidaMaxima)) {
+          this.controlAreaConstruidaMaxima?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.areaConstruidaMaxima));
+          this.showFiltersAdvanced = true;
+        }
+      }
+      if (this.isArea.TOTAL) {
+        if (this.valueExist(this.possibleQueries.areaTotalMinima)) {
+          this.controlAreaTotalMinima?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.areaTotalMinima));
+          this.showFiltersAdvanced = true;
+        }
+        if (this.valueExist(this.possibleQueries.areaTotalMaxima)) {
+          this.controlAreaTotalMaxima?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.areaTotalMaxima));
+          this.showFiltersAdvanced = true;
+        }
       }
       if (this.valueExist(this.possibleQueries.banheiros)) {
         this.controlBanheiros?.setValue(this.possibleQueries.banheiros);
@@ -257,17 +315,15 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
   }
 
   public submit(): void {
-    let queryParams = {};
+    let queryParams: Params | null | undefined = {};
 
-    const fieldsRemoveR$ = ['valorMinimo', 'valorMaximo'];
+    const constrols = this.form.controls;
 
-    Object.keys(this.form.controls).forEach(field => {
-      let value = this.form.get(field)?.value;
-      if (fieldsRemoveR$.includes(field)) {
-        value = StringUtil.removeSymbolCurrencyBr(value);
-      }
-      if (value && value !== 'null' && value !== null) {
-        queryParams = { ...queryParams, [field]: value }
+    Object.keys(constrols).forEach(key => {
+      let value = StringUtil.prepareSearchValue(key, constrols[key].value);
+
+      if (value !== NaN && (value || value === false)) {
+        queryParams = { ...queryParams, [key]: value }
       }
     });
 

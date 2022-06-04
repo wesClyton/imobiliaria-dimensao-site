@@ -2,6 +2,7 @@ import { Directive, ElementRef, HostListener, OnDestroy, OnInit } from '@angular
 import { NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { M2Pipe } from '../../pipes/m2/m2.pipe';
+import { StringUtil } from '../../utils/string.util';
 
 @Directive({
   selector: '[appM2]',
@@ -33,24 +34,10 @@ export class M2Directive implements OnInit, OnDestroy {
   }
 
   private setMask(value: string, loadedValue: boolean = false): void {
-    let thousand!: string;
-    let decimal!: string;
     let formated!: string;
 
     if (value && loadedValue) {
-      if (!value.includes('.')) {
-        value = `${value}.00`;
-      }
-      if (value.includes('.')) {
-        decimal = value.substring(value.length - 2, value.length);
-        if (decimal.includes('.')) {
-          value = `${value}0`;
-        }
-      }
-
-      thousand = value.substring(0, value.length - 2);
-      decimal = value.substring(value.length - 2, value.length);
-      formated = thousand ? `${thousand},${decimal}` : '0';
+      formated = StringUtil.formatMaskDecimalInValueLoaded(value);
     }
 
     this.ngControl.control?.setValue(

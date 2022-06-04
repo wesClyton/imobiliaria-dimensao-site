@@ -66,8 +66,6 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
   }
 
   private getAnnouncements(queryFilter?: Array<QueryFilterParam> | QueryFilterParam | null, type?: AnnouncementType): void {
-    this.announcementGetAllService.queryFilterRemove();
-
     this.announcementGetAllService.queryFilterAdd([
       {
         field: 'ativo',

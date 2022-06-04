@@ -71,10 +71,16 @@ export class StringUtil {
     return typeof value === 'number';
   }
 
-  public static prepareSearchValue(object: any, key: string): any {
-    let value = object[key];
-
-    const keysTranformNumber = ['areaMinima', 'areaMaxima', 'banheiros', 'dormitorios', 'vagasGaragem'];
+  public static prepareSearchValue(key: string, value: any): any {
+    const keysTranformNumber = [
+      'areaTotalMinima',
+      'areaTotalMaxima',
+      'areaConstruidaMinima',
+      'areaConstruidaMaxima',
+      'banheiros',
+      'dormitorios',
+      'vagasGaragem'
+    ];
     if (keysTranformNumber.some(item => item === key)) {
       return this.transformNumber(value);
     }
@@ -89,6 +95,33 @@ export class StringUtil {
     }
 
     return value;
+  }
+
+  public static formatMaskDecimalInValueLoaded(value: string): string {
+    let thousand!: string;
+    let decimal!: string;
+    let formated!: string;
+
+    if (!value.includes('.')) {
+      value = `${value}.00`;
+    }
+
+    if (value.includes('.')) {
+      decimal = value.substring(value.length - 2, value.length);
+      if (decimal.includes('.')) {
+        value = `${value}0`;
+      }
+    }
+
+    if (value.includes('.,')) {
+      return value;
+    }
+
+    thousand = value.substring(0, value.length - 2);
+    decimal = value.substring(value.length - 2, value.length);
+    formated = thousand ? `${thousand},${decimal}` : '0';
+
+    return formated;
   }
 
 }

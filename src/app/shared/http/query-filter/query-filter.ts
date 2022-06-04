@@ -16,7 +16,7 @@ export class QueryFilter {
     const queryFilters = new Array<QueryFilterParam>();
 
     Object.keys(object).forEach(key => {
-      let value = StringUtil.prepareSearchValue(object, key);
+      let value = StringUtil.prepareSearchValue(key, object[key]);
 
       if (value !== NaN && (value || value === false)) {
         queryFilters.push(this.create({

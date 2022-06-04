@@ -55,6 +55,33 @@ input[type='checkbox'] {
   }
 }
 
+.input-field-radio {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  > label {
+    width: 100%;
+  }
+  .item-radio {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: flex-start;
+    input {
+      cursor: pointer;
+    }
+    label {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      transform: translateY(1px);
+      cursor: pointer;
+    }
+  }
+}
+
 .input-error {
   font-family: var(--font-family-700);
   color: #ba0d0d;

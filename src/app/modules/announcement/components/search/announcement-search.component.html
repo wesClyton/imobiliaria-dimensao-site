@@ -49,14 +49,36 @@
           <input ngDefaultControl appCurrencyBr class="input" type="text" formControlName="valorMaximo" placeholder="Informe o Valor máximo">
         </div>
       </div>
-      <div class="item">
+
+      <div *ngIf="!typeIsComercial" class="input-field input-field-radio">
+        <label>Tipo da Área</label>
+        <div class="item-radio">
+          <input type="radio" formControlName="tipoArea" [id]="AnnouncementAreaType.Construida" [value]="AnnouncementAreaType.Construida">
+          <label [for]="AnnouncementAreaType.Construida">Construída</label>
+        </div>
+        <div class="item-radio">
+          <input type="radio" formControlName="tipoArea" [id]="AnnouncementAreaType.Total" [value]="AnnouncementAreaType.Total">
+          <label [for]="AnnouncementAreaType.Total">Total</label>
+        </div>
+      </div>
+      <div class="item" *ngIf="isArea.CONSTRUIDA">
         <div class="input-field">
-          <label>Área mínima (m²)</label>
-          <input ngDefaultControl appM2 class="input" type="text" formControlName="areaMinima" placeholder="Informe a Área mínima">
+          <label>Área construída mínima (m²)</label>
+          <input ngDefaultControl appM2 class="input" type="text" formControlName="areaConstruidaMinima" placeholder="Informe a Área construída mínima">
         </div>
         <div class="input-field">
-          <label>Área máxima (m²)</label>
-          <input ngDefaultControl appM2 class="input" type="text" formControlName="areaMaxima" placeholder="Informe a Área máxima">
+          <label>Área construída máxima (m²)</label>
+          <input ngDefaultControl appM2 class="input" type="text" formControlName="areaConstruidaMaxima" placeholder="Informe a Área construída máxima">
+        </div>
+      </div>
+      <div class="item" *ngIf="isArea.TOTAL">
+        <div class="input-field">
+          <label>Área total mínima (m²)</label>
+          <input ngDefaultControl appM2 class="input" type="text" formControlName="areaTotalMinima" placeholder="Informe a Área total mínima">
+        </div>
+        <div class="input-field">
+          <label>Área total máxima (m²)</label>
+          <input ngDefaultControl appM2 class="input" type="text" formControlName="areaTotalMaxima" placeholder="Informe a Área total máxima">
         </div>
       </div>
     </div>
