@@ -5,7 +5,7 @@ import { Announcement } from '../interfaces/announcement.interface';
 export class AnnouncementLinkUtil {
 
   public static create(announcement: Announcement): string {
-    return `${ANNOUNCEMENT_CONFIG.pathFront}/${StringUtil.formatFriendlyUrl(announcement.titulo)}/${announcement.codigoAnuncio}`;
+    return `${ANNOUNCEMENT_CONFIG.pathFront}/${StringUtil.formatFriendlyUrl(announcement.titulo)}/${announcement.codigoAnuncio.toLocaleUpperCase()}`;
   }
 
 }

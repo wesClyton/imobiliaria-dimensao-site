@@ -119,7 +119,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.announcementId = this.activatedRoute.snapshot.params['code'];
+    this.announcementId = (this.activatedRoute.snapshot.params['code'] as string).toUpperCase();
     this.getAnnouncement();
   }
 
