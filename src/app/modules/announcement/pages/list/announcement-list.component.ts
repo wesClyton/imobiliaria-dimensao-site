@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router, UrlTree } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 import { ScrollTopService } from 'src/app/shared/services/scroll-top/scroll-top.service';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { QueryFilterParam } from '../../../../shared/http/query-filter/query-filter.interface';
+import { StringUtil } from '../../../../shared/utils/string.util';
+import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
 import { AnnouncementType } from '../../enums/announcement-type.enum';
 import { AnnouncementGetAll } from '../../interfaces/announcement-get-all.interface';
 import { AnnouncementGetAllService } from '../../services/announcement-get-all.service';
@@ -28,6 +30,7 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
     private readonly loadingService: LoadingService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly scrollTopService: ScrollTopService,
+    private readonly router: Router
   ) {
     this.loadingService.show();
   }
@@ -109,15 +112,23 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
   }
 
   public goPage(page: number): void {
-    let queryFilter: QueryFilterParam;
+    const queryParamsCurrent = (this.router['currentUrlTree'] as UrlTree).queryParams;
+    let queryParams: Params | null | undefined = {};
 
-    queryFilter = {
-      field: 'page',
-      value: page
+    if (queryParamsCurrent) {
+      Object.keys(queryParamsCurrent).forEach(key => {
+        let value = StringUtil.prepareSearchValue(key, queryParamsCurrent[key]);
+
+        if (value !== NaN && (value || value === false)) {
+          queryParams = { ...queryParams, [key]: value }
+        }
+      });
     }
 
-    this.getAnnouncements(queryFilter);
+    queryParams = { ...queryParams, page };
+
     this.scrollTopService.scrollTop(document.getElementsByTagName('h6')[0]);
+    this.router.navigate([ANNOUNCEMENT_CONFIG.pathFront], { queryParams });
   }
 
   public clickPrevious(currentPage: number): void {
@@ -127,6 +138,5 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
   public clickNext(currentPage: number): void {
     this.goPage(currentPage + 1);
   }
-
 
 }
