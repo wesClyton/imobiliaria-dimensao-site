@@ -40,8 +40,6 @@ footer {
   }
 
   .infos {
-    font-size: 1rem;
-
     @include mobile-first(md) {
       flex: 2.2;
     }
@@ -57,7 +55,7 @@ footer {
       display: flex;
       align-items: center;
       word-break: break-word;
-      font-size: 0.95rem;
+      font-size: 1rem;
 
       @include mobile-first(md) {
         font-size: 0.85rem;
