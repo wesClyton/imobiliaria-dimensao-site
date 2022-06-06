@@ -51,23 +51,23 @@ h1 {
     }
 
     &.color- {
-      &CASA {
+      &APARTAMENTO {
         &::after { color: #005990 }
       }
-      &SOBRADO {
-        &::after { color: #CD4F4F }
-      }
-      &TERRENO_URBANO {
-        &::after { color: #D9BA17 }
-      }
-      &APARTAMENTO {
-        &::after { color: #5EBB32 }
-      }
-      &TERRENO_RURAL {
+      &CASA {
         &::after { color: #21B6E5 }
       }
       &COMERCIAL {
-        &::after { color: #AC62D9 }
+        &::after { color: #D9BA17 }
+      }
+      &SOBRADO {
+        &::after { color: #EF75DB }
+      }
+      &TERRENO_RURAL {
+        &::after { color: #CD4F4F }
+      }
+      &TERRENO_URBANO {
+        &::after { color: #5EBB32 }
       }
     }
   }
