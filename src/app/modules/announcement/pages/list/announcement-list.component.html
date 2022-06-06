@@ -4,7 +4,9 @@
   <app-announcement-search></app-announcement-search>
 
   <div class="list">
-    <h6 id="lengthResult">{{ announcementGetAll.data.length }} resultados encontrados</h6>
+    <h6 id="lengthResult">
+      {{ announcementGetAll.data.length }} resultados de {{ announcementGetAll.count }} encontrados
+    </h6>
 
     <ul class="announcements">
       <li class="item" *ngFor="let announcement of announcementGetAll.data;">
