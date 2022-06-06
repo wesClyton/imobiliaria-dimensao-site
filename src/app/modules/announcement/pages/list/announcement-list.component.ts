@@ -127,7 +127,10 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
 
     queryParams = { ...queryParams, page };
 
-    this.scrollTopService.scrollTop(document.getElementsByTagName('h6')[0]);
+    const elementToScroll = document.getElementById('lengthResult');
+    if (elementToScroll) {
+      this.scrollTopService.scrollTop(elementToScroll);
+    }
     this.router.navigate([ANNOUNCEMENT_CONFIG.pathFront], { queryParams });
   }
 
