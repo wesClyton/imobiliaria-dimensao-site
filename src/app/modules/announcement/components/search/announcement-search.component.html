@@ -91,7 +91,7 @@
             class="item"
             *ngFor="let quantitie of quantities"
             [ngClass]="{ 'active' : controlBanheiros?.value === quantitie }">
-            <label for="banheiros-{{ quantitie }}">{{ quantitie }}+</label>
+            <label for="banheiros-{{ quantitie }}">{{ quantitie }}</label>
             <input type="radio" formControlName="banheiros" id="banheiros-{{ quantitie }}" [value]="quantitie">
           </div>
         </div>
@@ -104,7 +104,7 @@
             class="item"
             *ngFor="let quantitie of quantities"
             [ngClass]="{ 'active' : controlDormitorios?.value === quantitie }">
-            <label for="dormitorios-{{ quantitie }}">{{ quantitie }}+</label>
+            <label for="dormitorios-{{ quantitie }}">{{ quantitie }}</label>
             <input type="radio" formControlName="dormitorios" id="dormitorios-{{ quantitie }}" [value]="quantitie">
           </div>
         </div>
@@ -117,7 +117,7 @@
             class="item"
             *ngFor="let quantitie of quantities"
             [ngClass]="{ 'active' : controlVagasGaragem?.value === quantitie }">
-            <label for="vagas-{{ quantitie }}">{{ quantitie }}+</label>
+            <label for="vagas-{{ quantitie }}">{{ quantitie }}</label>
             <input type="radio" formControlName="vagasGaragem" id="vagas-{{ quantitie }}" [value]="quantitie">
           </div>
         </div>
