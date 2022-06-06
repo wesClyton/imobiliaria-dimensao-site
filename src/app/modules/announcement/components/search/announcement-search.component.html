@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div *ngIf="!typeIsComercial" class="input-field input-field-radio">
+      <div *ngIf="!typeIsComercial && !typeIsTerrenoUrbano" class="input-field input-field-radio">
         <label>Tipo da Área</label>
         <div class="item-radio">
           <input type="radio" formControlName="tipoArea" [id]="AnnouncementAreaType.Construida" [value]="AnnouncementAreaType.Construida">
@@ -61,7 +61,7 @@
           <label [for]="AnnouncementAreaType.Total">Total</label>
         </div>
       </div>
-      <div class="item" *ngIf="isArea.CONSTRUIDA">
+      <div class="item" *ngIf="isArea.CONSTRUIDA && !typeIsTerrenoUrbano">
         <div class="input-field">
           <label>Área construída mínima (m²)</label>
           <input ngDefaultControl appM2 class="input" type="text" formControlName="areaConstruidaMinima" placeholder="Informe a Área construída mínima">
@@ -71,7 +71,7 @@
           <input ngDefaultControl appM2 class="input" type="text" formControlName="areaConstruidaMaxima" placeholder="Informe a Área construída máxima">
         </div>
       </div>
-      <div class="item" *ngIf="isArea.TOTAL">
+      <div class="item" *ngIf="isArea.TOTAL || (typeIsTerrenoUrbano)">
         <div class="input-field">
           <label>Área total mínima (m²)</label>
           <input ngDefaultControl appM2 class="input" type="text" formControlName="areaTotalMinima" placeholder="Informe a Área total mínima">

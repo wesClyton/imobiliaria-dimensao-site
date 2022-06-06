@@ -312,6 +312,7 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
 
   public resetAdvancedFilter(): void {
     this.form.reset();
+    this.router.navigateByUrl(ANNOUNCEMENT_CONFIG.pathFront);
   }
 
   public submit(): void {
