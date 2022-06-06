@@ -236,7 +236,6 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       }
       if (this.valueExist(this.possibleQueries.tipoArea)) {
         this.controlTipoArea?.setValue(this.possibleQueries.tipoArea);
-        this.showFiltersAdvanced = true;
       }
       if (this.isArea.CONSTRUIDA) {
         if (this.valueExist(this.possibleQueries.areaConstruidaMinima)) {
