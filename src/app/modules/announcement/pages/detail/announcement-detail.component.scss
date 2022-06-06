@@ -195,6 +195,7 @@
 
     strong {
       font-size: 0.825rem;
+      transform: translateY(1px);
 
       @include mobile-first(md) {
         font-size: 0.95rem;
@@ -203,7 +204,6 @@
 
     p {
       font-size: 0.825rem;
-      line-height: 0.825rem;
       padding-bottom: 0;
       transform: translateY(2px);
 
