@@ -24,29 +24,29 @@
         </ng-container>
 
         <ng-container *ngIf="!isHome">
-          <li><a (click)="navigateHome()">Início</a></li>
-          <li><a (click)="navigateQuemSomos()">Quem somos</a></li>
-          <li><a (click)="navigateAnuncios()">Anúncios</a></li>
-          <li><a (click)="navigateEmpreendimentos()">Empreendimentos</a></li>
-          <li><a (click)="navigateAnuncie()">Anuncie</a></li>
-          <li><a (click)="navigateCorretores()">Corretores</a></li>
-          <li><a (click)="navigateContato()">Contato</a></li>
+          <li><a routerLink="/">Início</a></li>
+          <li><a routerLink="/quem-somos">Quem somos</a></li>
+          <li><a [routerLink]="ANNOUNCEMENT_CONFIG.pathFront">Anúncios</a></li>
+          <li><a [routerLink]="ENTERPRISE_CONFIG.pathFront">Empreendimentos</a></li>
+          <li><a routerLink="/anuncie">Anuncie</a></li>
+          <li><a [routerLink]="BROKER_CONFIG.pathFront">Corretores</a></li>
+          <li><a routerLink="/contato">Contato</a></li>
         </ng-container>
       </div>
 
       <div class="default-items">
-        <li class="item"><a (click)="navigateDescubra()">Descubra</a></li>
+        <li class="item"><a (click)="navigateMapa()">Mapa</a></li>
         <li *ngIf="isHome" class="item item-menu">
           <a (click)="showSubMenu($event)">Menu</a>
           <ul class="sub-menu">
             <button type="button" class="btn-menu icon-close" (click)="showSubMenu($event)"></button>
-            <li><a (click)="navigateHome()">Início</a></li>
-            <li><a (click)="navigateQuemSomos()">Quem somos</a></li>
-            <li><a (click)="navigateAnuncios()">Anúncios</a></li>
-            <li><a (click)="navigateEmpreendimentos()">Empreendimentos</a></li>
-            <li><a (click)="navigateAnuncie()">Anuncie</a></li>
-            <li><a (click)="navigateCorretores()">Corretores</a></li>
-            <li class="item"><a (click)="navigateContato()">Contato</a></li>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/quem-somos">Quem somos</a></li>
+            <li><a [routerLink]="ANNOUNCEMENT_CONFIG.pathFront">Anúncios</a></li>
+            <li><a [routerLink]="ENTERPRISE_CONFIG.pathFront">Empreendimentos</a></li>
+            <li><a routerLink="/anuncie">Anuncie</a></li>
+            <li><a [routerLink]="BROKER_CONFIG.pathFront">Corretores</a></li>
+            <li><a routerLink="/contato">Contato</a></li>
           </ul>
         </li>
       </div>

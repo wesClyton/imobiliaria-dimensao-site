@@ -183,18 +183,21 @@ map-info-window {
           i {
             color: var(--primary-3);
             margin-right: 0.25rem;
+            transform: translateY(-1px);
 
             &.icon-metragem {
-              font-size: 0.625rem;
+              font-size: 0.62rem;
             }
             &.icon-dormitorios {
-              font-size: 0.725rem;
+              font-size: 0.75rem;
             }
-            &.icon-banheiros {
-              font-size: 1rem;
+            &.icon-shower {
+              font-size: 0.825rem;
+              transform: translateY(0px);
             }
             &.icon-garagem {
-              font-size: 0.85rem;
+              font-size: 0.825rem;
+              transform: translateY(0px);
             }
           }
         }

@@ -6,6 +6,8 @@ import { APP_CONFIG } from '../../../app.config';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
+import { BROKER_CONFIG } from '../../../modules/broker/broker.config';
+import { ENTERPRISE_CONFIG } from '../../../modules/enterprise/enterprise.config';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
 import { StringUtil } from '../../../shared/utils/string.util';
 
@@ -24,6 +26,18 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
     return APP_CONFIG;
   }
 
+  public get ANNOUNCEMENT_CONFIG(): ModuleConfig {
+    return ANNOUNCEMENT_CONFIG;
+  }
+
+  public get ENTERPRISE_CONFIG(): ModuleConfig {
+    return ENTERPRISE_CONFIG;
+  }
+
+  public get BROKER_CONFIG(): ModuleConfig {
+    return BROKER_CONFIG;
+  }
+
   public get isHome(): boolean {
     return window.location.pathname === environment.baseUrl;
   }
@@ -37,10 +51,6 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   public get StringUtil(): typeof StringUtil {
     return StringUtil;
-  }
-
-  public get ANNOUNCEMENT_CONFIG(): ModuleConfig {
-    return ANNOUNCEMENT_CONFIG;
   }
 
   constructor(
@@ -81,42 +91,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
     this.subMenuActive = false;
   }
 
-  public navigateHome(): void {
-    this.hideMenus();
-    this.router.navigateByUrl(APP_CONFIG.pathFront);
-  }
-
-  public navigateQuemSomos(): void {
-    this.hideMenus();
-    this.router.navigateByUrl('quem-somos');
-  }
-
-  public navigateAnuncios(): void {
-    this.hideMenus();
-    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/anuncios`);
-  }
-
-  public navigateAnuncie(): void {
-    this.hideMenus();
-    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/anuncie`);
-  }
-
-  public navigateCorretores(): void {
-    this.hideMenus();
-    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/corretores`);
-  }
-
-  public navigateEmpreendimentos(): void {
-    this.hideMenus();
-    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/empreendimentos`);
-  }
-
-  public navigateContato(): void {
-    this.hideMenus();
-    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/contato`);
-  }
-
-  public navigateDescubra(): void {
+  public navigateMapa(): void {
     this.hideMenus();
     this.router.navigateByUrl(`${APP_CONFIG.pathFront}/onde-encontrar`);
   }
