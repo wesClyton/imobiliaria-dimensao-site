@@ -60,9 +60,11 @@
     }
     .swiper-button-prev:after {
       border-radius: 0 8px 8px 0;
+      left: 7px;
     }
     .swiper-button-next:after {
       border-radius: 8px 0 0 8px;
+      right: 7px;
     }
 
     .box-video {

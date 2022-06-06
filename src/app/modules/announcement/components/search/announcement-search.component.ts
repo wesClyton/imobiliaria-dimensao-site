@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, UrlTree } from '@angular/router';
 import { Subscription, take } from 'rxjs';
+import { QueryFilter } from '../../../../shared/http/query-filter/query-filter';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { CityGetAll } from '../../../city/interfaces/city-get-all.interface';
 import { DistrictGetAll } from '../../../district/interfaces/district-get-all.interface';
@@ -315,14 +316,25 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
   }
 
   public submit(): void {
+    const queryParamsCurrent = (this.router['currentUrlTree'] as UrlTree).queryParams;
     let queryParams: Params | null | undefined = {};
+
+    if (queryParamsCurrent) {
+      Object.keys(queryParamsCurrent).forEach(key => {
+        let value = StringUtil.prepareSearchValue(key, queryParamsCurrent[key]);
+
+        if (QueryFilter.canAddQueryFilterWithValue(value)) {
+          queryParams = { ...queryParams, [key]: value }
+        }
+      });
+    }
 
     const constrols = this.form.controls;
 
     Object.keys(constrols).forEach(key => {
       let value = StringUtil.prepareSearchValue(key, constrols[key].value);
 
-      if (value !== NaN && value !== 'null' && (value || value === false)) {
+      if (QueryFilter.canAddQueryFilterWithValue(value)) {
         queryParams = { ...queryParams, [key]: value }
       }
     });

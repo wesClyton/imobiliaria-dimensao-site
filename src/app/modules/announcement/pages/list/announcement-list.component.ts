@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router, UrlTree } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 import { ScrollTopService } from 'src/app/shared/services/scroll-top/scroll-top.service';
 import { LoadingService } from '../../../../core/loading/loading.service';
+import { QueryFilter } from '../../../../shared/http/query-filter/query-filter';
 import { QueryFilterParam } from '../../../../shared/http/query-filter/query-filter.interface';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
@@ -119,7 +120,7 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
       Object.keys(queryParamsCurrent).forEach(key => {
         let value = StringUtil.prepareSearchValue(key, queryParamsCurrent[key]);
 
-        if (value !== NaN && value !== 'null' && (value || value === false)) {
+        if (QueryFilter.canAddQueryFilterWithValue(value)) {
           queryParams = { ...queryParams, [key]: value }
         }
       });

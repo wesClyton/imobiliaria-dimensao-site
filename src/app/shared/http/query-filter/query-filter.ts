@@ -55,4 +55,8 @@ export class QueryFilter {
     return currentQuery.includes(`${field}=`);
   }
 
+  public static canAddQueryFilterWithValue(value: any): boolean {
+    return value !== NaN && value !== 'null' && (value || value === false);
+  }
+
 }
