@@ -32,8 +32,12 @@ h1 {
 }
 
 .list {
-  margin: 2rem auto 0 auto;
+  margin: 0 auto;
   max-width: 360px;
+
+  #lengthResult {
+    padding-top: 2rem;
+  }
 
   @include mobile-first(md) {
     max-width: 720px;

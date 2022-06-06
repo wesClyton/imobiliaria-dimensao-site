@@ -322,7 +322,7 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
     Object.keys(constrols).forEach(key => {
       let value = StringUtil.prepareSearchValue(key, constrols[key].value);
 
-      if (value !== NaN && (value || value === false)) {
+      if (value !== NaN && value !== 'null' && (value || value === false)) {
         queryParams = { ...queryParams, [key]: value }
       }
     });

@@ -119,7 +119,7 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
       Object.keys(queryParamsCurrent).forEach(key => {
         let value = StringUtil.prepareSearchValue(key, queryParamsCurrent[key]);
 
-        if (value !== NaN && (value || value === false)) {
+        if (value !== NaN && value !== 'null' && (value || value === false)) {
           queryParams = { ...queryParams, [key]: value }
         }
       });
@@ -131,6 +131,7 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
     if (elementToScroll) {
       this.scrollTopService.scrollTop(elementToScroll);
     }
+
     this.router.navigate([ANNOUNCEMENT_CONFIG.pathFront], { queryParams });
   }
 

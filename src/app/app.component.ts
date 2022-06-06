@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.router.events.subscribe((event: any) => {
-        if (event instanceof NavigationStart) {
+        if (event instanceof NavigationStart && !event.url.includes('&page=')) {
           setTimeout(() => this.scrollTopService.scrollTop(), 200);
         }
       })
@@ -36,6 +36,5 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 
 }
