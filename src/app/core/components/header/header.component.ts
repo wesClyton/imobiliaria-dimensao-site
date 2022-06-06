@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+
 import { environment } from '../../../../environments/environment';
 import { APP_CONFIG } from '../../../app.config';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
@@ -56,7 +57,15 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
   constructor(
     private readonly router: Router,
     private readonly bannerGetAllService: BannerGetAllService
-  ) { }
+  ) {
+    this.subscription.add(
+      this.router.events.subscribe((event: any) => {
+        if (event instanceof NavigationEnd) {
+          this.hideMenus();
+        }
+      })
+    );
+  }
 
   ngAfterViewInit(): void {
     this.banners = this.bannerGetAllService.items;
