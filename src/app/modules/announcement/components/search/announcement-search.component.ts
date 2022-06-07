@@ -191,6 +191,9 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
 
     this.subscription.add(this.controlTipo?.valueChanges.subscribe(() => {
       this.controlTipoArea?.reset();
+      this.controlBanheiros?.reset();
+      this.controlDormitorios?.reset();
+      this.controlVagasGaragem?.reset();
     }));
   }
 
