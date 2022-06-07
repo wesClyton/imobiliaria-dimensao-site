@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router, UrlTree } from '@angular/router';
 import { Subscription, take } from 'rxjs';
@@ -145,9 +145,6 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       (this.isArea.TOTAL)
     )
   }
-
-  @ViewChildren('labelBanheiro')
-  public labelsBanheiro!: QueryList<HTMLLabelElement>;
 
   constructor(
     private readonly formBuilder: UntypedFormBuilder,
@@ -342,6 +339,12 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
 
   public setTrueFiltersAdvanced(): void {
     this.showFiltersAdvanced = true;
+  }
+
+  public clickRadio(control: AbstractControl | null, value: string): void {
+    if (control?.value?.includes(value)) {
+      control.reset();
+    }
   }
 
   public resetAdvancedFilter(): void {
