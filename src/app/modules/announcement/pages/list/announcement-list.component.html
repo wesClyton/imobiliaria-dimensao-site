@@ -5,7 +5,12 @@
 
   <div class="list">
     <h6 id="lengthResult">
-      {{ announcementGetAll.data.length }} resultados de {{ announcementGetAll.count }} encontrados
+      <ng-container *ngIf="announcementGetAll.data.length">
+        {{ announcementGetAll.data.length }} resultados de {{ announcementGetAll.count }} encontrados
+      </ng-container>
+      <ng-container *ngIf="!announcementGetAll.data.length">
+        Nenhum resultado encontrado
+      </ng-container>
     </h6>
 
     <ul class="announcements">
