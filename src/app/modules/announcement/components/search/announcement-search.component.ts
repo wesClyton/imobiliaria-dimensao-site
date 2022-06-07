@@ -21,7 +21,7 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
 
   public form!: UntypedFormGroup;
 
-  public quantities = new Array<string>('1', '2', '3', '4+');
+  public quantities = new Array<string>('1', '2', '3', '4');
 
   public showFiltersAdvanced = false;
 
@@ -353,18 +353,9 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
   }
 
   public submit(): void {
-    const queryParamsCurrent = (this.router['currentUrlTree'] as UrlTree).queryParams;
+    this.router.navigate([ANNOUNCEMENT_CONFIG.pathFront]);
+
     let queryParams: Params | null | undefined = {};
-
-    if (queryParamsCurrent) {
-      Object.keys(queryParamsCurrent).forEach(key => {
-        let value = StringUtil.prepareSearchValue(key, queryParamsCurrent[key]);
-
-        if (QueryFilter.canAddQueryFilterWithValue(value)) {
-          queryParams = { ...queryParams, [key]: value }
-        }
-      });
-    }
 
     const constrols = this.form.controls;
 
