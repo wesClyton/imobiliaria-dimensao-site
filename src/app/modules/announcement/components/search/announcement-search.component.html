@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div *ngIf="!typeIsComercial && !typeIsTerrenoUrbano" class="input-field input-field-radio">
+      <div *ngIf="showInputTipoArea" class="input-field input-field-radio">
         <label>Tipo da Área</label>
         <div class="item-radio">
           <input type="radio" formControlName="tipoArea" [id]="AnnouncementAreaType.Construida" [value]="AnnouncementAreaType.Construida">
@@ -61,7 +61,7 @@
           <label [for]="AnnouncementAreaType.Total">Total</label>
         </div>
       </div>
-      <div class="item" *ngIf="isArea.CONSTRUIDA && !typeIsTerrenoUrbano">
+      <div class="item" *ngIf="showInputAreaConstruida">
         <div class="input-field">
           <label>Área construída mínima (m²)</label>
           <input ngDefaultControl appM2 class="input" type="text" formControlName="areaConstruidaMinima" placeholder="Informe a Área construída mínima">
@@ -71,7 +71,7 @@
           <input ngDefaultControl appM2 class="input" type="text" formControlName="areaConstruidaMaxima" placeholder="Informe a Área construída máxima">
         </div>
       </div>
-      <div class="item" *ngIf="isArea.TOTAL || (typeIsTerrenoUrbano)">
+      <div class="item" *ngIf="showInputAreaTotal">
         <div class="input-field">
           <label>Área total mínima (m²)</label>
           <input ngDefaultControl appM2 class="input" type="text" formControlName="areaTotalMinima" placeholder="Informe a Área total mínima">
@@ -83,8 +83,8 @@
       </div>
     </div>
 
-    <div *ngIf="!typeIsTerrenoUrbano && !typeIsTerronoRural" class="box-3">
-      <div *ngIf="!typeIsComercial" class="input-field">
+    <div *ngIf="!isType.TERRENO_URBANO && !isType.TERRENO_RURAL" class="box-3">
+      <div *ngIf="!isType.COMERCIAL" class="input-field">
         <label>Banheiros</label>
         <div class="quantities-filter">
           <div
@@ -97,7 +97,7 @@
         </div>
       </div>
 
-      <div *ngIf="!typeIsComercial" class="input-field">
+      <div *ngIf="!isType.COMERCIAL" class="input-field">
         <label>Dormitórios</label>
         <div class="quantities-filter">
           <div

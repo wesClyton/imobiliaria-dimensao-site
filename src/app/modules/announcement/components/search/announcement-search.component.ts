@@ -112,16 +112,38 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
     vagasGaragem: string;
   }
 
-  public get typeIsComercial(): boolean {
-    return this.controlTipo?.value === AnnouncementTypeEnum.Comercial;
+  public get isType(): { [key in AnnouncementTypeEnum]: boolean } {
+    return {
+      APARTAMENTO: this.controlTipo?.value === AnnouncementTypeEnum.Apartamento,
+      CASA: this.controlTipo?.value === AnnouncementTypeEnum.Casa,
+      COMERCIAL: this.controlTipo?.value === AnnouncementTypeEnum.Comercial,
+      SOBRADO: this.controlTipo?.value === AnnouncementTypeEnum.Sobrado,
+      TERRENO_URBANO: this.controlTipo?.value === AnnouncementTypeEnum.TerrenoUrbano,
+      TERRENO_RURAL: this.controlTipo?.value === AnnouncementTypeEnum.TerronoRural
+    }
   }
 
-  public get typeIsTerrenoUrbano(): boolean {
-    return this.controlTipo?.value === AnnouncementTypeEnum.TerrenoUrbano;
+  public get showInputTipoArea(): boolean {
+    return (
+      (this.isType.APARTAMENTO || this.isType.CASA || this.isType.COMERCIAL || this.isType.SOBRADO) ||
+      (!this.controlTipo?.value || this.controlTipo?.value === 'null')
+    )
   }
 
-  public get typeIsTerronoRural(): boolean {
-    return this.controlTipo?.value === AnnouncementTypeEnum.TerronoRural;
+  public get showInputAreaConstruida(): boolean {
+    return (
+      (this.controlTipo?.value || this.controlTipo?.value !== 'null') &&
+      !this.isArea.TOTAL &&
+      (this.isArea.CONSTRUIDA && !this.isType.TERRENO_RURAL && !this.isType.TERRENO_URBANO)
+    );
+  }
+
+  public get showInputAreaTotal(): boolean {
+    return (
+      (this.controlTipo?.value || this.controlTipo?.value !== 'null') &&
+      (this.isType.TERRENO_RURAL || this.isType.TERRENO_URBANO) ||
+      (this.isArea.TOTAL)
+    )
   }
 
   @ViewChildren('labelBanheiro')
@@ -151,7 +173,7 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       bairroId: [null],
       valorMinimo: [null],
       valorMaximo: [null],
-      tipoArea: [AnnouncementAreaType.Construida],
+      tipoArea: [null],
       areaTotalMinima: [null],
       areaTotalMaxima: [null],
       areaConstruidaMinima: [null],
@@ -168,6 +190,10 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       this.controlAreaConstruidaMaxima?.reset();
       this.controlAreaTotalMinima?.reset();
       this.controlAreaTotalMaxima?.reset();
+    }));
+
+    this.subscription.add(this.controlTipo?.valueChanges.subscribe(() => {
+      this.controlTipoArea?.reset();
     }));
   }
 
