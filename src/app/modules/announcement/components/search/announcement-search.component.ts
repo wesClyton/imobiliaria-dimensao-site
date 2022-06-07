@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router, UrlTree } from '@angular/router';
 import { Subscription, take } from 'rxjs';
@@ -124,6 +124,9 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
     return this.controlTipo?.value === AnnouncementTypeEnum.TerronoRural;
   }
 
+  @ViewChildren('labelBanheiro')
+  public labelsBanheiro!: QueryList<HTMLLabelElement>;
+
   constructor(
     private readonly formBuilder: UntypedFormBuilder,
     private readonly router: Router,
@@ -158,8 +161,9 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       vagasGaragem: [null]
     });
 
-    this.subscription.add(this.form.get('cidadeId')?.valueChanges.subscribe(value => this.getDistricts(value)));
-    this.subscription.add(this.form.get('tipoArea')?.valueChanges.subscribe(() => {
+    this.subscription.add(this.controlCidade?.valueChanges.subscribe(value => this.getDistricts(value)));
+
+    this.subscription.add(this.controlTipoArea?.valueChanges.subscribe(() => {
       this.controlAreaConstruidaMinima?.reset();
       this.controlAreaConstruidaMaxima?.reset();
       this.controlAreaTotalMinima?.reset();
@@ -228,11 +232,11 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       }
       if (this.valueExist(this.possibleQueries.valorMinimo)) {
         this.controlValorMinimo?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.valorMinimo));
-        this.showFiltersAdvanced = true;
+        this.setTrueFiltersAdvanced();
       }
       if (this.valueExist(this.possibleQueries.valorMaximo)) {
         this.controlValorMaximo?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.valorMaximo));
-        this.showFiltersAdvanced = true;
+        this.setTrueFiltersAdvanced();
       }
       if (this.valueExist(this.possibleQueries.tipoArea)) {
         this.controlTipoArea?.setValue(this.possibleQueries.tipoArea);
@@ -240,34 +244,34 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       if (this.isArea.CONSTRUIDA) {
         if (this.valueExist(this.possibleQueries.areaConstruidaMinima)) {
           this.controlAreaConstruidaMinima?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.areaConstruidaMinima));
-          this.showFiltersAdvanced = true;
+          this.setTrueFiltersAdvanced();
         }
         if (this.valueExist(this.possibleQueries.areaConstruidaMaxima)) {
           this.controlAreaConstruidaMaxima?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.areaConstruidaMaxima));
-          this.showFiltersAdvanced = true;
+          this.setTrueFiltersAdvanced();
         }
       }
       if (this.isArea.TOTAL) {
         if (this.valueExist(this.possibleQueries.areaTotalMinima)) {
           this.controlAreaTotalMinima?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.areaTotalMinima));
-          this.showFiltersAdvanced = true;
+          this.setTrueFiltersAdvanced();
         }
         if (this.valueExist(this.possibleQueries.areaTotalMaxima)) {
           this.controlAreaTotalMaxima?.setValue(StringUtil.formatMaskDecimalInValueLoaded(this.possibleQueries.areaTotalMaxima));
-          this.showFiltersAdvanced = true;
+          this.setTrueFiltersAdvanced();
         }
       }
       if (this.valueExist(this.possibleQueries.banheiros)) {
         this.controlBanheiros?.setValue(this.possibleQueries.banheiros);
-        this.showFiltersAdvanced = true;
+        this.setTrueFiltersAdvanced();
       }
       if (this.valueExist(this.possibleQueries.dormitorios)) {
         this.controlDormitorios?.setValue(this.possibleQueries.dormitorios);
-        this.showFiltersAdvanced = true;
+        this.setTrueFiltersAdvanced();
       }
       if (this.valueExist(this.possibleQueries.vagasGaragem)) {
         this.controlVagasGaragem?.setValue(this.possibleQueries.vagasGaragem);
-        this.showFiltersAdvanced = true;
+        this.setTrueFiltersAdvanced();
       }
     }
   }
@@ -306,13 +310,17 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       });
   }
 
-  public toggleTypeFilter(): void {
-    this.showFiltersAdvanced = !this.showFiltersAdvanced;
+  public setFalseFiltersAdvanced(): void {
+    this.showFiltersAdvanced = false;
+  }
+
+  public setTrueFiltersAdvanced(): void {
+    this.showFiltersAdvanced = true;
   }
 
   public resetAdvancedFilter(): void {
-    this.form.reset();
     this.router.navigateByUrl(ANNOUNCEMENT_CONFIG.pathFront);
+    setTimeout(() => this.form.reset());
   }
 
   public submit(): void {

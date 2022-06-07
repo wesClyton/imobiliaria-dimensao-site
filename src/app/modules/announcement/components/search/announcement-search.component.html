@@ -91,7 +91,7 @@
             class="item"
             *ngFor="let quantitie of quantities"
             [ngClass]="{ 'active' : controlBanheiros?.value === quantitie }">
-            <label for="banheiros-{{ quantitie }}">{{ quantitie }}</label>
+            <label #labelBanheiro for="banheiros-{{ quantitie }}">{{ quantitie }}</label>
             <input type="radio" formControlName="banheiros" id="banheiros-{{ quantitie }}" [value]="quantitie">
           </div>
         </div>
@@ -126,8 +126,11 @@
   </ng-container>
 
   <div class="buttons">
-    <button class="btn btn-sm btn-primary-4 btn-outline" type="button" (click)="toggleTypeFilter()">
-      {{ showFiltersAdvanced ? 'Filtros básicos' : 'Filtros avançados' }}
+    <button *ngIf="showFiltersAdvanced" class="btn btn-sm btn-primary-4 btn-outline" type="button" (click)="setFalseFiltersAdvanced()">
+      Filtros básicos
+    </button>
+    <button *ngIf="!showFiltersAdvanced" class="btn btn-sm btn-primary-4 btn-outline" type="button" (click)="setTrueFiltersAdvanced()">
+      Filtros avançados
     </button>
     <button class="btn btn-sm btn-primary-3" type="submit">Buscar</button>
   </div>
