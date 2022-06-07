@@ -250,6 +250,27 @@
   .heading {
     margin-bottom: 1rem;
   }
+
+  .announcements {
+    @include mobile-first(md) {
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .item {
+      @include mobile-first(md) {
+        max-width: 234px;
+      }
+
+      @include mobile-first(lg) {
+        max-width: 320px;
+      }
+
+      @include mobile-first(xl) {
+        max-width: 274px;
+      }
+    }
+  }
 }
 
 app-announcement-list-item {
