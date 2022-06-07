@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { finalize, take } from 'rxjs';
 import { APP_CONFIG } from '../../../app.config';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
+import { AnnouncementLinkUtil } from '../../../modules/announcement/utils/announcement-link.util';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
 import { BROKER_CONFIG } from '../../../modules/broker/broker.config';
@@ -36,6 +37,10 @@ export class FooterComponent implements OnInit {
 
   public get ANNOUNCEMENT_CONFIG(): ModuleConfig {
     return ANNOUNCEMENT_CONFIG;
+  }
+
+  public get AnnouncementLinkUtil(): typeof AnnouncementLinkUtil {
+    return AnnouncementLinkUtil;
   }
 
   constructor(

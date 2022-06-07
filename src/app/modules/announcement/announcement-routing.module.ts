@@ -9,10 +9,6 @@ const routes: Routes = [
     component: AnnouncementListComponent
   },
   {
-    path: ':type',
-    component: AnnouncementListComponent
-  },
-  {
     path: ':title/:code',
     component: AnnouncementDetailComponent
   }

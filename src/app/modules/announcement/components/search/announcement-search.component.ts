@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { ActivatedRoute, Params, Router, UrlTree } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { QueryFilter } from '../../../../shared/http/query-filter/query-filter';
 import { StringUtil } from '../../../../shared/utils/string.util';
@@ -216,31 +216,8 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       }
     }
 
-    let type: AnnouncementTypeEnum = this.activatedRoute.snapshot.params['type'];
-    if (type?.includes('&')) {
-      type = type.split('&')[0] as AnnouncementTypeEnum;
-    }
-
-    if (type?.includes(',')) {
-      type = type.split(',')[0] as AnnouncementTypeEnum;
-    }
-
-    if (type) {
-      this.possibleQueries = {
-        tipo: type,
-        cidadeId: queries['cidadeId'],
-        bairroId: queries['bairroId'],
-        valorMinimo: queries['valorMinimo'],
-        valorMaximo: queries['valorMaximo'],
-        tipoArea: queries['tipoArea'],
-        areaTotalMinima: queries['areaTotalMinima'],
-        areaTotalMaxima: queries['areaTotalMaxima'],
-        areaConstruidaMaxima: queries['areaConstruidaMaxima'],
-        areaConstruidaMinima: queries['areaConstruidaMinima'],
-        banheiros: queries['banheiros'],
-        dormitorios: queries['dormitorios'],
-        vagasGaragem: queries['vagasGaragem']
-      }
+    if (this.possibleQueries.tipo.includes(',')) {
+      this.possibleQueries.tipo = this.possibleQueries.tipo.split(',')[0];
     }
 
     if (this.possibleQueries) {

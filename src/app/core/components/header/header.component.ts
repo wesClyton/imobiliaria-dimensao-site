@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { APP_CONFIG } from '../../../app.config';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
+import { AnnouncementLinkUtil } from '../../../modules/announcement/utils/announcement-link.util';
 import { Banner } from '../../../modules/banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../../../modules/banner/services/banner-get-all.service';
 import { BROKER_CONFIG } from '../../../modules/broker/broker.config';
@@ -37,6 +38,10 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   public get BROKER_CONFIG(): ModuleConfig {
     return BROKER_CONFIG;
+  }
+
+  public get AnnouncementLinkUtil(): typeof AnnouncementLinkUtil {
+    return AnnouncementLinkUtil;
   }
 
   public get isHome(): boolean {

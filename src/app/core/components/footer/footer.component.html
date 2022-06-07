@@ -14,9 +14,25 @@
         <h6>Imóveis</h6>
         <ul>
           <li *ngFor="let banner of banners;">
-            <a *ngIf="StringUtil.isUrlAnnouncementType(banner.link)" routerLink="{{ ANNOUNCEMENT_CONFIG.pathFront }}/{{ banner.link }}">{{ banner.nome }}</a>
-            <a *ngIf="StringUtil.isUrlInternal(banner.link)" routerLink="{{ banner.link }}">{{ banner.nome }}</a>
-            <a *ngIf="StringUtil.isUrl(banner.link)" target="_blank" [href]="banner.link">{{ banner.nome }}</a>
+            <a
+              *ngIf="StringUtil.isUrlParams(banner.link)"
+              [routerLink]="[ANNOUNCEMENT_CONFIG.pathFront]"
+              [queryParams]="AnnouncementLinkUtil.convertParamTypeAnnouncement(banner.link)">
+              {{ banner.nome }}
+            </a>
+
+            <a
+              *ngIf="StringUtil.isUrlInternal(banner.link)"
+              [routerLink]="banner.link">
+              {{ banner.nome }}
+            </a>
+
+            <a
+              *ngIf="StringUtil.isUrl(banner.link)"
+              target="_blank"
+              [href]="banner.link">
+              {{ banner.nome }}
+            </a>
           </li>
         </ul>
       </nav>

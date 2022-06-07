@@ -5,6 +5,7 @@ import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
 import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 import { PathImagePipe } from '../../shared/pipes/path-image/path-image.pipe';
 import { ANNOUNCEMENT_CONFIG } from '../announcement/announcement.config';
+import { AnnouncementLinkUtil } from '../announcement/utils/announcement-link.util';
 import { Banner } from '../banner/interfaces/banner.interface';
 import { BannerGetAllService } from '../banner/services/banner-get-all.service';
 SwiperCore.use([Mousewheel, Pagination]);
@@ -35,6 +36,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public get ANNOUNCEMENT_CONFIG(): ModuleConfig {
     return ANNOUNCEMENT_CONFIG;
+  }
+
+  public get AnnouncementLinkUtil(): typeof AnnouncementLinkUtil {
+    return AnnouncementLinkUtil;
   }
 
   constructor(

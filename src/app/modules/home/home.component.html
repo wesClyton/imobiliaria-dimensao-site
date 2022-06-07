@@ -15,10 +15,36 @@
         </div>
 
         <div #buttons class="buttons">
-          <a *ngIf="StringUtil.isUrlAnnouncementType(banner.link)" routerLink="{{ ANNOUNCEMENT_CONFIG.pathFront }}/{{ banner.link }}&destaque=true" class="btn btn-white">Ver destaques</a>
-          <a *ngIf="StringUtil.isUrlAnnouncementType(banner.link)" routerLink="{{ ANNOUNCEMENT_CONFIG.pathFront }}/{{ banner.link }}" class="btn btn-primary">Encontre o seu</a>
-          <a *ngIf="StringUtil.isUrlInternal(banner.link)" routerLink="{{ banner.link }}" class="btn btn-primary">Encontre o seu</a>
-          <a *ngIf="StringUtil.isUrl(banner.link)" [href]="banner.link" target="_blank" class="btn btn-primary">Encontre o seu</a>
+          <a
+            *ngIf="StringUtil.isUrlParams(banner.link)"
+            class="btn btn-white"
+            [routerLink]="[ANNOUNCEMENT_CONFIG.pathFront]"
+            [queryParams]="AnnouncementLinkUtil.convertParamTypeAnnouncement(banner.link, true)">
+            Ver destaques
+          </a>
+
+          <a
+            *ngIf="StringUtil.isUrlParams(banner.link)"
+            class="btn btn-primary"
+            [routerLink]="[ANNOUNCEMENT_CONFIG.pathFront]"
+            [queryParams]="AnnouncementLinkUtil.convertParamTypeAnnouncement(banner.link)">
+            Encontre o seu
+          </a>
+
+          <a
+            *ngIf="StringUtil.isUrlInternal(banner.link)"
+            class="btn btn-primary"
+            [routerLink]="banner.link">
+            Encontre o seu
+          </a>
+
+          <a
+            *ngIf="StringUtil.isUrl(banner.link)"
+            class="btn btn-primary"
+            target="_blank"
+            [href]="banner.link">
+            Saiba mais
+          </a>
         </div>
       </section>
     </ng-template>
