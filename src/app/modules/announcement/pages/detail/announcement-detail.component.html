@@ -11,9 +11,14 @@
         <strong class="amount">{{ announcement.valor | currencyBr }}</strong>
 
         <div class="numbers">
+          <div *ngIf="announcement.areaConstruida">
+            <i class="icon-metragem"></i>
+            <strong>Área construída</strong>
+            <p>{{ announcement.areaConstruida | m2 }}</p>
+          </div>
           <div *ngIf="announcement.areaTotal">
             <i class="icon-metragem"></i>
-            <strong>Área</strong>
+            <strong>Área total</strong>
             <p>{{ announcement.areaTotal | m2 }}</p>
           </div>
           <div *ngIf="announcement.suites">

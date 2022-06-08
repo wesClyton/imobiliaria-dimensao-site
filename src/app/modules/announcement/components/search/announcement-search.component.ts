@@ -216,8 +216,8 @@ export class AnnouncementSearchComponent implements OnInit, OnDestroy {
       }
     }
 
-    if (this.possibleQueries.tipo.includes(',')) {
-      this.possibleQueries.tipo = this.possibleQueries.tipo.split(',')[0];
+    if (this.possibleQueries?.tipo?.includes(',')) {
+      this.possibleQueries.tipo = this.possibleQueries?.tipo?.split(',')[0];
     }
 
     if (this.possibleQueries) {

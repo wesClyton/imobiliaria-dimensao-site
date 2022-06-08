@@ -3,12 +3,13 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../core/loading/loading.service';
-import { IconPinImage } from './icon-pin-image.enum';
+import { AnnouncementAreaType } from '../announcement/enums/announcement-area-type.enum';
 import { AnnouncementType as AnnouncementTypeEnum } from '../announcement/enums/announcement-type.enum';
 import { AnnouncementType } from '../announcement/interfaces/announcement-type.interface';
 import { Announcement } from '../announcement/interfaces/announcement.interface';
 import { AnnouncementGetAllService } from '../announcement/services/announcement-get-all.service';
 import { AnnouncementLinkUtil } from '../announcement/utils/announcement-link.util';
+import { IconPinImage } from './icon-pin-image.enum';
 import { IconPin } from './icon-pin.interface';
 import { Marker } from './marker.interface';
 
@@ -53,6 +54,13 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
     return AnnouncementLinkUtil.create(this.announcement);
   }
 
+  public get showAreaType(): { [key in AnnouncementAreaType]: boolean } {
+    return {
+      CONSTRUIDA: (this.announcement.tipo !== AnnouncementTypeEnum.TerrenoUrbano) && (this.announcement.tipo !== AnnouncementTypeEnum.TerronoRural),
+      TOTAL: (this.announcement.tipo === AnnouncementTypeEnum.TerrenoUrbano) || (this.announcement.tipo === AnnouncementTypeEnum.TerronoRural)
+    }
+  }
+
   private subscription = new Subscription();
 
   constructor(
@@ -76,11 +84,11 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     );
 
-    navigator.permissions
-      .query({ name: 'geolocation' })
+    navigator?.permissions
+      ?.query({ name: 'geolocation' })
       .then(permissionStatus => {
         if (permissionStatus.state === 'granted') {
-          navigator.geolocation.getCurrentPosition((position) => {
+          navigator?.geolocation?.getCurrentPosition((position) => {
             this.center = {
               lat: position.coords.latitude,
               lng: position.coords.longitude,

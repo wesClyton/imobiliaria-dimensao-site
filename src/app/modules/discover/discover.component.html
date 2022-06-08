@@ -61,8 +61,13 @@
         <div class="text">
           <h2>{{ announcement.tipo | announcementType }}</h2>
           <div class="numbers">
-            <div *ngIf="announcement.areaTotal">
-              <i class="icon-metragem"></i> {{ announcement.areaTotal | m2 }}
+            <div *ngIf="announcement.areaConstruida && showAreaType.CONSTRUIDA">
+              <i class="icon-metragem"></i>
+              <span>{{ announcement.areaConstruida | m2 }}</span>
+            </div>
+            <div *ngIf="announcement.areaTotal && showAreaType.TOTAL">
+              <i class="icon-metragem"></i>
+              <span>{{ announcement.areaTotal| m2 }}</span>
             </div>
             <div *ngIf="announcement.dormitorios">
               <i class="icon-dormitorios"></i> {{ announcement.dormitorios }}

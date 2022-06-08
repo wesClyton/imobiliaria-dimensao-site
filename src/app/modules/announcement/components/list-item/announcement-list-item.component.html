@@ -10,9 +10,13 @@
       <p *ngIf="announcement.sobre" class="sobre">{{ announcement.sobre | resumeText : 100 }}</p>
 
       <div class="numbers">
-        <div *ngIf="announcement.areaTotal">
+        <div *ngIf="announcement.areaConstruida && showAreaType.CONSTRUIDA">
           <i class="icon-metragem"></i>
-          <span>{{ announcement.areaTotal | m2 }}</span>
+          <span>{{ announcement.areaConstruida | m2 }}</span>
+        </div>
+        <div *ngIf="announcement.areaTotal && showAreaType.TOTAL">
+          <i class="icon-metragem"></i>
+          <span>{{ announcement.areaTotal| m2 }}</span>
         </div>
         <div *ngIf="announcement.dormitorios">
           <i class="icon-dormitorios"></i>
