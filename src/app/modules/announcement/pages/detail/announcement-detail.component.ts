@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
@@ -72,7 +72,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     private readonly announcementFormService: AnnouncementFormService,
     private readonly notificationService: NotificationService
   ) {
-    this.setAnnouncement();
+    this.loadingService.show();
   }
 
   ngOnInit(): void {
@@ -80,28 +80,18 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.router.events.subscribe((event: any) => {
-        if (event instanceof NavigationStart) {
-          this.setAnnouncement();
-          this.getAnnouncements();
+        if (event instanceof NavigationEnd) {
+          this.getAnnouncement();
+          this.loadingService.show();
         }
       })
     );
 
-    this.init();
+    this.getAnnouncement();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  private setAnnouncement(): void {
-    const state: { [k: string]: Announcement } | undefined = undefined;
-    if (state && state['announcement']) {
-      this.announcement = state['announcement'];
-    }
-    if (!this.announcement) {
-      this.loadingService.show();
-    }
   }
 
   private createForm(): void {
@@ -112,18 +102,15 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  private init(): void {
-    if (this.announcement) {
-      this.getAnnouncements();
-      this.filterCharacteristics();
+  private getAnnouncement(): void {
+    this.announcementId = (this.activatedRoute.snapshot.params['code'] as string).toUpperCase();
+
+    if (!this.announcementId) {
+      this.loadingService.hide();
+      this.notificationService.error('Não foi possível encontrar o anúncio.');
       return;
     }
 
-    this.announcementId = (this.activatedRoute.snapshot.params['code'] as string).toUpperCase();
-    this.getAnnouncement();
-  }
-
-  private getAnnouncement(): void {
     this.announcementGetByIdService
       .getById(this.announcementId)
       .pipe(
