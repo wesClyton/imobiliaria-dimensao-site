@@ -95,7 +95,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
   }
 
   private setAnnouncement(): void {
-    const state: { [k: string]: Announcement } | undefined = this.router.getCurrentNavigation()?.extras?.state;
+    const state: { [k: string]: Announcement } | undefined = undefined;
     if (state && state['announcement']) {
       this.announcement = state['announcement'];
     }
