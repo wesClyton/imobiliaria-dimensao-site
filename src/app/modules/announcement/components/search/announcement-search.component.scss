@@ -65,6 +65,11 @@
 
   .btn {
     width: auto;
+    font-size: 0.75rem;
+
+    @include mobile-first(md) {
+      font-size: 1rem;
+    }
   }
 }
 
