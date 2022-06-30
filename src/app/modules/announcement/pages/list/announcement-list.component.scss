@@ -103,6 +103,7 @@ app-announcement-list-item {
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 
   .btn {
     font-size: 0.75rem;
