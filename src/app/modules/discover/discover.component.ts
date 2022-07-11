@@ -40,7 +40,11 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public options: google.maps.MapOptions = {
     zoomControl: true,
-    scrollwheel: false,
+    mapTypeControl: true,
+    scaleControl: true,
+    streetViewControl: true,
+    rotateControl: true,
+    fullscreenControl: true,
     disableDoubleClickZoom: true,
     mapTypeId: 'roadmap',
     maxZoom: 20,
