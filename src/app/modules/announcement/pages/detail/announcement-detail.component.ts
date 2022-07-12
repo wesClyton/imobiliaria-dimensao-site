@@ -8,6 +8,7 @@ import { FormService } from '../../../../shared/services/form/form.service';
 import { CharacteristicType } from '../../../characteristic/enums/characteristic-type.enum';
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
 import { LeadType } from '../../../lead/enums/lead-type.enum';
+import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
 import { AnnouncementLead } from '../../interfaces/announcement-lead.interface';
 import { Announcement } from '../../interfaces/announcement.interface';
 import { AnnouncementFormService } from '../../services/announcement-form.service';
@@ -57,6 +58,19 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
   public get controlTelefoneHasError(): boolean | undefined {
     return this.controlTelefone?.dirty && this.controlTelefone?.hasError('required');
+  }
+
+  private get canOpenAnnouncement(): boolean {
+    let isNotExpired = false;
+    let dateSplited = this.announcement.expiracaoAnuncio.toString().split('/');
+    const date = new Date(
+      parseInt(dateSplited[2], 10),
+      parseInt(dateSplited[1], 10) - 1,
+      parseInt(dateSplited[0], 10)
+    );
+    isNotExpired = date > new Date();
+
+    return this.announcement.ativo || isNotExpired;
   }
 
   private subscription = new Subscription();
@@ -119,6 +133,11 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
       )
       .subscribe(announcement => {
         this.announcement = announcement;
+        if (!this.canOpenAnnouncement) {
+          this.notificationService.information('Anúncio expirado ou inativo');
+          this.router.navigateByUrl(ANNOUNCEMENT_CONFIG.pathFront);
+          return;
+        }
         this.filterCharacteristics();
         this.getAnnouncements();
       });
