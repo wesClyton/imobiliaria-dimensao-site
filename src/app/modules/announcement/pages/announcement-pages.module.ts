@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ButtonWhatsappModule } from '../../../shared/components/button-whatsapp/button-whatsapp.module';
 import { DirectivesModule } from '../../../shared/directives/directives.module';
 import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { AnnouncementComponentModule } from '../components/announcement-components.module';
@@ -19,7 +20,8 @@ import { AnnouncementListComponent } from './list/announcement-list.component';
     AnnouncementPipesModule,
     ReactiveFormsModule,
     PipesModule,
-    DirectivesModule
+    DirectivesModule,
+    ButtonWhatsappModule
   ],
   exports: [
     AnnouncementListComponent,

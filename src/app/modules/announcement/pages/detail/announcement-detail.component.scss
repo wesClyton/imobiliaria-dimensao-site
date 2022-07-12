@@ -114,7 +114,55 @@
       margin-top: 1.5rem;
       font-size: 1rem;
     }
+  }
 
+  .divider {
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin: 1rem 0;
+
+    p {
+      background-color: var(--white);
+      padding: 0 0.5rem;
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+    }
+
+    &::after {
+      content: '';
+      height: 1px;
+      width: 100%;
+      background-color: var(--grey-4);
+      display: block;
+      transform: translateY(-11px);
+    }
+  }
+
+  app-button-whatsapp {
+    display: flex;
+    justify-content: center;
+  }
+
+  .call {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+
+    > .text {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 1rem;
+
+      i {
+        font-size: 1.5rem;
+        color: var(--primary-3);
+      }
+    }
   }
 }
 

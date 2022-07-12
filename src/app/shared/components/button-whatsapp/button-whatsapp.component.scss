@@ -1,7 +1,9 @@
+$greenWhats: #00E676;
+
 button {
   background-color: transparent;
-  border: 1px solid #00E676;
-  color: #00E676;
+  border: 1px solid $greenWhats;
+  color: $greenWhats;
   text-transform: uppercase;
   text-align: center;
   height: 26px;
@@ -12,9 +14,9 @@ button {
   font-weight: 600;
 
   &:hover {
-    color: #fff;
-    background-color: #00E676;
-    border-color: #00E676;
+    color: var(--white);
+    background-color: $greenWhats;
+    border-color: $greenWhats;
   }
 
   span {
@@ -22,5 +24,6 @@ button {
     font-size: 0.75rem;
     margin-right: 5px;
     vertical-align: text-top;
+    transform: translateY(1.5px);
   }
 }

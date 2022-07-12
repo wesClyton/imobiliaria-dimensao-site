@@ -7,14 +7,19 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonWhatsappComponent {
 
-  @Input() numeroWhats: any;
-  @Input() messageWhats: any;
+  @Input()
+  public number!: string | undefined;
+
+  @Input()
+  public message = 'Olá, vim através do site.';
 
   constructor() { }
 
-  openWhatsapp() {
-    this.numeroWhats = '55' + this.numeroWhats.replace(/\D/g, '');
-    window.open(`https://api.whatsapp.com/send?phone=${this.numeroWhats}&text=${this.messageWhats}`, '_blank')
+  public openWhatsapp(): void {
+    if (this.number) {
+      this.number = '55' + this.number.replace(/\D/g, '');
+      window.open(`https://api.whatsapp.com/send?phone=${this.number}&text=${this.message}`, '_blank')
+    }
   }
 
 }
