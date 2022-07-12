@@ -1,7 +1,8 @@
 <div *ngIf="banners" class="banners">
   <swiper
     [config]="swiperConfig"
-    (transitionStart)="buttonsAnimation()">
+    (transitionStart)="transitionStart()"
+    (transitionEnd)="transitionEnd()">
     <ng-template swiperSlide *ngFor="let banner of banners;">
       <section
         class="banner"
