@@ -73,6 +73,10 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     return this.announcement.ativo || isNotExpired;
   }
 
+  public get messageWhats(): string {
+    return `Olá, gostaria de mais informações sobre o imóvel ${this.announcement.codigoAnuncio}. ${location.href}`;
+  }
+
   private subscription = new Subscription();
 
   constructor(

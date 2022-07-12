@@ -127,5 +127,3 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 }
-
-// Olá, gostaria de mais informações sobre o imóvel DC66. https://imobiliariadimensao.com.br/anuncios/casa-a-venda-no-condominio-portal-das-aguas-em-umuarama-pr/DC66
