@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StringUtil } from 'src/app/shared/utils/string.util';
 import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
