@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StringUtil } from 'src/app/shared/utils/string.util';
 import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
@@ -39,6 +39,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChildren('buttons')
   public buttonsDiv!: QueryList<ElementRef>;
 
+  @ViewChildren('bannerElement')
+  public bannersElement!: QueryList<ElementRef>;
+
   public get ANNOUNCEMENT_CONFIG(): ModuleConfig {
     return ANNOUNCEMENT_CONFIG;
   }
@@ -49,11 +52,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private scroledToFooter = false;
 
-  private inLastBanner = false;
-
-  private get canScrollToFooter(): boolean {
-    return this.inLastBanner && !this.scroledToFooter;
-  }
+  private eventListenerBannerActive = false;
 
   constructor(
     private readonly bannerGetAllService: BannerGetAllService,
@@ -90,40 +89,53 @@ export class HomeComponent implements OnInit, OnDestroy {
     return StringUtil;
   }
 
+  private shouldScrollToFooter(event: WheelEvent | any): void {
+    if (event instanceof WheelEvent) {
+      const delta = Math.sign(event.deltaY);
+      if (delta > 0) {
+        if (!this.scroledToFooter && this.eventListenerBannerActive) {
+          this.scroledToFooter = true;
+          this.scrollFooter();
+        }
+      } else {
+        this.scroledToFooter = false;
+      }
+    } else {
+      this.scroledToFooter = false;
+    }
+  }
+
   public transitionEnd(): void {
-    return;
     this.subscription.add(
       this.swiper?.activeSlides
         .subscribe(swipers => {
-          this.inLastBanner = this.checkLastBanner(swipers);
-          if (this.inLastBanner && !this.scroledToFooter) {
-            this.addEventListener();
+          this.scroledToFooter = false;
+          if (this.checkLastBanner(swipers)) {
+            this.addEventListenerBanner();
           } else {
-            document.removeEventListener('wheel', () => {}, false);
+            this.removeEventListenerBanner();
           }
         })
     );
   }
 
-  private addEventListener(): void {
-    document.addEventListener('wheel', (event: WheelEvent) => {
-      const delta = Math.sign(event.deltaY);
-      if (delta > 0 && this.canScrollToFooter) {
-        setTimeout(() => {
-          this.scrollFooter();
-        }, 1100);
-      } else {
-        this.scroledToFooter = false;
-      }
-    });
+  private addEventListenerBanner(): void {
+    this.eventListenerBannerActive = true;
+    document.addEventListener('wheel', (event: WheelEvent) => this.shouldScrollToFooter(event));
+    document.addEventListener('window:scroll', (event: any) => this.shouldScrollToFooter(event));
+  }
+
+  private removeEventListenerBanner(): void {
+    this.eventListenerBannerActive = false;
+    document.removeEventListener('wheel', () => {});
+    document.removeEventListener('window:scroll', () => {});
   }
 
   private scrollFooter(): void {
     const footer = document.getElementById('main-footer');
-    if (footer && this.canScrollToFooter) {
+    if (footer) {
       this.scrollTopService.scrollTop(footer);
     }
-    this.scroledToFooter = true;
   }
 
 }

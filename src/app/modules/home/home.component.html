@@ -5,6 +5,7 @@
     (transitionEnd)="transitionEnd()">
     <ng-template swiperSlide *ngFor="let banner of banners;">
       <section
+        #bannerElement
         class="banner"
         [ngStyle]="{'background-image': 'url(' + pathImageBanner(banner.foto) + ')'}">
 
