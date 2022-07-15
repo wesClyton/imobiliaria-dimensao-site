@@ -5,7 +5,6 @@ import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
 import { SwiperComponent, SwiperSlideDirective } from 'swiper/angular';
 import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 import { PathImagePipe } from '../../shared/pipes/path-image/path-image.pipe';
-import { ScrollTopService } from '../../shared/services/scroll-top/scroll-top.service';
 import { ANNOUNCEMENT_CONFIG } from '../announcement/announcement.config';
 import { AnnouncementLinkUtil } from '../announcement/utils/announcement-link.util';
 import { Banner } from '../banner/interfaces/banner.interface';
@@ -86,7 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public get isDesktop(): boolean {
-    return window.outerWidth >= 767.98;
+    return window?.outerWidth >= 767.98;
   }
 
   private checkSlideFooter(): void {
@@ -100,7 +99,6 @@ export class HomeComponent implements OnInit, OnDestroy {
           const styleY = (swiperWrapper.getAttribute('style') as string).split('transform: translate3d(0px, ')[1].split('px,')[0];
 
           if (this.checkLastBanner(swipers) && swiperWrapper && footer && header) {
-            console.log(footer.clientHeight);
             const newStyleY = (parseFloat(styleY) + (footer.clientHeight - header.clientHeight));
             swiperWrapper.style.transform = `translate3d(0px, ${newStyleY}px, 0px)`;
           } else {
