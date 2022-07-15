@@ -1,8 +1,7 @@
 <div *ngIf="banners" class="banners">
   <swiper
     [config]="swiperConfig"
-    (transitionStart)="transitionStart()"
-    (transitionEnd)="transitionEnd()">
+    (transitionStart)="transitionStart()">
     <ng-template swiperSlide *ngFor="let banner of banners;">
       <section
         #bannerElement
@@ -49,6 +48,9 @@
           </a>
         </div>
       </section>
+    </ng-template>
+    <ng-template *ngIf="isDesktop" swiperSlide>
+      <app-footer></app-footer>
     </ng-template>
   </swiper>
 </div>

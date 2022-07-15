@@ -50,15 +50,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     return AnnouncementLinkUtil;
   }
 
-  private scroledToFooter = false;
-
-  private eventListenerBannerActive = false;
-
   constructor(
     private readonly bannerGetAllService: BannerGetAllService,
     private readonly pathImagePipe: PathImagePipe,
-    private readonly renderer: Renderer2,
-    private readonly scrollTopService: ScrollTopService
+    private readonly renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -73,7 +68,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private checkLastBanner(swipers: Array<SwiperSlideDirective>): boolean {
-    return swipers.some(swiper => swiper.slideIndex === (this.banners.length - 1) && swiper.slideData.isActive);
+    return swipers.some(swiper => swiper.slideIndex === (this.banners.length) && swiper.slideData.isActive);
   }
 
   public pathImageBanner(foto: string): string {
@@ -81,6 +76,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public transitionStart(): void {
+    this.checkSlideFooter()
     this.buttonsDiv?.forEach(element => this.renderer.addClass(element.nativeElement, 'inactive'));
     setTimeout(() => this.buttonsDiv?.forEach(element => this.renderer.removeClass(element.nativeElement, 'inactive')), 400);
   }
@@ -89,53 +85,30 @@ export class HomeComponent implements OnInit, OnDestroy {
     return StringUtil;
   }
 
-  private shouldScrollToFooter(event: WheelEvent | any): void {
-    if (event instanceof WheelEvent) {
-      const delta = Math.sign(event.deltaY);
-      if (delta > 0) {
-        if (!this.scroledToFooter && this.eventListenerBannerActive) {
-          this.scroledToFooter = true;
-          this.scrollFooter();
-        }
-      } else {
-        this.scroledToFooter = false;
-      }
-    } else {
-      this.scroledToFooter = false;
-    }
+  public get isDesktop(): boolean {
+    return window.outerWidth >= 767.98;
   }
 
-  public transitionEnd(): void {
+  private checkSlideFooter(): void {
+    const swiperWrapper: HTMLElement = document.getElementsByClassName('swiper-wrapper')[0] as any;
+    const footer = document.getElementById('main-footer');
+    const header = document.getElementById('main-header');
+
     this.subscription.add(
       this.swiper?.activeSlides
         .subscribe(swipers => {
-          this.scroledToFooter = false;
-          if (this.checkLastBanner(swipers)) {
-            this.addEventListenerBanner();
+          const styleY = (swiperWrapper.getAttribute('style') as string).split('transform: translate3d(0px, ')[1].split('px,')[0];
+
+          if (this.checkLastBanner(swipers) && swiperWrapper && footer && header) {
+            console.log(footer.clientHeight);
+            const newStyleY = (parseFloat(styleY) + (footer.clientHeight - header.clientHeight));
+            swiperWrapper.style.transform = `translate3d(0px, ${newStyleY}px, 0px)`;
           } else {
-            this.removeEventListenerBanner();
+            swiperWrapper.style.transform = `translate3d(0px, ${styleY}px, 0px)`;
           }
         })
     );
   }
 
-  private addEventListenerBanner(): void {
-    this.eventListenerBannerActive = true;
-    document.addEventListener('wheel', (event: WheelEvent) => this.shouldScrollToFooter(event));
-    document.addEventListener('window:scroll', (event: any) => this.shouldScrollToFooter(event));
-  }
-
-  private removeEventListenerBanner(): void {
-    this.eventListenerBannerActive = false;
-    document.removeEventListener('wheel', () => {});
-    document.removeEventListener('window:scroll', () => {});
-  }
-
-  private scrollFooter(): void {
-    const footer = document.getElementById('main-footer');
-    if (footer) {
-      this.scrollTopService.scrollTop(footer);
-    }
-  }
 
 }

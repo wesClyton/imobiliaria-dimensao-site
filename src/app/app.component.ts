@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { environment } from '../environments/environment';
 import { LoadingService } from './core/loading/loading.service';
 import { ScrollTopService } from './shared/services/scroll-top/scroll-top.service';
 
@@ -14,6 +15,10 @@ export class AppComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
   public showLoading!: boolean;
+
+  public get isHome(): boolean {
+    return window.location.pathname === environment.baseUrl;
+  }
 
   constructor(
     private readonly router: Router,

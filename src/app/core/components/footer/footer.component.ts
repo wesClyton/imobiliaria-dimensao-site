@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { finalize, take } from 'rxjs';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { APP_CONFIG } from '../../../app.config';
 import { ANNOUNCEMENT_CONFIG } from '../../../modules/announcement/announcement.config';
 import { AnnouncementLinkUtil } from '../../../modules/announcement/utils/announcement-link.util';
@@ -8,14 +8,13 @@ import { BannerGetAllService } from '../../../modules/banner/services/banner-get
 import { BROKER_CONFIG } from '../../../modules/broker/broker.config';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
 import { StringUtil } from '../../../shared/utils/string.util';
-import { LoadingService } from '../../loading/loading.service';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements AfterViewInit, OnDestroy {
 
   public get APP_CONFIG(): ModuleConfig {
     return APP_CONFIG;
@@ -43,31 +42,22 @@ export class FooterComponent implements OnInit {
     return AnnouncementLinkUtil;
   }
 
+  private subscription = new Subscription();
+
   constructor(
-    private readonly bannerGetAllService: BannerGetAllService,
-    private readonly loadingService: LoadingService
+    private readonly bannerGetAllService: BannerGetAllService
   ) { }
 
-  ngOnInit(): void {
-    this.getBanners();
+
+  ngAfterViewInit(): void {
+    this.banners = this.bannerGetAllService.items;
+    if (!this.banners) {
+      this.subscription.add(this.bannerGetAllService.banners$.subscribe((banners) => this.banners = banners.data));
+    }
   }
 
-  private getBanners(): void {
-    this.bannerGetAllService.queryFilterRemove();
-    this.bannerGetAllService.queryFilterAdd({
-      field: 'ativo',
-      value: true
-    });
-    this.bannerGetAllService
-      .getAll()
-      .pipe(
-        take(1),
-        finalize(() => this.loadingService.hide())
-      )
-      .subscribe(banners => {
-        this.bannerGetAllService.updateList(banners);
-        this.banners = banners.data;
-      });
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home.component';
 import { SwiperModule } from 'swiper/angular';
+import { CoreComponentsModule } from '../../core/components/core-components.module';
+import { HomeComponent } from './home.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SwiperModule
+    SwiperModule,
+    CoreComponentsModule
   ]
 })
 export class HomeModule { }
