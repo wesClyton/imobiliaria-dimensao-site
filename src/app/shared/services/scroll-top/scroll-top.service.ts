@@ -7,7 +7,7 @@ export class ScrollTopService {
 
   constructor() { }
 
-  scrollTop(element?: HTMLElement | undefined): void {
+  public scrollTop(element?: HTMLElement | undefined): void {
     if (!element) {
       element = document.getElementById('main-header') || undefined;
     }
@@ -22,6 +22,10 @@ export class ScrollTopService {
         }
       });
     }
+  }
+
+  public scrollTopByValue(value: number = 0): void {
+    window.scrollTo({top: value, behavior: 'smooth'});
   }
 
 }

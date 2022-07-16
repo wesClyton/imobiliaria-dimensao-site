@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public transitionStart(): void {
+    this.scrollTopService.scrollTopByValue(0);
     this.buttonsDiv?.forEach(element => this.renderer.addClass(element.nativeElement, 'inactive'));
     setTimeout(() => this.buttonsDiv?.forEach(element => this.renderer.removeClass(element.nativeElement, 'inactive')), 400);
   }
@@ -90,15 +91,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private shouldScrollToFooter(event: WheelEvent | any): void {
-    if (event instanceof WheelEvent) {
-      const delta = Math.sign(event.deltaY);
-      if (delta > 0) {
-        if (!this.scroledToFooter && this.eventListenerBannerActive) {
-          this.scroledToFooter = true;
-          this.scrollFooter();
-        }
-      } else {
-        this.scroledToFooter = false;
+    const delta = Math.sign(event?.deltaY);
+    if (delta > 0) {
+      if (!this.scroledToFooter && this.eventListenerBannerActive) {
+        this.scroledToFooter = true;
+        this.scrollFooter();
       }
     } else {
       this.scroledToFooter = false;
@@ -122,12 +119,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   private addEventListenerBanner(): void {
     this.eventListenerBannerActive = true;
     document.addEventListener('wheel', (event: WheelEvent) => this.shouldScrollToFooter(event));
+    document.addEventListener('touchmove', (event: any) => this.shouldScrollToFooter(event));
     document.addEventListener('window:scroll', (event: any) => this.shouldScrollToFooter(event));
   }
 
   private removeEventListenerBanner(): void {
     this.eventListenerBannerActive = false;
     document.removeEventListener('wheel', () => {});
+    document.removeEventListener('touchmove', () => {});
     document.removeEventListener('window:scroll', () => {});
   }
 
