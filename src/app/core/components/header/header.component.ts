@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription, take } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { APP_CONFIG } from '../../../app.config';
@@ -12,13 +12,14 @@ import { BROKER_CONFIG } from '../../../modules/broker/broker.config';
 import { ENTERPRISE_CONFIG } from '../../../modules/enterprise/enterprise.config';
 import { ModuleConfig } from '../../../shared/interfaces/module-config.interface';
 import { StringUtil } from '../../../shared/utils/string.util';
+import { LoadingService } from '../../loading/loading.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterViewInit, OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   public menuActive = false;
 
@@ -61,7 +62,8 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private readonly router: Router,
-    private readonly bannerGetAllService: BannerGetAllService
+    private readonly bannerGetAllService: BannerGetAllService,
+    private readonly loadingService: LoadingService
   ) {
     this.subscription.add(
       this.router.events.subscribe((event: any) => {
@@ -72,11 +74,8 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  ngAfterViewInit(): void {
-    this.banners = this.bannerGetAllService.items;
-    if (!this.banners) {
-      this.subscription.add(this.bannerGetAllService.banners$.subscribe((banners) => this.banners = banners.data));
-    }
+  ngOnInit(): void {
+    this.getBanners();
   }
 
   ngOnDestroy(): void {
@@ -110,4 +109,21 @@ export class HeaderComponent implements AfterViewInit, OnDestroy {
     this.router.navigateByUrl(`${APP_CONFIG.pathFront}/onde-encontrar`);
   }
 
+  private getBanners(): void {
+    this.bannerGetAllService.queryFilterRemove();
+    this.bannerGetAllService.queryFilterAdd({
+      field: 'ativo',
+      value: true
+    });
+    this.bannerGetAllService
+      .getAll()
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(banners => {
+        this.bannerGetAllService.updateList(banners);
+        this.banners = banners.data;
+      });
+  }
 }

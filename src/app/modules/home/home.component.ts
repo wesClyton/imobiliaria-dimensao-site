@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { StringUtil } from 'src/app/shared/utils/string.util';
 import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
 import { SwiperComponent, SwiperSlideDirective } from 'swiper/angular';
+import { LoadingService } from '../../core/loading/loading.service';
 import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 import { PathImagePipe } from '../../shared/pipes/path-image/path-image.pipe';
 import { ScrollTopService } from '../../shared/services/scroll-top/scroll-top.service';
@@ -58,13 +59,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     private readonly bannerGetAllService: BannerGetAllService,
     private readonly pathImagePipe: PathImagePipe,
     private readonly renderer: Renderer2,
-    private readonly scrollTopService: ScrollTopService
-  ) { }
+    private readonly scrollTopService: ScrollTopService,
+    private readonly loadingService: LoadingService
+  ) {
+    this.loadingService.show();
+  }
 
   ngOnInit(): void {
     this.banners = this.bannerGetAllService.items;
     if (!this.banners) {
-      this.subscription.add(this.bannerGetAllService.banners$.subscribe((banners) => this.banners = banners.data));
+      this.subscription.add(this.bannerGetAllService.banners$.subscribe((banners) => {
+        this.banners = banners.data;
+        setTimeout(() => this.loadingService.hide(), 1000);
+      }));
     }
   }
 
@@ -90,7 +97,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     return StringUtil;
   }
 
-  private shouldScrollToFooter(event: WheelEvent | any): void {
+  private shouldScrollToFooter(event: any): void {
     const delta = Math.sign(event?.deltaY);
     if (delta > 0) {
       if (!this.scroledToFooter && this.eventListenerBannerActive) {
