@@ -4,6 +4,7 @@ import { finalize, take } from 'rxjs';
 import { LoadingService } from '../../core/loading/loading.service';
 import { NotificationService } from '../../core/notification/notification.service';
 import { FormService } from '../../shared/services/form/form.service';
+import { MetaTagService } from '../../shared/services/meta-tag/meta-tag.service';
 import { LeadType } from '../lead/enums/lead-type.enum';
 import { ContactFormService } from './contact-form.service';
 import { ContactLead } from './contact-lead.interface';
@@ -62,10 +63,15 @@ export class ContactComponent implements OnInit {
     private readonly formService: FormService,
     private readonly loadingService: LoadingService,
     private readonly contactFormService: ContactFormService,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly metaTagService: MetaTagService
   ) { }
 
   ngOnInit(): void {
+    this.metaTagService.update({
+      title: 'Contato'
+    });
+
     this.createForm();
   }
 

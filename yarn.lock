@@ -3199,14 +3199,14 @@
   "resolved" "https://registry.npmjs.org/es-module-lexer/-/es-module-lexer-0.9.3.tgz"
   "version" "0.9.3"
 
+"esbuild-darwin-64@0.14.38":
+  "integrity" "sha512-5JJvgXkX87Pd1Og0u/NJuO7TSqAikAcQQ74gyJ87bqWRVeouky84ICoV4sN6VV53aTW+NE87qLdGY4QA2S7KNA=="
+  "resolved" "https://registry.npmjs.org/esbuild-darwin-64/-/esbuild-darwin-64-0.14.38.tgz"
+  "version" "0.14.38"
+
 "esbuild-wasm@0.14.38":
   "integrity" "sha512-mObTw5/3+KIOTShVgk3fuEn+INnHgOSbWJuGkInEZTWpUOh/+TCSgRxl5cDon4OkoaLU5rWm7R7Dkl/mJv8SGw=="
   "resolved" "https://registry.npmjs.org/esbuild-wasm/-/esbuild-wasm-0.14.38.tgz"
-  "version" "0.14.38"
-
-"esbuild-windows-64@0.14.38":
-  "integrity" "sha512-Khy4wVmebnzue8aeSXLC+6clo/hRYeNIm0DyikoEqX+3w3rcvrhzpoix0S+MF9vzh6JFskkIGD7Zx47ODJNyCw=="
-  "resolved" "https://registry.npmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.14.38.tgz"
   "version" "0.14.38"
 
 "esbuild@0.14.38":
@@ -4160,11 +4160,6 @@
   "integrity" "sha512-iHrqe5shvBUcFbmZq9zOQHBoeOhZJu6RQGrDpBgenUm/Am+F3JM2MgQj+rK3Z601fzrL5gLZWtAPH2OBaSVcyw=="
   "resolved" "https://registry.npmjs.org/isbinaryfile/-/isbinaryfile-4.0.10.tgz"
   "version" "4.0.10"
-
-"isbot@^3.5.0":
-  "integrity" "sha512-QOFF7IE7hUdzo8pbhCubeiMzKdLZt+W/UwRZWwg+zghmnqXoMwh2V0bi5UT+oIvoD0IWCWjzAtp30ZrrRwJVCg=="
-  "resolved" "https://registry.npmjs.org/isbot/-/isbot-3.5.0.tgz"
-  "version" "3.5.0"
 
 "isexe@^2.0.0":
   "integrity" "sha1-6PvzdNxVb/iUehDcsFctYz8s+hA="

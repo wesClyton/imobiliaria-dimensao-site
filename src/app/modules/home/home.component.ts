@@ -6,6 +6,7 @@ import { SwiperComponent, SwiperSlideDirective } from 'swiper/angular';
 import { LoadingService } from '../../core/loading/loading.service';
 import { ModuleConfig } from '../../shared/interfaces/module-config.interface';
 import { PathImagePipe } from '../../shared/pipes/path-image/path-image.pipe';
+import { MetaTagService } from '../../shared/services/meta-tag/meta-tag.service';
 import { ScrollTopService } from '../../shared/services/scroll-top/scroll-top.service';
 import { ANNOUNCEMENT_CONFIG } from '../announcement/announcement.config';
 import { AnnouncementLinkUtil } from '../announcement/utils/announcement-link.util';
@@ -60,19 +61,24 @@ export class HomeComponent implements OnInit, OnDestroy {
     private readonly pathImagePipe: PathImagePipe,
     private readonly renderer: Renderer2,
     private readonly scrollTopService: ScrollTopService,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    private readonly metaTagService: MetaTagService
   ) {
     this.loadingService.show();
   }
 
   ngOnInit(): void {
+    this.metaTagService.update();
+
     this.banners = this.bannerGetAllService.items;
     if (!this.banners) {
       this.subscription.add(this.bannerGetAllService.banners$.subscribe((banners) => {
         this.banners = banners.data;
         setTimeout(() => this.loadingService.hide(), 1000);
       }));
+      return;
     }
+    this.loadingService.hide();
   }
 
   ngOnDestroy(): void {
