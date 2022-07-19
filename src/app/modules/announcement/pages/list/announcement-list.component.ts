@@ -5,6 +5,7 @@ import { ScrollTopService } from 'src/app/shared/services/scroll-top/scroll-top.
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { QueryFilter } from '../../../../shared/http/query-filter/query-filter';
 import { QueryFilterParam } from '../../../../shared/http/query-filter/query-filter.interface';
+import { MetaTagService } from '../../../../shared/services/meta-tag/meta-tag.service';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
 import { AnnouncementType } from '../../enums/announcement-type.enum';
@@ -26,17 +27,26 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
 
   public pages = new Array<number>();
 
+  public get title(): string {
+    return 'Encontre seu imóvel';
+  }
+
   constructor(
     private readonly announcementGetAllService: AnnouncementGetAllService,
     private readonly loadingService: LoadingService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly scrollTopService: ScrollTopService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly metaTagService: MetaTagService
   ) {
     this.loadingService.show();
   }
 
   ngOnInit(): void {
+    this.metaTagService.update({
+      title: this.title
+    });
+
     this.subscription.add(
       this.activatedRoute.queryParams.subscribe(filter => {
         Object.keys(filter).length ? this.getAnouncementsByFilter(filter) : this.getAnnouncementByRouteType();

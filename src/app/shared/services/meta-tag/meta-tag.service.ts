@@ -40,7 +40,7 @@ export class MetaTagService {
   }
 
   private generateMetaDefinitions(metaTag: Partial<PageMetaTag>): Array<MetaDefinition> {
-    metaTag.title = metaTag.title ? `${metaTag.title} - ${this.default.title}` : APP_CONFIG.name;
+    metaTag.title = metaTag.title ? `${metaTag.title} - ${APP_CONFIG.name}` : APP_CONFIG.name;
     metaTag.image = metaTag.image ? metaTag.image : this.default.image;
 
     return [

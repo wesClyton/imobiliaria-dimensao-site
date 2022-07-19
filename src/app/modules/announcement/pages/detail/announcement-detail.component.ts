@@ -144,7 +144,7 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
         this.announcement = announcement;
         this.metaTagService.update({
           title: this.announcement.titulo,
-          image: this.pathImagePipe.transform(this.announcement.galeria.fotos[0].nome, 'anuncios') || ''
+          image: this.pathImagePipe.transform(this.announcement.galeria.fotos[0].nome, 'anuncios', this.announcement.galeria.id) || ''
         });
         if (!this.canOpenAnnouncement) {
           this.notificationService.information('Anúncio expirado ou inativo');

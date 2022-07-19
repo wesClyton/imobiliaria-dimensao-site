@@ -58,6 +58,10 @@ export class ContactComponent implements OnInit {
     return this.form.get('concordo');
   }
 
+  public get title(): string {
+    return 'Contato';
+  }
+
   constructor(
     private readonly formBuilder: UntypedFormBuilder,
     private readonly formService: FormService,
@@ -69,7 +73,7 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaTagService.update({
-      title: 'Contato'
+      title: this.title
     });
 
     this.createForm();

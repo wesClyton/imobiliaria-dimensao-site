@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MetaTagService } from '../../../../shared/services/meta-tag/meta-tag.service';
+import { ENTERPRISE_CONFIG } from '../../enterprise.config';
 import { EnterpriseGetAll } from '../../interfaces/enterprise-get-all.interface';
 import { Enterprise } from '../../interfaces/enterprise.interface';
 
@@ -14,11 +16,20 @@ export class EnterpriseComponent implements OnInit {
 
   public enterprise!: Enterprise | null;
 
+  public get title(): string {
+    return ENTERPRISE_CONFIG.namePlural;
+  }
+
   constructor(
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly metaTagService: MetaTagService
   ) { }
 
   ngOnInit(): void {
+    this.metaTagService.update({
+      title: this.title
+    });
+
     this.enterprises = (this.activatedRoute.snapshot.data['enterpriseGetAll'] as EnterpriseGetAll).data;
   }
 

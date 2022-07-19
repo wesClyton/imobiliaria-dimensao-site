@@ -4,10 +4,11 @@ import { finalize, take } from 'rxjs';
 import { LoadingService } from '../../core/loading/loading.service';
 import { NotificationService } from '../../core/notification/notification.service';
 import { FormService } from '../../shared/services/form/form.service';
+import { MetaTagService } from '../../shared/services/meta-tag/meta-tag.service';
 import { AnnouncementType } from '../announcement/interfaces/announcement-type.interface';
 import { LeadType } from '../lead/enums/lead-type.enum';
-import { AnnounceLead } from './announce-lead.interface';
 import { AnnounceFormService } from './announce-form.service';
+import { AnnounceLead } from './announce-lead.interface';
 
 @Component({
   selector: 'app-announce',
@@ -52,15 +53,24 @@ export class AnnounceComponent implements OnInit {
     return this.controlTipoImovel?.dirty && this.controlTipoImovel?.hasError('required');
   }
 
+  public get title(): string {
+    return 'Por que anunciar conosco?';
+  }
+
   constructor(
     private readonly formBuilder: UntypedFormBuilder,
     private readonly formService: FormService,
     private readonly announceFormService: AnnounceFormService,
     private readonly loadingService: LoadingService,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly metaTagService: MetaTagService,
   ) { }
 
   ngOnInit(): void {
+    this.metaTagService.update({
+      title: this.title
+    });
+
     this.createForm();
   }
 

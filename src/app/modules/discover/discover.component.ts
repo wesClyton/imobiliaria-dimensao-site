@@ -3,6 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../core/loading/loading.service';
+import { MetaTagService } from '../../shared/services/meta-tag/meta-tag.service';
 import { AnnouncementAreaType } from '../announcement/enums/announcement-area-type.enum';
 import { AnnouncementType as AnnouncementTypeEnum } from '../announcement/enums/announcement-type.enum';
 import { AnnouncementType } from '../announcement/interfaces/announcement-type.interface';
@@ -65,18 +66,27 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  public get title(): string {
+    return 'Descubra no Mapa';
+  }
+
   private subscription = new Subscription();
 
   constructor(
     private readonly ngZone: NgZone,
     private readonly announcementGetAllService: AnnouncementGetAllService,
     private readonly loadingService: LoadingService,
-    private readonly formBuilder: UntypedFormBuilder
+    private readonly formBuilder: UntypedFormBuilder,
+    private readonly metaTagService: MetaTagService
   ) {
     this.loadingService.show();
   }
 
   ngOnInit(): void {
+    this.metaTagService.update({
+      title: this.title
+    });
+
     this.form = this.formBuilder.group({
       tipoImovel: [null]
     });
