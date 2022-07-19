@@ -11,10 +11,10 @@ export class MetaTagService {
 
   private readonly default: PageMetaTag = {
     author: APP_CONFIG.name,
-    image: '',
+    image: `${location.host}/imobiliaria-dimensao-default.jpg`,
     description: 'Comprar e vender casas, terrenos e apartamentos nunca foi tão fácil! Imobiliária Dimensão, há mais de 35 anos realizando sonhos em Umuarama e Região.',
     keywords: [''],
-    title: APP_CONFIG.name,
+    title: '',
     type: 'website'
   }
 
@@ -40,7 +40,9 @@ export class MetaTagService {
   }
 
   private generateMetaDefinitions(metaTag: Partial<PageMetaTag>): Array<MetaDefinition> {
-    metaTag.title = metaTag.title && metaTag.title !== APP_CONFIG.name ? `${metaTag.title} - ${this.default.title}` : this.default.title;
+    metaTag.title = metaTag.title ? `${metaTag.title} - ${this.default.title}` : APP_CONFIG.name;
+    metaTag.image = metaTag.image ? metaTag.image : this.default.image;
+
     return [
       { name: 'title', content: metaTag.title || ''},
       { property: 'og:title', content: metaTag.title || '' },
@@ -49,7 +51,8 @@ export class MetaTagService {
       { name: 'author', content: metaTag.author || this.default.author || '' },
       { property: 'og:author', content: metaTag.author || this.default.author || '' },
       { name: 'keywords', content: metaTag?.keywords?.join(', ') || this.default.keywords?.join(', ') || '' },
-      { property: 'og:type', content: metaTag.type || this.default.type || '' }
+      { property: 'og:type', content: metaTag.type || this.default.type || '' },
+      { property: 'og:type', content: metaTag.image || '' }
     ];
   }
 

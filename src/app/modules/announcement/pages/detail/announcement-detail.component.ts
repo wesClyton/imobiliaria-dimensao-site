@@ -4,7 +4,9 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
+import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
 import { FormService } from '../../../../shared/services/form/form.service';
+import { MetaTagService } from '../../../../shared/services/meta-tag/meta-tag.service';
 import { CharacteristicType } from '../../../characteristic/enums/characteristic-type.enum';
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
 import { LeadType } from '../../../lead/enums/lead-type.enum';
@@ -18,7 +20,8 @@ import { AnnouncementGetByIdService } from '../../services/announcement-get-by-i
 @Component({
   selector: 'app-announcement-detail',
   templateUrl: 'announcement-detail.component.html',
-  styleUrls: ['announcement-detail.component.scss']
+  styleUrls: ['announcement-detail.component.scss'],
+  providers: [PathImagePipe]
 })
 export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
@@ -88,7 +91,9 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
     private readonly formBuilder: UntypedFormBuilder,
     private readonly formService: FormService,
     private readonly announcementFormService: AnnouncementFormService,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly metaTagService: MetaTagService,
+    private readonly pathImagePipe: PathImagePipe
   ) {
     this.loadingService.show();
   }
@@ -137,6 +142,10 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
       )
       .subscribe(announcement => {
         this.announcement = announcement;
+        this.metaTagService.update({
+          title: this.announcement.titulo,
+          image: this.pathImagePipe.transform(this.announcement.galeria.fotos[0].nome, 'anuncios') || ''
+        });
         if (!this.canOpenAnnouncement) {
           this.notificationService.information('Anúncio expirado ou inativo');
           this.router.navigateByUrl(ANNOUNCEMENT_CONFIG.pathFront);
