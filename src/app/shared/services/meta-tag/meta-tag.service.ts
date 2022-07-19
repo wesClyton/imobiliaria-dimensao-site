@@ -11,7 +11,7 @@ export class MetaTagService {
 
   private readonly default: PageMetaTag = {
     author: APP_CONFIG.name,
-    image: `${location.host}/imobiliaria-dimensao-default.jpg`,
+    image: `${location.host}/assets/imobiliaria-dimensao-default.jpg`,
     description: 'Comprar e vender casas, terrenos e apartamentos nunca foi tão fácil! Imobiliária Dimensão, há mais de 35 anos realizando sonhos em Umuarama e Região.',
     keywords: [''],
     title: '',
