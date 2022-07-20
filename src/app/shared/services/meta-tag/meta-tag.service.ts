@@ -36,7 +36,7 @@ export class MetaTagService {
      { 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
     ]);
 
-    this.titleService.setTitle(pageMetadata.title || this.default.title || '');
+    this.titleService.setTitle(pageMetadata.title || '');
   }
 
   private generateMetaDefinitions(metaTag: Partial<PageMetaTag>): Array<MetaDefinition> {
