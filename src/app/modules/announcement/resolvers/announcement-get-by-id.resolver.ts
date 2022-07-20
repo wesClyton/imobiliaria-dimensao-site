@@ -7,26 +7,12 @@ import { NotificationService } from '../../../core/notification/notification.ser
 import { ANNOUNCEMENT_CONFIG } from '../announcement.config';
 import { Announcement } from '../interfaces/announcement.interface';
 import { AnnouncementGetByIdService } from '../services/announcement-get-by-id.service';
+import { AnnouncementLinkUtil } from '../utils/announcement-link.util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnnouncementGeByIdResolver implements Resolve<Announcement | null> {
-
-  private announcement!: Announcement;
-
-  private get canOpenAnnouncement(): boolean {
-    let isNotExpired = false;
-    let dateSplited = this.announcement.expiracaoAnuncio.toString().split('/');
-    const date = new Date(
-      parseInt(dateSplited[2], 10),
-      parseInt(dateSplited[1], 10) - 1,
-      parseInt(dateSplited[0], 10)
-    );
-    isNotExpired = date > new Date();
-
-    return this.announcement.ativo || isNotExpired;
-  }
 
   constructor(
     private readonly loadingService: LoadingService,
@@ -43,8 +29,7 @@ export class AnnouncementGeByIdResolver implements Resolve<Announcement | null> 
       .pipe(
         take(1),
         switchMap(announcement => {
-          this.announcement = announcement;
-          if (!this.canOpenAnnouncement) {
+          if (!AnnouncementLinkUtil.canOpenAnnouncement(announcement)) {
             this.notificationService.information('Anúncio expirado ou inativo');
             this.router.navigateByUrl(ANNOUNCEMENT_CONFIG.pathFront);
             return of(null);

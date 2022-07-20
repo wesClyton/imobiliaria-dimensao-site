@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { finalize, take } from 'rxjs';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { finalize, Subscription, take } from 'rxjs';
 import { LoadingService } from '../../../../core/loading/loading.service';
 import { NotificationService } from '../../../../core/notification/notification.service';
 import { PathImagePipe } from '../../../../shared/pipes/path-image/path-image.pipe';
@@ -10,10 +10,13 @@ import { MetaTagService } from '../../../../shared/services/meta-tag/meta-tag.se
 import { CharacteristicType } from '../../../characteristic/enums/characteristic-type.enum';
 import { Characteristic } from '../../../characteristic/interfaces/characteristic.interface';
 import { LeadType } from '../../../lead/enums/lead-type.enum';
+import { ANNOUNCEMENT_CONFIG } from '../../announcement.config';
 import { AnnouncementLead } from '../../interfaces/announcement-lead.interface';
 import { Announcement } from '../../interfaces/announcement.interface';
 import { AnnouncementFormService } from '../../services/announcement-form.service';
 import { AnnouncementGetAllService } from '../../services/announcement-get-all.service';
+import { AnnouncementGetByIdService } from '../../services/announcement-get-by-id.service';
+import { AnnouncementLinkUtil } from '../../utils/announcement-link.util';
 
 @Component({
   selector: 'app-announcement-detail',
@@ -21,7 +24,7 @@ import { AnnouncementGetAllService } from '../../services/announcement-get-all.s
   styleUrls: ['announcement-detail.component.scss'],
   providers: [PathImagePipe]
 })
-export class AnnouncementDetailComponent implements OnInit {
+export class AnnouncementDetailComponent implements OnInit, OnDestroy {
 
   public showModal = false;
 
@@ -63,6 +66,14 @@ export class AnnouncementDetailComponent implements OnInit {
     return `Olá, gostaria de mais informações sobre o imóvel ${this.announcement.codigoAnuncio}. ${location.href}`;
   }
 
+  private announcementId!: string;
+
+  private subscription = new Subscription();
+
+  private get messageNotAnnouncement(): string {
+    return 'Não foi possível encontrar o anúncio.';
+  }
+
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly announcementGetAllService: AnnouncementGetAllService,
@@ -72,14 +83,27 @@ export class AnnouncementDetailComponent implements OnInit {
     private readonly announcementFormService: AnnouncementFormService,
     private readonly notificationService: NotificationService,
     private readonly metaTagService: MetaTagService,
-    private readonly pathImagePipe: PathImagePipe
+    private readonly pathImagePipe: PathImagePipe,
+    private readonly router: Router,
+    private readonly announcementGetByIdService: AnnouncementGetByIdService
   ) { }
 
   ngOnInit(): void {
     this.announcement = this.activatedRoute.snapshot.data['announcement'];
     if (!this.announcement) {
+      this.notificationService.information(this.messageNotAnnouncement);
+      this.router.navigateByUrl(ANNOUNCEMENT_CONFIG.pathFront);
       return;
     }
+
+    this.subscription.add(
+      this.router.events.subscribe((event: any) => {
+        if (event instanceof NavigationEnd) {
+          this.getAnnouncement();
+          this.loadingService.show();
+        }
+      })
+    );
 
     this.filterCharacteristics();
     this.getAnnouncements();
@@ -91,6 +115,10 @@ export class AnnouncementDetailComponent implements OnInit {
     });
 
     this.createForm();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private createForm(): void {
@@ -120,6 +148,37 @@ export class AnnouncementDetailComponent implements OnInit {
   private filterCharacteristics(): void {
     this.characteristicsImovel = this.announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.Imovel);
     this.characteristicsInstalacoes = this.announcement.caracteristicas.filter(characteristic => characteristic.tipo === CharacteristicType.InstalacoesCondominio);
+  }
+
+  private getAnnouncement(): void {
+    this.announcementId = (this.activatedRoute.snapshot.params['code'] as string).toUpperCase();
+
+    if (!this.announcementId) {
+      this.loadingService.hide();
+      this.notificationService.error(this.messageNotAnnouncement);
+      return;
+    }
+
+    this.announcementGetByIdService
+      .getById(this.announcementId)
+      .pipe(
+        take(1),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe(announcement => {
+        this.announcement = announcement;
+        if (!AnnouncementLinkUtil.canOpenAnnouncement(this.announcement)) {
+          this.notificationService.information('Anúncio expirado ou inativo');
+          this.router.navigateByUrl(ANNOUNCEMENT_CONFIG.pathFront);
+          return;
+        }
+        this.metaTagService.update({
+          title: this.announcement.titulo,
+          image: this.pathImagePipe.transform(this.announcement.galeria.fotos[0].nome, 'anuncios', this.announcement.galeria.id) || ''
+        });
+        this.filterCharacteristics();
+        this.getAnnouncements();
+      });
   }
 
   public submit(): void {

@@ -25,4 +25,17 @@ export class AnnouncementLinkUtil {
     return params;
   }
 
+  public static canOpenAnnouncement(announcement: Announcement): boolean {
+    let isNotExpired = false;
+    let dateSplited = announcement.expiracaoAnuncio.toString().split('/');
+    const date = new Date(
+      parseInt(dateSplited[2], 10),
+      parseInt(dateSplited[1], 10) - 1,
+      parseInt(dateSplited[0], 10)
+    );
+    isNotExpired = date > new Date();
+
+    return announcement.ativo || isNotExpired;
+  }
+
 }

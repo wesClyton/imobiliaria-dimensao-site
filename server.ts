@@ -2,6 +2,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
 import { existsSync } from 'fs';
+import * as path from 'path';
 import { join } from 'path';
 import 'zone.js/dist/zone-node';
 import { AppServerModule } from './src/main.server';
@@ -29,10 +30,41 @@ export function app(): express.Express {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    const userAgent = (req.header('User-Agent') as string).toLowerCase();
+
+    const isBot = detectBot(userAgent);
+
+    if (isBot) {
+      res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    } else {
+      res.sendFile(path.join(__dirname, '../browser/index.html'));
+    }
   });
 
   return server;
+}
+
+function detectBot(userAgent: string): boolean {
+  const bots = [
+    'googlebot',
+    'bingbot',
+    'yandexbot',
+    'duckduckbot',
+    'slurp',
+    'twitterbot',
+    'facebookexternalhit',
+    'linkedinbot',
+    'embedly',
+    'baiduspider',
+    'pinterest',
+    'slackbot',
+    'vkShare',
+    'facebot',
+    'outbrain',
+    'w3c_validator'
+  ];
+
+  return bots.some(bot => bot.indexOf(userAgent) > -1);
 }
 
 function run(): void {

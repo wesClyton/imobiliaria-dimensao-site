@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
 import { APP_CONFIG } from '../../../app.config';
 import { PageMetaTag } from '../../interfaces/page-meta-tag.interface';
 
@@ -9,51 +8,33 @@ import { PageMetaTag } from '../../interfaces/page-meta-tag.interface';
 })
 export class MetaTagService {
 
-  private readonly default: PageMetaTag = {
-    author: APP_CONFIG.name,
-    image: `${location.host}/assets/imobiliaria-dimensao-default.jpg`,
-    description: 'Comprar e vender casas, terrenos e apartamentos nunca foi tão fácil! Imobiliária Dimensão, há mais de 35 anos realizando sonhos em Umuarama e Região.',
-    keywords: [''],
-    title: '',
-    type: 'website'
-  }
+  private readonly imageDefault = 'https://imobiliariadimensao.com.br/assets/imobiliaria-dimensao-default.jpg';
+
+  private readonly descriptionDefault = 'Comprar e vender casas, terrenos e apartamentos nunca foi tão fácil! Imobiliária Dimensão, há mais de 35 anos realizando sonhos em Umuarama e Região.';
 
   constructor(
     private readonly metaService: Meta,
-    private readonly titleService: Title,
-    private readonly router: Router
+    private readonly titleService: Title
   ) { }
 
-  public update(metaTag: PageMetaTag = this.default, index: boolean = false): void {
-    const pageMetadata: PageMetaTag = {...this.default, ...metaTag};
-    const metatags: MetaDefinition[] = this.generateMetaDefinitions(pageMetadata);
+  public update(pageMetaTag?: PageMetaTag): void {
+    pageMetaTag = { ...pageMetaTag }
 
-    this.metaService.addTags([
-     ...metatags,
-     { property: 'og:url', content: `${this.router.url}`},
-     { name: 'robots', content: index ? 'index, follow' : 'noindex' },
-     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-     { 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
-    ]);
+    pageMetaTag.title = pageMetaTag.title ? `${pageMetaTag.title} - ${APP_CONFIG.name}` : APP_CONFIG.name;
 
-    this.titleService.setTitle(pageMetadata.title || '');
-  }
+    this.metaService.updateTag({ name: 'twitter:card', content: 'summary' });
+    this.metaService.updateTag({ name: 'twitter:title', content: pageMetaTag.title || APP_CONFIG.name });
+    this.metaService.updateTag({ name: 'twitter:description', content: pageMetaTag.description || this.descriptionDefault });
+    this.metaService.updateTag({ name: 'twitter:image', content: pageMetaTag.image || this.imageDefault });
 
-  private generateMetaDefinitions(metaTag: Partial<PageMetaTag>): Array<MetaDefinition> {
-    metaTag.title = metaTag.title ? `${metaTag.title} - ${APP_CONFIG.name}` : APP_CONFIG.name;
-    metaTag.image = metaTag.image ? metaTag.image : this.default.image;
+    this.metaService.updateTag({ property: 'og:type', content: 'website' });
+    this.metaService.updateTag({ property: 'og:site_name', content: APP_CONFIG.name });
+    this.metaService.updateTag({ property: 'og:title', content: pageMetaTag.title || APP_CONFIG.name });
+    this.metaService.updateTag({ property: 'og:description', content: pageMetaTag.description || this.descriptionDefault });
+    this.metaService.updateTag({ property: 'og:image', content: pageMetaTag.image || this.imageDefault });
+    this.metaService.updateTag({ property: 'og:url', content: location.href });
 
-    return [
-      { name: 'title', content: metaTag.title || ''},
-      { property: 'og:title', content: metaTag.title || '' },
-      { name: 'description', content: metaTag.description || this.default.description || '' },
-      { property: 'og:description', content: metaTag.description || this.default.description || '' },
-      { name: 'author', content: metaTag.author || this.default.author || '' },
-      { property: 'og:author', content: metaTag.author || this.default.author || '' },
-      { name: 'keywords', content: metaTag?.keywords?.join(', ') || this.default.keywords?.join(', ') || '' },
-      { property: 'og:type', content: metaTag.type || this.default.type || '' },
-      { property: 'og:type', content: metaTag.image || '' }
-    ];
+    this.titleService.setTitle(pageMetaTag.title || APP_CONFIG.name);
   }
 
 }
