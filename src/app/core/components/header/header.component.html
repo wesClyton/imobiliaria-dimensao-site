@@ -51,6 +51,7 @@
       </div>
 
       <div class="default-items">
+        <li *ngIf="isHome" class="item item-contato"><a (click)="navigateContato()">Contato</a></li>
         <li class="item"><a (click)="navigateMapa()">Mapa</a></li>
         <li *ngIf="isHome" class="item item-menu">
           <a (click)="showSubMenu($event)">Menu</a>

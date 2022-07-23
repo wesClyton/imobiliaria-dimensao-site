@@ -109,6 +109,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`${APP_CONFIG.pathFront}/onde-encontrar`);
   }
 
+  public navigateContato(): void {
+    this.hideMenus();
+    this.router.navigateByUrl(`${APP_CONFIG.pathFront}/contato`);
+  }
+
   private getBanners(): void {
     this.bannerGetAllService.queryFilterRemove();
     this.bannerGetAllService.queryFilterAdd({

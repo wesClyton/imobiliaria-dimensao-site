@@ -198,6 +198,14 @@ header {
     top: 10px;
   }
 
+  .item-contato {
+    display: block;
+
+    @include mobile-first(md) {
+      display: none !important;
+    }
+  }
+
   .item a {
     text-transform: uppercase;
     font-weight: 700;
