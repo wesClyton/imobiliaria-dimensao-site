@@ -36,7 +36,7 @@ h1 {
 
   @include mobile-first(lg) {
     flex-direction: row;
-    max-width: fit-content;
+    max-width: 800px;
   }
 }
 
@@ -79,7 +79,7 @@ h1 {
 .text {
 
   @include mobile-first(lg) {
-    flex: 0.84;
+    flex: .85;
   }
 
   .buttons {
