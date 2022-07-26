@@ -123,7 +123,7 @@ map-info-window {
       border-bottom: 1px solid var(--grey-5);
     }
 
-    .text {
+    .text-infos {
       padding: 0.2rem 0.6rem 0.6rem;
 
       h2 {
@@ -134,7 +134,7 @@ map-info-window {
       }
 
       .footer {
-
+        margin-top: 0.25rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -160,30 +160,26 @@ map-info-window {
       .numbers {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        gap: 0.35rem;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0.25rem 0 0.45rem;
+        justify-content: flex-start;
         flex-wrap: wrap;
-        color: var(--grey-2);
+        gap: 0.25rem 1rem;
 
-        div {
+        > .item {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: nowrap;
+          gap: 0.25rem;
 
-          width: 30%;
-          flex-basis: 30%;
-
-          &:first-child {
-            width: 100%;
-            flex-basis: 100%;
+          > .text {
+            color: var(--grey-2);
+            font-size: 0.88rem;
           }
 
-          font-size: 0.82rem;
-
-          i {
+          > .icon {
             color: var(--primary-3);
-            margin-right: 0.25rem;
             transform: translateY(-1px);
+            font-size: 0.83rem;
 
             &.icon-metragem {
               font-size: 0.62rem;
@@ -192,11 +188,9 @@ map-info-window {
               font-size: 0.75rem;
             }
             &.icon-shower {
-              font-size: 0.825rem;
               transform: translateY(0px);
             }
             &.icon-garagem {
-              font-size: 0.825rem;
               transform: translateY(0px);
             }
           }

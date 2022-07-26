@@ -58,25 +58,28 @@
         <img
           [src]="announcement.galeria.fotos[0]?.nome | pathImage: 'anuncios': announcement.galeria.fotos[0]?.galeriaId"
           [alt]="announcement.titulo">
-        <div class="text">
+        <div class="text-infos">
           <h2>{{ announcement.tipo | announcementType }}</h2>
           <div class="numbers">
-            <div *ngIf="announcement.areaConstruida && showAreaType.CONSTRUIDA">
-              <i class="icon-metragem"></i>
-              <span>{{ announcement.areaConstruida | m2 }}</span>
+            <div class="item" *ngIf="announcement.areaConstruida && showAreaType.CONSTRUIDA">
+              <span class="icon icon-metragem"></span>
+              <span class="text">{{ announcement.areaConstruida | m2 }}</span>
             </div>
-            <div *ngIf="announcement.areaTotal && showAreaType.TOTAL">
-              <i class="icon-metragem"></i>
-              <span>{{ announcement.areaTotal| m2 }}</span>
+            <div class="item" *ngIf="announcement.areaTotal && showAreaType.TOTAL">
+              <span class="icon icon-metragem"></span>
+              <span class="text">{{ announcement.areaTotal| m2 }}</span>
             </div>
-            <div *ngIf="announcement.dormitorios">
-              <i class="icon-dormitorios"></i> {{ announcement.dormitorios }}
+            <div class="item" *ngIf="announcement.dormitorios">
+              <span class="icon icon-dormitorios"></span>
+              <span class="text">{{ announcement.dormitorios }}</span>
             </div>
-            <div *ngIf="announcement.banheiros">
-              <i class="icon-shower"></i> {{ announcement.banheiros }}
+            <div class="item" *ngIf="announcement.banheiros">
+              <span class="icon icon-shower"></span>
+              <span class="text">{{ announcement.banheiros }}</span>
             </div>
-            <div *ngIf="announcement.vagasGaragem">
-              <i class="icon-garagem"></i> {{ announcement.vagasGaragem }}
+            <div class="item" *ngIf="announcement.vagasGaragem">
+              <span class="icon icon-garagem"></span>
+              <span class="text">{{ announcement.vagasGaragem }}</span>
             </div>
           </div>
           <div class="footer">

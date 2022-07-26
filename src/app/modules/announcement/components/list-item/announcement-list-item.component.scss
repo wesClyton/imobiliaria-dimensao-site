@@ -61,34 +61,26 @@
 .numbers {
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
   justify-content: flex-start;
-  align-items: baseline;
-  margin: 0.75rem 0 0.5rem;
-  flex-wrap: nowrap;
-  color: var(--grey-2);
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
 
-  div {
+  > .item {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
 
-    span {
-      display: inline-block;
-      font-size: 0.8875rem;
-      line-height: 0.8275rem;
+    > .text {
+      color: var(--grey-2);
+      font-size: 0.88rem;
     }
 
-    i {
+    > .icon {
       color: var(--primary-3);
-      margin-right: 0.25rem;
-      display: inline-block;
-      width: 25px;
-      height: 25px;
-      line-height: 25px;
-      text-align: center;
-      border-radius: 5px;
       transform: translateY(-1px);
+      font-size: 0.83rem;
 
       &.icon-metragem {
         font-size: 0.62rem;
@@ -97,11 +89,9 @@
         font-size: 0.75rem;
       }
       &.icon-shower {
-        font-size: 0.825rem;
         transform: translateY(0px);
       }
       &.icon-garagem {
-        font-size: 0.825rem;
         transform: translateY(0px);
       }
     }

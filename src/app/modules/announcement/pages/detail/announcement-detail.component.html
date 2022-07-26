@@ -11,35 +11,47 @@
         <strong class="amount">{{ announcement.valor | currencyBr }}</strong>
 
         <div class="numbers">
-          <div *ngIf="announcement.areaConstruida">
-            <i class="icon-metragem"></i>
-            <strong>Área construída</strong>
-            <p>{{ announcement.areaConstruida | m2 }}</p>
+          <div class="item" *ngIf="announcement.areaConstruida">
+            <span class="icon icon-metragem"></span>
+            <div class="text">
+              <strong>Área construída</strong>
+              <span>{{ announcement.areaConstruida | m2 }}</span>
+            </div>
           </div>
-          <div *ngIf="announcement.areaTotal">
-            <i class="icon-metragem"></i>
-            <strong>Área total</strong>
-            <p>{{ announcement.areaTotal | m2 }}</p>
+          <div class="item" *ngIf="announcement.areaTotal">
+            <span class="icon icon-metragem"></span>
+            <div class="text">
+              <strong>Área total</strong>
+              <span>{{ announcement.areaTotal | m2 }}</span>
+            </div>
           </div>
-          <div *ngIf="announcement.suites">
-            <i class="icon-suite"></i>
-            <strong>Suítes</strong>
-            <p>{{ announcement.suites }}</p>
+          <div class="item" *ngIf="announcement.suites">
+            <span class="icon icon-suite"></span>
+            <div class="text">
+              <strong>Suítes</strong>
+              <span>{{ announcement.suites }}</span>
+            </div>
           </div>
-          <div *ngIf="announcement.dormitorios">
-            <i class="icon-dormitorios"></i>
-            <strong>Dormitórios</strong>
-            <p>{{ announcement.dormitorios }}</p>
+          <div class="item" *ngIf="announcement.dormitorios">
+            <span class="icon icon-dormitorios"></span>
+            <div class="text">
+              <strong>Dormitórios</strong>
+              <span>{{ announcement.dormitorios }}</span>
+            </div>
           </div>
-          <div *ngIf="announcement.banheiros">
-            <i class="icon-shower"></i>
-            <strong>Banheiros</strong>
-            <p>{{ announcement.banheiros }}</p>
+          <div class="item" *ngIf="announcement.banheiros">
+            <span class="icon icon-shower"></span>
+            <div class="text">
+              <strong>Banheiros</strong>
+              <span>{{ announcement.banheiros }}</span>
+            </div>
           </div>
-          <div *ngIf="announcement.vagasGaragem">
-            <i class="icon-garagem"></i>
-            <strong>Vagas</strong>
-            <p>{{ announcement.vagasGaragem }}</p>
+          <div class="item" *ngIf="announcement.vagasGaragem">
+            <span class="icon icon-garagem"></span>
+            <div class="text">
+              <strong>Vagas</strong>
+              <span>{{ announcement.vagasGaragem }}</span>
+            </div>
           </div>
         </div>
 
