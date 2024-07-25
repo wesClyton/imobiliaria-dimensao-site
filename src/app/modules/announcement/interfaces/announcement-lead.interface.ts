@@ -6,4 +6,5 @@ export interface AnnouncementLead {
   readonly telefone: string;
   readonly tipoForm: LeadType;
   readonly codigoimovel: string;
+  readonly id?: string;
 }

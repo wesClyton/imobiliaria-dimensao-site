@@ -7,4 +7,5 @@ export interface ContactLead {
   readonly melhorHorario: string;
   readonly mensagem: string;
 	readonly tipoForm: LeadType;
+  readonly id?: string;
 }

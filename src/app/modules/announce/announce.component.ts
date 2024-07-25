@@ -96,7 +96,8 @@ export class AnnounceComponent implements OnInit {
       nome: this.controlNome?.value,
       telefone: this.controlTelefone?.value,
       tipoForm: LeadType.Anuncie,
-      tipoImovel: this.controlTipoImovel?.value
+      tipoImovel: this.controlTipoImovel?.value,
+      id: "form_anuncie"
     }
 
     this.announceFormService

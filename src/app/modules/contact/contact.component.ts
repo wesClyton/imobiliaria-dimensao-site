@@ -104,7 +104,8 @@ export class ContactComponent implements OnInit {
       melhorHorario: this.controlMelhorHorario?.value,
       mensagem: this.controlMensagem?.value,
       telefone: this.controlTelefone?.value,
-      tipoForm: LeadType.Contato
+      tipoForm: LeadType.Contato,
+      id: "form_contato"
     }
 
     this.contactFormService
