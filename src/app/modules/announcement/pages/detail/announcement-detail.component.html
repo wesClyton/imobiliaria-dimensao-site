@@ -100,7 +100,7 @@
         <button class="close-button icon-close" (click)="toggleModal()"></button>
         <h5>Fale com um corretor</h5>
         <p>Para saber mais sobre esse imóvel, preencha o formulário abaixo.</p>
-        <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+        <form id="form_anuncio" class="form" [formGroup]="form" (ngSubmit)="submit()">
           <div class="input-field">
             <label>Nome</label>
             <input ngDefaultControl class="input" type="text" formControlName="nome" placeholder="Informe seu Nome">

@@ -105,7 +105,6 @@ export class ContactComponent implements OnInit {
       mensagem: this.controlMensagem?.value,
       telefone: this.controlTelefone?.value,
       tipoForm: LeadType.Contato,
-      id: "form_contato"
     }
 
     this.contactFormService

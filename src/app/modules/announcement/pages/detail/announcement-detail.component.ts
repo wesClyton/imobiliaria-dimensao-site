@@ -195,7 +195,6 @@ export class AnnouncementDetailComponent implements OnInit, OnDestroy {
       telefone: this.controlTelefone?.value,
       tipoForm: LeadType.Anuncio,
       codigoimovel: this.announcement.codigoAnuncio,
-      id: "form_anuncio"
     }
 
     this.announcementFormService
