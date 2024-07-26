@@ -6,7 +6,7 @@ import { NotificationType } from './notification-type.enum';
 @Component({
   selector: 'app-notification-component',
   template: `
-    <div class="content">
+    <div class="content" id="success_form">
       <mat-icon>{{ icon }}</mat-icon>
       {{ message }}
     </div>
