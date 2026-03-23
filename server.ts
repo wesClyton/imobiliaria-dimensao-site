@@ -37,7 +37,7 @@ export function app(): express.Express {
     if (isBot) {
       res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
     } else {
-      res.sendFile(path.join(__dirname, '../browser/index.html'));
+      res.sendFile(path.join(distFolder, 'index.html'));
     }
   });
 
