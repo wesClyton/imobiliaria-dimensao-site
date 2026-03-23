@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/imobiliaria-dimensao-site/server/main.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/imobiliaria-dimensao-site/browser/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/[^./]+\\.[^./]+$",
+      "dest": "dist/imobiliaria-dimensao-site/browser/$0"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "dist/imobiliaria-dimensao-site/server/main.js"
+    }
+  ]
+}
