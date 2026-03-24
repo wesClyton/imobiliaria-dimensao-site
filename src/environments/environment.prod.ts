@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  api: 'https://imobiliaria-dimensao-back-git-migracao-vercel-unk1.vercel.app/site',
+  api: 'https://api.imobiliariadimensao.com.br/site',
   aws: 'https://imobiliaria-dimensao.s3.amazonaws.com',
   baseUrl: '/'
 };
