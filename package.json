@@ -10,11 +10,13 @@
     "dev:ssr": "ng run imobiliaria-dimensao-site:serve-ssr",
     "serve:ssr": "node dist/imobiliaria-dimensao-site/server/main.js",
     "build:ssr": "ng build && ng run imobiliaria-dimensao-site:server",
-    "prerender": "ng run imobiliaria-dimensao-site:prerender"
+    "prerender": "ng run imobiliaria-dimensao-site:prerender",
+    "vercel-build": "npm run build:ssr"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.0.0",
+    "@angular/cdk": "^14.0.0",
     "@angular/common": "^14.0.0",
     "@angular/compiler": "^14.0.0",
     "@angular/core": "^14.0.0",
