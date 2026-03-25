@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { finalize, Subscription, take } from 'rxjs';
@@ -77,7 +78,8 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly announcementGetAllService: AnnouncementGetAllService,
     private readonly loadingService: LoadingService,
     private readonly formBuilder: UntypedFormBuilder,
-    private readonly metaTagService: MetaTagService
+    private readonly metaTagService: MetaTagService,
+    @Inject(PLATFORM_ID) private readonly platformId: Object
   ) {
     this.loadingService.show();
   }
@@ -98,28 +100,32 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     );
 
-    navigator?.permissions
-      ?.query({ name: 'geolocation' })
-      .then(permissionStatus => {
-        if (permissionStatus.state === 'granted') {
-          navigator?.geolocation?.getCurrentPosition((position) => {
-            this.center = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-          });
-        } else {
-          this.center = {
-            lat: -23.7625196,
-            lng: -53.300687
-          };
-        }
-      });
+    this.center = {
+      lat: -23.7625196,
+      lng: -53.300687
+    };
+
+    if (isPlatformBrowser(this.platformId)) {
+      navigator?.permissions
+        ?.query({ name: 'geolocation' })
+        .then(permissionStatus => {
+          if (permissionStatus.state === 'granted') {
+            navigator?.geolocation?.getCurrentPosition((position) => {
+              this.center = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
+            });
+          }
+        });
+    }
 
     this.getAnnouncements();
   }
 
   ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
 
     autocomplete.addListener('place_changed', () => {
@@ -193,7 +199,7 @@ export class DiscoverComponent implements OnInit, AfterViewInit, OnDestroy {
   public iconPin(announcement: Announcement): IconPin {
     return {
       url: `assets/${IconPinImage[announcement.tipo]}`,
-      scaledSize: new google.maps.Size(40, 40)
+      scaledSize: isPlatformBrowser(this.platformId) ? new google.maps.Size(40, 40) : null as any
     }
   };
 

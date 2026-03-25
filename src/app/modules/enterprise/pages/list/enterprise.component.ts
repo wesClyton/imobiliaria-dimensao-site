@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MetaTagService } from '../../../../shared/services/meta-tag/meta-tag.service';
 import { ENTERPRISE_CONFIG } from '../../enterprise.config';
@@ -22,7 +23,8 @@ export class EnterpriseComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly metaTagService: MetaTagService
+    private readonly metaTagService: MetaTagService,
+    @Inject(PLATFORM_ID) private readonly platformId: Object
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +36,9 @@ export class EnterpriseComponent implements OnInit {
   }
 
   public openLink(enterprise: Enterprise): void {
-    window.open(`${enterprise.link}`, '_blank')
+    if (isPlatformBrowser(this.platformId)) {
+      window.open(`${enterprise.link}`, '_blank')
+    }
   }
 
 }

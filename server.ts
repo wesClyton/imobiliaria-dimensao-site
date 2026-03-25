@@ -26,7 +26,14 @@ export function app(): express.Express {
 
   // All regular routes use the Universal engine (SSR for all visitors)
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] }, (err: Error, html: string) => {
+      if (err) {
+        console.error('SSR error:', err);
+        res.sendFile(join(distFolder, 'index.html'));
+      } else {
+        res.send(html);
+      }
+    });
   });
 
   return server;
