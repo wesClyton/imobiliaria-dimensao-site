@@ -1,8 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
-import { existsSync } from 'fs';
-import * as path from 'path';
+import { existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 import 'zone.js/dist/zone-node';
 import { AppServerModule } from './src/main.server';
@@ -10,10 +9,9 @@ import { AppServerModule } from './src/main.server';
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/imobiliaria-dimensao-site/browser');
+  const distFolder = process.env['BROWSER_DIST_PATH'] || join(process.cwd(), 'dist/imobiliaria-dimensao-site/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
-  // Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
   }));
@@ -21,50 +19,35 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'
   }));
 
-  // All regular routes use the Universal engine
+  // Diagnostic endpoint — remover após resolver o problema
+  server.get('/_debug', (req, res) => {
+    res.json({
+      cwd: process.cwd(),
+      distFolder,
+      distExists: existsSync(distFolder),
+      browserFiles: existsSync(distFolder) ? readdirSync(distFolder).slice(0, 15) : [],
+      envPath: process.env['BROWSER_DIST_PATH'] || 'not set'
+    });
+  });
+
+  // All regular routes use the Universal engine (SSR for all visitors)
   server.get('*', (req, res) => {
-    const userAgent = (req.header('User-Agent') as string).toLowerCase();
-
-    const isBot = detectBot(userAgent);
-
-    if (isBot) {
-      res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
-    } else {
-      res.sendFile(path.join(distFolder, 'index.html'));
-    }
+    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] }, (err: Error, html: string) => {
+      if (err) {
+        console.error('SSR error:', err);
+        res.sendFile(join(distFolder, 'index.html'));
+      } else {
+        res.send(html);
+      }
+    });
   });
 
   return server;
-}
-
-function detectBot(userAgent: string): boolean {
-  const bots = [
-    'googlebot',
-    'bingbot',
-    'yandexbot',
-    'duckduckbot',
-    'slurp',
-    'twitterbot',
-    'facebookexternalhit',
-    'linkedinbot',
-    'embedly',
-    'baiduspider',
-    'pinterest',
-    'slackbot',
-    'vkShare',
-    'facebot',
-    'outbrain',
-    'w3c_validator'
-  ];
-
-  return bots.some(bot => bot.indexOf(userAgent) > -1);
 }
 
 const serverApp = app();

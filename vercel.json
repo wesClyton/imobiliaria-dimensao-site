@@ -1,5 +1,12 @@
 {
   "version": 2,
+  "buildCommand": "npm run build:ssr",
+  "outputDirectory": "dist/imobiliaria-dimensao-site/browser",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "dist/imobiliaria-dimensao-site/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",

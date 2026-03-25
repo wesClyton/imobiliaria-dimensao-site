@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, QueryList, ViewChildren } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 
@@ -46,6 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public get isHome(): boolean {
+    if (!isPlatformBrowser(this.platformId)) return false;
     return window.location.pathname === environment.baseUrl;
   }
 
@@ -63,7 +65,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private readonly router: Router,
     private readonly bannerGetAllService: BannerGetAllService,
-    private readonly loadingService: LoadingService
+    private readonly loadingService: LoadingService,
+    @Inject(PLATFORM_ID) private readonly platformId: Object
   ) {
     this.subscription.add(
       this.router.events.subscribe((event: any) => {
@@ -83,7 +86,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public navigateFilter(banner: Banner): void {
-    window.open(banner.link, '_blank');
+    if (isPlatformBrowser(this.platformId)) {
+      window.open(banner.link, '_blank');
+    }
     this.showMenu();
   }
 
