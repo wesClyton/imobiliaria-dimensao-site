@@ -1,7 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
-import { existsSync } from 'fs';
+import { existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 import 'zone.js/dist/zone-node';
 import { AppServerModule } from './src/main.server';
@@ -9,7 +9,7 @@ import { AppServerModule } from './src/main.server';
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/imobiliaria-dimensao-site/browser');
+  const distFolder = process.env['BROWSER_DIST_PATH'] || join(process.cwd(), 'dist/imobiliaria-dimensao-site/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
   server.engine('html', ngExpressEngine({
@@ -23,6 +23,17 @@ export function app(): express.Express {
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'
   }));
+
+  // Diagnostic endpoint — remover após resolver o problema
+  server.get('/_debug', (req, res) => {
+    res.json({
+      cwd: process.cwd(),
+      distFolder,
+      distExists: existsSync(distFolder),
+      browserFiles: existsSync(distFolder) ? readdirSync(distFolder).slice(0, 15) : [],
+      envPath: process.env['BROWSER_DIST_PATH'] || 'not set'
+    });
+  });
 
   // All regular routes use the Universal engine (SSR for all visitors)
   server.get('*', (req, res) => {
