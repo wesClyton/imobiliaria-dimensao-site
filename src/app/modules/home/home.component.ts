@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, QueryList, Renderer2, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StringUtil } from 'src/app/shared/utils/string.util';
 import SwiperCore, { Mousewheel, Pagination, SwiperOptions } from 'swiper';
@@ -62,7 +63,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private readonly renderer: Renderer2,
     private readonly scrollTopService: ScrollTopService,
     private readonly loadingService: LoadingService,
-    private readonly metaTagService: MetaTagService
+    private readonly metaTagService: MetaTagService,
+    @Inject(PLATFORM_ID) private readonly platformId: Object
   ) {
     this.loadingService.show();
   }
@@ -130,6 +132,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private addEventListenerBanner(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     this.eventListenerBannerActive = true;
     document.addEventListener('wheel', (event: WheelEvent) => this.shouldScrollToFooter(event));
     document.addEventListener('touchmove', (event: any) => this.shouldScrollToFooter(event));
@@ -137,6 +140,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private removeEventListenerBanner(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     this.eventListenerBannerActive = false;
     document.removeEventListener('wheel', () => {});
     document.removeEventListener('touchmove', () => {});
@@ -144,6 +148,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private scrollFooter(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     const footer = document.getElementById('main-footer');
     if (footer) {
       this.scrollTopService.scrollTop(footer);

@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { APP_CONFIG } from '../../../app.config';
 import { PageMetaTag } from '../../interfaces/page-meta-tag.interface';
@@ -14,7 +15,9 @@ export class MetaTagService {
 
   constructor(
     private readonly metaService: Meta,
-    private readonly titleService: Title
+    private readonly titleService: Title,
+    @Inject(PLATFORM_ID) private readonly platformId: Object,
+    @Inject(DOCUMENT) private readonly document: Document
   ) { }
 
   public update(pageMetaTag?: PageMetaTag): void {
@@ -32,9 +35,16 @@ export class MetaTagService {
     this.metaService.updateTag({ property: 'og:title', content: pageMetaTag.title || APP_CONFIG.name });
     this.metaService.updateTag({ property: 'og:description', content: pageMetaTag.description || this.descriptionDefault });
     this.metaService.updateTag({ property: 'og:image', content: pageMetaTag.image || this.imageDefault });
-    this.metaService.updateTag({ property: 'og:url', content: location.href });
+    this.metaService.updateTag({ property: 'og:url', content: this.getUrl() });
 
     this.titleService.setTitle(pageMetaTag.title || APP_CONFIG.name);
+  }
+
+  private getUrl(): string {
+    if (isPlatformBrowser(this.platformId)) {
+      return location.href;
+    }
+    return this.document.location?.href || 'https://imobiliariadimensao.com.br';
   }
 
 }

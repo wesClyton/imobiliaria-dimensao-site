@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MapInfoWindow } from '@angular/google-maps';
 import { take } from 'rxjs';
 import SwiperCore, { Mousewheel, Navigation, SwiperOptions } from 'swiper';
@@ -68,7 +69,7 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
   public get iconPin(): IconPin {
     return {
       url: `assets/${IconPinImage[this.announcement?.tipo]}`,
-      scaledSize: new google.maps.Size(40, 40)
+      scaledSize: isPlatformBrowser(this.platformId) ? new google.maps.Size(40, 40) : null as any
     }
   };
 
@@ -92,7 +93,8 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
   }
 
   constructor(
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    @Inject(PLATFORM_ID) private readonly platformId: Object
   ) { }
 
   ngOnInit(): void {
@@ -189,7 +191,9 @@ export class AnnouncementGalleryComponent implements OnInit, OnChanges {
   }
 
   public copyLink(): void {
-    CopyClipboard.copy(window.location.href);
-    this.notificationService.success('Link copiado para área de transferência');
+    if (isPlatformBrowser(this.platformId)) {
+      CopyClipboard.copy(window.location.href);
+      this.notificationService.success('Link copiado para área de transferência');
+    }
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Params, Router, UrlTree } from '@angular/router';
 import { finalize, Subscription, take } from 'rxjs';
 import { ScrollTopService } from 'src/app/shared/services/scroll-top/scroll-top.service';
@@ -37,7 +38,8 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
     private readonly activatedRoute: ActivatedRoute,
     private readonly scrollTopService: ScrollTopService,
     private readonly router: Router,
-    private readonly metaTagService: MetaTagService
+    private readonly metaTagService: MetaTagService,
+    @Inject(PLATFORM_ID) private readonly platformId: Object
   ) {
     this.loadingService.show();
   }
@@ -138,9 +140,11 @@ export class AnnouncementListComponent implements OnInit, OnDestroy {
 
     queryParams = { ...queryParams, page };
 
-    const elementToScroll = document.getElementById('lengthResult');
-    if (elementToScroll) {
-      this.scrollTopService.scrollTop(elementToScroll);
+    if (isPlatformBrowser(this.platformId)) {
+      const elementToScroll = document.getElementById('lengthResult');
+      if (elementToScroll) {
+        this.scrollTopService.scrollTop(elementToScroll);
+      }
     }
 
     this.router.navigate([ANNOUNCEMENT_CONFIG.pathFront], { queryParams });
